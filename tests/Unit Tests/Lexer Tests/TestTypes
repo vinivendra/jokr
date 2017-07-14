@@ -1,0 +1,26 @@
+/* This is a comment /* With a nested comment */ Foo Bar */
+/* Valid Types */
+
+Foo Bar
+Baz
+Blah
+B0lah
+B0l0ah
+Blah0
+_Lah
+__Lah
+_Lah0
+_La0h0
+
+/* Invalid Types */
+hUE
+hue
+hue_
+hue2
+hue2hue
+h_ue
+h_u_e
+hue_2_hue
+Hue_
+Hue_hue
+Hue__hue
