@@ -2,7 +2,7 @@ import Antlr4
 import XCTest
 
 private let testFilesPath = CommandLine.arguments[1] +
-	"/AntlrTests/AntlrUnitTests/LexerTests/"
+	"/tests/Unit Tests/Lexer Tests/"
 
 class LexerTests: XCTestCase {
 	func testIDs() {

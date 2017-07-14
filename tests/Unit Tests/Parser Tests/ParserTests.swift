@@ -4,7 +4,7 @@ import XCTest
 // TODO: Remove !
 
 private let testFilesPath = CommandLine.arguments[1] +
-	"/AntlrTests/AntlrUnitTests/ParserTests/"
+	"/tests/Unit Tests/Parser Tests/"
 
 class ParserTests: XCTestCase {
 	typealias TokenTest =
