@@ -1,0 +1,15 @@
+/* This is a comment /* With a nested comment */ Foo Bar */
+/* This is a simpler block comment */
+// This is a line comment
+foo bar // This is a comment after a statement
+foo /* And this is a comment between tokens */ bar
+foo bar
+baz
+blah
+b0lah
+b0l0ah;
+blah0
+_lah; blahblah
+__lah \n
+_lah0
+_la0h0 \

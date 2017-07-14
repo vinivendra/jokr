@@ -1,0 +1,26 @@
+/* This is a comment /* With a nested comment */ foo bar */
+/* Valid IDs */
+
+foo bar
+baz
+blah
+b0lah
+b0l0ah
+blah0
+_lah
+__lah
+_lah0
+_la0h0
+
+/* Invalid IDs */
+HUE
+Hue
+Hue_
+Hue2
+Hue2hue
+H_ue
+H_u_e
+Hue_2_hue
+hue_
+hue_hue
+hue__hue

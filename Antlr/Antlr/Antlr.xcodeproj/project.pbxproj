@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		246608801F1923C10076FBB6 /* TestNewlines in Resources */ = {isa = PBXBuildFile; fileRef = 2466087F1F1923C10076FBB6 /* TestNewlines */; };
+		246608821F1927E20076FBB6 /* TestAssignments in Resources */ = {isa = PBXBuildFile; fileRef = 246608811F1927E20076FBB6 /* TestAssignments */; };
+		246608841F193F2C0076FBB6 /* TestVariableDeclarations in Resources */ = {isa = PBXBuildFile; fileRef = 246608831F193F2C0076FBB6 /* TestVariableDeclarations */; };
+		246608861F1942B40076FBB6 /* TestExpressions in Resources */ = {isa = PBXBuildFile; fileRef = 246608851F1942B40076FBB6 /* TestExpressions */; };
+		247B81E91F16603000D2FB07 /* ObjcCompilerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247B81E81F16603000D2FB07 /* ObjcCompilerListener.swift */; };
+		24A414481F0F20CE0075993D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414471F0F20CE0075993D /* main.swift */; };
+		24A4146A1F0F29450075993D /* libAntlr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A414681F0F29450075993D /* libAntlr4.dylib */; };
+		24A414761F0F2B2E0075993D /* JokrBaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A4146F1F0F2B2E0075993D /* JokrBaseListener.swift */; };
+		24A414771F0F2B2E0075993D /* JokrLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414701F0F2B2E0075993D /* JokrLexer.swift */; };
+		24A414781F0F2B2E0075993D /* JokrLexerATN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414721F0F2B2E0075993D /* JokrLexerATN.swift */; };
+		24A414791F0F2B2E0075993D /* JokrListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414731F0F2B2E0075993D /* JokrListener.swift */; };
+		24A4147A1F0F2B2E0075993D /* JokrParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414741F0F2B2E0075993D /* JokrParser.swift */; };
+		24A4147B1F0F2B2E0075993D /* JokrParserATN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414751F0F2B2E0075993D /* JokrParserATN.swift */; };
+		24B03DB51F1865B3002B2F2C /* FunctionListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B03DB41F1865B3002B2F2C /* FunctionListenerTests.swift */; };
+		24B03DB71F1868EB002B2F2C /* TestStatementLists in Resources */ = {isa = PBXBuildFile; fileRef = 24B03DB61F1868EB002B2F2C /* TestStatementLists */; };
+		24B03DB91F1868FD002B2F2C /* TestStatementListsWithNewline in Resources */ = {isa = PBXBuildFile; fileRef = 24B03DB81F1868FD002B2F2C /* TestStatementListsWithNewline */; };
+		24B5F5231F17B8480045FF6A /* libAntlr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A414681F0F29450075993D /* libAntlr4.dylib */; };
+		24B5F5241F17B87A0045FF6A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAFF601F15AA7E00C62249 /* Extensions.swift */; };
+		24B5F5251F17B87A0045FF6A /* JokrCompilerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAFF3E1F158D5700C62249 /* JokrCompilerListener.swift */; };
+		24B5F5261F17B87A0045FF6A /* ObjcCompilerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247B81E81F16603000D2FB07 /* ObjcCompilerListener.swift */; };
+		24B5F5271F17B8820045FF6A /* JokrBaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A4146F1F0F2B2E0075993D /* JokrBaseListener.swift */; };
+		24B5F5281F17B8820045FF6A /* JokrLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414701F0F2B2E0075993D /* JokrLexer.swift */; };
+		24B5F5291F17B8820045FF6A /* JokrLexerATN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414721F0F2B2E0075993D /* JokrLexerATN.swift */; };
+		24B5F52A1F17B8820045FF6A /* JokrListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414731F0F2B2E0075993D /* JokrListener.swift */; };
+		24B5F52B1F17B8820045FF6A /* JokrParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414741F0F2B2E0075993D /* JokrParser.swift */; };
+		24B5F52C1F17B8820045FF6A /* JokrParserATN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A414751F0F2B2E0075993D /* JokrParserATN.swift */; };
+		24B5F5341F17B8BA0045FF6A /* LexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B5F52E1F17B8BA0045FF6A /* LexerTests.swift */; };
+		24B5F5351F17B8BA0045FF6A /* TestComments in Resources */ = {isa = PBXBuildFile; fileRef = 24B5F52F1F17B8BA0045FF6A /* TestComments */; };
+		24B5F5361F17B8BA0045FF6A /* TestIDs in Resources */ = {isa = PBXBuildFile; fileRef = 24B5F5301F17B8BA0045FF6A /* TestIDs */; };
+		24B5F5371F17B8BA0045FF6A /* TestTypes in Resources */ = {isa = PBXBuildFile; fileRef = 24B5F5311F17B8BA0045FF6A /* TestTypes */; };
+		24B5F5381F17B8BA0045FF6A /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B5F5331F17B8BA0045FF6A /* ParserTests.swift */; };
+		24B5F53E1F17B94C0045FF6A /* FunctionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B5F53D1F17B94C0045FF6A /* FunctionListener.swift */; };
+		24B5F53F1F17B94C0045FF6A /* FunctionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B5F53D1F17B94C0045FF6A /* FunctionListener.swift */; };
+		24DAFF3F1F158D5700C62249 /* JokrCompilerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAFF3E1F158D5700C62249 /* JokrCompilerListener.swift */; };
+		24DAFF611F15AA7E00C62249 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAFF601F15AA7E00C62249 /* Extensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		24A414421F0F20CE0075993D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2466087F1F1923C10076FBB6 /* TestNewlines */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestNewlines; sourceTree = "<group>"; };
+		246608811F1927E20076FBB6 /* TestAssignments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestAssignments; sourceTree = "<group>"; };
+		246608831F193F2C0076FBB6 /* TestVariableDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestVariableDeclarations; sourceTree = "<group>"; };
+		246608851F1942B40076FBB6 /* TestExpressions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestExpressions; sourceTree = "<group>"; };
+		247B81E81F16603000D2FB07 /* ObjcCompilerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjcCompilerListener.swift; sourceTree = "<group>"; };
+		24A414441F0F20CE0075993D /* Antlr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Antlr; sourceTree = BUILT_PRODUCTS_DIR; };
+		24A414471F0F20CE0075993D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		24A414651F0F29270075993D /* antlr4-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "antlr4-master"; sourceTree = "<group>"; };
+		24A414661F0F29440075993D /* Antlr4.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; name = Antlr4.swiftdoc; path = "antlr4-master/runtime/Swift/.build/debug/Antlr4.swiftdoc"; sourceTree = "<group>"; };
+		24A414671F0F29440075993D /* Antlr4.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; name = Antlr4.swiftmodule; path = "antlr4-master/runtime/Swift/.build/debug/Antlr4.swiftmodule"; sourceTree = "<group>"; };
+		24A414681F0F29450075993D /* libAntlr4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libAntlr4.dylib; path = "antlr4-master/runtime/Swift/.build/debug/libAntlr4.dylib"; sourceTree = "<group>"; };
+		24A414691F0F29450075993D /* libAntlr4.dylib.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = libAntlr4.dylib.dSYM; path = "antlr4-master/runtime/Swift/.build/debug/libAntlr4.dylib.dSYM"; sourceTree = "<group>"; };
+		24A4146C1F0F2A5D0075993D /* Jokr.g4 */ = {isa = PBXFileReference; lastKnownFileType = text; path = Jokr.g4; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
+		24A4146E1F0F2B2E0075993D /* Jokr.tokens */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Jokr.tokens; sourceTree = "<group>"; };
+		24A4146F1F0F2B2E0075993D /* JokrBaseListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrBaseListener.swift; sourceTree = "<group>"; };
+		24A414701F0F2B2E0075993D /* JokrLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrLexer.swift; sourceTree = "<group>"; };
+		24A414711F0F2B2E0075993D /* JokrLexer.tokens */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JokrLexer.tokens; sourceTree = "<group>"; };
+		24A414721F0F2B2E0075993D /* JokrLexerATN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrLexerATN.swift; sourceTree = "<group>"; };
+		24A414731F0F2B2E0075993D /* JokrListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrListener.swift; sourceTree = "<group>"; };
+		24A414741F0F2B2E0075993D /* JokrParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrParser.swift; sourceTree = "<group>"; };
+		24A414751F0F2B2E0075993D /* JokrParserATN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrParserATN.swift; sourceTree = "<group>"; };
+		24B03DB41F1865B3002B2F2C /* FunctionListenerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionListenerTests.swift; sourceTree = "<group>"; };
+		24B03DB61F1868EB002B2F2C /* TestStatementLists */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementLists; sourceTree = "<group>"; };
+		24B03DB81F1868FD002B2F2C /* TestStatementListsWithNewline */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementListsWithNewline; sourceTree = "<group>"; };
+		24B5F50C1F17B7E80045FF6A /* AntlrUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AntlrUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		24B5F5161F17B8000045FF6A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24B5F52E1F17B8BA0045FF6A /* LexerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexerTests.swift; sourceTree = "<group>"; };
+		24B5F52F1F17B8BA0045FF6A /* TestComments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestComments; sourceTree = "<group>"; };
+		24B5F5301F17B8BA0045FF6A /* TestIDs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestIDs; sourceTree = "<group>"; };
+		24B5F5311F17B8BA0045FF6A /* TestTypes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestTypes; sourceTree = "<group>"; };
+		24B5F5331F17B8BA0045FF6A /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
+		24B5F53D1F17B94C0045FF6A /* FunctionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionListener.swift; sourceTree = "<group>"; };
+		24DAFF3E1F158D5700C62249 /* JokrCompilerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrCompilerListener.swift; sourceTree = "<group>"; };
+		24DAFF601F15AA7E00C62249 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		24A414411F0F20CE0075993D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24A4146A1F0F29450075993D /* libAntlr4.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24B5F5091F17B7E80045FF6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24B5F5231F17B8480045FF6A /* libAntlr4.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24A4143B1F0F20CE0075993D = {
+			isa = PBXGroup;
+			children = (
+				24A414461F0F20CE0075993D /* Antlr */,
+				24DAFF581F15A95A00C62249 /* AntlrTests */,
+				24A414451F0F20CE0075993D /* Products */,
+				24A4145D1F0F267A0075993D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		24A414451F0F20CE0075993D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24A414441F0F20CE0075993D /* Antlr */,
+				24B5F50C1F17B7E80045FF6A /* AntlrUnitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		24A414461F0F20CE0075993D /* Antlr */ = {
+			isa = PBXGroup;
+			children = (
+				24A414471F0F20CE0075993D /* main.swift */,
+				24DAFF601F15AA7E00C62249 /* Extensions.swift */,
+				24DAFF3E1F158D5700C62249 /* JokrCompilerListener.swift */,
+				247B81E81F16603000D2FB07 /* ObjcCompilerListener.swift */,
+				24B5F53D1F17B94C0045FF6A /* FunctionListener.swift */,
+				24A4146C1F0F2A5D0075993D /* Jokr.g4 */,
+				24A4146D1F0F2B2E0075993D /* Antlr Swift */,
+			);
+			path = Antlr;
+			sourceTree = "<group>";
+		};
+		24A4145D1F0F267A0075993D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24A4146B1F0F294C0075993D /* Antlr4 */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		24A4146B1F0F294C0075993D /* Antlr4 */ = {
+			isa = PBXGroup;
+			children = (
+				24A414661F0F29440075993D /* Antlr4.swiftdoc */,
+				24A414671F0F29440075993D /* Antlr4.swiftmodule */,
+				24A414681F0F29450075993D /* libAntlr4.dylib */,
+				24A414691F0F29450075993D /* libAntlr4.dylib.dSYM */,
+				24A414651F0F29270075993D /* antlr4-master */,
+			);
+			name = Antlr4;
+			sourceTree = "<group>";
+		};
+		24A4146D1F0F2B2E0075993D /* Antlr Swift */ = {
+			isa = PBXGroup;
+			children = (
+				24A4146E1F0F2B2E0075993D /* Jokr.tokens */,
+				24A4146F1F0F2B2E0075993D /* JokrBaseListener.swift */,
+				24A414701F0F2B2E0075993D /* JokrLexer.swift */,
+				24A414711F0F2B2E0075993D /* JokrLexer.tokens */,
+				24A414721F0F2B2E0075993D /* JokrLexerATN.swift */,
+				24A414731F0F2B2E0075993D /* JokrListener.swift */,
+				24A414741F0F2B2E0075993D /* JokrParser.swift */,
+				24A414751F0F2B2E0075993D /* JokrParserATN.swift */,
+			);
+			path = "Antlr Swift";
+			sourceTree = "<group>";
+		};
+		24B5F5141F17B8000045FF6A /* AntlrUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				24B5F5161F17B8000045FF6A /* Info.plist */,
+				24B5F52D1F17B8BA0045FF6A /* LexerTests */,
+				24B5F5321F17B8BA0045FF6A /* ParserTests */,
+			);
+			path = AntlrUnitTests;
+			sourceTree = "<group>";
+		};
+		24B5F52D1F17B8BA0045FF6A /* LexerTests */ = {
+			isa = PBXGroup;
+			children = (
+				24B5F52E1F17B8BA0045FF6A /* LexerTests.swift */,
+				24B5F52F1F17B8BA0045FF6A /* TestComments */,
+				24B5F5301F17B8BA0045FF6A /* TestIDs */,
+				2466087F1F1923C10076FBB6 /* TestNewlines */,
+				24B5F5311F17B8BA0045FF6A /* TestTypes */,
+			);
+			path = LexerTests;
+			sourceTree = "<group>";
+		};
+		24B5F5321F17B8BA0045FF6A /* ParserTests */ = {
+			isa = PBXGroup;
+			children = (
+				24B03DB41F1865B3002B2F2C /* FunctionListenerTests.swift */,
+				24B5F5331F17B8BA0045FF6A /* ParserTests.swift */,
+				246608811F1927E20076FBB6 /* TestAssignments */,
+				246608851F1942B40076FBB6 /* TestExpressions */,
+				24B03DB61F1868EB002B2F2C /* TestStatementLists */,
+				24B03DB81F1868FD002B2F2C /* TestStatementListsWithNewline */,
+				246608831F193F2C0076FBB6 /* TestVariableDeclarations */,
+			);
+			path = ParserTests;
+			sourceTree = "<group>";
+		};
+		24DAFF581F15A95A00C62249 /* AntlrTests */ = {
+			isa = PBXGroup;
+			children = (
+				24B5F5141F17B8000045FF6A /* AntlrUnitTests */,
+			);
+			path = AntlrTests;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		24A414431F0F20CE0075993D /* Antlr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24A4144B1F0F20CE0075993D /* Build configuration list for PBXNativeTarget "Antlr" */;
+			buildPhases = (
+				24A4147C1F0F2B750075993D /* Antlr */,
+				24A414401F0F20CE0075993D /* Sources */,
+				24A414411F0F20CE0075993D /* Frameworks */,
+				24A414421F0F20CE0075993D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Antlr;
+			productName = Antlr;
+			productReference = 24A414441F0F20CE0075993D /* Antlr */;
+			productType = "com.apple.product-type.tool";
+		};
+		24B5F50B1F17B7E80045FF6A /* AntlrUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24B5F5111F17B7E80045FF6A /* Build configuration list for PBXNativeTarget "AntlrUnitTests" */;
+			buildPhases = (
+				24B5F5081F17B7E80045FF6A /* Sources */,
+				24B5F5091F17B7E80045FF6A /* Frameworks */,
+				24B5F50A1F17B7E80045FF6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AntlrUnitTests;
+			productName = AntlrUnitTests;
+			productReference = 24B5F50C1F17B7E80045FF6A /* AntlrUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		24A4143C1F0F20CE0075993D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = vinivendra;
+				TargetAttributes = {
+					24A414431F0F20CE0075993D = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = HHT774898M;
+						ProvisioningStyle = Automatic;
+					};
+					24B5F50B1F17B7E80045FF6A = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = HHT774898M;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 24A4143F1F0F20CE0075993D /* Build configuration list for PBXProject "Antlr" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 24A4143B1F0F20CE0075993D;
+			productRefGroup = 24A414451F0F20CE0075993D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				24A414431F0F20CE0075993D /* Antlr */,
+				24B5F50B1F17B7E80045FF6A /* AntlrUnitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		24B5F50A1F17B7E80045FF6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24B5F5361F17B8BA0045FF6A /* TestIDs in Resources */,
+				24B5F5351F17B8BA0045FF6A /* TestComments in Resources */,
+				24B03DB91F1868FD002B2F2C /* TestStatementListsWithNewline in Resources */,
+				24B03DB71F1868EB002B2F2C /* TestStatementLists in Resources */,
+				24B5F5371F17B8BA0045FF6A /* TestTypes in Resources */,
+				246608821F1927E20076FBB6 /* TestAssignments in Resources */,
+				246608801F1923C10076FBB6 /* TestNewlines in Resources */,
+				246608861F1942B40076FBB6 /* TestExpressions in Resources */,
+				246608841F193F2C0076FBB6 /* TestVariableDeclarations in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		24A4147C1F0F2B750075993D /* Antlr */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Antlr;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT\"/Antlr\nbash runAntler.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		24A414401F0F20CE0075993D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24A414771F0F2B2E0075993D /* JokrLexer.swift in Sources */,
+				24DAFF611F15AA7E00C62249 /* Extensions.swift in Sources */,
+				24B5F53E1F17B94C0045FF6A /* FunctionListener.swift in Sources */,
+				24A414791F0F2B2E0075993D /* JokrListener.swift in Sources */,
+				24A414761F0F2B2E0075993D /* JokrBaseListener.swift in Sources */,
+				247B81E91F16603000D2FB07 /* ObjcCompilerListener.swift in Sources */,
+				24A414781F0F2B2E0075993D /* JokrLexerATN.swift in Sources */,
+				24DAFF3F1F158D5700C62249 /* JokrCompilerListener.swift in Sources */,
+				24A4147B1F0F2B2E0075993D /* JokrParserATN.swift in Sources */,
+				24A4147A1F0F2B2E0075993D /* JokrParser.swift in Sources */,
+				24A414481F0F20CE0075993D /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24B5F5081F17B7E80045FF6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24B5F5281F17B8820045FF6A /* JokrLexer.swift in Sources */,
+				24B5F52B1F17B8820045FF6A /* JokrParser.swift in Sources */,
+				24B5F52A1F17B8820045FF6A /* JokrListener.swift in Sources */,
+				24B5F5261F17B87A0045FF6A /* ObjcCompilerListener.swift in Sources */,
+				24B5F52C1F17B8820045FF6A /* JokrParserATN.swift in Sources */,
+				24B5F53F1F17B94C0045FF6A /* FunctionListener.swift in Sources */,
+				24B5F5251F17B87A0045FF6A /* JokrCompilerListener.swift in Sources */,
+				24B5F5291F17B8820045FF6A /* JokrLexerATN.swift in Sources */,
+				24B03DB51F1865B3002B2F2C /* FunctionListenerTests.swift in Sources */,
+				24B5F5341F17B8BA0045FF6A /* LexerTests.swift in Sources */,
+				24B5F5381F17B8BA0045FF6A /* ParserTests.swift in Sources */,
+				24B5F5271F17B8820045FF6A /* JokrBaseListener.swift in Sources */,
+				24B5F5241F17B87A0045FF6A /* Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		24A414491F0F20CE0075993D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		24A4144A1F0F20CE0075993D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		24A4144C1F0F20CE0075993D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = HHT774898M;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/antlr4-master/runtime/Swift/.build/debug",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = "compile-time";
+				SWIFT_INCLUDE_PATHS = "\"$(SRCROOT)/antlr4-master/runtime/Swift/.build/debug\"";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		24A4144D1F0F20CE0075993D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = HHT774898M;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/antlr4-master/runtime/Swift/.build/debug",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = "compile-time";
+				SWIFT_INCLUDE_PATHS = "\"$(SRCROOT)/antlr4-master/runtime/Swift/.build/debug\"";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		24B5F5121F17B7E80045FF6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HHT774898M;
+				INFOPLIST_FILE = AntlrTests/AntlrUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/antlr4-master/runtime/Swift/.build/debug",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vinivendra.AntlrUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_INCLUDE_PATHS = "\"$(SRCROOT)/antlr4-master/runtime/Swift/.build/debug\"";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		24B5F5131F17B7E80045FF6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HHT774898M;
+				INFOPLIST_FILE = AntlrTests/AntlrUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/antlr4-master/runtime/Swift/.build/debug",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vinivendra.AntlrUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "\"$(SRCROOT)/antlr4-master/runtime/Swift/.build/debug\"";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		24A4143F1F0F20CE0075993D /* Build configuration list for PBXProject "Antlr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24A414491F0F20CE0075993D /* Debug */,
+				24A4144A1F0F20CE0075993D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24A4144B1F0F20CE0075993D /* Build configuration list for PBXNativeTarget "Antlr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24A4144C1F0F20CE0075993D /* Debug */,
+				24A4144D1F0F20CE0075993D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24B5F5111F17B7E80045FF6A /* Build configuration list for PBXNativeTarget "AntlrUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24B5F5121F17B7E80045FF6A /* Debug */,
+				24B5F5131F17B7E80045FF6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 24A4143C1F0F20CE0075993D /* Project object */;
+}
