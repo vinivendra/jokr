@@ -62,7 +62,7 @@
 		246608831F193F2C0076FBB6 /* TestVariableDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestVariableDeclarations; sourceTree = "<group>"; };
 		246608851F1942B40076FBB6 /* TestExpressions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestExpressions; sourceTree = "<group>"; };
 		247B81E81F16603000D2FB07 /* ObjcCompilerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjcCompilerListener.swift; sourceTree = "<group>"; };
-		24A414441F0F20CE0075993D /* Antlr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Antlr; sourceTree = BUILT_PRODUCTS_DIR; };
+		24A414441F0F20CE0075993D /* jokr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jokr; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A414471F0F20CE0075993D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		24A414651F0F29270075993D /* antlr4-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "antlr4-master"; sourceTree = "<group>"; };
 		24A414661F0F29440075993D /* Antlr4.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; name = Antlr4.swiftdoc; path = "antlr4-master/runtime/Swift/.build/debug/Antlr4.swiftdoc"; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 		24B03DB41F1865B3002B2F2C /* FunctionListenerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionListenerTests.swift; sourceTree = "<group>"; };
 		24B03DB61F1868EB002B2F2C /* TestStatementLists */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementLists; sourceTree = "<group>"; };
 		24B03DB81F1868FD002B2F2C /* TestStatementListsWithNewline */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementListsWithNewline; sourceTree = "<group>"; };
-		24B5F50C1F17B7E80045FF6A /* AntlrUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AntlrUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		24B5F50C1F17B7E80045FF6A /* jokrUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jokrUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24B5F5161F17B8000045FF6A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24B5F52E1F17B8BA0045FF6A /* LexerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexerTests.swift; sourceTree = "<group>"; };
 		24B5F52F1F17B8BA0045FF6A /* TestComments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestComments; sourceTree = "<group>"; };
@@ -126,8 +126,8 @@
 		24A414451F0F20CE0075993D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				24A414441F0F20CE0075993D /* Antlr */,
-				24B5F50C1F17B7E80045FF6A /* AntlrUnitTests.xctest */,
+				24A414441F0F20CE0075993D /* jokr */,
+				24B5F50C1F17B7E80045FF6A /* jokrUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,9 +228,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		24A414431F0F20CE0075993D /* Antlr */ = {
+		24A414431F0F20CE0075993D /* jokr */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 24A4144B1F0F20CE0075993D /* Build configuration list for PBXNativeTarget "Antlr" */;
+			buildConfigurationList = 24A4144B1F0F20CE0075993D /* Build configuration list for PBXNativeTarget "jokr" */;
 			buildPhases = (
 				24A4147C1F0F2B750075993D /* Antlr */,
 				24A414401F0F20CE0075993D /* Sources */,
@@ -241,14 +241,14 @@
 			);
 			dependencies = (
 			);
-			name = Antlr;
+			name = jokr;
 			productName = Antlr;
-			productReference = 24A414441F0F20CE0075993D /* Antlr */;
+			productReference = 24A414441F0F20CE0075993D /* jokr */;
 			productType = "com.apple.product-type.tool";
 		};
-		24B5F50B1F17B7E80045FF6A /* AntlrUnitTests */ = {
+		24B5F50B1F17B7E80045FF6A /* jokrUnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 24B5F5111F17B7E80045FF6A /* Build configuration list for PBXNativeTarget "AntlrUnitTests" */;
+			buildConfigurationList = 24B5F5111F17B7E80045FF6A /* Build configuration list for PBXNativeTarget "jokrUnitTests" */;
 			buildPhases = (
 				24B5F5081F17B7E80045FF6A /* Sources */,
 				24B5F5091F17B7E80045FF6A /* Frameworks */,
@@ -258,9 +258,9 @@
 			);
 			dependencies = (
 			);
-			name = AntlrUnitTests;
+			name = jokrUnitTests;
 			productName = AntlrUnitTests;
-			productReference = 24B5F50C1F17B7E80045FF6A /* AntlrUnitTests.xctest */;
+			productReference = 24B5F50C1F17B7E80045FF6A /* jokrUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -285,7 +285,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 24A4143F1F0F20CE0075993D /* Build configuration list for PBXProject "Antlr" */;
+			buildConfigurationList = 24A4143F1F0F20CE0075993D /* Build configuration list for PBXProject "jokr" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -297,8 +297,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				24A414431F0F20CE0075993D /* Antlr */,
-				24B5F50B1F17B7E80045FF6A /* AntlrUnitTests */,
+				24A414431F0F20CE0075993D /* jokr */,
+				24B5F50B1F17B7E80045FF6A /* jokrUnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -555,7 +555,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		24A4143F1F0F20CE0075993D /* Build configuration list for PBXProject "Antlr" */ = {
+		24A4143F1F0F20CE0075993D /* Build configuration list for PBXProject "jokr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				24A414491F0F20CE0075993D /* Debug */,
@@ -564,7 +564,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		24A4144B1F0F20CE0075993D /* Build configuration list for PBXNativeTarget "Antlr" */ = {
+		24A4144B1F0F20CE0075993D /* Build configuration list for PBXNativeTarget "jokr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				24A4144C1F0F20CE0075993D /* Debug */,
@@ -573,7 +573,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		24B5F5111F17B7E80045FF6A /* Build configuration list for PBXNativeTarget "AntlrUnitTests" */ = {
+		24B5F5111F17B7E80045FF6A /* Build configuration list for PBXNativeTarget "jokrUnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				24B5F5121F17B7E80045FF6A /* Debug */,
