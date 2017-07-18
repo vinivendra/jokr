@@ -28,7 +28,6 @@
 		246BCC191F19567E004BE84C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC011F19567E004BE84C /* main.swift */; };
 		246BCC1B1F19567E004BE84C /* ObjcCompilerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC021F19567E004BE84C /* ObjcCompilerListener.swift */; };
 		246BCC1C1F19567E004BE84C /* ObjcCompilerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC021F19567E004BE84C /* ObjcCompilerListener.swift */; };
-		246BCC301F1957B7004BE84C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC211F1957B7004BE84C /* Info.plist */; };
 		246BCC311F1957B7004BE84C /* LexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC231F1957B7004BE84C /* LexerTests.swift */; };
 		246BCC321F1957B7004BE84C /* TestComments in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC241F1957B7004BE84C /* TestComments */; };
 		246BCC331F1957B7004BE84C /* TestIDs in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC251F1957B7004BE84C /* TestIDs */; };
@@ -233,7 +232,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24A4144B1F0F20CE0075993D /* Build configuration list for PBXNativeTarget "jokr" */;
 			buildPhases = (
-				24A4147C1F0F2B750075993D /* Antlr */,
+				24AFC3171F1ED15400534712 /* Build Antlr runtime */,
+				24A4147C1F0F2B750075993D /* Run Antlr to build parser */,
 				24A414401F0F20CE0075993D /* Sources */,
 				24A414411F0F20CE0075993D /* Frameworks */,
 				24A414421F0F20CE0075993D /* CopyFiles */,
@@ -317,7 +317,6 @@
 				246BCC3A1F1957B7004BE84C /* TestStatementLists in Resources */,
 				246BCC381F1957B7004BE84C /* TestAssignments in Resources */,
 				246BCC321F1957B7004BE84C /* TestComments in Resources */,
-				246BCC301F1957B7004BE84C /* Info.plist in Resources */,
 				246BCC3C1F1957B7004BE84C /* TestVariableDeclarations in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,19 +324,33 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		24A4147C1F0F2B750075993D /* Antlr */ = {
+		24A4147C1F0F2B750075993D /* Run Antlr to build parser */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = Antlr;
+			name = "Run Antlr to build parser";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT\"/jokr\nbash runAntler.sh";
+			shellScript = "cd \"$SRCROOT\"/jokr\nbash runAntlr.sh";
+		};
+		24AFC3171F1ED15400534712 /* Build Antlr runtime */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Antlr runtime";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT\"/jokr\nbash buildAntlrRuntime.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
