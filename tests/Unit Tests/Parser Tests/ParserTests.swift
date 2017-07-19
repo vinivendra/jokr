@@ -250,9 +250,10 @@ class ParserTests: XCTestCase {
 			}
 
 			let expectedDeclarations: [TokenTest] = [
-				(1, 0, "Intfive(){\nIntx=4\nx=5\n}"),
-				(6, 0, "Intnumber(Intnumber){\nresult=number\n}"),
-				(10, 0, "Intsum(Inta,Intb,Intc){\nresult=a+b+c\n}")]
+				(1, 0, "Intfive(){\nIntx=4\nx=5\nreturn5\n}"),
+				(7, 0,
+				 "Intnumber(Intnumber){\nresult=number\nreturnresult\n}"),
+				(12, 0, "Intsum(Inta,Intb,Intc){\nreturna+b+c\n}")]
 
 			XCTAssertEqual(declarations.count, expectedDeclarations.count)
 
@@ -290,12 +291,12 @@ class ParserTests: XCTestCase {
 			}
 
 			let expectedParameterLists: [TokenTest] = [
-				(1, 9, ""), (6, 11, "Intnumber"), (10, 8, "Inta,Intb,Intc"),
-				(10, 8, "Inta,Intb"), (10, 8, "Inta")]
+				(1, 9, ""), (7, 11, "Intnumber"), (12, 8, "Inta,Intb,Intc"),
+				(12, 8, "Inta,Intb"), (12, 8, "Inta")]
 
 			let expectedParameters: [TokenTest] = [
-				(6, 11, "Intnumber"), (10, 8, "Inta"), (10, 15, "Intb"),
-				(10, 22, "Intc")]
+				(7, 11, "Intnumber"), (12, 8, "Inta"), (12, 15, "Intb"),
+				(12, 22, "Intc")]
 
 			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
 			XCTAssertEqual(parameters.count, expectedParameters.count)

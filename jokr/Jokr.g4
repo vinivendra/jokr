@@ -12,7 +12,8 @@ statementList:
 
 statement:
 	functionDeclaration
-	| assignment;
+	| assignment
+	| returnStatement;
 
 assignment:
 	variableDeclaration ASSIGN expression
@@ -44,6 +45,9 @@ expression:
 	| expression OPERATOR expression
 	| lvalue;
 
+returnStatement:
+	RETURN expression;
+
 variableDeclaration:
 	TYPE ID;
 
@@ -60,6 +64,7 @@ RPAREN: ')';
 LBRACE: '{';
 RBRACE: '}';
 COMMA: ',';
+RETURN: 'return';
 INT: [0-9]+;
 TYPE: [_]*[A-Z][a-zA-Z0-9]*;
 ID: [_]*[a-z][a-zA-Z0-9]*;

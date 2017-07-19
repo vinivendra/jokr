@@ -158,6 +158,19 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	open func enterReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	open func enterVariableDeclaration(_ ctx: JokrParser.VariableDeclarationContext) { }
 	/**
 	 * {@inheritDoc}

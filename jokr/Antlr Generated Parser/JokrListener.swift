@@ -139,6 +139,18 @@ public protocol JokrListener: ParseTreeListener {
 	 */
 	func exitExpression(_ ctx: JokrParser.ExpressionContext)
 	/**
+	 * Enter a parse tree produced by {@link JokrParser#returnStatement}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#returnStatement}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
+	/**
 	 * Enter a parse tree produced by {@link JokrParser#variableDeclaration}.
 	 - Parameters:
 	   - ctx: the parse tree
