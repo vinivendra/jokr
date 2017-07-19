@@ -15,7 +15,10 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+
+# Substitute xcuserdata for individual files
 *.xcuserstate
+*.xcbkptlist
 
 ## Other
 *.moved-aside
