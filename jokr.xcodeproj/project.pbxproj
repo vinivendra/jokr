@@ -70,7 +70,7 @@
 		246BCBFE1F19567E004BE84C /* FunctionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionListener.swift; sourceTree = "<group>"; };
 		246BCBFF1F19567E004BE84C /* Jokr.g4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Jokr.g4; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		246BCC001F19567E004BE84C /* JokrCompilerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrCompilerListener.swift; sourceTree = "<group>"; };
-		246BCC011F19567E004BE84C /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = ../main.swift; sourceTree = "<group>"; };
+		246BCC011F19567E004BE84C /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		246BCC021F19567E004BE84C /* ObjcCompilerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjcCompilerListener.swift; sourceTree = "<group>"; };
 		246BCC211F1957B7004BE84C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		246BCC231F1957B7004BE84C /* LexerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexerTests.swift; sourceTree = "<group>"; };
@@ -117,6 +117,7 @@
 		246BCBF31F19567E004BE84C /* jokr */ = {
 			isa = PBXGroup;
 			children = (
+				246BCC011F19567E004BE84C /* main.swift */,
 				246BCBFD1F19567E004BE84C /* Extensions.swift */,
 				246BCBFE1F19567E004BE84C /* FunctionListener.swift */,
 				246BCBFF1F19567E004BE84C /* Jokr.g4 */,
@@ -130,7 +131,6 @@
 		246BCBF41F19567E004BE84C /* Antlr Generated Parser */ = {
 			isa = PBXGroup;
 			children = (
-				246BCC011F19567E004BE84C /* main.swift */,
 				246BCBF51F19567E004BE84C /* Jokr.tokens */,
 				246BCBF61F19567E004BE84C /* JokrBaseListener.swift */,
 				246BCBF71F19567E004BE84C /* JokrLexer.swift */,

@@ -1,7 +1,7 @@
 import Antlr4
 
 enum Objc {
-	static let valueTypes = ["int", "float"]
+	static let valueTypes = ["void", "int", "float"]
 }
 
 private extension Token {
@@ -65,14 +65,12 @@ class ObjcCompilerListener: JokrCompilerListener {
 	override func enterProgram(_ ctx: JokrParser.ProgramContext) {
 		super.enterProgram(ctx)
 
-		contents += "#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n\t@autoreleasepool {\n"
-		indentation = 2
+		contents += "#import <Foundation/Foundation.h>\n\n"
+		indentation = 0
 	}
 
 	override func exitProgram(_ ctx: JokrParser.ProgramContext) {
 		super.exitProgram(ctx)
-
-		contents += "\t}\n\treturn 0;\n}\n"
 		indentation = 0
 	}
 
@@ -95,5 +93,62 @@ class ObjcCompilerListener: JokrCompilerListener {
 		} else {
 			assertionFailure("Failed to transpile assignment")
 		}
+	}
+
+	override func enterFunctionDeclaration(
+		_ ctx: JokrParser.FunctionDeclarationContext)
+	{
+		super.enterFunctionDeclaration(ctx)
+
+		if let functionHeader = ctx.functionDeclarationHeader(),
+			let functionParameters = ctx.functionDeclarationParameters(),
+			let parameterList = functionParameters.parameterDeclarationList(),
+			let type = functionHeader.TYPE()?.getSymbol()?.typeToObjc,
+			let id = functionHeader.ID()?.getSymbol()?.getText()
+			{
+				let parameters = parameterList.parameters()
+				let parametersString = parameters.map {
+					$0.TYPE()!.getSymbol()!.typeToObjc +
+						$0.ID()!.getSymbol()!.getText()!
+				}.joined(separator: ", ")
+
+				if id == "main" {
+					addIntentation()
+					contents += "\(type)\(id)(\(parametersString)) {\n"
+					indentation += 1
+
+					addIntentation()
+					contents += "@autoreleasepool {\n"
+					indentation += 1
+				} else {
+					assertionFailure("Only 'main' function support for now")
+				}
+		} else {
+			assertionFailure("Failed to transpile function declaration")
+		}
+	}
+
+	override func exitFunctionDeclaration(
+		_ ctx: JokrParser.FunctionDeclarationContext)
+	{
+		super.exitFunctionDeclaration(ctx)
+
+		indentation -= 1
+		addIntentation()
+		contents += "}\n"
+
+		indentation -= 1
+		addIntentation()
+		contents += "}\n"
+	}
+
+	override func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
+	{
+		super.exitReturnStatement(ctx)
+
+		let expression = ctx.expression()!.toObjc
+
+		addIntentation()
+		contents += "return \(expression);\n"
 	}
 }
