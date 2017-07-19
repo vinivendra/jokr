@@ -1,0 +1,12 @@
+Int five() {
+	Int x = 4
+	x = 5
+}
+
+Int number(Int number) {
+	result = number
+}
+
+Int sum(Int a, Int b, Int c) {
+	result = a + b + c
+}

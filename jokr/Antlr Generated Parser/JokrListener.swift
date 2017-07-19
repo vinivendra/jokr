@@ -55,6 +55,78 @@ public protocol JokrListener: ParseTreeListener {
 	 */
 	func exitAssignment(_ ctx: JokrParser.AssignmentContext)
 	/**
+	 * Enter a parse tree produced by {@link JokrParser#functionDeclaration}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterFunctionDeclaration(_ ctx: JokrParser.FunctionDeclarationContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#functionDeclaration}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitFunctionDeclaration(_ ctx: JokrParser.FunctionDeclarationContext)
+	/**
+	 * Enter a parse tree produced by {@link JokrParser#functionDeclarationHeader}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterFunctionDeclarationHeader(_ ctx: JokrParser.FunctionDeclarationHeaderContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#functionDeclarationHeader}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitFunctionDeclarationHeader(_ ctx: JokrParser.FunctionDeclarationHeaderContext)
+	/**
+	 * Enter a parse tree produced by {@link JokrParser#functionDeclarationParameters}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterFunctionDeclarationParameters(_ ctx: JokrParser.FunctionDeclarationParametersContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#functionDeclarationParameters}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitFunctionDeclarationParameters(_ ctx: JokrParser.FunctionDeclarationParametersContext)
+	/**
+	 * Enter a parse tree produced by {@link JokrParser#parameterDeclarationList}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#parameterDeclarationList}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext)
+	/**
+	 * Enter a parse tree produced by {@link JokrParser#parameterDeclaration}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#parameterDeclaration}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext)
+	/**
+	 * Enter a parse tree produced by {@link JokrParser#block}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterBlock(_ ctx: JokrParser.BlockContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#block}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitBlock(_ ctx: JokrParser.BlockContext)
+	/**
 	 * Enter a parse tree produced by {@link JokrParser#expression}.
 	 - Parameters:
 	   - ctx: the parse tree

@@ -231,4 +231,100 @@ class ParserTests: XCTestCase {
 			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
 		}
 	}
+
+	func testFunctionDeclarations() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestFunctionDeclarations")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let declarations = tree.filter {
+				$0 is JokrParser.FunctionDeclarationContext
+			}
+
+			let expectedDeclarations: [TokenTest] = [
+				(1, 0, "Intfive(){\nIntx=4\nx=5\n}"),
+				(6, 0, "Intnumber(Intnumber){\nresult=number\n}"),
+				(10, 0, "Intsum(Inta,Intb,Intc){\nresult=a+b+c\n}")]
+
+			XCTAssertEqual(declarations.count, expectedDeclarations.count)
+
+			for (expected, actual) in zip(expectedDeclarations, declarations) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
+		}
+	}
+
+	func testParameterDeclaration() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestFunctionDeclarations")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let parameterLists = tree.filter {
+				$0 is JokrParser.ParameterDeclarationListContext
+			}
+
+			let parameters = tree.filter {
+				$0 is JokrParser.ParameterDeclarationContext
+			}
+
+			let expectedParameterLists: [TokenTest] = [
+				(1, 9, ""), (6, 11, "Intnumber"), (10, 8, "Inta,Intb,Intc"),
+				(10, 8, "Inta,Intb"), (10, 8, "Inta")]
+
+			let expectedParameters: [TokenTest] = [
+				(6, 11, "Intnumber"), (10, 8, "Inta"), (10, 15, "Intb"),
+				(10, 22, "Intc")]
+
+			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
+			XCTAssertEqual(parameters.count, expectedParameters.count)
+
+			for (expected, actual) in
+				zip(expectedParameterLists, parameterLists)
+			{
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			for (expected, actual) in zip(expectedParameters, parameters) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
+		}
+	}
+
+//	for context in parameterLists {
+//		print(context.getStart()!.getLine())
+//		print(context.getStart()!.getCharPositionInLine())
+//		print(context.getText())
+//	}
+
 }

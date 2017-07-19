@@ -13,8 +13,9 @@ open class JokrLexer: Lexer {
 
 	internal static let _sharedContextCache:PredictionContextCache = PredictionContextCache()
 	public static let BLOCK_COMMENT=1, LINE_COMMENT=2, OPERATOR=3, OPERATOR_CHAR=4, 
-                   LPAREN=5, RPAREN=6, INT=7, TYPE=8, ID=9, SNAKE_CASE=10, 
-                   ASSIGN=11, NEW_LINE=12, WS=13
+                   LPAREN=5, RPAREN=6, LBRACE=7, RBRACE=8, COMMA=9, INT=10, 
+                   TYPE=11, ID=12, SNAKE_CASE=13, ASSIGN=14, NEW_LINE=15, 
+                   WS=16
 	public static let channelNames: [String] = [
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	]
@@ -25,15 +26,18 @@ open class JokrLexer: Lexer {
 
 	public static let ruleNames: [String] = [
 		"BLOCK_COMMENT", "LINE_COMMENT", "OPERATOR", "OPERATOR_CHAR", "LPAREN", 
-		"RPAREN", "INT", "TYPE", "ID", "SNAKE_CASE", "ASSIGN", "NEW_LINE", "WS"
+		"RPAREN", "LBRACE", "RBRACE", "COMMA", "INT", "TYPE", "ID", "SNAKE_CASE", 
+		"ASSIGN", "NEW_LINE", "WS"
 	]
 
 	private static let _LITERAL_NAMES: [String?] = [
-		nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, "'='"
+		nil, nil, nil, nil, nil, "'('", "')'", "'{'", "'}'", "','", nil, nil, 
+		nil, nil, "'='"
 	]
 	private static let _SYMBOLIC_NAMES: [String?] = [
 		nil, "BLOCK_COMMENT", "LINE_COMMENT", "OPERATOR", "OPERATOR_CHAR", "LPAREN", 
-		"RPAREN", "INT", "TYPE", "ID", "SNAKE_CASE", "ASSIGN", "NEW_LINE", "WS"
+		"RPAREN", "LBRACE", "RBRACE", "COMMA", "INT", "TYPE", "ID", "SNAKE_CASE", 
+		"ASSIGN", "NEW_LINE", "WS"
 	]
 	public static let VOCABULARY: Vocabulary = Vocabulary(_LITERAL_NAMES, _SYMBOLIC_NAMES)
 
