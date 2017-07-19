@@ -52,20 +52,18 @@ private extension JokrParser.ExpressionContext {
 }
 
 class ObjcCompilerListener: JokrCompilerListener {
-	var contents = ""
-
 	var indentation = 0
 
 	func addIntentation() {
 		for _ in 0..<indentation {
-			contents += "\t"
+			write("\t")
 		}
 	}
 
 	override func enterProgram(_ ctx: JokrParser.ProgramContext) {
 		super.enterProgram(ctx)
 
-		contents += "#import <Foundation/Foundation.h>\n\n"
+		write("#import <Foundation/Foundation.h>\n\n")
 		indentation = 0
 	}
 
@@ -83,13 +81,13 @@ class ObjcCompilerListener: JokrCompilerListener {
 			let id = variableDeclaration.ID()?.getSymbol()?.getText() {
 
 			addIntentation()
-			contents += "\(type)\(id) = \(expression.toObjc);\n"
+			write("\(type)\(id) = \(expression.toObjc);\n")
 		} else if let lvalue = ctx.lvalue(),
 			let expression = ctx.expression(),
 			let id = lvalue.ID()?.getSymbol()?.getText() {
 
 			addIntentation()
-			contents += "\(id) = \(expression.toObjc);\n"
+			write("\(id) = \(expression.toObjc);\n")
 		} else {
 			assertionFailure("Failed to transpile assignment")
 		}
@@ -114,11 +112,11 @@ class ObjcCompilerListener: JokrCompilerListener {
 
 				if id == "main" {
 					addIntentation()
-					contents += "\(type)\(id)(\(parametersString)) {\n"
+					write("\(type)\(id)(\(parametersString)) {\n")
 					indentation += 1
 
 					addIntentation()
-					contents += "@autoreleasepool {\n"
+					write("@autoreleasepool {\n")
 					indentation += 1
 				} else {
 					assertionFailure("Only 'main' function support for now")
@@ -135,11 +133,11 @@ class ObjcCompilerListener: JokrCompilerListener {
 
 		indentation -= 1
 		addIntentation()
-		contents += "}\n"
+		write("}\n")
 
 		indentation -= 1
 		addIntentation()
-		contents += "}\n"
+		write("}\n")
 	}
 
 	override func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
@@ -149,6 +147,6 @@ class ObjcCompilerListener: JokrCompilerListener {
 		let expression = ctx.expression()!.toObjc
 
 		addIntentation()
-		contents += "return \(expression);\n"
+		write("return \(expression);\n")
 	}
 }

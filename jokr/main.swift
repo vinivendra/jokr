@@ -10,10 +10,10 @@ do {
 	parser.setBuildParseTree(true)
 	let tree = try parser.program()
 	let listener = ObjcCompilerListener()
+	listener.changeFile("main")
 	try ParseTreeWalker.DEFAULT.walk(listener, tree)
 
 	print("Done!")
-	print(listener.contents)
 } catch (let error) {
 	print("Failed :(")
 	print(error)
