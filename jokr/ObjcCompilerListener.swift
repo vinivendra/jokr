@@ -44,31 +44,18 @@ class ObjcCompilerListener: JokrCompilerListener {
 	{
 		super.enterFunctionDeclaration(ctx)
 
-		if let functionHeader = ctx.functionDeclarationHeader(),
-			let functionParameters = ctx.functionDeclarationParameters(),
-			let parameterList = functionParameters.parameterDeclarationList()
-			{
-				let type = transpileType(functionHeader.TYPE())
-				let id = transpileID(functionHeader.ID())
+		let (type, id, parametersString) = unwrapFunctionDeclarationContext(ctx)
 
-				let parameters = parameterList.parameters()
-				let parametersString = parameters.map {
-					transpileType($0.TYPE()) + transpileID($0.ID())
-				}.joined(separator: ", ")
+		if id == "main" {
+			addIntentation()
+			write("\(type)\(id)(\(parametersString)) {\n")
+			indentation += 1
 
-				if id == "main" {
-					addIntentation()
-					write("\(type)\(id)(\(parametersString)) {\n")
-					indentation += 1
-
-					addIntentation()
-					write("@autoreleasepool {\n")
-					indentation += 1
-				} else {
-					assertionFailure("Only 'main' function support for now")
-				}
+			addIntentation()
+			write("@autoreleasepool {\n")
+			indentation += 1
 		} else {
-			assertionFailure("Failed to transpile function declaration")
+			assertionFailure("Only 'main' function support for now")
 		}
 	}
 

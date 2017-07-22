@@ -119,4 +119,29 @@ class JokrCompilerListener: JokrBaseListener {
 			return ""
 		}
 	}
+
+	//
+	func unwrapFunctionDeclarationContext(
+		_ ctx: JokrParser.FunctionDeclarationContext)
+		-> (type: String, id: String, parametersString: String)
+	{
+
+		if let functionHeader = ctx.functionDeclarationHeader(),
+			let functionParameters = ctx.functionDeclarationParameters(),
+			let parameterList = functionParameters.parameterDeclarationList()
+		{
+			let type = transpileType(functionHeader.TYPE())
+			let id = transpileID(functionHeader.ID())
+
+			let parameters = parameterList.parameters()
+			let parametersString = parameters.map {
+				transpileType($0.TYPE()) + transpileID($0.ID())
+				}.joined(separator: ", ")
+
+			return (type, id, parametersString)
+		} else {
+			assertionFailure("Failed to transpile function declaration")
+			return ("", "", "")
+		}
+	}
 }
