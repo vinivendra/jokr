@@ -4,53 +4,6 @@ enum Objc {
 	static let valueTypes = ["void", "int", "float"]
 }
 
-private extension Token {
-	var typeToObjc: String {
-		if let text = self.getText() {
-			let lowercased = text.lowercased()
-			if Objc.valueTypes.contains(lowercased) {
-				return lowercased + " "
-			} else {
-				return text + " *"
-			}
-		}
-
-		assertionFailure("Failed to transpile type")
-		return "" // never reached
-	}
-}
-
-private extension JokrParser.LvalueContext {
-	var toObjc: String {
-		if let id = self.ID()?.getText() {
-			return id
-		}
-
-		assertionFailure("Failed to transpile lvalue")
-		return "" // never reached
-	}
-}
-
-private extension JokrParser.ExpressionContext {
-	var toObjc: String {
-		if let int = self.INT()?.getText() {
-			return int
-		} else if self.LPAREN() != nil,
-			let expression = self.expression(0) {
-			return "(\(expression.toObjc))"
-		} else if let operatorText = self.OPERATOR()?.getText(),
-			let lhs = expression(0),
-			let rhs = expression(1) {
-			return "\(lhs.toObjc) \(operatorText) \(rhs.toObjc)"
-		} else if let lvalue = lvalue() {
-			return lvalue.toObjc
-		}
-
-		assertionFailure("Failed to transpile expression")
-		return "" // never reached
-	}
-}
-
 class ObjcCompilerListener: JokrCompilerListener {
 	var indentation = 0
 
@@ -60,6 +13,11 @@ class ObjcCompilerListener: JokrCompilerListener {
 		}
 	}
 
+	override func stringForObjectType(_ string: String) -> String {
+		return string + " *"
+	}
+
+	//
 	override func enterProgram(_ ctx: JokrParser.ProgramContext) {
 		super.enterProgram(ctx)
 
@@ -75,22 +33,10 @@ class ObjcCompilerListener: JokrCompilerListener {
 	override func exitAssignment(_ ctx: JokrParser.AssignmentContext) {
 		super.exitAssignment(ctx)
 
-		if let variableDeclaration = ctx.variableDeclaration(),
-			let expression = ctx.expression(),
-			let type = variableDeclaration.TYPE()?.getSymbol()?.typeToObjc,
-			let id = variableDeclaration.ID()?.getSymbol()?.getText() {
+		let assignmentText = transpileAssignment(ctx)
 
-			addIntentation()
-			write("\(type)\(id) = \(expression.toObjc);\n")
-		} else if let lvalue = ctx.lvalue(),
-			let expression = ctx.expression(),
-			let id = lvalue.ID()?.getSymbol()?.getText() {
-
-			addIntentation()
-			write("\(id) = \(expression.toObjc);\n")
-		} else {
-			assertionFailure("Failed to transpile assignment")
-		}
+		addIntentation()
+		write(assignmentText)
 	}
 
 	override func enterFunctionDeclaration(
@@ -100,14 +46,14 @@ class ObjcCompilerListener: JokrCompilerListener {
 
 		if let functionHeader = ctx.functionDeclarationHeader(),
 			let functionParameters = ctx.functionDeclarationParameters(),
-			let parameterList = functionParameters.parameterDeclarationList(),
-			let type = functionHeader.TYPE()?.getSymbol()?.typeToObjc,
-			let id = functionHeader.ID()?.getSymbol()?.getText()
+			let parameterList = functionParameters.parameterDeclarationList()
 			{
+				let type = transpileType(functionHeader.TYPE())
+				let id = transpileID(functionHeader.ID())
+
 				let parameters = parameterList.parameters()
 				let parametersString = parameters.map {
-					$0.TYPE()!.getSymbol()!.typeToObjc +
-						$0.ID()!.getSymbol()!.getText()!
+					transpileType($0.TYPE()) + transpileID($0.ID())
 				}.joined(separator: ", ")
 
 				if id == "main" {
@@ -144,7 +90,7 @@ class ObjcCompilerListener: JokrCompilerListener {
 	{
 		super.exitReturnStatement(ctx)
 
-		let expression = ctx.expression()!.toObjc
+		let expression = transpileExpression(ctx.expression()!)
 
 		addIntentation()
 		write("return \(expression);\n")
