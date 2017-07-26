@@ -9,7 +9,7 @@ do {
 	let parser = try JokrParser(tokens)
 	parser.setBuildParseTree(true)
 	let tree = try parser.program()
-	let listener = ObjcCompilerListener()
+	let listener = JokrTranspiler(language: Objc())
 	listener.changeFile("main")
 	try ParseTreeWalker.DEFAULT.walk(listener, tree)
 

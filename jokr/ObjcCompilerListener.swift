@@ -1,85 +1,47 @@
 import Antlr4
 
-enum Objc {
+class Objc: LanguageDataSource {
 	static let valueTypes = ["void", "int", "float"]
-}
 
-class ObjcCompilerListener: JokrCompilerListener {
-	var indentation = 0
-
-	func addIntentation() {
-		for _ in 0..<indentation {
-			write("\t")
-		}
+	func stringForFileStart() -> String {
+		return "#import <Foundation/Foundation.h>\n\n"
 	}
 
-	override func stringForObjectType(_ string: String) -> String {
-		return string + " *"
-	}
+	func spacedStringForType(_ type: String) -> String {
+		let lowercased = type.lowercased()
 
-	//
-	override func enterProgram(_ ctx: JokrParser.ProgramContext) {
-		super.enterProgram(ctx)
-
-		write("#import <Foundation/Foundation.h>\n\n")
-		indentation = 0
-	}
-
-	override func exitProgram(_ ctx: JokrParser.ProgramContext) {
-		super.exitProgram(ctx)
-		indentation = 0
-	}
-
-	override func exitAssignment(_ ctx: JokrParser.AssignmentContext) {
-		super.exitAssignment(ctx)
-
-		let assignmentText = transpileAssignment(ctx)
-
-		addIntentation()
-		write(assignmentText)
-	}
-
-	override func enterFunctionDeclaration(
-		_ ctx: JokrParser.FunctionDeclarationContext)
-	{
-		super.enterFunctionDeclaration(ctx)
-
-		let (type, id, parametersString) = unwrapFunctionDeclarationContext(ctx)
-
-		if id == "main" {
-			addIntentation()
-			write("\(type)\(id)(\(parametersString)) {\n")
-			indentation += 1
-
-			addIntentation()
-			write("@autoreleasepool {\n")
-			indentation += 1
+		if Objc.valueTypes.contains(lowercased) {
+			return lowercased + " "
 		} else {
-			assertionFailure("Only 'main' function support for now")
+			return type + " *"
 		}
 	}
 
-	override func exitFunctionDeclaration(
-		_ ctx: JokrParser.FunctionDeclarationContext)
-	{
-		super.exitFunctionDeclaration(ctx)
+	func stringForType(_ type: String) -> String {
+		let lowercased = type.lowercased()
 
-		indentation -= 1
-		addIntentation()
-		write("}\n")
-
-		indentation -= 1
-		addIntentation()
-		write("}\n")
+		if Objc.valueTypes.contains(lowercased) {
+			return lowercased
+		} else {
+			return type + " *"
+		}
 	}
 
-	override func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
+	func stringForFunctionHeader(
+		withType type: String,
+		id: String,
+		parameters: [(type: String, id: String)]) -> String
 	{
-		super.exitReturnStatement(ctx)
+		var contents = "- (\(type))\(id)"
 
-		let expression = transpileExpression(ctx.expression()!)
+		if let parameter = parameters.first {
+			contents += ":(\(parameter.type))\(parameter.id)"
+		}
 
-		addIntentation()
-		write("return \(expression);\n")
+		for parameter in parameters.dropFirst() {
+			contents += " \(parameter.id):(\(parameter.type))\(parameter.id)"
+		}
+
+		return contents
 	}
 }

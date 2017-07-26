@@ -1,10 +1,12 @@
 import Antlr4
 
+// TODO: Fix the forced unwraps
+
 extension JokrParser.ParameterDeclarationListContext {
 	func parameters() -> [JokrParser.ParameterDeclarationContext] {
 		if let parameter = parameterDeclaration() {
 			if let parameterList = parameterDeclarationList() {
-				return [parameter] + parameterList.parameters()
+				return parameterList.parameters() + [parameter]
 			} else {
 				return [parameter]
 			}
@@ -14,17 +16,51 @@ extension JokrParser.ParameterDeclarationListContext {
 	}
 }
 
-// MARK: -
+protocol LanguageDataSource {
+	func stringForFileStart() -> String
+	func spacedStringForType(_: String) -> String
+	func stringForType(_: String) -> String
+	func stringForID(_: String) -> String
+	func stringForInt(_: String) -> String
+	func stringForFunctionHeader(
+		withType: String,
+		id: String,
+		parameters: [(type: String, id: String)]) -> String
+}
 
-class JokrCompilerListener: JokrBaseListener {
+extension LanguageDataSource {
+	func stringForID(_ string: String) -> String {
+		return string
+	}
+
+	func stringForInt(_ string: String) -> String {
+		return string
+	}
+}
+
+// MARK: -
+class JokrTranspiler: JokrBaseListener {
+
+	let dataSource: LanguageDataSource
+
+	var indentation = 0
+
+	init(language: LanguageDataSource,
+	     writingWith writer: JKRWriter = JKRConsoleWriter()) {
+		self.dataSource = language
+		self.writer = writer
+	}
+
+	func addIntentation() {
+		for _ in 0..<indentation {
+			write("\t")
+		}
+	}
 
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: JKRWriter
-	let writer: JKRWriter
 
-	init(writingWith writer: JKRWriter = JKRConsoleWriter()) {
-		self.writer = writer
-	}
+	let writer: JKRWriter
 
 	func write(_ string: String) {
 		writer.write(string)
@@ -35,36 +71,21 @@ class JokrCompilerListener: JokrBaseListener {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	// MARK: Common transpilation code
+	// MARK: Transpilation
 
 	func transpileType(_ type: TerminalNode?) -> String {
-		let token = type?.getSymbol()
-
-		if let text = token?.getText() {
-			let lowercased = text.lowercased()
-			if Objc.valueTypes.contains(lowercased) {
-				return stringForValueType(lowercased)
-			} else {
-				return stringForObjectType(text)
-			}
+		if let text = type?.getSymbol()?.getText() {
+			return dataSource.spacedStringForType(text)
 		}
 
 		assertionFailure("Failed to transpile type")
 		return ""
 	}
 
-	func stringForValueType(_ string: String) -> String {
-		return string + " "
-	}
-
-	func stringForObjectType(_ string: String) -> String {
-		return string + " "
-	}
-
 	//
 	func transpileID(_ id: TerminalNode?) -> String {
 		if let text = id?.getSymbol()?.getText() {
-			return text
+			return dataSource.stringForID(text)
 		}
 
 		assertionFailure("Failed to transpile id")
@@ -76,22 +97,33 @@ class JokrCompilerListener: JokrBaseListener {
 		-> String
 	{
 		if let int = expression.INT()?.getText() {
-			return int
-		} else if expression.LPAREN() != nil,
+			return dataSource.stringForInt(int)
+		}
+		else if expression.LPAREN() != nil,
 			let expression = expression.expression(0) {
 			return "(\(transpileExpression(expression)))"
-		} else if let operatorText = expression.OPERATOR()?.getText(),
+		}
+		else if let operatorText = expression.OPERATOR()?.getText(),
 			let lhs = expression.expression(0),
 			let rhs = expression.expression(1) {
 			let lhsText = transpileExpression(lhs)
 			let rhsText = transpileExpression(rhs)
 			return "\(lhsText) \(operatorText) \(rhsText)"
-		} else if let lvalue = expression.lvalue() {
-			return lvalue.ID()!.getSymbol()!.getText()!
+		}
+		else if let lvalue = expression.lvalue() {
+			return transpileID(lvalue.ID())
 		}
 
 		assertionFailure("Failed to transpile expression")
 		return ""
+	}
+
+	//
+	func transpileParameter(_ ctx: JokrParser.ParameterDeclarationContext) ->
+		(type: String, id: String)
+	{
+		return (dataSource.stringForType(ctx.TYPE()!.getText()),
+				dataSource.stringForID(ctx.ID()!.getText()))
 	}
 
 	//
@@ -121,27 +153,86 @@ class JokrCompilerListener: JokrBaseListener {
 	}
 
 	//
-	func unwrapFunctionDeclarationContext(
-		_ ctx: JokrParser.FunctionDeclarationContext)
-		-> (type: String, id: String, parametersString: String)
+	func transpileFunctionDeclaration(
+		_ ctx: JokrParser.FunctionDeclarationContext) -> String
 	{
+		let (type, id, parameters) = unwrapFunctionDeclarationContext(ctx)
+		return dataSource.stringForFunctionHeader(
+			withType: type,
+			id: id,
+			parameters: parameters)
+	}
 
+	func unwrapFunctionDeclarationContext(
+		_ ctx: JokrParser.FunctionDeclarationContext) ->
+		(type: String,
+		id: String,
+		parameters: [(type: String, id: String)])
+	{
 		if let functionHeader = ctx.functionDeclarationHeader(),
 			let functionParameters = ctx.functionDeclarationParameters(),
 			let parameterList = functionParameters.parameterDeclarationList()
 		{
-			let type = transpileType(functionHeader.TYPE())
-			let id = transpileID(functionHeader.ID())
+			let type = dataSource.stringForType(
+				functionHeader.TYPE()!.getText())
+			let id = dataSource.stringForID(functionHeader.ID()!.getText())
+			let parameters = parameterList.parameters().map(transpileParameter)
 
-			let parameters = parameterList.parameters()
-			let parametersString = parameters.map {
-				transpileType($0.TYPE()) + transpileID($0.ID())
-				}.joined(separator: ", ")
-
-			return (type, id, parametersString)
+			return (type, id, parameters)
 		} else {
 			assertionFailure("Failed to transpile function declaration")
-			return ("", "", "")
+			return ("", "", [])
 		}
+	}
+
+	//
+	func transpileReturn(_ ctx: JokrParser.ReturnStatementContext) -> String {
+		let expression = transpileExpression(ctx.expression()!)
+		return "return \(expression);\n"
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// MARK: Antlr
+
+	override func enterProgram(_ ctx: JokrParser.ProgramContext) {
+		super.enterProgram(ctx)
+		indentation = 0
+		write(dataSource.stringForFileStart())
+	}
+
+	override func exitProgram(_ ctx: JokrParser.ProgramContext) {
+		super.exitProgram(ctx)
+		indentation = 0
+	}
+
+	override func exitAssignment(_ ctx: JokrParser.AssignmentContext) {
+		super.exitAssignment(ctx)
+		addIntentation()
+		write(transpileAssignment(ctx))
+	}
+
+	override func enterFunctionDeclaration(
+		_ ctx: JokrParser.FunctionDeclarationContext)
+	{
+		super.enterFunctionDeclaration(ctx)
+		addIntentation()
+		write(transpileFunctionDeclaration(ctx) + " {\n")
+		indentation += 1
+	}
+
+	override func exitFunctionDeclaration(
+		_ ctx: JokrParser.FunctionDeclarationContext)
+	{
+		super.exitFunctionDeclaration(ctx)
+		indentation -= 1
+		addIntentation()
+		write("}\n")
+	}
+
+	override func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
+	{
+		super.exitReturnStatement(ctx)
+		addIntentation()
+		write(transpileReturn(ctx))
 	}
 }
