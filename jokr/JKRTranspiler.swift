@@ -14,28 +14,19 @@ class JKRTranspiler {
 		return dataSource.stringForFileStart()
 	}
 
-	func transpileAssignment(_ assignment: JokrParser.AssignmentContext)
+	func transpileAssignment(_ assignment: JKRTreeAssignment)
 		-> String
 	{
-		if let variableDeclaration = assignment.variableDeclaration(),
-			let expression = assignment.expression()
-		{
-			let type = transpileType(variableDeclaration.TYPE())
-			let id = transpileID(variableDeclaration.ID())
+		switch assignment {
+		case let .declaration(type, id, expression):
+			let typeText = transpileType(type)
+			let idText = transpileID(id)
 			let expressionText = transpileExpression(expression)
-			return "\(type)\(id) = \(expressionText);\n"
-		}
-		else if let lvalue = assignment.lvalue(),
-			let expression = assignment.expression()
-		{
-			let id = transpileID(lvalue.ID())
+			return "\(typeText)\(idText) = \(expressionText);\n"
+		case let .assignment(id, expression):
+			let idText = transpileID(id)
 			let expressionText = transpileExpression(expression)
-			return "\(id) = \(expressionText);\n"
-		}
-		else
-		{
-			assertionFailure("Failed to transpile assignment")
-			return ""
+			return "\(idText) = \(expressionText);\n"
 		}
 	}
 
@@ -49,55 +40,38 @@ class JKRTranspiler {
 			parameters: parameters)
 	}
 
-	func transpileReturn(_ ctx: JokrParser.ReturnStatementContext) -> String {
-		let expression = transpileExpression(ctx.expression()!)
+	func transpileReturn(_ expression: JKRTreeExpression) -> String {
+		let expression = transpileExpression(expression)
 		return "return \(expression);\n"
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Implementation
 
-	private func transpileType(_ type: TerminalNode?) -> String {
-		if let text = type?.getSymbol()?.getText() {
-			return dataSource.spacedStringForType(text)
-		}
-
-		assertionFailure("Failed to transpile type")
-		return ""
+	private func transpileType(_ text: String) -> String {
+		return dataSource.spacedStringForType(text)
 	}
 
-	private func transpileID(_ id: TerminalNode?) -> String {
-		if let text = id?.getSymbol()?.getText() {
-			return dataSource.stringForID(text)
-		}
-
-		assertionFailure("Failed to transpile id")
-		return ""
+	private func transpileID(_ text: String) -> String {
+		return dataSource.stringForID(text)
 	}
 
-	private func transpileExpression(_ expression: JokrParser.ExpressionContext)
+	private func transpileExpression(_ expression: JKRTreeExpression)
 		-> String
 	{
-		if let int = expression.INT()?.getText() {
-			return dataSource.stringForInt(int)
+		switch expression {
+		case let .int(text):
+			return dataSource.stringForInt(text)
+		case let .parenthesized(innerExpression):
+			let innerExpressionText = transpileExpression(innerExpression)
+			return "(\(innerExpressionText))"
+		case let .operation(leftExpression, operatorText, rightExpression):
+			let leftText = transpileExpression(leftExpression)
+			let rightText = transpileExpression(rightExpression)
+			return "\(leftText) \(operatorText) \(rightText)"
+		case let .lvalue(text):
+			return transpileID(text)
 		}
-		else if expression.LPAREN() != nil,
-			let expression = expression.expression(0) {
-			return "(\(transpileExpression(expression)))"
-		}
-		else if let operatorText = expression.OPERATOR()?.getText(),
-			let lhs = expression.expression(0),
-			let rhs = expression.expression(1) {
-			let lhsText = transpileExpression(lhs)
-			let rhsText = transpileExpression(rhs)
-			return "\(lhsText) \(operatorText) \(rhsText)"
-		}
-		else if let lvalue = expression.lvalue() {
-			return transpileID(lvalue.ID())
-		}
-
-		assertionFailure("Failed to transpile expression")
-		return ""
 	}
 
 	private func transpileParameter(

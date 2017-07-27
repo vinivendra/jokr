@@ -16,6 +16,56 @@ extension JokrParser.ParameterDeclarationListContext {
 	}
 }
 
+extension JokrParser.AssignmentContext {
+	func toJKRTreeAssignment() -> JKRTreeAssignment {
+		if let variableDeclaration = self.variableDeclaration(),
+			let expression = self.expression()
+		{
+			let type = variableDeclaration.TYPE()!.getSymbol()!.getText()!
+			let id = variableDeclaration.ID()!.getSymbol()!.getText()!
+			let expression = expression.toJKRTreeExpression()
+			return .declaration(type, id, expression)
+		}
+		else if let lvalue = self.lvalue(),
+			let expression = self.expression()
+		{
+			let id = lvalue.ID()!.getSymbol()!.getText()!
+			let expression = expression.toJKRTreeExpression()
+			return .assignment(id, expression)
+		}
+		else
+		{
+			assertionFailure("Failed to transpile assignment")
+			return .assignment("", .int(""))
+		}
+	}
+}
+
+extension JokrParser.ExpressionContext {
+	func toJKRTreeExpression() -> JKRTreeExpression {
+		if let int = self.INT()?.getText() {
+			return .int(int)
+		}
+		else if self.LPAREN() != nil,
+			let expression = self.expression(0) {
+			return .parenthesized(expression.toJKRTreeExpression())
+		}
+		else if let operatorText = self.OPERATOR()?.getText(),
+			let lhs = self.expression(0),
+			let rhs = self.expression(1) {
+			let lhsExp = lhs.toJKRTreeExpression()
+			let rhsExp = rhs.toJKRTreeExpression()
+			return .operation(lhsExp, operatorText, rhsExp)
+		}
+		else if let lvalue = self.lvalue() {
+			return .lvalue(lvalue.ID()!.getText())
+		}
+
+		assertionFailure("Failed to transpile expression")
+		return .int("")
+	}
+}
+
 // MARK: -
 class JKRListener: JokrBaseListener {
 
@@ -62,10 +112,13 @@ class JKRListener: JokrBaseListener {
 		indentation = 0
 	}
 
-	override func exitAssignment(_ ctx: JokrParser.AssignmentContext) {
-		super.exitAssignment(ctx)
+	override func exitAssignment(_ assignment: JokrParser.AssignmentContext) {
+		super.exitAssignment(assignment)
+
+		let assignment = assignment.toJKRTreeAssignment()
+
 		addIntentation()
-		write(transpiler.transpileAssignment(ctx))
+		write(transpiler.transpileAssignment(assignment))
 	}
 
 	override func enterFunctionDeclaration(
@@ -89,7 +142,10 @@ class JKRListener: JokrBaseListener {
 	override func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
 	{
 		super.exitReturnStatement(ctx)
+
+		let expression = ctx.expression()!.toJKRTreeExpression()
+
 		addIntentation()
-		write(transpiler.transpileReturn(ctx))
+		write(transpiler.transpileReturn(expression))
 	}
 }
