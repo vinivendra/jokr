@@ -1,6 +1,6 @@
 import Antlr4
 
-class Objc: LanguageDataSource {
+class JKRObjcDataSource: JKRLanguageDataSource {
 	static let valueTypes = ["void", "int", "float"]
 
 	func stringForFileStart() -> String {
@@ -10,7 +10,7 @@ class Objc: LanguageDataSource {
 	func spacedStringForType(_ type: String) -> String {
 		let lowercased = type.lowercased()
 
-		if Objc.valueTypes.contains(lowercased) {
+		if JKRObjcDataSource.valueTypes.contains(lowercased) {
 			return lowercased + " "
 		} else {
 			return type + " *"
@@ -20,7 +20,7 @@ class Objc: LanguageDataSource {
 	func stringForType(_ type: String) -> String {
 		let lowercased = type.lowercased()
 
-		if Objc.valueTypes.contains(lowercased) {
+		if JKRObjcDataSource.valueTypes.contains(lowercased) {
 			return lowercased
 		} else {
 			return type + " *"

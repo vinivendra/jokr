@@ -16,7 +16,7 @@ extension JokrParser.ParameterDeclarationListContext {
 	}
 }
 
-protocol LanguageDataSource {
+protocol JKRLanguageDataSource {
 	func stringForFileStart() -> String
 	func spacedStringForType(_: String) -> String
 	func stringForType(_: String) -> String
@@ -28,7 +28,7 @@ protocol LanguageDataSource {
 		parameters: [(type: String, id: String)]) -> String
 }
 
-extension LanguageDataSource {
+extension JKRLanguageDataSource {
 	func stringForID(_ string: String) -> String {
 		return string
 	}
@@ -39,13 +39,13 @@ extension LanguageDataSource {
 }
 
 // MARK: -
-class JokrTranspiler: JokrBaseListener {
+class JKRListener: JokrBaseListener {
 
-	let dataSource: LanguageDataSource
+	let dataSource: JKRLanguageDataSource
 
 	var indentation = 0
 
-	init(language: LanguageDataSource,
+	init(language: JKRLanguageDataSource,
 	     writingWith writer: JKRWriter = JKRConsoleWriter()) {
 		self.dataSource = language
 		self.writer = writer
