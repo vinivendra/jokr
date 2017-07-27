@@ -5,29 +5,29 @@ class JKRObjcDataSource: JKRLanguageDataSource {
 		return "#import <Foundation/Foundation.h>\n\n"
 	}
 
-	func spacedStringForType(_ type: String) -> String {
-		let lowercased = type.lowercased()
+	func spacedStringForType(_ type: JKRTreeType) -> String {
+		let lowercased = type.text.lowercased()
 
 		if JKRObjcDataSource.valueTypes.contains(lowercased) {
 			return lowercased + " "
 		} else {
-			return type + " *"
+			return type.text + " *"
 		}
 	}
 
-	func stringForType(_ type: String) -> String {
-		let lowercased = type.lowercased()
+	func stringForType(_ type: JKRTreeType) -> String {
+		let lowercased = type.text.lowercased()
 
 		if JKRObjcDataSource.valueTypes.contains(lowercased) {
 			return lowercased
 		} else {
-			return type + " *"
+			return type.text + " *"
 		}
 	}
 
 	func stringForFunctionHeader(
-		withType type: String,
-		id: String,
+		withType type: JKRTreeType,
+		id: JKRTreeID,
 		parameters: [JKRTreeParameter]) -> String
 	{
 		var contents = "- (\(stringForType(type)))\(stringForID(id))"

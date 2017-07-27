@@ -1,25 +1,32 @@
-// TODO: Consider changing Strings to opaque structs that only data sources can
-// unravel
-
 enum JKRTreeAssignment {
-	case declaration(String, String, JKRTreeExpression)
-	case assignment(String, JKRTreeExpression)
+	case declaration(JKRTreeType, JKRTreeID, JKRTreeExpression)
+	case assignment(JKRTreeID, JKRTreeExpression)
 }
 
 indirect enum JKRTreeExpression {
 	case int(String)
 	case parenthesized(JKRTreeExpression)
 	case operation(JKRTreeExpression, String, JKRTreeExpression)
-	case lvalue(String)
+	case lvalue(JKRTreeID)
 }
 
 struct JKRTreeFunctionDeclaration {
-	let type: String
-	let id: String
+	let type: JKRTreeType
+	let id: JKRTreeID
 	let parameters: [JKRTreeParameter]
 }
 
 struct JKRTreeParameter {
-	let type: String
-	let id: String
+	let type: JKRTreeType
+	let id: JKRTreeID
+}
+
+struct JKRTreeType {
+	let text: String
+	init(_ text: String) { self.text = text }
+}
+
+struct JKRTreeID {
+	let text: String
+	init(_ text: String) { self.text = text }
 }

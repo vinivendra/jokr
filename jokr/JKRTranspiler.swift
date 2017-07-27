@@ -45,11 +45,11 @@ class JKRTranspiler {
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Implementation
 
-	private func transpileType(_ text: String) -> String {
+	private func transpileType(_ text: JKRTreeType) -> String {
 		return dataSource.spacedStringForType(text)
 	}
 
-	private func transpileID(_ text: String) -> String {
+	private func transpileID(_ text: JKRTreeID) -> String {
 		return dataSource.stringForID(text)
 	}
 

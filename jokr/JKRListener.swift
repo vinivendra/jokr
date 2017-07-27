@@ -2,14 +2,24 @@ import Antlr4
 
 // TODO: Fix the forced unwraps
 
+extension TerminalNode {
+	func toJKRTreeID() -> JKRTreeID {
+		return JKRTreeID(getText())
+	}
+
+	func toJKRTreeType() -> JKRTreeType {
+		return JKRTreeType(getText())
+	}
+}
+
 extension JokrParser.FunctionDeclarationContext {
 	func toJKRTreeFunctionDeclaration() -> JKRTreeFunctionDeclaration {
 		if let functionHeader = self.functionDeclarationHeader(),
 			let functionParameters = self.functionDeclarationParameters(),
 			let parameterList = functionParameters.parameterDeclarationList()
 		{
-			let type = functionHeader.TYPE()!.getText()
-			let id = functionHeader.ID()!.getText()
+			let type = functionHeader.TYPE()!.toJKRTreeType()
+			let id = functionHeader.ID()!.toJKRTreeID()
 			let parameters = parameterList.toJKRTreeParameters()
 
 			return JKRTreeFunctionDeclaration(type: type,
@@ -17,7 +27,9 @@ extension JokrParser.FunctionDeclarationContext {
 			                                  parameters: parameters)
 		} else {
 			assertionFailure("Failed to transpile function declaration")
-			return JKRTreeFunctionDeclaration(type: "", id: "", parameters: [])
+			return JKRTreeFunctionDeclaration(type: JKRTreeType(""),
+			                                  id: JKRTreeID(""),
+			                                  parameters: [])
 		}
 	}
 }
@@ -25,8 +37,10 @@ extension JokrParser.FunctionDeclarationContext {
 extension JokrParser.ParameterDeclarationListContext {
 	func toJKRTreeParameters() -> [JKRTreeParameter] {
 		if let parameter = parameterDeclaration() {
-			let parameter = JKRTreeParameter(type: parameter.TYPE()!.getText(),
-			                                 id: parameter.ID()!.getText())
+			let type = parameter.TYPE()!.toJKRTreeType()
+			let id = parameter.ID()!.toJKRTreeID()
+			let parameter = JKRTreeParameter(type: type,
+			                                 id: id)
 
 			if let parameterList = parameterDeclarationList() {
 				return parameterList.toJKRTreeParameters() + [parameter]
@@ -44,22 +58,22 @@ extension JokrParser.AssignmentContext {
 		if let variableDeclaration = self.variableDeclaration(),
 			let expression = self.expression()
 		{
-			let type = variableDeclaration.TYPE()!.getSymbol()!.getText()!
-			let id = variableDeclaration.ID()!.getSymbol()!.getText()!
+			let type = variableDeclaration.TYPE()!.toJKRTreeType()
+			let id = variableDeclaration.ID()!.toJKRTreeID()
 			let expression = expression.toJKRTreeExpression()
 			return .declaration(type, id, expression)
 		}
 		else if let lvalue = self.lvalue(),
 			let expression = self.expression()
 		{
-			let id = lvalue.ID()!.getSymbol()!.getText()!
+			let id = lvalue.ID()!.toJKRTreeID()
 			let expression = expression.toJKRTreeExpression()
 			return .assignment(id, expression)
 		}
 		else
 		{
 			assertionFailure("Failed to transpile assignment")
-			return .assignment("", .int(""))
+			return .assignment(JKRTreeID(""), .int(""))
 		}
 	}
 }
@@ -81,7 +95,7 @@ extension JokrParser.ExpressionContext {
 			return .operation(lhsExp, operatorText, rhsExp)
 		}
 		else if let lvalue = self.lvalue() {
-			return .lvalue(lvalue.ID()!.getText())
+			return .lvalue(lvalue.ID()!.toJKRTreeID())
 		}
 
 		assertionFailure("Failed to transpile expression")
