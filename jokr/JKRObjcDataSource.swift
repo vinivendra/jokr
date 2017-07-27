@@ -1,3 +1,5 @@
+/// Stateless class to translate bits of code that are language specific (i.e.
+/// are different in Objc and Java).
 class JKRObjcDataSource: JKRLanguageDataSource {
 	static let valueTypes = ["void", "int", "float"]
 

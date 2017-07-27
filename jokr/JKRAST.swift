@@ -1,3 +1,7 @@
+/// Typesafe representations of elements in the jokr AST. Allows the actual 
+/// transpiler code to be independent from antlr, and makes it easier to reason
+/// about given the type safety and the enum coverage.
+
 enum JKRTreeAssignment {
 	case declaration(JKRTreeType, JKRTreeID, JKRTreeExpression)
 	case assignment(JKRTreeID, JKRTreeExpression)

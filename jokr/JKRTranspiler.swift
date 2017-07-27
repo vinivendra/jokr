@@ -1,3 +1,7 @@
+/// Stateless class that converts the jokr AST nodes into bits of code. Manually
+/// handles code that is common to both Objc and Java, which is mostly just the
+/// general structure; all other language-specific code is delegated into
+/// the language data source.
 class JKRTranspiler {
 	private let dataSource: JKRLanguageDataSource
 
