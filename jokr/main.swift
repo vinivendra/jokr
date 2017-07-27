@@ -3,7 +3,7 @@ import Antlr4
 
 do {
 	print("Parsing...")
-	let char = ANTLRInputStream("Int main() {\nString x = 2\nreturn 0\n}\n")
+	let char = ANTLRInputStream("Int main(Person a, Object b) {\nString x = 2\nreturn 0\n}\n")
 	let lexer = JokrLexer(char)
 	let tokens = CommonTokenStream(lexer)
 	let parser = try JokrParser(tokens)

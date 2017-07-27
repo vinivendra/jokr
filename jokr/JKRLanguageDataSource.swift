@@ -7,7 +7,7 @@ protocol JKRLanguageDataSource {
 	func stringForFunctionHeader(
 		withType: String,
 		id: String,
-		parameters: [(type: String, id: String)]) -> String
+		parameters: [JKRTreeParameter]) -> String
 }
 
 extension JKRLanguageDataSource {

@@ -1,5 +1,3 @@
-import Antlr4
-
 class JKRObjcDataSource: JKRLanguageDataSource {
 	static let valueTypes = ["void", "int", "float"]
 
@@ -30,9 +28,11 @@ class JKRObjcDataSource: JKRLanguageDataSource {
 	func stringForFunctionHeader(
 		withType type: String,
 		id: String,
-		parameters: [(type: String, id: String)]) -> String
+		parameters: [JKRTreeParameter]) -> String
 	{
-		var contents = "- (\(type))\(id)"
+		var contents = "- (\(stringForType(type)))\(stringForID(id))"
+
+		let parameters = parameters.map(stringsForParameter)
 
 		if let parameter = parameters.first {
 			contents += ":(\(parameter.type))\(parameter.id)"
@@ -43,5 +43,16 @@ class JKRObjcDataSource: JKRLanguageDataSource {
 		}
 
 		return contents
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// MARK: Private
+
+	private func stringsForParameter(
+		_ parameter: JKRTreeParameter) ->
+		(type: String, id: String)
+	{
+		return (stringForType(parameter.type),
+		        stringForID(parameter.id))
 	}
 }

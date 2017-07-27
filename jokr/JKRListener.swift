@@ -2,11 +2,34 @@ import Antlr4
 
 // TODO: Fix the forced unwraps
 
+extension JokrParser.FunctionDeclarationContext {
+	func toJKRTreeFunctionDeclaration() -> JKRTreeFunctionDeclaration {
+		if let functionHeader = self.functionDeclarationHeader(),
+			let functionParameters = self.functionDeclarationParameters(),
+			let parameterList = functionParameters.parameterDeclarationList()
+		{
+			let type = functionHeader.TYPE()!.getText()
+			let id = functionHeader.ID()!.getText()
+			let parameters = parameterList.toJKRTreeParameters()
+
+			return JKRTreeFunctionDeclaration(type: type,
+			                                  id: id,
+			                                  parameters: parameters)
+		} else {
+			assertionFailure("Failed to transpile function declaration")
+			return JKRTreeFunctionDeclaration(type: "", id: "", parameters: [])
+		}
+	}
+}
+
 extension JokrParser.ParameterDeclarationListContext {
-	func parameters() -> [JokrParser.ParameterDeclarationContext] {
+	func toJKRTreeParameters() -> [JKRTreeParameter] {
 		if let parameter = parameterDeclaration() {
+			let parameter = JKRTreeParameter(type: parameter.TYPE()!.getText(),
+			                                 id: parameter.ID()!.getText())
+
 			if let parameterList = parameterDeclarationList() {
-				return parameterList.parameters() + [parameter]
+				return parameterList.toJKRTreeParameters() + [parameter]
 			} else {
 				return [parameter]
 			}
@@ -112,10 +135,10 @@ class JKRListener: JokrBaseListener {
 		indentation = 0
 	}
 
-	override func exitAssignment(_ assignment: JokrParser.AssignmentContext) {
-		super.exitAssignment(assignment)
+	override func exitAssignment(_ ctx: JokrParser.AssignmentContext) {
+		super.exitAssignment(ctx)
 
-		let assignment = assignment.toJKRTreeAssignment()
+		let assignment = ctx.toJKRTreeAssignment()
 
 		addIntentation()
 		write(transpiler.transpileAssignment(assignment))
@@ -125,8 +148,12 @@ class JKRListener: JokrBaseListener {
 		_ ctx: JokrParser.FunctionDeclarationContext)
 	{
 		super.enterFunctionDeclaration(ctx)
+
+		let functionDeclaration = ctx.toJKRTreeFunctionDeclaration()
+
 		addIntentation()
-		write(transpiler.transpileFunctionDeclaration(ctx) + " {\n")
+		write(transpiler.transpileFunctionDeclaration(functionDeclaration)
+			+ " {\n")
 		indentation += 1
 	}
 

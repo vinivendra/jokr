@@ -12,3 +12,14 @@ indirect enum JKRTreeExpression {
 	case operation(JKRTreeExpression, String, JKRTreeExpression)
 	case lvalue(String)
 }
+
+struct JKRTreeFunctionDeclaration {
+	let type: String
+	let id: String
+	let parameters: [JKRTreeParameter]
+}
+
+struct JKRTreeParameter {
+	let type: String
+	let id: String
+}

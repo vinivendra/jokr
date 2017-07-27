@@ -1,5 +1,3 @@
-import Antlr4
-
 class JKRTranspiler {
 	private let dataSource: JKRLanguageDataSource
 
@@ -31,13 +29,12 @@ class JKRTranspiler {
 	}
 
 	func transpileFunctionDeclaration(
-		_ ctx: JokrParser.FunctionDeclarationContext) -> String
+		_ functionDeclaration: JKRTreeFunctionDeclaration) -> String
 	{
-		let (type, id, parameters) = unwrapFunctionDeclarationContext(ctx)
 		return dataSource.stringForFunctionHeader(
-			withType: type,
-			id: id,
-			parameters: parameters)
+			withType: functionDeclaration.type,
+			id: functionDeclaration.id,
+			parameters: functionDeclaration.parameters)
 	}
 
 	func transpileReturn(_ expression: JKRTreeExpression) -> String {
@@ -71,37 +68,6 @@ class JKRTranspiler {
 			return "\(leftText) \(operatorText) \(rightText)"
 		case let .lvalue(text):
 			return transpileID(text)
-		}
-	}
-
-	private func transpileParameter(
-		_ ctx: JokrParser.ParameterDeclarationContext) ->
-		(type: String, id: String)
-	{
-		return (dataSource.stringForType(ctx.TYPE()!.getText()),
-		        dataSource.stringForID(ctx.ID()!.getText()))
-	}
-
-
-	private func unwrapFunctionDeclarationContext(
-		_ ctx: JokrParser.FunctionDeclarationContext) ->
-		(type: String,
-		id: String,
-		parameters: [(type: String, id: String)])
-	{
-		if let functionHeader = ctx.functionDeclarationHeader(),
-			let functionParameters = ctx.functionDeclarationParameters(),
-			let parameterList = functionParameters.parameterDeclarationList()
-		{
-			let type = dataSource.stringForType(
-				functionHeader.TYPE()!.getText())
-			let id = dataSource.stringForID(functionHeader.ID()!.getText())
-			let parameters = parameterList.parameters().map(transpileParameter)
-
-			return (type, id, parameters)
-		} else {
-			assertionFailure("Failed to transpile function declaration")
-			return ("", "", [])
 		}
 	}
 }
