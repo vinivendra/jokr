@@ -58,7 +58,7 @@ class ParserTests: XCTestCase {
 			}
 
 		} catch (let error) {
-			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
 
@@ -110,7 +110,7 @@ class ParserTests: XCTestCase {
 			}
 
 		} catch (let error) {
-			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
 
@@ -146,7 +146,7 @@ class ParserTests: XCTestCase {
 			}
 
 		} catch (let error) {
-			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
 
@@ -180,7 +180,7 @@ class ParserTests: XCTestCase {
 			}
 
 		} catch (let error) {
-			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
 
@@ -220,7 +220,7 @@ class ParserTests: XCTestCase {
 			}
 
 		} catch (let error) {
-			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
 
@@ -257,7 +257,7 @@ class ParserTests: XCTestCase {
 			}
 
 		} catch (let error) {
-			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
 
@@ -310,7 +310,7 @@ class ParserTests: XCTestCase {
 			}
 
 		} catch (let error) {
-			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
 

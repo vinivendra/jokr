@@ -58,4 +58,14 @@ extension ParserRuleContext {
 
 		return listener.result
 	}
+
+	func filter<T: ParserRuleContext>(type: T.Type) -> [T]
+	{
+		let listener = JKRFilterFunction({ $0 is T })
+
+		// JKRContainsFunction's only throwing function is empty
+		try! ParseTreeWalker.DEFAULT.walk(listener, self)
+
+		return listener.result as! [T]
+	}
 }

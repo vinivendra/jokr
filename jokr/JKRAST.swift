@@ -17,16 +17,48 @@ enum JKRTreeStatement {
 	}
 }
 
-enum JKRTreeAssignment {
+enum JKRTreeAssignment: Equatable {
 	case declaration(JKRTreeType, JKRTreeID, JKRTreeExpression)
 	case assignment(JKRTreeID, JKRTreeExpression)
+
+	static func ==(lhs: JKRTreeAssignment, rhs: JKRTreeAssignment) -> Bool {
+		switch (lhs, rhs) {
+		case let (.declaration(type1, id1, exp1),
+		          .declaration(type2, id2, exp2)):
+			return type1 == type2 && id1 == id2 && exp1 == exp2
+		case let (.assignment(id1, exp1),
+		          .assignment(id2, exp2)):
+			return id1 == id2 && exp1 == exp2
+		default:
+			return false
+		}
+	}
 }
 
-indirect enum JKRTreeExpression {
+indirect enum JKRTreeExpression: Equatable {
 	case int(String)
 	case parenthesized(JKRTreeExpression)
 	case operation(JKRTreeExpression, String, JKRTreeExpression)
 	case lvalue(JKRTreeID)
+
+	static func ==(lhs: JKRTreeExpression, rhs: JKRTreeExpression) -> Bool {
+		switch (lhs, rhs) {
+		case let (.int(int1),
+		          .int(int2)):
+			return int1 == int2
+		case let (.parenthesized(exp1),
+		          .parenthesized(exp2)):
+			return exp1 == exp2
+		case let (.operation(exp11, op1, exp12),
+		          .operation(exp21, op2, exp22)):
+			return exp11 == exp21 && op1 == op2 && exp12 == exp22
+		case let (.lvalue(id1),
+		          .lvalue(id2)):
+			return id1 == id2
+		default:
+			return false
+		}
+	}
 }
 
 struct JKRTreeFunctionDeclaration {
@@ -41,12 +73,20 @@ struct JKRTreeParameter {
 	let id: JKRTreeID
 }
 
-struct JKRTreeType {
+struct JKRTreeType: Equatable {
 	let text: String
 	init(_ text: String) { self.text = text }
+
+	static func ==(lhs: JKRTreeType, rhs: JKRTreeType) -> Bool {
+		return lhs.text == rhs.text
+	}
 }
 
-struct JKRTreeID {
+struct JKRTreeID: Equatable {
 	let text: String
 	init(_ text: String) { self.text = text }
+
+	static func ==(lhs: JKRTreeID, rhs: JKRTreeID) -> Bool {
+		return lhs.text == rhs.text
+	}
 }

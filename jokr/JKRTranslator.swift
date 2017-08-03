@@ -1,4 +1,6 @@
-/// Stateless class that translates the jokr AST nodes into bits of code. 
+// TODO: Add swiftlint
+
+/// Stateless class that translates the jokr AST nodes into bits of code.
 /// Manually handles code that is common to both Objc and Java, which is mostly 
 /// just the general structure; all other language-specific code is delegated 
 /// into the language data source.
@@ -30,7 +32,9 @@ class JKRTranslator {
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Implementation
 
-	private func translateAssignment(_ assignment: JKRTreeAssignment) -> String {
+	private func translateAssignment(_ assignment: JKRTreeAssignment)
+		-> String
+	{
 		switch assignment {
 		case let .declaration(type, id, expression):
 			let typeText = translateType(type)
