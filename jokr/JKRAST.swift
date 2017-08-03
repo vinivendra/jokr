@@ -2,6 +2,21 @@
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 
+enum JKRTreeStatement {
+	case assignment(JKRTreeAssignment)
+	case functionDeclaration(JKRTreeFunctionDeclaration)
+	case returnStm(JKRTreeExpression)
+
+	var block: [JKRTreeStatement]? {
+		switch self {
+		case let .functionDeclaration(functionDeclaration):
+			return functionDeclaration.block
+		case .assignment, .returnStm:
+			return nil
+		}
+	}
+}
+
 enum JKRTreeAssignment {
 	case declaration(JKRTreeType, JKRTreeID, JKRTreeExpression)
 	case assignment(JKRTreeID, JKRTreeExpression)
@@ -18,6 +33,7 @@ struct JKRTreeFunctionDeclaration {
 	let type: JKRTreeType
 	let id: JKRTreeID
 	let parameters: [JKRTreeParameter]
+	let block: [JKRTreeStatement]
 }
 
 struct JKRTreeParameter {

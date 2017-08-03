@@ -109,14 +109,6 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
-			statementLists.forEach {
-				print($0.getText())
-				print($0.getStart()!.getLine())
-				print($0.getStart()!.getCharPositionInLine())
-				print($0.getStop()!.getLine())
-				print($0.getStop()!.getCharPositionInLine())
-			}
-
 		} catch (let error) {
 			XCTFail("Lexer or Parser failed to get tokens.\nError: \(error)")
 		}

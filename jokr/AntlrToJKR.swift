@@ -17,25 +17,70 @@ extension TerminalNode {
 	}
 }
 
+extension JokrParser.ProgramContext {
+	func toJKRTreeStatements() -> [JKRTreeStatement] {
+		if let statementList = statementList() {
+			return statementList.toJKRTreeStatements()
+		} else {
+			return []
+		}
+	}
+}
+
+extension JokrParser.StatementListContext {
+	func toJKRTreeStatements() -> [JKRTreeStatement] {
+		guard let statement = statement()?.toJKRTreeStatement() else {
+			assertionFailure("Failed to transpile parameter")
+			return []
+		}
+
+		if let statementList = statementList() {
+			return statementList.toJKRTreeStatements() + [statement]
+		} else {
+			return [statement]
+		}
+	}
+}
+
+extension JokrParser.StatementContext {
+	func toJKRTreeStatement() -> JKRTreeStatement {
+		if let assignment = assignment() {
+			return .assignment(assignment.toJKRTreeAssignment())
+		} else if let functionDeclaration = functionDeclaration() {
+			return .functionDeclaration(
+				functionDeclaration.toJKRTreeFunctionDeclaration())
+		} else if let returnStatement = returnStatement() {
+			return .returnStm(returnStatement.getJKRTreeExpression())
+		}
+
+		assertionFailure("Failed to transpile parameter")
+		return .returnStm(JKRTreeExpression.int(""))
+	}
+}
+
 extension JokrParser.FunctionDeclarationContext {
 	func toJKRTreeFunctionDeclaration() -> JKRTreeFunctionDeclaration {
 		if let functionHeader = self.functionDeclarationHeader(),
 			let functionParameters = self.functionDeclarationParameters(),
 			let parameterList = functionParameters.parameterDeclarationList(),
 			let type = functionHeader.TYPE()?.toJKRTreeType(),
-			let id = functionHeader.ID()?.toJKRTreeID()
+			let id = functionHeader.ID()?.toJKRTreeID(),
+			let statementList = block()?.statementList()
 		{
 			let parameters = parameterList.toJKRTreeParameters()
+			let block = statementList.toJKRTreeStatements()
 
 			return JKRTreeFunctionDeclaration(type: type,
 			                                  id: id,
-			                                  parameters: parameters)
+			                                  parameters: parameters,
+			                                  block: block)
 		}
 
 		assertionFailure("Failed to transpile function declaration")
 		return JKRTreeFunctionDeclaration(type: JKRTreeType(""),
 		                                  id: JKRTreeID(""),
-		                                  parameters: [])
+		                                  parameters: [],
+		                                  block: [])
 	}
 }
 

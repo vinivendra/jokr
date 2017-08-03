@@ -1,77 +1,62 @@
-/// Stateless class that converts the jokr AST nodes into bits of code. Manually
-/// handles code that is common to both Objc and Java, which is mostly just the
-/// general structure; all other language-specific code is delegated into
-/// the language data source.
+/// Class that implements the transpilation algorithm's general structure.
+/// Translating individual bits of code is delegated to the `translator`; the
+/// code's structure, indentation, opening and closing of braces, scopes, etc.
+/// are handled here.
 class JKRTranspiler {
-	private let dataSource: JKRLanguageDataSource
+	let translator: JKRTranslator
+	let writer: JKRWriter
+	var indentation = 0
 
-	init(language: JKRLanguageDataSource) {
-		self.dataSource = language
+	init(language: JKRLanguageDataSource,
+	     writingWith writer: JKRWriter = JKRConsoleWriter()) {
+		self.translator = JKRTranslator(language: language)
+		self.writer = writer
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Interface
 
-	func stringForFileStart() -> String {
-		return dataSource.stringForFileStart()
-	}
+	func transpileProgram(_ statements: [JKRTreeStatement]) {
+		write(translator.stringForFileStart())
 
-	func transpileAssignment(_ assignment: JKRTreeAssignment)
-		-> String
-	{
-		switch assignment {
-		case let .declaration(type, id, expression):
-			let typeText = transpileType(type)
-			let idText = transpileID(id)
-			let expressionText = transpileExpression(expression)
-			return "\(typeText)\(idText) = \(expressionText);\n"
-		case let .assignment(id, expression):
-			let idText = transpileID(id)
-			let expressionText = transpileExpression(expression)
-			return "\(idText) = \(expressionText);\n"
-		}
-	}
-
-	func transpileFunctionDeclaration(
-		_ functionDeclaration: JKRTreeFunctionDeclaration) -> String
-	{
-		return dataSource.stringForFunctionHeader(
-			withType: functionDeclaration.type,
-			id: functionDeclaration.id,
-			parameters: functionDeclaration.parameters)
-	}
-
-	func transpileReturn(_ expression: JKRTreeExpression) -> String {
-		let expression = transpileExpression(expression)
-		return "return \(expression);\n"
+		transpileStatements(statements)
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Implementation
 
-	private func transpileType(_ text: JKRTreeType) -> String {
-		return dataSource.spacedStringForType(text)
+	private func transpileStatements(_ statements: [JKRTreeStatement]) {
+		for statement in statements {
+			transpileStatement(statement)
+		}
 	}
 
-	private func transpileID(_ text: JKRTreeID) -> String {
-		return dataSource.stringForID(text)
+	private func transpileStatement(_ statement: JKRTreeStatement) {
+		addIntentation()
+		write(translator.translateStatement(statement))
+
+		if let block = statement.block {
+			write(" {\n")
+			indentation += 1
+			transpileStatements(block)
+			indentation -= 1
+			addIntentation()
+			write("}\n")
+		}
 	}
 
-	private func transpileExpression(_ expression: JKRTreeExpression)
-		-> String
-	{
-		switch expression {
-		case let .int(text):
-			return dataSource.stringForInt(text)
-		case let .parenthesized(innerExpression):
-			let innerExpressionText = transpileExpression(innerExpression)
-			return "(\(innerExpressionText))"
-		case let .operation(leftExpression, operatorText, rightExpression):
-			let leftText = transpileExpression(leftExpression)
-			let rightText = transpileExpression(rightExpression)
-			return "\(leftText) \(operatorText) \(rightText)"
-		case let .lvalue(text):
-			return transpileID(text)
+	// Writing
+	private func write(_ string: String) {
+		writer.write(string)
+	}
+
+	private func changeFile(_ string: String) {
+		writer.changeFile(string)
+	}
+
+	private func addIntentation() {
+		for _ in 0..<indentation {
+			write("\t")
 		}
 	}
 }

@@ -9,9 +9,10 @@ do {
 	let parser = try JokrParser(tokens)
 	parser.setBuildParseTree(true)
 	let tree = try parser.program()
-	let listener = JKRListener(language: JKRObjcDataSource())
-	listener.changeFile("main")
-	try ParseTreeWalker.DEFAULT.walk(listener, tree)
+
+	let ast = tree.toJKRTreeStatements()
+	let transpiler = JKRTranspiler(language: JKRObjcDataSource())
+	transpiler.transpileProgram(ast)
 
 	print("Done!")
 } catch (let error) {
