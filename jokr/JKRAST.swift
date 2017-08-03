@@ -73,19 +73,39 @@ struct JKRTreeParameter {
 	let id: JKRTreeID
 }
 
-struct JKRTreeType: Equatable {
+struct JKRTreeType: Equatable, ExpressibleByStringLiteral {
 	let text: String
 	init(_ text: String) { self.text = text }
 
+	// ExpressibleByStringLiteral
+	init(stringLiteral value: String) { self.text = value }
+	public init(extendedGraphemeClusterLiteral value: String) {
+		self.text = value
+	}
+	public init(unicodeScalarLiteral value: String) {
+		self.text = value
+	}
+
+	// Equatable
 	static func ==(lhs: JKRTreeType, rhs: JKRTreeType) -> Bool {
 		return lhs.text == rhs.text
 	}
 }
 
-struct JKRTreeID: Equatable {
+struct JKRTreeID: Equatable, ExpressibleByStringLiteral {
 	let text: String
 	init(_ text: String) { self.text = text }
 
+	// ExpressibleByStringLiteral
+	init(stringLiteral value: String) { self.text = value }
+	public init(extendedGraphemeClusterLiteral value: String) {
+		self.text = value
+	}
+	public init(unicodeScalarLiteral value: String) {
+		self.text = value
+	}
+
+	// Equatable
 	static func ==(lhs: JKRTreeID, rhs: JKRTreeID) -> Bool {
 		return lhs.text == rhs.text
 	}

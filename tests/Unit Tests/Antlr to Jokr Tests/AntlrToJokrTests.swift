@@ -19,17 +19,17 @@ class AntlrToJokrTests: XCTestCase {
 			let tree = try parser.program()
 
 			// TODO: Test filter by type
-			// TODO: Add string literal to type and id
+			// TODO: Add Equatable to other AST elements
 			let assignments = tree.filter(type:
 				JokrParser.AssignmentContext.self)
 				.map { $0.toJKRTreeAssignment() }
 
 			let expectedAssignments: [JKRTreeAssignment] = [
-				.declaration(JKRTreeType("Int"), JKRTreeID("bla"), .int("2")),
-				.declaration(JKRTreeType("Float"), JKRTreeID("fooBar"), .int("3")),
-				.declaration(JKRTreeType("Blah"), JKRTreeID("baz"), .lvalue(JKRTreeID("fooBar"))),
-				.assignment(JKRTreeID("fooBar"), .lvalue(JKRTreeID("bla"))),
-				.assignment(JKRTreeID("bla"), .int("300"))
+				.declaration("Int", "bla", .int("2")),
+				.declaration("Float", "fooBar", .int("3")),
+				.declaration("Blah", "baz", .lvalue("fooBar")),
+				.assignment("fooBar", .lvalue("bla")),
+				.assignment("bla", .int("300"))
 			]
 
 			XCTAssertEqual(assignments, expectedAssignments)

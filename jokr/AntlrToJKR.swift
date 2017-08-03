@@ -78,7 +78,7 @@ extension JokrParser.FunctionDeclarationContext {
 
 		assertionFailure("Failed to transpile function declaration")
 		return JKRTreeFunctionDeclaration(type: JKRTreeType(""),
-		                                  id: JKRTreeID(""),
+		                                  id: "",
 		                                  parameters: [],
 		                                  block: [])
 	}
@@ -128,7 +128,7 @@ extension JokrParser.AssignmentContext {
 		}
 
 		assertionFailure("Failed to transpile assignment")
-		return .assignment(JKRTreeID(""), .int(""))
+		return .assignment("", .int(""))
 	}
 }
 
