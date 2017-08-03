@@ -18,8 +18,7 @@ class AntlrToJokrTests: XCTestCase {
 			parser.setBuildParseTree(true)
 			let tree = try parser.program()
 
-			// TODO: Test filter by type
-			// TODO: Add Equatable to other AST elements
+			// TODO: Test filter by type and add filter by type to Parser Tests
 			let assignments = tree.filter(type:
 				JokrParser.AssignmentContext.self)
 				.map { $0.toJKRTreeAssignment() }
