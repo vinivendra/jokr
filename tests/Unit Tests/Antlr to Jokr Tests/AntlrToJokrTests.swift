@@ -5,6 +5,32 @@ private let testFilesPath = CommandLine.arguments[1] +
 "/tests/Unit Tests/Antlr To Jokr Tests/"
 
 class AntlrToJokrTests: XCTestCase {
+	func testIDs() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestIDs")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let ids = tree.filter(type:
+				JokrParser.AssignmentContext.self)
+				.flatMap { $0.variableDeclaration()?.ID()?.toJKRTreeID() }
+
+			let expectedIDs: [JKRTreeID] = ["bla", "fooBar", "baz", "fooBar",
+			                                "bla"]
+
+			XCTAssertEqual(ids, expectedIDs)
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	func testAssignment() {
 		let contents = try! String(contentsOfFile:
 			testFilesPath + "TestAssignment")
@@ -35,4 +61,5 @@ class AntlrToJokrTests: XCTestCase {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
+
 }

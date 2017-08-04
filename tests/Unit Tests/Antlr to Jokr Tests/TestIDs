@@ -1,0 +1,5 @@
+Int bla = 2
+Float fooBar = 3
+Blah baz = fooBar
+Int fooBar = bla
+Int bla = 300
