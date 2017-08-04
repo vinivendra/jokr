@@ -31,6 +31,32 @@ class AntlrToJokrTests: XCTestCase {
 		}
 	}
 
+	func testTypes() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestTypes")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let types = tree.filter(type:
+				JokrParser.AssignmentContext.self)
+				.flatMap { $0.variableDeclaration()?.TYPE()?.toJKRTreeType() }
+
+			let expectedTypess: [JKRTreeType] = ["Int", "Float", "Blah", "Int",
+			                                     "Void"]
+
+			XCTAssertEqual(types, expectedTypess)
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	func testAssignment() {
 		let contents = try! String(contentsOfFile:
 			testFilesPath + "TestAssignment")
