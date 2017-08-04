@@ -208,4 +208,33 @@ class AntlrToJokrTests: XCTestCase {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
+
+	func testReturns() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestReturns")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let returns = tree.filter(type:
+				JokrParser.ReturnStatementContext.self)
+				.map { $0.getJKRTreeExpression() }
+
+			let expectedReturns: [JKRTreeExpression] = [
+				.int("0"),
+				.operation(.int("5"), "+", .int("6")),
+				.parenthesized(.int("9"))
+			]
+
+			XCTAssertEqual(returns, expectedReturns)
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
 }
