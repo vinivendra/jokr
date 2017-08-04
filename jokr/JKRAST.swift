@@ -2,7 +2,7 @@
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 
-enum JKRTreeStatement {
+enum JKRTreeStatement: Equatable {
 	case assignment(JKRTreeAssignment)
 	case functionDeclaration(JKRTreeFunctionDeclaration)
 	case returnStm(JKRTreeExpression)
@@ -15,12 +15,30 @@ enum JKRTreeStatement {
 			return nil
 		}
 	}
+
+	// Equatable
+	static func ==(lhs: JKRTreeStatement, rhs: JKRTreeStatement) -> Bool {
+		switch (lhs, rhs) {
+		case let (.assignment(assignment1),
+		          .assignment(assignment2)):
+			return assignment1 == assignment2
+		case let (.functionDeclaration(functionDeclaration1),
+		          .functionDeclaration(functionDeclaration2)):
+			return functionDeclaration1 == functionDeclaration2
+		case let (.returnStm(returnStm1),
+		          .returnStm(returnStm2)):
+			return returnStm1 == returnStm2
+		default:
+			return false
+		}
+	}
 }
 
 enum JKRTreeAssignment: Equatable {
 	case declaration(JKRTreeType, JKRTreeID, JKRTreeExpression)
 	case assignment(JKRTreeID, JKRTreeExpression)
 
+	// Equatable
 	static func ==(lhs: JKRTreeAssignment, rhs: JKRTreeAssignment) -> Bool {
 		switch (lhs, rhs) {
 		case let (.declaration(type1, id1, exp1),
@@ -41,6 +59,7 @@ indirect enum JKRTreeExpression: Equatable {
 	case operation(JKRTreeExpression, String, JKRTreeExpression)
 	case lvalue(JKRTreeID)
 
+	// Equatable
 	static func ==(lhs: JKRTreeExpression, rhs: JKRTreeExpression) -> Bool {
 		switch (lhs, rhs) {
 		case let (.int(int1),
@@ -61,11 +80,19 @@ indirect enum JKRTreeExpression: Equatable {
 	}
 }
 
-struct JKRTreeFunctionDeclaration {
+struct JKRTreeFunctionDeclaration: Equatable {
 	let type: JKRTreeType
 	let id: JKRTreeID
 	let parameters: [JKRTreeParameter]
 	let block: [JKRTreeStatement]
+
+	// Equatable
+	static func ==(lhs: JKRTreeFunctionDeclaration,
+	               rhs: JKRTreeFunctionDeclaration) -> Bool
+	{
+		return lhs.type == rhs.type && lhs.id == rhs.id &&
+			lhs.parameters == rhs.parameters && lhs.block == rhs.block
+	}
 }
 
 struct JKRTreeParameter: Equatable {
