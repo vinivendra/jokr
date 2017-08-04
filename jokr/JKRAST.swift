@@ -68,9 +68,14 @@ struct JKRTreeFunctionDeclaration {
 	let block: [JKRTreeStatement]
 }
 
-struct JKRTreeParameter {
+struct JKRTreeParameter: Equatable {
 	let type: JKRTreeType
 	let id: JKRTreeID
+
+	// Equatable
+	static func ==(lhs: JKRTreeParameter, rhs: JKRTreeParameter) -> Bool {
+		return lhs.type == rhs.type && lhs.id == rhs.id
+	}
 }
 
 struct JKRTreeType: Equatable, ExpressibleByStringLiteral {

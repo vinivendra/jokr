@@ -123,4 +123,47 @@ class AntlrToJokrTests: XCTestCase {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
+
+	func testParameters() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestParameters")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let parameters = tree.filter(type:
+				JokrParser.ParameterDeclarationListContext.self)
+				// Filter only root parameter lists, sublists get tested too
+				.filter {
+					!($0.parent is JokrParser.ParameterDeclarationListContext)
+				}.map { $0.toJKRTreeParameters() }
+
+			let expectedParameters: [[JKRTreeParameter]] = [
+				[],
+				[JKRTreeParameter(type: "Float", id: "bla")],
+				[JKRTreeParameter(type: "Int", id: "bla"),
+				 JKRTreeParameter(type: "Float", id: "foo")],
+				[JKRTreeParameter(type: "Int", id: "bla"),
+				 JKRTreeParameter(type: "Float", id: "foo"),
+				 JKRTreeParameter(type: "Double", id: "hue")],
+			]
+
+			for (parameter, expectedParameter)
+				in zip(parameters, expectedParameters)
+			{
+				XCTAssertEqual(parameter, expectedParameter)
+			}
+			XCTAssertEqual(parameters.count, expectedParameters.count)
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+
 }
