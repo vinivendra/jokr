@@ -2,4 +2,4 @@ Int bla = 2
 Float fooBar = 3
 Blah baz = fooBar
 Int fooBar = bla
-Void bla = 300
+Int bla = 300

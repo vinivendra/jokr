@@ -57,9 +57,9 @@ class AntlrToJokrTests: XCTestCase {
 		}
 	}
 
-	func testAssignment() {
+	func testAssignments() {
 		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestAssignment")
+			testFilesPath + "TestAssignments")
 
 		let inputStream = ANTLRInputStream(contents)
 		let lexer = JokrLexer(inputStream)
@@ -83,6 +83,42 @@ class AntlrToJokrTests: XCTestCase {
 			]
 
 			XCTAssertEqual(assignments, expectedAssignments)
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testExpressions() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestExpressions")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let expressions = tree.filter(type:
+				JokrParser.ExpressionContext.self)
+				// Filter only root expressions, subexpressions get tested too
+				.filter { !($0.parent is JokrParser.ExpressionContext) }
+				.map { $0.toJKRTreeExpression() }
+
+			let expectedExpressions: [JKRTreeExpression] = [
+				.int("0"),
+				.parenthesized(.int("1")),
+				.operation(.int("2"), "+", .int("3")),
+				JKRTreeExpression.lvalue("foo"),
+				.operation(.int("4"), "+",
+				           .parenthesized(
+							.operation(.parenthesized(.int("5")),
+							           "+", .lvalue("foo"))))
+			]
+
+			XCTAssertEqual(expressions, expectedExpressions)
 		} catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
