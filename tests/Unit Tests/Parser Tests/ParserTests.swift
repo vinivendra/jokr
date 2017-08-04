@@ -25,13 +25,10 @@ class ParserTests: XCTestCase {
 			parser.setBuildParseTree(true)
 			let tree = try parser.program()
 
-			let statementLists = tree.filter {
-				$0 is JokrParser.StatementListContext
-			}
+			let statementLists = tree.filter(type:
+				JokrParser.StatementListContext.self)
 
-			let statements = tree.filter {
-				$0 is JokrParser.StatementContext
-			}
+			let statements = tree.filter(type: JokrParser.StatementContext.self)
 
 			let expectedStatementLists: [TokenTest] = [(1, 0, "x=0\nx=1"),
 			                                           (1, 0, "x=0")]
@@ -75,13 +72,10 @@ class ParserTests: XCTestCase {
 			parser.setBuildParseTree(true)
 			let tree = try parser.program()
 
-			let statementLists = tree.filter {
-				$0 is JokrParser.StatementListContext
-				}
+			let statementLists = tree.filter(type:
+				JokrParser.StatementListContext.self)
 
-			let statements = tree.filter {
-				$0 is JokrParser.StatementContext
-				}
+			let statements = tree.filter(type: JokrParser.StatementContext.self)
 
 			let expectedStatementLists: [TokenTest] = [
 				(1, 0, "x=0\nx=1\nx=2"), (1, 0, "x=0\nx=1"),
@@ -127,9 +121,8 @@ class ParserTests: XCTestCase {
 			parser.setBuildParseTree(true)
 			let tree = try parser.program()
 
-			let assignments = tree.filter {
-				$0 is JokrParser.AssignmentContext
-				}
+			let assignments = tree.filter(type:
+				JokrParser.AssignmentContext.self)
 
 			let expectedAssignments: [TokenTest] = [
 				(1, 0, "Intbla=2"), (2, 0, "FloatfooBar=3"),
@@ -163,9 +156,8 @@ class ParserTests: XCTestCase {
 			parser.setBuildParseTree(true)
 			let tree = try parser.program()
 
-			let declarations = tree.filter {
-				$0 is JokrParser.VariableDeclarationContext
-			}
+			let declarations = tree.filter(type:
+				JokrParser.VariableDeclarationContext.self)
 
 			let expectedDeclarations: [TokenTest] = [(1, 0, "Intbla"),
 			                                         (2, 0, "Floatfoo")]
@@ -197,9 +189,8 @@ class ParserTests: XCTestCase {
 			parser.setBuildParseTree(true)
 			let tree = try parser.program()
 
-			let expressions = tree.filter {
-				$0 is JokrParser.ExpressionContext
-			}
+			let expressions = tree.filter(type:
+				JokrParser.ExpressionContext.self)
 
 			let expectedExpressions: [TokenTest] = [
 				(1, 10, "0"),
@@ -237,9 +228,8 @@ class ParserTests: XCTestCase {
 			parser.setBuildParseTree(true)
 			let tree = try parser.program()
 
-			let declarations = tree.filter {
-				$0 is JokrParser.FunctionDeclarationContext
-			}
+			let declarations = tree.filter(type:
+				JokrParser.FunctionDeclarationContext.self)
 
 			let expectedDeclarations: [TokenTest] = [
 				(1, 0, "Intfive(){\nIntx=4\nx=5\nreturn5\n}"),
@@ -274,13 +264,11 @@ class ParserTests: XCTestCase {
 			parser.setBuildParseTree(true)
 			let tree = try parser.program()
 
-			let parameterLists = tree.filter {
-				$0 is JokrParser.ParameterDeclarationListContext
-			}
+			let parameterLists = tree.filter(type:
+				JokrParser.ParameterDeclarationListContext.self)
 
-			let parameters = tree.filter {
-				$0 is JokrParser.ParameterDeclarationContext
-			}
+			let parameters = tree.filter(type:
+				JokrParser.ParameterDeclarationContext.self)
 
 			let expectedParameterLists: [TokenTest] = [
 				(1, 9, ""), (7, 11, "Intnumber"), (12, 8, "Inta,Intb,Intc"),
