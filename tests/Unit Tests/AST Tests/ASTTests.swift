@@ -14,8 +14,7 @@ class ASTTests: XCTestCase {
 			"hue"
 		]
 
-		let expectedIDs: [JKRTreeID] = ["foo", "bar", "baz", "bla",
-		                                JKRTreeID("hue")]
+		let expectedIDs = ids.arrayCopy()
 
 		let expectedTexts = ["foo", "bar", "baz", "bla", "hue"]
 
@@ -37,8 +36,7 @@ class ASTTests: XCTestCase {
 			"Hue"
 		]
 
-		let expectedTypes: [JKRTreeType] = ["Foo", "Bar", "Baz", "Bla",
-		                                    JKRTreeType("Hue")]
+		let expectedTypes = types.arrayCopy()
 
 		let expectedTexts = ["Foo", "Bar", "Baz", "Bla", "Hue"]
 
@@ -58,11 +56,7 @@ class ASTTests: XCTestCase {
 			JKRTreeParameter(type: "Person", id: "joe")
 		]
 
-		let expectedParameters: [JKRTreeParameter] = [
-			JKRTreeParameter(type: "Int", id: "x"),
-			JKRTreeParameter(type: "Person", id: "x"),
-			JKRTreeParameter(type: "Person", id: "joe")
-		]
+		let expectedParameters = parameters.arrayCopy()
 
 		XCTAssertEqual(parameters, expectedParameters)
 
@@ -97,7 +91,7 @@ class ASTTests: XCTestCase {
 				block: [.returnStm(.int("1"))]),
 		]
 
-		let expectedDeclarations = declarations.map { $0 }
+		let expectedDeclarations = declarations.arrayCopy()
 
 		XCTAssertEqual(declarations, expectedDeclarations)
 
@@ -106,6 +100,5 @@ class ASTTests: XCTestCase {
 		{
 			XCTAssertNotEqual(declaration, differentDeclaration)
 		}
-
 	}
 }
