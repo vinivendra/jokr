@@ -147,4 +147,49 @@ class ASTTests: XCTestCase {
 			XCTAssertNotEqual(assignment, differentAssignment)
 		}
 	}
+
+	func testStatements() {
+		let statements: [JKRTreeStatement] = [
+			.assignment(.assignment("y", .int("1"))),
+			.assignment(.assignment("y", .int("0"))),
+			.functionDeclaration(JKRTreeFunctionDeclaration(
+				type: "Int", id: "func1",
+				parameters: [],
+				block: [.assignment(.assignment("y", .int("1")))])),
+			.functionDeclaration(JKRTreeFunctionDeclaration(
+				type: "Int", id: "func2",
+				parameters: [],
+				block: [.assignment(.assignment("y", .int("1")))])),
+			.returnStm(.int("0")),
+			.returnStm(.int("1"))
+		]
+
+		let expectedStatements = statements.arrayCopy()
+
+		let expectedBlocks: [[JKRTreeStatement]?] = [
+			nil, nil,
+			[.assignment(.assignment("y", .int("1")))],
+			[.assignment(.assignment("y", .int("1")))],
+			nil, nil
+		]
+
+		XCTAssertEqual(statements, expectedStatements)
+
+		for (statement, differentStatement) in
+			zip(statements, expectedStatements.shifted())
+		{
+			XCTAssertNotEqual(statement, differentStatement)
+		}
+
+		for (block, expectedBlock) in
+			zip(statements.map { $0.block }, expectedBlocks)
+		{
+			if let block = block, let expectedBlock = expectedBlock {
+				XCTAssertEqual(block, expectedBlock)
+			} else {
+				XCTAssertNil(block)
+				XCTAssertNil(expectedBlock)
+			}
+		}
+	}
 }
