@@ -125,4 +125,26 @@ class ASTTests: XCTestCase {
 			XCTAssertNotEqual(expression, differentExpression)
 		}
 	}
+
+	func testAssignments() {
+		let assignments: [JKRTreeAssignment] = [
+			.declaration("Int", "x", .int("0")),
+			.declaration("Float", "x", .int("0")),
+			.declaration("Float", "y", .int("0")),
+			.declaration("Float", "x", .int("1")),
+			.assignment("x", .int("0")),
+			.assignment("y", .int("0")),
+			.assignment("y", .int("1"))
+		]
+
+		let expectedAssignments = assignments.arrayCopy()
+
+		XCTAssertEqual(assignments, expectedAssignments)
+
+		for (assignment, differentAssignment) in
+			zip(assignments, expectedAssignments.shifted())
+		{
+			XCTAssertNotEqual(assignment, differentAssignment)
+		}
+	}
 }
