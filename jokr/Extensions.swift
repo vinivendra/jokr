@@ -57,20 +57,3 @@ extension MutableRandomAccessCollection {
 }
 
 extension Array: MutableRandomAccessCollection { }
-
-extension String {
-	public func withMutableCString<Result>(
-		_ closure: @escaping (UnsafeMutablePointer<Int8>) throws -> Result)
-		rethrows -> Result {
-
-			do {
-				return try self.withCString { pointer in
-					let mutablePointer = UnsafeMutablePointer<Int8>(
-						mutating: pointer)
-					return try closure(mutablePointer)
-				}
-			} catch (let error) {
-				throw error
-			}
-	}
-}
