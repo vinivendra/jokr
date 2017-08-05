@@ -28,17 +28,8 @@
 		246BCC1B1F19567E004BE84C /* JKRObjcDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC021F19567E004BE84C /* JKRObjcDataSource.swift */; };
 		246BCC1C1F19567E004BE84C /* JKRObjcDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC021F19567E004BE84C /* JKRObjcDataSource.swift */; };
 		246BCC311F1957B7004BE84C /* LexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC231F1957B7004BE84C /* LexerTests.swift */; };
-		246BCC321F1957B7004BE84C /* TestComments in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC241F1957B7004BE84C /* TestComments */; };
-		246BCC331F1957B7004BE84C /* TestIDs in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC251F1957B7004BE84C /* TestIDs */; };
-		246BCC341F1957B7004BE84C /* TestNewlines in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC261F1957B7004BE84C /* TestNewlines */; };
-		246BCC351F1957B7004BE84C /* TestTypes in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC271F1957B7004BE84C /* TestTypes */; };
 		246BCC361F1957B7004BE84C /* FunctionListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC291F1957B7004BE84C /* FunctionListenerTests.swift */; };
 		246BCC371F1957B7004BE84C /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC2A1F1957B7004BE84C /* ParserTests.swift */; };
-		246BCC381F1957B7004BE84C /* TestAssignments in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC2B1F1957B7004BE84C /* TestAssignments */; };
-		246BCC391F1957B7004BE84C /* TestExpressions in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC2C1F1957B7004BE84C /* TestExpressions */; };
-		246BCC3A1F1957B7004BE84C /* TestStatementLists in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC2D1F1957B7004BE84C /* TestStatementLists */; };
-		246BCC3B1F1957B7004BE84C /* TestStatementListsWithNewline in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC2E1F1957B7004BE84C /* TestStatementListsWithNewline */; };
-		246BCC3C1F1957B7004BE84C /* TestVariableDeclarations in Resources */ = {isa = PBXBuildFile; fileRef = 246BCC2F1F1957B7004BE84C /* TestVariableDeclarations */; };
 		248BAEEE1F23AA9B00B0190A /* JKRWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F71941F202117005B971C /* JKRWriter.swift */; };
 		24A4146A1F0F29450075993D /* libAntlr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A414681F0F29450075993D /* libAntlr4.dylib */; };
 		24B5F5231F17B8480045FF6A /* libAntlr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A414681F0F29450075993D /* libAntlr4.dylib */; };
@@ -50,13 +41,9 @@
 		24DB760D1F2A2491009E4E97 /* JKRAST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB760B1F2A2491009E4E97 /* JKRAST.swift */; };
 		24DB760F1F2A3789009E4E97 /* AntlrToJKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB760E1F2A3789009E4E97 /* AntlrToJKR.swift */; };
 		24DB76101F2A3789009E4E97 /* AntlrToJKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB760E1F2A3789009E4E97 /* AntlrToJKR.swift */; };
-		24DC8E111F34DB5B0015A211 /* TestParameters in Resources */ = {isa = PBXBuildFile; fileRef = 24DC8E101F34DB5B0015A211 /* TestParameters */; };
 		24E61C3C1F33A25300A2B8F5 /* JKRTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E61C3B1F33A25300A2B8F5 /* JKRTranslator.swift */; };
 		24E61C3D1F33A79300A2B8F5 /* JKRTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E61C3B1F33A25300A2B8F5 /* JKRTranslator.swift */; };
 		24E61C3F1F33AC5200A2B8F5 /* AntlrToJokrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E61C3E1F33AC5200A2B8F5 /* AntlrToJokrTests.swift */; };
-		24E61C441F33B00C00A2B8F5 /* TestAssignments in Resources */ = {isa = PBXBuildFile; fileRef = 24E61C431F33B00C00A2B8F5 /* TestAssignments */; };
-		24F3F5801F3522AE00B75C3F /* TestFunctionDeclarations in Resources */ = {isa = PBXBuildFile; fileRef = 24F3F57F1F3522AE00B75C3F /* TestFunctionDeclarations */; };
-		24F3F5821F352C4500B75C3F /* TestReturns in Resources */ = {isa = PBXBuildFile; fileRef = 24F3F5811F352C4500B75C3F /* TestReturns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -360,19 +347,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				246BCC391F1957B7004BE84C /* TestExpressions in Resources */,
-				246BCC3B1F1957B7004BE84C /* TestStatementListsWithNewline in Resources */,
-				24DC8E111F34DB5B0015A211 /* TestParameters in Resources */,
-				246BCC351F1957B7004BE84C /* TestTypes in Resources */,
-				246BCC341F1957B7004BE84C /* TestNewlines in Resources */,
-				246BCC331F1957B7004BE84C /* TestIDs in Resources */,
-				246BCC3A1F1957B7004BE84C /* TestStatementLists in Resources */,
-				246BCC381F1957B7004BE84C /* TestAssignments in Resources */,
-				246BCC321F1957B7004BE84C /* TestComments in Resources */,
-				24F3F5821F352C4500B75C3F /* TestReturns in Resources */,
-				246BCC3C1F1957B7004BE84C /* TestVariableDeclarations in Resources */,
-				24E61C441F33B00C00A2B8F5 /* TestAssignments in Resources */,
-				24F3F5801F3522AE00B75C3F /* TestFunctionDeclarations in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
