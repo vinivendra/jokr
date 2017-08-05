@@ -54,11 +54,13 @@ class ASTTests: XCTestCase {
 	func testParameters() {
 		let parameters: [JKRTreeParameter] = [
 			JKRTreeParameter(type: "Int", id: "x"),
+			JKRTreeParameter(type: "Person", id: "x"),
 			JKRTreeParameter(type: "Person", id: "joe")
 		]
 
 		let expectedParameters: [JKRTreeParameter] = [
 			JKRTreeParameter(type: "Int", id: "x"),
+			JKRTreeParameter(type: "Person", id: "x"),
 			JKRTreeParameter(type: "Person", id: "joe")
 		]
 
