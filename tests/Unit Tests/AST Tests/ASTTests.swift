@@ -50,4 +50,24 @@ class ASTTests: XCTestCase {
 
 		XCTAssertEqual(types.map { $0.text }, expectedTexts)
 	}
+
+	func testParameters() {
+		let parameters: [JKRTreeParameter] = [
+			JKRTreeParameter(type: "Int", id: "x"),
+			JKRTreeParameter(type: "Person", id: "joe")
+		]
+
+		let expectedParameters: [JKRTreeParameter] = [
+			JKRTreeParameter(type: "Int", id: "x"),
+			JKRTreeParameter(type: "Person", id: "joe")
+		]
+
+		XCTAssertEqual(parameters, expectedParameters)
+
+		for (parameter, differentParameter) in
+			zip(parameters, expectedParameters.shifted())
+		{
+			XCTAssertNotEqual(parameter, differentParameter)
+		}
+	}
 }
