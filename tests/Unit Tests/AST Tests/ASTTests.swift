@@ -72,4 +72,40 @@ class ASTTests: XCTestCase {
 			XCTAssertNotEqual(parameter, differentParameter)
 		}
 	}
+
+	func testFunctionDeclarations() {
+		let declarations = [
+			JKRTreeFunctionDeclaration(
+				type: "Int", id: "func1",
+				parameters: [],
+				block: [.returnStm(.int("0"))]),
+			JKRTreeFunctionDeclaration(
+				type: "Void", id: "func1",
+				parameters: [],
+				block: [.returnStm(.int("0"))]),
+			JKRTreeFunctionDeclaration(
+				type: "Void", id: "func2",
+				parameters: [],
+				block: [.returnStm(.int("0"))]),
+			JKRTreeFunctionDeclaration(
+				type: "Void", id: "func2",
+				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
+				block: [.returnStm(.int("0"))]),
+			JKRTreeFunctionDeclaration(
+				type: "Void", id: "func2",
+				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
+				block: [.returnStm(.int("1"))]),
+		]
+
+		let expectedDeclarations = declarations.map { $0 }
+
+		XCTAssertEqual(declarations, expectedDeclarations)
+
+		for (declaration, differentDeclaration) in
+			zip(declarations, expectedDeclarations.shifted())
+		{
+			XCTAssertNotEqual(declaration, differentDeclaration)
+		}
+
+	}
 }
