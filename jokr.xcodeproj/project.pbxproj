@@ -31,6 +31,7 @@
 		246BCC361F1957B7004BE84C /* FunctionListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC291F1957B7004BE84C /* FunctionListenerTests.swift */; };
 		246BCC371F1957B7004BE84C /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC2A1F1957B7004BE84C /* ParserTests.swift */; };
 		248BAEEE1F23AA9B00B0190A /* JKRWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F71941F202117005B971C /* JKRWriter.swift */; };
+		248F364D1F365A6E00BCAF0A /* ASTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F364C1F365A6E00BCAF0A /* ASTTests.swift */; };
 		24A4146A1F0F29450075993D /* libAntlr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A414681F0F29450075993D /* libAntlr4.dylib */; };
 		24B5F5231F17B8480045FF6A /* libAntlr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A414681F0F29450075993D /* libAntlr4.dylib */; };
 		24DB76061F2A1FE3009E4E97 /* JKRTranspiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB76051F2A1FE3009E4E97 /* JKRTranspiler.swift */; };
@@ -90,6 +91,9 @@
 		246BCC2D1F1957B7004BE84C /* TestStatementLists */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementLists; sourceTree = "<group>"; };
 		246BCC2E1F1957B7004BE84C /* TestStatementListsWithNewline */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementListsWithNewline; sourceTree = "<group>"; };
 		246BCC2F1F1957B7004BE84C /* TestVariableDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestVariableDeclarations; sourceTree = "<group>"; };
+		248F364A1F363D6800BCAF0A /* TestStatements */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestStatements; path = "Antlr to Jokr Tests/TestStatements"; sourceTree = "<group>"; };
+		248F364B1F3659F600BCAF0A /* TestEmpty */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestEmpty; path = "tests/Unit Tests/Antlr to Jokr Tests/TestEmpty"; sourceTree = "<group>"; };
+		248F364C1F365A6E00BCAF0A /* ASTTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASTTests.swift; path = "AST Tests/ASTTests.swift"; sourceTree = "<group>"; };
 		24A414441F0F20CE0075993D /* jokr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jokr; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A414651F0F29270075993D /* antlr4-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "antlr4-master"; sourceTree = "<group>"; };
 		24A414661F0F29440075993D /* Antlr4.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; name = Antlr4.swiftdoc; path = "antlr4-master/runtime/Swift/.build/debug/Antlr4.swiftdoc"; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 				246BCC221F1957B7004BE84C /* Lexer Tests */,
 				246BCC281F1957B7004BE84C /* Parser Tests */,
 				24E61C401F33AC6000A2B8F5 /* Antlr To Jokr Tests */,
+				248F364E1F365A7800BCAF0A /* AST Tests */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -209,9 +214,18 @@
 			path = "Parser Tests";
 			sourceTree = "<group>";
 		};
+		248F364E1F365A7800BCAF0A /* AST Tests */ = {
+			isa = PBXGroup;
+			children = (
+				248F364C1F365A6E00BCAF0A /* ASTTests.swift */,
+			);
+			name = "AST Tests";
+			sourceTree = "<group>";
+		};
 		24A4143B1F0F20CE0075993D = {
 			isa = PBXGroup;
 			children = (
+				248F364B1F3659F600BCAF0A /* TestEmpty */,
 				246BCBF31F19567E004BE84C /* jokr */,
 				246BCC1F1F1957B7004BE84C /* tests */,
 				24A414451F0F20CE0075993D /* Products */,
@@ -259,6 +273,7 @@
 				24DC8E101F34DB5B0015A211 /* TestParameters */,
 				24F3F57F1F3522AE00B75C3F /* TestFunctionDeclarations */,
 				24F3F5811F352C4500B75C3F /* TestReturns */,
+				248F364A1F363D6800BCAF0A /* TestStatements */,
 			);
 			name = "Antlr To Jokr Tests";
 			sourceTree = "<group>";
@@ -416,6 +431,7 @@
 				246BCC151F19567E004BE84C /* FunctionListener.swift in Sources */,
 				24DB76101F2A3789009E4E97 /* AntlrToJKR.swift in Sources */,
 				246BCC1C1F19567E004BE84C /* JKRObjcDataSource.swift in Sources */,
+				248F364D1F365A6E00BCAF0A /* ASTTests.swift in Sources */,
 				246BCC0D1F19567E004BE84C /* JokrListener.swift in Sources */,
 				246BCC361F1957B7004BE84C /* FunctionListenerTests.swift in Sources */,
 				24E61C3D1F33A79300A2B8F5 /* JKRTranslator.swift in Sources */,

@@ -29,6 +29,35 @@ extension Array {
 	}
 }
 
+protocol MutableRandomAccessCollection:
+MutableCollection, RandomAccessCollection { }
+
+extension MutableRandomAccessCollection {
+	mutating func shift() {
+		guard let first = self.first,
+			count > 1 else { return }
+
+		let lastValidIndex = index(before: endIndex)
+
+		var i = startIndex
+		while i != lastValidIndex {
+			let next = index(after: i)
+			self[i] = self[next]
+			i = next
+		}
+
+		self[lastValidIndex] = first
+	}
+
+	func shifted() -> Self {
+		var copy = self
+		copy.shift()
+		return copy
+	}
+}
+
+extension Array: MutableRandomAccessCollection { }
+
 extension String {
 	public func withMutableCString<Result>(
 		_ closure: @escaping (UnsafeMutablePointer<Int8>) throws -> Result)
