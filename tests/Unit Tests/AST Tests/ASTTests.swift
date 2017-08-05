@@ -17,11 +17,15 @@ class ASTTests: XCTestCase {
 		let expectedIDs: [JKRTreeID] = ["foo", "bar", "baz", "bla",
 		                                JKRTreeID("hue")]
 
+		let expectedTexts = ["foo", "bar", "baz", "bla", "hue"]
+
 		XCTAssertEqual(ids, expectedIDs)
 
 		for (id, differentID) in zip(ids, expectedIDs.shifted()) {
 			XCTAssertNotEqual(id, differentID)
 		}
+
+		XCTAssertEqual(ids.map { $0.text }, expectedTexts)
 	}
 
 	func testTypes() {
@@ -36,10 +40,14 @@ class ASTTests: XCTestCase {
 		let expectedTypes: [JKRTreeType] = ["Foo", "Bar", "Baz", "Bla",
 		                                    JKRTreeType("Hue")]
 
+		let expectedTexts = ["Foo", "Bar", "Baz", "Bla", "Hue"]
+
 		XCTAssertEqual(types, expectedTypes)
 
 		for (type, differentType) in zip(types, expectedTypes.shifted()) {
 			XCTAssertNotEqual(type, differentType)
 		}
+
+		XCTAssertEqual(types.map { $0.text }, expectedTexts)
 	}
 }
