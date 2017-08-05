@@ -237,4 +237,96 @@ class AntlrToJokrTests: XCTestCase {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
+
+	func testStatements() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestStatements")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let statements = tree.filter(type:
+				JokrParser.StatementContext.self)
+				.map { $0.toJKRTreeStatement() }
+
+			let expectedStatements: [JKRTreeStatement] = [
+				.functionDeclaration(
+					JKRTreeFunctionDeclaration(
+						type: "Int", id: "foo",
+						parameters: [],
+						block: [
+							.assignment(.declaration("Int", "x", .int("0"))),
+							.returnStm(.int("0"))])),
+				.assignment(.declaration("Int", "x", .int("0"))),
+				.returnStm(.int("0")),
+
+				.assignment(.declaration("Int", "y", .int("0"))),
+				.returnStm(.int("1"))
+			]
+
+			XCTAssertEqual(statements, expectedStatements)
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testProgram() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestStatements")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let statements = tree.toJKRTreeStatements()
+
+			let expectedStatements: [JKRTreeStatement] = [
+				.functionDeclaration(
+					JKRTreeFunctionDeclaration(
+						type: "Int", id: "foo",
+						parameters: [],
+						block: [
+							.assignment(.declaration("Int", "x", .int("0"))),
+							.returnStm(.int("0"))])),
+				.assignment(.declaration("Int", "y", .int("0"))),
+				.returnStm(.int("1"))
+			]
+
+			XCTAssertEqual(statements, expectedStatements)
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testEmpty() {
+		let contents = try! String(contentsOfFile:
+			testFilesPath + "TestEmpty")
+
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+
+		do {
+			let parser = try JokrParser(tokens)
+			parser.setBuildParseTree(true)
+			let tree = try parser.program()
+
+			let statements = tree.toJKRTreeStatements()
+
+			XCTAssertEqual(statements, [])
+		} catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
 }

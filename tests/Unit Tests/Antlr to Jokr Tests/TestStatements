@@ -1,0 +1,7 @@
+Int foo() {
+	Int x = 0
+	return 0
+}
+
+Int y = 0
+return 1
