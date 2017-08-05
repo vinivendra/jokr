@@ -103,7 +103,7 @@ class ASTTests: XCTestCase {
 	}
 
 
-	func testFunctionExpressions() {
+	func testExpressions() {
 		let expressions: [JKRTreeExpression] = [
 			JKRTreeExpression.int("0"), .int("1"),
 			.parenthesized(.int("0")), .parenthesized(.int("1")),
