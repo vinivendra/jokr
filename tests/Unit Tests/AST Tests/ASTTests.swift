@@ -23,4 +23,23 @@ class ASTTests: XCTestCase {
 			XCTAssertNotEqual(id, differentID)
 		}
 	}
+
+	func testTypes() {
+		let types: [JKRTreeType] = [
+			JKRTreeType("Foo"),
+			JKRTreeType(stringLiteral: "Bar"),
+			JKRTreeType(extendedGraphemeClusterLiteral: "Baz"),
+			JKRTreeType(unicodeScalarLiteral: "Bla"),
+			"Hue"
+		]
+
+		let expectedTypes: [JKRTreeType] = ["Foo", "Bar", "Baz", "Bla",
+		                                    JKRTreeType("Hue")]
+
+		XCTAssertEqual(types, expectedTypes)
+
+		for (type, differentType) in zip(types, expectedTypes.shifted()) {
+			XCTAssertNotEqual(type, differentType)
+		}
+	}
 }
