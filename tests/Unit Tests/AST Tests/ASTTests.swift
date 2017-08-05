@@ -101,4 +101,28 @@ class ASTTests: XCTestCase {
 			XCTAssertNotEqual(declaration, differentDeclaration)
 		}
 	}
+
+
+	func testFunctionExpressions() {
+		let expressions: [JKRTreeExpression] = [
+			JKRTreeExpression.int("0"), .int("1"),
+			.parenthesized(.int("0")), .parenthesized(.int("1")),
+			.operation(.int("0"), "+", .int("1")),
+			.operation(.int("1"), "+", .int("1")),
+			.operation(.int("1"), "-", .int("1")),
+			.operation(.int("1"), "-", .int("2")),
+			JKRTreeExpression.lvalue("foo"),
+			JKRTreeExpression.lvalue("bar")
+			]
+
+		let expectedExpression = expressions.arrayCopy()
+
+		XCTAssertEqual(expressions, expectedExpression)
+
+		for (expression, differentExpression) in
+			zip(expressions, expectedExpression.shifted())
+		{
+			XCTAssertNotEqual(expression, differentExpression)
+		}
+	}
 }
