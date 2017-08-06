@@ -5,6 +5,10 @@ class JKRLanguageDataSourceMockup: JKRLanguageDataSource {
 		return "File start\n"
 	}
 
+	func stringForMainStart() -> String {
+		return "Main file start\n"
+	}
+
 	func spacedStringForType(_ type: JKRTreeType) -> String {
 		return type.text + " "
 	}
