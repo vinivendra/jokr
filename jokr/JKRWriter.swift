@@ -63,6 +63,13 @@ class JKRFileWriter: JKRWriter {
 		self.outputDirectory = outputDirectory
 	}
 
+	func prettyPrint() {
+		for (filename, contents) in files {
+			print("======================= \(filename) =======================")
+			print(contents)
+		}
+	}
+
 	// JKRWriter
 	private(set) var currentFileName = ""
 
@@ -76,13 +83,6 @@ class JKRFileWriter: JKRWriter {
 	func changeFile(_ filename: String) {
 		files[filename] = ""
 		currentFileName = filename
-	}
-
-	func prettyPrint() {
-		for (filename, contents) in files {
-			print("======================= \(filename) =======================")
-			print(contents)
-		}
 	}
 
 	func finishWriting() throws {
