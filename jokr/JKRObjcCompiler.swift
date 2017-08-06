@@ -7,7 +7,9 @@ struct JKRObjcCompiler: JKRCompiler {
 		let (output, status) =
 			Shell.runCommand("clang -framework Foundation \(folderPath)main.m -o \(folderPath)main")
 		// swiftlint:disable:previous line_length
-		print(output)
+		if output != "" {
+			print(output)
+		}
 
 		if status == 0 {
 			print("======== Compilation succeeded!")
@@ -24,7 +26,11 @@ struct JKRObjcCompiler: JKRCompiler {
 		print("======== Running program...")
 		let (output, status) =
 			Shell.runBinary(folderPath + "main")
-		print(output)
+
+		if output != "" {
+			print(output)
+		}
+
 		print("======== Program finished with status \(status)")
 
 		return status
