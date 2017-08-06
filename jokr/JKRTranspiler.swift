@@ -25,7 +25,7 @@ class JKRTranspiler {
 
 	func transpileProgram(_ statements: [JKRTreeStatement]) {
 		// test
-		if writer.currentFileName == "main" {
+		if writer.currentFileName.lowercased() == "main" {
 			write(translator.stringForMainStart())
 			indentation += 2
 
