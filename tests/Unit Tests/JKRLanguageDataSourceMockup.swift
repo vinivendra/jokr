@@ -18,28 +18,6 @@ class JKRLanguageDataSourceMockup: JKRLanguageDataSource {
 		id: JKRTreeID,
 		parameters: [JKRTreeParameter]) -> String
 	{
-		var contents = type.text + " " + id.text + "("
-
-		let parameters = parameters.map(stringsForParameter)
-
-		if let parameter = parameters.first {
-			contents += "\(parameter.type) \(parameter.id)"
-		}
-
-		for parameter in parameters.dropFirst() {
-			contents += ", \(parameter.type) \(parameter.id)"
-		}
-
-		contents = contents + ")"
-
-		return contents
-	}
-
-	private func stringsForParameter(
-		_ parameter: JKRTreeParameter) ->
-		(type: String, id: String)
-	{
-		return (stringForType(parameter.type),
-		        stringForID(parameter.id))
+		return type.text + " " + id.text + "(" + parameters.description + ")"
 	}
 }
