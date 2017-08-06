@@ -31,8 +31,7 @@ extension JokrParser.ProgramContext {
 extension JokrParser.StatementListContext {
 	func toJKRTreeStatements() -> [JKRTreeStatement] {
 		guard let statement = statement()?.toJKRTreeStatement() else {
-			assertionFailure("Failed to transpile parameter")
-			return []
+			fatalError("Failed to transpile parameter")
 		}
 
 		if let statementList = statementList() {
@@ -57,8 +56,7 @@ extension JokrParser.StatementContext {
 			return .returnStm(returnStatement.getJKRTreeExpression())
 		}
 
-		assertionFailure("Failed to transpile parameter")
-		return .returnStm(JKRTreeExpression.int(""))
+		fatalError("Failed to transpile parameter")
 	}
 }
 
@@ -80,11 +78,7 @@ extension JokrParser.FunctionDeclarationContext {
 			                                  block: block)
 		}
 
-		assertionFailure("Failed to transpile function declaration")
-		return JKRTreeFunctionDeclaration(type: JKRTreeType(""),
-		                                  id: "",
-		                                  parameters: [],
-		                                  block: [])
+		fatalError("Failed to transpile function declaration")
 	}
 }
 
@@ -95,8 +89,7 @@ extension JokrParser.ParameterDeclarationListContext {
 			guard let type = parameter.TYPE()?.toJKRTreeType(),
 				let id = parameter.ID()?.toJKRTreeID() else
 			{
-				assertionFailure("Failed to transpile parameter")
-				return []
+				fatalError("Failed to transpile parameter")
 			}
 
 			let parameter = JKRTreeParameter(type: type,
@@ -133,8 +126,7 @@ extension JokrParser.AssignmentContext {
 			return .assignment(id, expression)
 		}
 
-		assertionFailure("Failed to transpile assignment")
-		return .assignment("", .int(""))
+		fatalError("Failed to transpile assignment")
 	}
 }
 
@@ -162,8 +154,7 @@ extension JokrParser.ExpressionContext {
 			return .lvalue(id)
 		}
 
-		assertionFailure("Failed to transpile expression")
-		return .int("")
+		fatalError("Failed to transpile expression")
 	}
 }
 
@@ -173,7 +164,6 @@ extension JokrParser.ReturnStatementContext {
 			return expression
 		}
 
-		assertionFailure("Failed to transpile return")
-		return .int("")
+		fatalError("Failed to transpile return")
 	}
 }

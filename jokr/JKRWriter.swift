@@ -21,8 +21,7 @@ class JKRStringWriter: JKRWriter {
 
 	func write(_ string: String) {
 		guard let existingContents = files[currentFileName] else {
-			assertionFailure("No filename given!")
-			return
+			fatalError("No filename given!")
 		}
 		files[currentFileName] = existingContents + string
 	}
