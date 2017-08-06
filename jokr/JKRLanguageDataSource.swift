@@ -1,4 +1,4 @@
-/// Interface for the Objc and Java language data sources. Anything the 
+/// Interface for the Objc and Java language data sources. Anything the
 /// transpiler needs from them should be used through this protocol.
 protocol JKRLanguageDataSource {
 	func stringForFileStart() -> String

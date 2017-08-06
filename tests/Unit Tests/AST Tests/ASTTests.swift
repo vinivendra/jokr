@@ -89,7 +89,7 @@ class ASTTests: XCTestCase {
 				type: "Void", id: "func2",
 				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
 				block: [.returnStm(.int("1"))])
-			]
+		]
 
 		let expectedDeclarations = declarations.arrayCopy()
 

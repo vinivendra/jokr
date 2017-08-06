@@ -1,4 +1,4 @@
-/// Typesafe representations of elements in the jokr AST. Allows the actual 
+/// Typesafe representations of elements in the jokr AST. Allows the actual
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 

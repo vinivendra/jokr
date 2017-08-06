@@ -332,7 +332,7 @@ class AntlrToJokrTests: XCTestCase {
 			let tree = try parser.program()
 
 			let statements = tree.toJKRTreeStatements()
-
+			
 			XCTAssertEqual(statements, [])
 		}
 		catch (let error) {
