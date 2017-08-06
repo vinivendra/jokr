@@ -14,15 +14,13 @@ do {
 	let tree = try parser.program()
 
 	let ast = tree.toJKRTreeStatements()
-	let writer = JKRStringWriter()
+	let writer = JKRFileWriter(outputDirectory: filePath)
 	let transpiler = JKRTranspiler(language: JKRObjcDataSource(),
 	                               writingWith: writer)
 
 	writer.changeFile("main")
 	transpiler.transpileProgram(ast)
-
-	try writer.files["main"]?.write(toFile: filePath + "main.m",
-	                                atomically: false, encoding: .utf8)
+	try writer.finishWriting()
 
 	print("Done!")
 }

@@ -217,8 +217,8 @@
 				24E61C401F33AC6000A2B8F5 /* Antlr To Jokr Tests */,
 				248F364E1F365A7800BCAF0A /* AST Tests */,
 				2426963E1F36A2BA00AFB573 /* Transpiler Tests */,
-				242696441F36AD8300AFB573 /* Language Data Source Tests */,
 				247DBBEC1F36B1C60009EBAC /* Translator Tests */,
+				242696441F36AD8300AFB573 /* Language Data Source Tests */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -330,6 +330,7 @@
 			buildPhases = (
 				24AFC3171F1ED15400534712 /* Build Antlr runtime */,
 				24A4147C1F0F2B750075993D /* Run Antlr to build parser */,
+				24349BC81F37343F00B7A62F /* Run Swiftlint */,
 				24A414401F0F20CE0075993D /* Sources */,
 				24A414411F0F20CE0075993D /* Frameworks */,
 				24A414421F0F20CE0075993D /* CopyFiles */,
@@ -411,6 +412,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		24349BC81F37343F00B7A62F /* Run Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Swiftlint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $SRCROOT\nswiftlint";
+		};
 		24A4147C1F0F2B750075993D /* Run Antlr to build parser */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

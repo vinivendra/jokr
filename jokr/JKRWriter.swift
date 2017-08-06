@@ -5,12 +5,17 @@ protocol JKRWriter {
 	func changeFile(_: String)
 	// test
 	var currentFileName: String { get }
+	func finishWriting() throws
+}
+
+extension JKRWriter {
+	func finishWriting() throws { }
 }
 
 /// JKRWriter that writes to STDIN, using textual separators for separating 
 /// files.
 class JKRConsoleWriter: JKRWriter {
-	var currentFileName: String = ""
+	private(set) var currentFileName = ""
 
 	func write(_ string: String) {
 		print(string, terminator: "")
@@ -44,6 +49,53 @@ class JKRStringWriter: JKRWriter {
 		for (filename, contents) in files {
 			print("======================= \(filename) =======================")
 			print(contents)
+		}
+	}
+}
+
+/// JKRWriter that accumulates the file contents in memory then writes them to 
+/// the appropriate files in the given directory.
+class JKRFileWriter: JKRWriter {
+	private var files = [String: String]()
+	private var outputDirectory: String
+
+	init(outputDirectory: String) {
+		self.outputDirectory = outputDirectory
+	}
+
+	// JKRWriter
+	private(set) var currentFileName = ""
+
+	func write(_ string: String) {
+		guard let existingContents = files[currentFileName] else {
+			fatalError("No filename given!")
+		}
+		files[currentFileName] = existingContents + string
+	}
+
+	func changeFile(_ filename: String) {
+		files[filename] = ""
+		currentFileName = filename
+	}
+
+	func prettyPrint() {
+		for (filename, contents) in files {
+			print("======================= \(filename) =======================")
+			print(contents)
+		}
+	}
+
+	func finishWriting() throws {
+		for (filename, contents) in files {
+			let path = outputDirectory + filename + ".m"
+			do {
+				try contents.write(toFile: path,
+				                   atomically: false,
+				                   encoding: .utf8)
+			}
+			catch (let error) {
+				throw error
+			}
 		}
 	}
 }
