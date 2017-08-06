@@ -16,6 +16,11 @@ class JKRTranslator {
 		return dataSource.stringForFileStart()
 	}
 
+	// test
+	func stringForMainStart() -> String {
+		return dataSource.stringForMainStart()
+	}
+
 	func translateStatement(_ statement: JKRTreeStatement) -> String {
 		switch statement {
 		case let .assignment(assignment):

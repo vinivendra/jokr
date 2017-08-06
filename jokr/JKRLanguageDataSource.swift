@@ -2,6 +2,8 @@
 /// transpiler needs from them should be used through this protocol.
 protocol JKRLanguageDataSource {
 	func stringForFileStart() -> String
+	func stringForMainStart() -> String
+
 	func spacedStringForType(_: JKRTreeType) -> String
 	func stringForType(_: JKRTreeType) -> String
 	func stringForID(_: JKRTreeID) -> String

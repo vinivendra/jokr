@@ -7,6 +7,12 @@ class JKRObjcDataSource: JKRLanguageDataSource {
 		return "#import <Foundation/Foundation.h>\n\n"
 	}
 
+	// test
+	func stringForMainStart() -> String {
+		return "#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n\t@autoreleasepool {\n"
+		// swiftlint:disable:previous line_length
+	}
+
 	func spacedStringForType(_ type: JKRTreeType) -> String {
 		let lowercased = type.text.lowercased()
 

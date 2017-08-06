@@ -24,9 +24,22 @@ class JKRTranspiler {
 	// MARK: Interface
 
 	func transpileProgram(_ statements: [JKRTreeStatement]) {
-		write(translator.stringForFileStart())
+		// test
+		if writer.currentFileName == "main" {
+			write(translator.stringForMainStart())
+			indentation += 2
 
-		transpileStatements(statements)
+			transpileStatements(statements)
+
+			indentation = 1
+			addIntentation()
+			write("}\n}\n")
+		}
+		else {
+			write(translator.stringForFileStart())
+
+			transpileStatements(statements)
+		}
 	}
 
 	////////////////////////////////////////////////////////////////////////////

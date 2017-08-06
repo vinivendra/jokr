@@ -3,17 +3,22 @@
 protocol JKRWriter {
 	func write(_: String)
 	func changeFile(_: String)
+	// test
+	var currentFileName: String { get }
 }
 
 /// JKRWriter that writes to STDIN, using textual separators for separating 
 /// files.
 class JKRConsoleWriter: JKRWriter {
+	var currentFileName: String = ""
+
 	func write(_ string: String) {
 		print(string, terminator: "")
 	}
 
 	func changeFile(_ filename: String) {
 		print("======================= \(filename) =======================")
+		currentFileName = filename
 	}
 }
 
@@ -21,7 +26,7 @@ class JKRConsoleWriter: JKRWriter {
 /// the values are their contents.
 class JKRStringWriter: JKRWriter {
 	var files = [String: String]()
-	private var currentFileName = ""
+	private(set) var currentFileName = ""
 
 	func write(_ string: String) {
 		guard let existingContents = files[currentFileName] else {
