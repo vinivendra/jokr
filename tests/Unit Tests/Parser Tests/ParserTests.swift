@@ -4,7 +4,7 @@ import XCTest
 // TODO: Remove !
 
 private let testFilesPath = CommandLine.arguments[1] +
-	"/tests/Unit Tests/Parser Tests/"
+"/tests/Unit Tests/Parser Tests/"
 
 class ParserTests: XCTestCase {
 	typealias TokenTest =
@@ -54,7 +54,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -103,7 +104,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -138,7 +140,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -171,7 +174,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -210,7 +214,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -246,7 +251,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -297,15 +303,16 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
 
-//	for context in parameterLists {
-//		print(context.getStart()!.getLine())
-//		print(context.getStart()!.getCharPositionInLine())
-//		print(context.getText())
-//	}
+	//	for context in parameterLists {
+	//		print(context.getStart()!.getLine())
+	//		print(context.getStart()!.getCharPositionInLine())
+	//		print(context.getText())
+	//	}
 
 }

@@ -21,7 +21,8 @@ extension JokrParser.ProgramContext {
 	func toJKRTreeStatements() -> [JKRTreeStatement] {
 		if let statementList = statementList() {
 			return statementList.toJKRTreeStatements()
-		} else {
+		}
+		else {
 			return []
 		}
 	}
@@ -36,7 +37,8 @@ extension JokrParser.StatementListContext {
 
 		if let statementList = statementList() {
 			return statementList.toJKRTreeStatements() + [statement]
-		} else {
+		}
+		else {
 			return [statement]
 		}
 	}
@@ -46,10 +48,12 @@ extension JokrParser.StatementContext {
 	func toJKRTreeStatement() -> JKRTreeStatement {
 		if let assignment = assignment() {
 			return .assignment(assignment.toJKRTreeAssignment())
-		} else if let functionDeclaration = functionDeclaration() {
+		}
+		else if let functionDeclaration = functionDeclaration() {
 			return .functionDeclaration(
 				functionDeclaration.toJKRTreeFunctionDeclaration())
-		} else if let returnStatement = returnStatement() {
+		}
+		else if let returnStatement = returnStatement() {
 			return .returnStm(returnStatement.getJKRTreeExpression())
 		}
 
@@ -100,10 +104,12 @@ extension JokrParser.ParameterDeclarationListContext {
 
 			if let parameterList = parameterDeclarationList() {
 				return parameterList.toJKRTreeParameters() + [parameter]
-			} else {
+			}
+			else {
 				return [parameter]
 			}
-		} else {
+		}
+		else {
 			return []
 		}
 	}

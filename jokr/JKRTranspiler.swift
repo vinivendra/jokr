@@ -1,5 +1,3 @@
-// TODO: Test JRKWriter
-
 /// Class that implements the transpilation algorithm's general structure.
 /// Translating individual bits of code is delegated to the `translator`; the
 /// code's structure, indentation, opening and closing of braces, scopes, etc.

@@ -64,6 +64,7 @@ class TranslatorTests: XCTestCase {
 			parameters: [JKRTreeParameter(type: "int", id: "five")], block: []))
 		XCTAssertEqual(translator.translateStatement(statement),
 		               "String foo([jokrUnitTests.JKRTreeParameter(type: jokrUnitTests.JKRTreeType(text: \"int\"), id: jokrUnitTests.JKRTreeID(text: \"five\"))])")
+		// swiftlint:disable:previous line_length
 
 		statement = .functionDeclaration(JKRTreeFunctionDeclaration(
 			type: "String", id: "foo",
@@ -72,6 +73,7 @@ class TranslatorTests: XCTestCase {
 			block: []))
 		XCTAssertEqual(translator.translateStatement(statement),
 		               "String foo([jokrUnitTests.JKRTreeParameter(type: jokrUnitTests.JKRTreeType(text: \"int\"), id: jokrUnitTests.JKRTreeID(text: \"five\")), jokrUnitTests.JKRTreeParameter(type: jokrUnitTests.JKRTreeType(text: \"float\"), id: jokrUnitTests.JKRTreeID(text: \"four\"))])")
+		// swiftlint:disable:previous line_length
 
 		statement = .functionDeclaration(JKRTreeFunctionDeclaration(
 			type: "String", id: "foo", parameters: [],

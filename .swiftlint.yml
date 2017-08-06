@@ -1,0 +1,22 @@
+excluded:
+  - antlr4-master
+  - .git
+  - jokr/Antlr Generated Parser
+
+disabled_rules:
+  - todo
+  - opening_brace
+
+line_length:
+  - 80  # warning
+  - 100 # error
+
+identifier_name:
+  min_length:
+    error: 2
+  excluded:
+    - id
+
+statement_position:
+    statement_mode: uncuddled_else
+

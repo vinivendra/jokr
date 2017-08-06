@@ -88,8 +88,8 @@ class ASTTests: XCTestCase {
 			JKRTreeFunctionDeclaration(
 				type: "Void", id: "func2",
 				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
-				block: [.returnStm(.int("1"))]),
-		]
+				block: [.returnStm(.int("1"))])
+			]
 
 		let expectedDeclarations = declarations.arrayCopy()
 
@@ -102,7 +102,6 @@ class ASTTests: XCTestCase {
 		}
 	}
 
-
 	func testExpressions() {
 		let expressions: [JKRTreeExpression] = [
 			JKRTreeExpression.int("0"), .int("1"),
@@ -113,7 +112,7 @@ class ASTTests: XCTestCase {
 			.operation(.int("1"), "-", .int("2")),
 			JKRTreeExpression.lvalue("foo"),
 			JKRTreeExpression.lvalue("bar")
-			]
+		]
 
 		let expectedExpression = expressions.arrayCopy()
 
@@ -186,7 +185,8 @@ class ASTTests: XCTestCase {
 		{
 			if let block = block, let expectedBlock = expectedBlock {
 				XCTAssertEqual(block, expectedBlock)
-			} else {
+			}
+			else {
 				XCTAssertNil(block)
 				XCTAssertNil(expectedBlock)
 			}

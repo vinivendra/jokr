@@ -17,7 +17,7 @@ enum JKRTreeStatement: Equatable {
 	}
 
 	// Equatable
-	static func ==(lhs: JKRTreeStatement, rhs: JKRTreeStatement) -> Bool {
+	static func == (lhs: JKRTreeStatement, rhs: JKRTreeStatement) -> Bool {
 		switch (lhs, rhs) {
 		case let (.assignment(assignment1),
 		          .assignment(assignment2)):
@@ -39,7 +39,7 @@ enum JKRTreeAssignment: Equatable {
 	case assignment(JKRTreeID, JKRTreeExpression)
 
 	// Equatable
-	static func ==(lhs: JKRTreeAssignment, rhs: JKRTreeAssignment) -> Bool {
+	static func == (lhs: JKRTreeAssignment, rhs: JKRTreeAssignment) -> Bool {
 		switch (lhs, rhs) {
 		case let (.declaration(type1, id1, exp1),
 		          .declaration(type2, id2, exp2)):
@@ -60,7 +60,7 @@ indirect enum JKRTreeExpression: Equatable {
 	case lvalue(JKRTreeID)
 
 	// Equatable
-	static func ==(lhs: JKRTreeExpression, rhs: JKRTreeExpression) -> Bool {
+	static func == (lhs: JKRTreeExpression, rhs: JKRTreeExpression) -> Bool {
 		switch (lhs, rhs) {
 		case let (.int(int1),
 		          .int(int2)):
@@ -87,8 +87,8 @@ struct JKRTreeFunctionDeclaration: Equatable {
 	let block: [JKRTreeStatement]
 
 	// Equatable
-	static func ==(lhs: JKRTreeFunctionDeclaration,
-	               rhs: JKRTreeFunctionDeclaration) -> Bool
+	static func == (lhs: JKRTreeFunctionDeclaration,
+	                rhs: JKRTreeFunctionDeclaration) -> Bool
 	{
 		return lhs.type == rhs.type && lhs.id == rhs.id &&
 			lhs.parameters == rhs.parameters && lhs.block == rhs.block
@@ -100,7 +100,7 @@ struct JKRTreeParameter: Equatable {
 	let id: JKRTreeID
 
 	// Equatable
-	static func ==(lhs: JKRTreeParameter, rhs: JKRTreeParameter) -> Bool {
+	static func == (lhs: JKRTreeParameter, rhs: JKRTreeParameter) -> Bool {
 		return lhs.type == rhs.type && lhs.id == rhs.id
 	}
 }
@@ -119,7 +119,7 @@ struct JKRTreeType: Equatable, ExpressibleByStringLiteral {
 	}
 
 	// Equatable
-	static func ==(lhs: JKRTreeType, rhs: JKRTreeType) -> Bool {
+	static func == (lhs: JKRTreeType, rhs: JKRTreeType) -> Bool {
 		return lhs.text == rhs.text
 	}
 }
@@ -138,7 +138,7 @@ struct JKRTreeID: Equatable, ExpressibleByStringLiteral {
 	}
 
 	// Equatable
-	static func ==(lhs: JKRTreeID, rhs: JKRTreeID) -> Bool {
+	static func == (lhs: JKRTreeID, rhs: JKRTreeID) -> Bool {
 		return lhs.text == rhs.text
 	}
 }

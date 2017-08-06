@@ -26,7 +26,8 @@ class AntlrToJokrTests: XCTestCase {
 			                                "bla"]
 
 			XCTAssertEqual(ids, expectedIDs)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -52,7 +53,8 @@ class AntlrToJokrTests: XCTestCase {
 			                                     "Void"]
 
 			XCTAssertEqual(types, expectedTypess)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -88,7 +90,8 @@ class AntlrToJokrTests: XCTestCase {
 			]
 
 			XCTAssertEqual(expressions, expectedExpressions)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -119,7 +122,8 @@ class AntlrToJokrTests: XCTestCase {
 			]
 
 			XCTAssertEqual(assignments, expectedAssignments)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -151,7 +155,7 @@ class AntlrToJokrTests: XCTestCase {
 				 JKRTreeParameter(type: "Float", id: "foo")],
 				[JKRTreeParameter(type: "Int", id: "bla"),
 				 JKRTreeParameter(type: "Float", id: "foo"),
-				 JKRTreeParameter(type: "Double", id: "hue")],
+				 JKRTreeParameter(type: "Double", id: "hue")]
 			]
 
 			for (parameter, expectedParameter)
@@ -160,7 +164,8 @@ class AntlrToJokrTests: XCTestCase {
 				XCTAssertEqual(parameter, expectedParameter)
 			}
 			XCTAssertEqual(parameters.count, expectedParameters.count)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -204,7 +209,8 @@ class AntlrToJokrTests: XCTestCase {
 			]
 
 			XCTAssertEqual(declarations, expectedDeclarations)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -233,7 +239,8 @@ class AntlrToJokrTests: XCTestCase {
 			]
 
 			XCTAssertEqual(returns, expectedReturns)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -271,7 +278,8 @@ class AntlrToJokrTests: XCTestCase {
 			]
 
 			XCTAssertEqual(statements, expectedStatements)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -304,7 +312,8 @@ class AntlrToJokrTests: XCTestCase {
 			]
 
 			XCTAssertEqual(statements, expectedStatements)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
@@ -325,7 +334,8 @@ class AntlrToJokrTests: XCTestCase {
 			let statements = tree.toJKRTreeStatements()
 
 			XCTAssertEqual(statements, [])
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}

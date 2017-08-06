@@ -2,7 +2,7 @@ import Antlr4
 import XCTest
 
 private let testFilesPath = CommandLine.arguments[1] +
-	"/tests/Unit Tests/Lexer Tests/"
+"/tests/Unit Tests/Lexer Tests/"
 
 class LexerTests: XCTestCase {
 	func testIDs() {
@@ -30,7 +30,8 @@ class LexerTests: XCTestCase {
 
 			XCTAssertEqual(tokens.filter { $0.getType() == JokrLexer.ID }.count,
 			               ids.count)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("JokrLexer failed to get tokens.\nError: \(error)")
 		}
 	}
@@ -58,9 +59,11 @@ class LexerTests: XCTestCase {
 				}, "Token not found: \(type)")
 			}
 
-			XCTAssertEqual(tokens.filter { $0.getType() == JokrLexer.TYPE }.count,
-			               types.count)
-		} catch (let error) {
+			XCTAssertEqual(
+				tokens.filter { $0.getType() == JokrLexer.TYPE }.count,
+				types.count)
+		}
+		catch (let error) {
 			XCTFail("JokrLexer failed to get tokens.\nError: \(error)")
 		}
 	}
@@ -108,7 +111,8 @@ class LexerTests: XCTestCase {
 				$0.getType() == JokrLexer.NEW_LINE
 				}.count, 5)
 
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("JokrLexer failed to get tokens.\nError: \(error)")
 		}
 	}
@@ -137,7 +141,8 @@ class LexerTests: XCTestCase {
 			XCTAssertEqual(tokens.filter {
 				$0.getType() == JokrLexer.NEW_LINE
 				}.count, newlines.count)
-		} catch (let error) {
+		}
+		catch (let error) {
 			XCTFail("JokrLexer failed to get tokens.\nError: \(error)")
 		}
 	}

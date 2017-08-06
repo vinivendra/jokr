@@ -15,6 +15,7 @@ class TranspilerTests: XCTestCase {
 
 		XCTAssertEqual(writer.files["main"],
 		               "Translator file start\nTranslator assignment\nTranslator return statement\n")
+		// swiftlint:disable:previous line_length
 	}
 
 	func testFunctionDeclaration() {
@@ -28,7 +29,7 @@ class TranspilerTests: XCTestCase {
 					parameters: [],
 					block: [
 						.assignment(.declaration("Int", "x", .int("0"))),
-						.returnStm(.int("0"))])),
+						.returnStm(.int("0"))]))
 		]
 
 		writer.changeFile("main")
@@ -36,5 +37,6 @@ class TranspilerTests: XCTestCase {
 
 		XCTAssertEqual(writer.files["main"],
 		               "Translator file start\nTranslator function declaration {\n\tTranslator assignment\n\tTranslator return statement\n}\n")
+		// swiftlint:disable:previous line_length
 	}
 }

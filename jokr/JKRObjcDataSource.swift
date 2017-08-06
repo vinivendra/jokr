@@ -12,7 +12,8 @@ class JKRObjcDataSource: JKRLanguageDataSource {
 
 		if JKRObjcDataSource.valueTypes.contains(lowercased) {
 			return lowercased + " "
-		} else {
+		}
+		else {
 			return type.text + " *"
 		}
 	}
@@ -22,7 +23,8 @@ class JKRObjcDataSource: JKRLanguageDataSource {
 
 		if JKRObjcDataSource.valueTypes.contains(lowercased) {
 			return lowercased
-		} else {
+		}
+		else {
 			return type.text + " *"
 		}
 	}
