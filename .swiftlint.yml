@@ -1,3 +1,7 @@
+################################################################################
+# WARNING: any updates made here should also be made to tests/.swiftlint
+################################################################################
+
 excluded:
   - antlr4-master
   - .git
@@ -6,6 +10,9 @@ excluded:
 disabled_rules:
   - todo
   - opening_brace
+
+opt_in_rules:
+  - force_unwrapping
 
 line_length:
   - 80  # warning

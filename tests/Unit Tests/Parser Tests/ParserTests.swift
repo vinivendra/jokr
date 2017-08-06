@@ -1,7 +1,8 @@
+// Files dealing with Antlr are allowed to force-unwrap
+// swiftlint:disable force_unwrapping
+
 import Antlr4
 import XCTest
-
-// TODO: Remove !
 
 private let testFilesPath = CommandLine.arguments[1] +
 "/tests/Unit Tests/Parser Tests/"

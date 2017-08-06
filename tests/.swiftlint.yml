@@ -9,6 +9,9 @@ disabled_rules:
   - type_body_length
   - force_try
 
+opt_in_rules:
+  - force_unwrapping
+
 line_length:
   - 80  # warning
   - 100 # error
