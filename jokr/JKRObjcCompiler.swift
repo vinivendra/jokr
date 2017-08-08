@@ -5,7 +5,7 @@ struct JKRObjcCompiler: JKRCompiler {
 	func compileFiles(atPath folderPath: String) -> CInt {
 		print("======== Compiling Obj-C...")
 		let (output, status) =
-			Shell.runCommand("clang -framework Foundation \(folderPath)main.m -o \(folderPath)main")
+			Shell.runCommand("clang -framework Foundation \(folderPath)main.m -o \(folderPath)a.out")
 		// swiftlint:disable:previous line_length
 		if output != "" {
 			print(output)
@@ -24,7 +24,7 @@ struct JKRObjcCompiler: JKRCompiler {
 	@discardableResult
 	func runProgram(atPath folderPath: String) -> CInt {
 		print("======== Running program...")
-		let (output, status) = Shell.runBinary(folderPath + "main")
+		let (output, status) = Shell.runBinary(folderPath + "a.out")
 
 		if output != "" {
 			print(output)

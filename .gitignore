@@ -1,7 +1,14 @@
-# Xcode
+#######################
+# Executable files
+a.out
+*.class
 
-## Macos
+#######################
+# Macos
 .DS_Store
+
+#######################
+# Xcode
 
 ## Build generated
 DerivedData/
