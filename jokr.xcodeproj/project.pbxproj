@@ -58,6 +58,8 @@
 		24F4D0B21F376B90002F303A /* JKRObjcCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F4D0B01F376B90002F303A /* JKRObjcCompiler.swift */; };
 		24F4D0B41F377EE5002F303A /* JKRJavaDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F4D0B31F377EE5002F303A /* JKRJavaDataSource.swift */; };
 		24F4D0B51F377EE5002F303A /* JKRJavaDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F4D0B31F377EE5002F303A /* JKRJavaDataSource.swift */; };
+		24F4D0B71F378507002F303A /* JKRJavaCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F4D0B61F378507002F303A /* JKRJavaCompiler.swift */; };
+		24F4D0B81F378507002F303A /* JKRJavaCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F4D0B61F378507002F303A /* JKRJavaCompiler.swift */; };
 		24FAA0D11F369DA90053A6BC /* FunctionListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FAA0CF1F369D9A0053A6BC /* FunctionListenerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +136,7 @@
 		24F4D0AD1F376B50002F303A /* JKRCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKRCompiler.swift; sourceTree = "<group>"; };
 		24F4D0B01F376B90002F303A /* JKRObjcCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKRObjcCompiler.swift; sourceTree = "<group>"; };
 		24F4D0B31F377EE5002F303A /* JKRJavaDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKRJavaDataSource.swift; sourceTree = "<group>"; };
+		24F4D0B61F378507002F303A /* JKRJavaCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKRJavaCompiler.swift; sourceTree = "<group>"; };
 		24FAA0CF1F369D9A0053A6BC /* FunctionListenerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionListenerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +196,7 @@
 				24F4D0B31F377EE5002F303A /* JKRJavaDataSource.swift */,
 				24F4D0AD1F376B50002F303A /* JKRCompiler.swift */,
 				24F4D0B01F376B90002F303A /* JKRObjcCompiler.swift */,
+				24F4D0B61F378507002F303A /* JKRJavaCompiler.swift */,
 			);
 			path = jokr;
 			sourceTree = "<group>";
@@ -485,6 +489,7 @@
 				24DB760F1F2A3789009E4E97 /* AntlrToJKR.swift in Sources */,
 				24F4D0B41F377EE5002F303A /* JKRJavaDataSource.swift in Sources */,
 				24F4D0B11F376B90002F303A /* JKRObjcCompiler.swift in Sources */,
+				24F4D0B71F378507002F303A /* JKRJavaCompiler.swift in Sources */,
 				246BCC071F19567E004BE84C /* JokrLexer.swift in Sources */,
 				246BCC101F19567E004BE84C /* JokrParserATN.swift in Sources */,
 				24DB760C1F2A2491009E4E97 /* JKRAST.swift in Sources */,
@@ -512,6 +517,7 @@
 				246BCC1C1F19567E004BE84C /* JKRObjcDataSource.swift in Sources */,
 				242696391F369F5900AFB573 /* JKRLanguageDataSourceMockup.swift in Sources */,
 				247DBBEB1F36B1C00009EBAC /* TranslatorTests.swift in Sources */,
+				24F4D0B81F378507002F303A /* JKRJavaCompiler.swift in Sources */,
 				248F364D1F365A6E00BCAF0A /* ASTTests.swift in Sources */,
 				2426963D1F36A2B100AFB573 /* TranspilerTests.swift in Sources */,
 				246BCC0D1F19567E004BE84C /* JokrListener.swift in Sources */,

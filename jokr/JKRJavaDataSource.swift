@@ -11,7 +11,7 @@ class JKRJavaDataSource: JKRLanguageDataSource {
 
 	// test
 	func stringForMainStart() -> String {
-		return "public class Main {\n\tpublic static void main(String[] args) {\n"
+		return "public class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"helloooow\");\n"
 		// swiftlint:disable:previous line_length
 	}
 

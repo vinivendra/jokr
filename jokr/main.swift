@@ -22,11 +22,11 @@ do {
 	transpiler.transpileProgram(ast)
 	try writer.finishWriting()
 
-//	let compiler = JKRObjcCompiler()
-//	let compileStatus = compiler.compileFiles(atPath: filePath)
-//	if compileStatus == 0 {
-//		compiler.runProgram(atPath: filePath)
-//	}
+	let compiler = JKRJavaCompiler()
+	let compileStatus = compiler.compileFiles(atPath: filePath)
+	if compileStatus == 0 {
+		compiler.runProgram(atPath: filePath)
+	}
 
 	print("Done!")
 }
