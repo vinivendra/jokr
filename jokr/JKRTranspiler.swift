@@ -4,8 +4,6 @@
 /// are handled here.
 class JKRTranspiler {
 	let translator: JKRTranslator
-	let writer: JKRWriter
-	var indentation = 0
 
 	init(language: JKRLanguageDataSource,
 	     writingWith writer: JKRWriter = JKRConsoleWriter()) {
@@ -22,6 +20,10 @@ class JKRTranspiler {
 
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Interface
+
+	func changeFile(_ string: String) {
+		writer.changeFile(string)
+	}
 
 	func transpileProgram(_ statements: [JKRTreeStatement]) {
 		// test
@@ -42,8 +44,19 @@ class JKRTranspiler {
 		}
 	}
 
+	func endTranspilation() throws {
+		do {
+			try writer.finishWriting()
+		}
+		catch (let error) {
+			throw error
+		}
+	}
+
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Implementation
+	private let writer: JKRWriter
+	private var indentation = 0
 
 	private func transpileStatements(_ statements: [JKRTreeStatement]) {
 		for statement in statements {
@@ -68,10 +81,6 @@ class JKRTranspiler {
 	// Writing
 	private func write(_ string: String) {
 		writer.write(string)
-	}
-
-	private func changeFile(_ string: String) {
-		writer.changeFile(string)
 	}
 
 	private func addIntentation() {

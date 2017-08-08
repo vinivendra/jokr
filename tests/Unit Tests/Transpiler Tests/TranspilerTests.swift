@@ -10,8 +10,9 @@ class TranspilerTests: XCTestCase {
 			.returnStm(.int("1"))
 		]
 
-		writer.changeFile("file")
+		transpiler.changeFile("file")
 		transpiler.transpileProgram(ast)
+		try! transpiler.endTranspilation()
 
 		XCTAssertEqual(writer.files["file"],
 		               "Translator file start\nTranslator assignment\nTranslator return statement\n")
@@ -32,8 +33,9 @@ class TranspilerTests: XCTestCase {
 						.returnStm(.int("0"))]))
 		]
 
-		writer.changeFile("file")
+		transpiler.changeFile("file")
 		transpiler.transpileProgram(ast)
+		try! transpiler.endTranspilation()
 
 		XCTAssertEqual(writer.files["file"],
 		               "Translator file start\nTranslator function declaration {\n\tTranslator assignment\n\tTranslator return statement\n}\n")

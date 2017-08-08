@@ -8,23 +8,20 @@ import Antlr4
 private let filePath = CommandLine.arguments[1] + "/tests/"
 
 do {
-	print("Parsing...")
-	let char = ANTLRInputStream(
-		"Int x = 2\nInt y = x - x\n")
-	let lexer = JokrLexer(char)
-	let tokens = CommonTokenStream(lexer)
-	let parser = try JokrParser(tokens)
-	parser.setBuildParseTree(true)
-	let tree = try parser.program()
+
+	let driver = JKRDriver(folderPath: filePath)
+
+	let tree = try driver.parseFile("main.jkr")
 
 	let ast = tree.toJKRTreeStatements()
-	let writer = JKRFileWriter(outputDirectory: filePath, fileExtension: "java")
-	let transpiler = JKRTranspiler(language: JKRJavaDataSource(),
-	                               writingWith: writer)
+	let transpiler = JKRTranspiler(
+		language: JKRJavaDataSource(),
+		writingWith: JKRFileWriter(outputDirectory: filePath,
+		                           fileExtension: "java"))
 
-	writer.changeFile("Main")
+	transpiler.changeFile("Main")
 	transpiler.transpileProgram(ast)
-	try writer.finishWriting()
+	try transpiler.endTranspilation()
 
 	let compiler = JKRJavaCompiler()
 	let compileStatus = compiler.compileFiles(atPath: filePath)
