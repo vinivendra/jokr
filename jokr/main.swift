@@ -9,14 +9,13 @@ private let filePath = CommandLine.arguments[1] + "/tests/"
 
 do {
 
-	let driver = JKRDriver(folderPath: filePath)
+	let driver = JKRDriver(folderPath: filePath,
+	                       parser: JKRAntlrParser())
 
-	let tree = try driver.parseFile("main.jkr")
-
-	let ast = tree.toJKRTreeStatements()
+	let statements = try driver.parse(file: "main.jkr")
 
 	let translator = JKRJavaTranslator()
-	translator.transpileProgram(ast)
+	translator.transpileProgram(statements)
 	try translator.endTranspilation()
 
 //	let compiler = JKRJavaCompiler()

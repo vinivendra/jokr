@@ -14,32 +14,26 @@ enum JKRTargetLanguage {
 	}
 }
 
+func log(_ string: String) {
+	if jkrDebug {
+		print(string)
+	}
+}
+
+var jkrDebug: Bool = true
+
 class JKRDriver {
-	var debug: Bool
-	var folderPath: String
+	private let folderPath: String
+	private let parser: JKRParser
 
-	init(folderPath: String, debug: Bool = true) {
+	init(folderPath: String, parser: JKRParser) {
 		self.folderPath = folderPath
-		self.debug = debug
+		self.parser = parser
 	}
 
-	func log(_ string: String) {
-		if debug {
-			print(string)
-		}
-	}
-
-	func parseFile(_ filename: String) throws -> JokrParser.ProgramContext {
+	func parse(file: String) throws -> [JKRTreeStatement] {
 		do {
-			log("Parsing...")
-			let contents = try String(contentsOfFile: folderPath + filename)
-			let char = ANTLRInputStream(contents)
-			let lexer = JokrLexer(char)
-			let tokens = CommonTokenStream(lexer)
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
-			return tree
+			return try parser.parse(file: folderPath + file)
 		}
 		catch (let error) {
 			throw error
