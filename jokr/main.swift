@@ -10,18 +10,17 @@ private let filePath = CommandLine.arguments[1] + "/tests/"
 do {
 
 	let driver = JKRDriver(folderPath: filePath,
-	                       parser: JKRAntlrParser())
+	                       parser: JKRAntlrParser(),
+	                       language: .objectiveC)
 
 	let statements = try driver.parse(file: "main.jkr")
+	try driver.translate(program: statements)
 
-	let translator = JKRJavaTranslator()
-	try translator.translate(program: statements)
-
-//	let compiler = JKRJavaCompiler()
-//	let compileStatus = compiler.compileFiles(atPath: filePath)
-//	if compileStatus == 0 {
-//		compiler.runProgram(atPath: filePath)
-//	}
+	let compiler = JKRObjcCompiler()
+	let compileStatus = compiler.compileFiles(atPath: filePath)
+	if compileStatus == 0 {
+		compiler.runProgram(atPath: filePath)
+	}
 
 	print("Done!")
 }

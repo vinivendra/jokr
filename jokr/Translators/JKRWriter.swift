@@ -58,11 +58,9 @@ class JKRStringWriter: JKRWriter {
 class JKRFileWriter: JKRWriter {
 	private var files = [String: String]()
 	private var outputDirectory: String
-	private var fileExtension: String
 
-	init(outputDirectory: String, fileExtension: String) {
+	init(outputDirectory: String) {
 		self.outputDirectory = outputDirectory
-		self.fileExtension = fileExtension
 	}
 
 	func prettyPrint() {
@@ -89,7 +87,7 @@ class JKRFileWriter: JKRWriter {
 
 	func finishWriting() throws {
 		for (filename, contents) in files {
-			let path = outputDirectory + filename + "." + fileExtension
+			let path = outputDirectory + filename
 			do {
 				try contents.write(toFile: path,
 				                   atomically: false,

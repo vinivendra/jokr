@@ -9,7 +9,7 @@ class JKRObjcTranslator: JKRTranslator {
 	}
 
 	static func create(writingWith writer: JKRWriter) -> JKRTranslator {
-		return JKRJavaTranslator(writingWith: writer)
+		return JKRObjcTranslator(writingWith: writer)
 	}
 
 	func translate(program statements: [JKRTreeStatement]) throws {
