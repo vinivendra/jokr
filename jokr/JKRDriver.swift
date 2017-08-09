@@ -12,6 +12,15 @@ enum JKRTargetLanguage {
 			return JKRObjcTranslator.self
 		}
 	}
+
+	var compiler: JKRCompiler.Type {
+		switch self {
+		case .java:
+			return JKRJavaCompiler.self
+		case .objectiveC:
+			return JKRObjcCompiler.self
+		}
+	}
 }
 
 func log(_ string: String) {
@@ -60,6 +69,19 @@ class JKRDriver {
 		}
 		catch (let error) {
 			throw error
+		}
+	}
+
+	func compile() {
+		let compiler = language.compiler.create()
+		compiler.compileFiles(atPath: folderPath)
+	}
+
+	func compileAndRun() {
+		let compiler = language.compiler.create()
+		let compileStatus = compiler.compileFiles(atPath: folderPath)
+		if compileStatus == 0 {
+			compiler.runProgram(atPath: folderPath)
 		}
 	}
 }

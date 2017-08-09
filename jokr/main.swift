@@ -15,12 +15,7 @@ do {
 
 	try driver.parseInputFiles()
 	try driver.writeOutputFiles()
-
-	let compiler = JKRObjcCompiler()
-	let compileStatus = compiler.compileFiles(atPath: filePath)
-	if compileStatus == 0 {
-		compiler.runProgram(atPath: filePath)
-	}
+	driver.compileAndRun()
 
 	print("Done!")
 }

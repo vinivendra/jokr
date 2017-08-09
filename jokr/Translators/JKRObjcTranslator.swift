@@ -29,7 +29,9 @@ class JKRObjcTranslator: JKRTranslator {
 
 			indentation = 1
 			addIntentation()
-			write("}\n}\n")
+			write("}\n")
+			addIntentation()
+			write("return 0;\n}\n")
 
 			try writer.finishWriting()
 		}
