@@ -6,7 +6,7 @@ struct JKRJavaCompiler: JKRCompiler {
 	}
 
 	@discardableResult
-	func compileFiles(atPath folderPath: String) -> CInt {
+	func compileFiles(atPath folderPath: String) throws -> CInt {
 		log("======== Compiling Java...")
 		let (output, status) = Shell.runCommand("javac \(folderPath)Main.java")
 		if output != "" {
@@ -17,7 +17,8 @@ struct JKRJavaCompiler: JKRCompiler {
 			log("======== Compilation succeeded!")
 		}
 		else {
-			log("======== Compilation finished with status \(status)")
+			log("======== Compilation failed with status \(status)")
+			throw JKRError.compilation(status)
 		}
 
 		return 0

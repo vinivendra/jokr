@@ -6,7 +6,7 @@ struct JKRObjcCompiler: JKRCompiler {
 	}
 
 	@discardableResult
-	func compileFiles(atPath folderPath: String) -> CInt {
+	func compileFiles(atPath folderPath: String) throws -> CInt {
 		log("======== Compiling Obj-C...")
 		let (output, status) =
 			Shell.runCommand("clang -framework Foundation \(folderPath)main.m -o \(folderPath)a.out")
@@ -19,7 +19,8 @@ struct JKRObjcCompiler: JKRCompiler {
 			log("======== Compilation succeeded!")
 		}
 		else {
-			log("======== Compilation finished with status \(status)")
+			log("======== Compilation failed with status \(status)")
+			throw JKRError.compilation(status)
 		}
 
 		return status

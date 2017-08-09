@@ -23,6 +23,12 @@ enum JKRTargetLanguage {
 	}
 }
 
+// TODO: Remove from this file
+///////////////////////////////////
+enum JKRError: Error {
+	case compilation(CInt)
+}
+
 func log(_ string: String) {
 	if jkrDebug {
 		print(string)
@@ -30,13 +36,11 @@ func log(_ string: String) {
 }
 
 var jkrDebug: Bool = true
+///////////////////////////////////
 
 class JKRDriver {
-	private let folderPath: String
-	private let parser: JKRParser
-	private let language: JKRTargetLanguage
-
-	private var ast: [JKRTreeStatement]?
+	////////////////////////////////////////////////////////////////////////////
+	// MARK: Interface
 
 	init(folderPath: String,
 	     parser: JKRParser,
@@ -46,7 +50,42 @@ class JKRDriver {
 		self.language = language
 	}
 
-	func parseInputFiles() throws {
+	func translate() throws {
+		do {
+			try parseInputFiles()
+			try writeOutputFiles()
+		}
+		catch (let error) {
+			throw error
+		}
+	}
+
+	func transpile() throws {
+		do {
+			try parseInputFiles()
+			try writeOutputFiles()
+			try compile()
+		}
+		catch (let error) {
+			throw error
+		}
+	}
+
+	func run() {
+		let compiler = language.compiler.create()
+		compiler.runProgram(atPath: folderPath)
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// MARK: Implementation
+
+	private let folderPath: String
+	private let parser: JKRParser
+	private let language: JKRTargetLanguage
+
+	private var ast: [JKRTreeStatement]?
+
+	private func parseInputFiles() throws {
 		do {
 			ast = try parser.parse(file: folderPath + "main.jkr")
 		}
@@ -55,7 +94,7 @@ class JKRDriver {
 		}
 	}
 
-	func writeOutputFiles() throws {
+	private func writeOutputFiles() throws {
 		do {
 			if ast == nil {
 				try parseInputFiles()
@@ -72,16 +111,13 @@ class JKRDriver {
 		}
 	}
 
-	func compile() {
-		let compiler = language.compiler.create()
-		compiler.compileFiles(atPath: folderPath)
-	}
-
-	func compileAndRun() {
-		let compiler = language.compiler.create()
-		let compileStatus = compiler.compileFiles(atPath: folderPath)
-		if compileStatus == 0 {
-			compiler.runProgram(atPath: folderPath)
+	private func compile() throws {
+		do {
+			let compiler = language.compiler.create()
+			try compiler.compileFiles(atPath: folderPath)
+		}
+		catch (let error) {
+			throw error
 		}
 	}
 }

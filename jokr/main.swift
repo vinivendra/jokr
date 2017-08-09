@@ -11,11 +11,10 @@ do {
 
 	let driver = JKRDriver(folderPath: filePath,
 	                       parser: JKRAntlrParser(),
-	                       language: .objectiveC)
+	                       language: .java)
 
-	try driver.parseInputFiles()
-	try driver.writeOutputFiles()
-	driver.compileAndRun()
+	try driver.transpile()
+	driver.run()
 
 	print("Done!")
 }
