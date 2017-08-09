@@ -2,13 +2,13 @@ import Antlr4
 
 enum JKRTargetLanguage {
 	case java
-	case objective_c
+	case objectiveC
 
 	var extensionName: String {
 		switch self {
 		case .java:
 			return "java"
-		case .objective_c:
+		case .objectiveC:
 			return "m"
 		}
 	}

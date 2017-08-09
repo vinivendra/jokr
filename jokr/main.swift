@@ -14,20 +14,16 @@ do {
 	let tree = try driver.parseFile("main.jkr")
 
 	let ast = tree.toJKRTreeStatements()
-	let transpiler = JKRTranspiler(
-		language: JKRJavaDataSource(),
-		writingWith: JKRFileWriter(outputDirectory: filePath,
-		                           fileExtension: "java"))
 
-	transpiler.changeFile("Main")
-	transpiler.transpileProgram(ast)
-	try transpiler.endTranspilation()
+	let translator = JKRJavaTranslator()
+	translator.transpileProgram(ast)
+	try translator.endTranspilation()
 
-	let compiler = JKRJavaCompiler()
-	let compileStatus = compiler.compileFiles(atPath: filePath)
-	if compileStatus == 0 {
-		compiler.runProgram(atPath: filePath)
-	}
+//	let compiler = JKRJavaCompiler()
+//	let compileStatus = compiler.compileFiles(atPath: filePath)
+//	if compileStatus == 0 {
+//		compiler.runProgram(atPath: filePath)
+//	}
 
 	print("Done!")
 }

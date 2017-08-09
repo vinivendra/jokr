@@ -1,0 +1,8 @@
+Int x = 2
+Int y = x - x
+return 1
+
+Int five(Person bla, Float hue) {
+	Int x = 5
+	return 5
+}

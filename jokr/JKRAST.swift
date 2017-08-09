@@ -2,6 +2,11 @@
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 
+// TODO: JKRTreeInt
+// TODO: FunctionDecl should be Decl not Stm
+// TODO: JKRTreeReturn, change translate(return:) to translate.
+// TODO: JKRTreeOperator
+
 enum JKRTreeStatement: Equatable {
 	case assignment(JKRTreeAssignment)
 	case functionDeclaration(JKRTreeFunctionDeclaration)
