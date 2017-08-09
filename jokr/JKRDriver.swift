@@ -27,6 +27,8 @@ class JKRDriver {
 	private let parser: JKRParser
 	private let language: JKRTargetLanguage
 
+	private var ast: [JKRTreeStatement]?
+
 	init(folderPath: String,
 	     parser: JKRParser,
 	     language: JKRTargetLanguage) {
@@ -35,20 +37,26 @@ class JKRDriver {
 		self.language = language
 	}
 
-	func parse(file: String) throws -> [JKRTreeStatement] {
+	func parseInputFiles() throws {
 		do {
-			return try parser.parse(file: folderPath + file)
+			ast = try parser.parse(file: folderPath + "main.jkr")
 		}
 		catch (let error) {
 			throw error
 		}
 	}
 
-	func translate(program: [JKRTreeStatement]) throws {
+	func writeOutputFiles() throws {
 		do {
+			if ast == nil {
+				try parseInputFiles()
+			}
+
 			let translator = language.translator.create(writingWith:
 					JKRFileWriter(outputDirectory: folderPath))
-			try translator.translate(program: program)
+
+			try translator.translate(program: ast!)
+			// swiftlint:disable:previous force_unwrapping
 		}
 		catch (let error) {
 			throw error

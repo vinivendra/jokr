@@ -13,8 +13,8 @@ do {
 	                       parser: JKRAntlrParser(),
 	                       language: .objectiveC)
 
-	let statements = try driver.parse(file: "main.jkr")
-	try driver.translate(program: statements)
+	try driver.parseInputFiles()
+	try driver.writeOutputFiles()
 
 	let compiler = JKRObjcCompiler()
 	let compileStatus = compiler.compileFiles(atPath: filePath)
