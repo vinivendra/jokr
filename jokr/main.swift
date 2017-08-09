@@ -15,8 +15,7 @@ do {
 	let statements = try driver.parse(file: "main.jkr")
 
 	let translator = JKRJavaTranslator()
-	translator.transpileProgram(statements)
-	try translator.endTranspilation()
+	try translator.translate(program: statements)
 
 //	let compiler = JKRJavaCompiler()
 //	let compileStatus = compiler.compileFiles(atPath: filePath)

@@ -1,6 +1,6 @@
 // doc
 // test
-class JKRJavaTranslator {
+class JKRJavaTranslator: JKRTranslator {
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Interface
 
@@ -8,26 +8,28 @@ class JKRJavaTranslator {
 		self.writer = writer
 	}
 
-	func transpileProgram(_ statements: [JKRTreeStatement]) {
-		changeFile("Main.java")
-
-		indentation = 0
-		write("public class Main {\n")
-		indentation += 1
-
-		addIntentation()
-		write("public static void main(String []args) {\n")
-		indentation += 1
-
-		writeWithStructure(statements)
-
-		indentation = 1
-		addIntentation()
-		write("}\n}\n")
+	static func create(writingWith writer: JKRWriter) -> JKRTranslator {
+		return JKRJavaTranslator(writingWith: writer)
 	}
 
-	func endTranspilation() throws {
+	func translate(program statements: [JKRTreeStatement]) throws {
 		do {
+			changeFile("Main.java")
+
+			indentation = 0
+			write("public class Main {\n")
+			indentation += 1
+
+			addIntentation()
+			write("public static void main(String []args) {\n")
+			indentation += 1
+
+			writeWithStructure(statements)
+
+			indentation = 1
+			addIntentation()
+			write("}\n}\n")
+
 			try writer.finishWriting()
 		}
 		catch (let error) {
@@ -38,7 +40,7 @@ class JKRJavaTranslator {
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Implementation
 
-	static let valueTypes = ["int", "float", "void"]
+	private static let valueTypes = ["int", "float", "void"]
 
 	// Transpilation (general structure)
 	private var indentation = 0

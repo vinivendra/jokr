@@ -1,6 +1,6 @@
 // doc
 // test
-class JKRObjcTranslator {
+class JKRObjcTranslator: JKRTranslator {
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Interface
 
@@ -8,27 +8,29 @@ class JKRObjcTranslator {
 		self.writer = writer
 	}
 
-	func transpileProgram(_ statements: [JKRTreeStatement]) {
-		changeFile("main.m")
-
-		indentation = 0
-		write("#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n")
-		// swiftlint:disable:previous line_length
-		indentation += 1
-
-		addIntentation()
-		write("@autoreleasepool {\n")
-		indentation += 1
-
-		writeWithStructure(statements)
-
-		indentation = 1
-		addIntentation()
-		write("}\n}\n")
+	static func create(writingWith writer: JKRWriter) -> JKRTranslator {
+		return JKRJavaTranslator(writingWith: writer)
 	}
 
-	func endTranspilation() throws {
+	func translate(program statements: [JKRTreeStatement]) throws {
 		do {
+			changeFile("main.m")
+
+			indentation = 0
+			write("#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n")
+			// swiftlint:disable:previous line_length
+			indentation += 1
+
+			addIntentation()
+			write("@autoreleasepool {\n")
+			indentation += 1
+
+			writeWithStructure(statements)
+
+			indentation = 1
+			addIntentation()
+			write("}\n}\n")
+
 			try writer.finishWriting()
 		}
 		catch (let error) {
@@ -39,7 +41,7 @@ class JKRObjcTranslator {
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: Implementation
 
-	static let valueTypes = ["int", "float", "void"]
+	private static let valueTypes = ["int", "float", "void"]
 
 	// Transpilation (general structure)
 	private var indentation = 0
