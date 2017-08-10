@@ -1,10 +1,6 @@
 import Foundation
 import Antlr4
 
-// TODO: Fix filenames and extensions
-// TODO: Join language classes into a single option
-// TODO: Join antlr, transpiler and compiler into a single API
-
 private let filePath = CommandLine.arguments[1] + "/tests/"
 
 do {
