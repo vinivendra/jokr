@@ -170,173 +170,173 @@ class AntlrToJokrTests: XCTestCase {
 		}
 	}
 
-	func testFunctionDeclarations() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestFunctionDeclarations")
+//	func testFunctionDeclarations() {
+//		let contents = try! String(contentsOfFile:
+//			testFilesPath + "TestFunctionDeclarations")
+//
+//		let inputStream = ANTLRInputStream(contents)
+//		let lexer = JokrLexer(inputStream)
+//		let tokens = CommonTokenStream(lexer)
+//
+//		do {
+//			let parser = try JokrParser(tokens)
+//			parser.setBuildParseTree(true)
+//			let tree = try parser.program()
+//
+//			let declarations = tree.filter(type:
+//				JokrParser.FunctionDeclarationContext.self)
+//				.map { $0.toJKRTreeFunctionDeclaration() }
+//
+//			let expectedDeclarations: [JKRTreeFunctionDeclaration] = [
+//				JKRTreeFunctionDeclaration(
+//					type: "Int", id: "func1",
+//					parameters: [],
+//					block: [.returnStm(.int("0"))]),
+//				JKRTreeFunctionDeclaration(
+//					type: "Int", id: "func2",
+//					parameters: [JKRTreeParameter(type: "Float", id: "bla")],
+//					block: [
+//						.assignment(.declaration(
+//							"String", "baz",
+//							.operation(.int("5"), "+", .int("6")))),
+//						.returnStm(.int("0"))]),
+//				JKRTreeFunctionDeclaration(
+//					type: "Void", id: "func4",
+//					parameters: [JKRTreeParameter(type: "Int", id: "bla"),
+//					             JKRTreeParameter(type: "Float", id: "foo"),
+//					             JKRTreeParameter(type: "Double", id: "hue")],
+//					block: [.returnStm(.int("0"))])
+//			]
+//
+//			XCTAssertEqual(declarations, expectedDeclarations)
+//		}
+//		catch (let error) {
+//			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+//		}
+//	}
 
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
+//	func testReturns() {
+//		let contents = try! String(contentsOfFile:
+//			testFilesPath + "TestReturns")
+//
+//		let inputStream = ANTLRInputStream(contents)
+//		let lexer = JokrLexer(inputStream)
+//		let tokens = CommonTokenStream(lexer)
+//
+//		do {
+//			let parser = try JokrParser(tokens)
+//			parser.setBuildParseTree(true)
+//			let tree = try parser.program()
+//
+//			let returns = tree.filter(type:
+//				JokrParser.ReturnStatementContext.self)
+//				.map { $0.getJKRTreeExpression() }
+//
+//			let expectedReturns: [JKRTreeExpression] = [
+//				.int("0"),
+//				.operation(.int("5"), "+", .int("6")),
+//				.parenthesized(.int("9"))
+//			]
+//
+//			XCTAssertEqual(returns, expectedReturns)
+//		}
+//		catch (let error) {
+//			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+//		}
+//	}
 
-		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
-
-			let declarations = tree.filter(type:
-				JokrParser.FunctionDeclarationContext.self)
-				.map { $0.toJKRTreeFunctionDeclaration() }
-
-			let expectedDeclarations: [JKRTreeFunctionDeclaration] = [
-				JKRTreeFunctionDeclaration(
-					type: "Int", id: "func1",
-					parameters: [],
-					block: [.returnStm(.int("0"))]),
-				JKRTreeFunctionDeclaration(
-					type: "Int", id: "func2",
-					parameters: [JKRTreeParameter(type: "Float", id: "bla")],
-					block: [
-						.assignment(.declaration(
-							"String", "baz",
-							.operation(.int("5"), "+", .int("6")))),
-						.returnStm(.int("0"))]),
-				JKRTreeFunctionDeclaration(
-					type: "Void", id: "func4",
-					parameters: [JKRTreeParameter(type: "Int", id: "bla"),
-					             JKRTreeParameter(type: "Float", id: "foo"),
-					             JKRTreeParameter(type: "Double", id: "hue")],
-					block: [.returnStm(.int("0"))])
-			]
-
-			XCTAssertEqual(declarations, expectedDeclarations)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testReturns() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestReturns")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
-		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
-
-			let returns = tree.filter(type:
-				JokrParser.ReturnStatementContext.self)
-				.map { $0.getJKRTreeExpression() }
-
-			let expectedReturns: [JKRTreeExpression] = [
-				.int("0"),
-				.operation(.int("5"), "+", .int("6")),
-				.parenthesized(.int("9"))
-			]
-
-			XCTAssertEqual(returns, expectedReturns)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testStatements() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestStatements")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
-		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
-
-			let statements = tree.filter(type:
-				JokrParser.StatementContext.self)
-				.map { $0.toJKRTreeStatement() }
-
-			let expectedStatements: [JKRTreeStatement] = [
-				.functionDeclaration(
-					JKRTreeFunctionDeclaration(
-						type: "Int", id: "foo",
-						parameters: [],
-						block: [
-							.assignment(.declaration("Int", "x", .int("0"))),
-							.returnStm(.int("0"))])),
-				.assignment(.declaration("Int", "x", .int("0"))),
-				.returnStm(.int("0")),
-
-				.assignment(.declaration("Int", "y", .int("0"))),
-				.returnStm(.int("1"))
-			]
-
-			XCTAssertEqual(statements, expectedStatements)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testProgram() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestStatements")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
-		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
-
-			let statements = tree.toJKRTreeStatements()
-
-			let expectedStatements: [JKRTreeStatement] = [
-				.functionDeclaration(
-					JKRTreeFunctionDeclaration(
-						type: "Int", id: "foo",
-						parameters: [],
-						block: [
-							.assignment(.declaration("Int", "x", .int("0"))),
-							.returnStm(.int("0"))])),
-				.assignment(.declaration("Int", "y", .int("0"))),
-				.returnStm(.int("1"))
-			]
-
-			XCTAssertEqual(statements, expectedStatements)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testEmpty() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestEmpty")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
-		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
-
-			let statements = tree.toJKRTreeStatements()
-
-			XCTAssertEqual(statements, [])
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
+//	func testStatements() {
+//		let contents = try! String(contentsOfFile:
+//			testFilesPath + "TestStatements")
+//
+//		let inputStream = ANTLRInputStream(contents)
+//		let lexer = JokrLexer(inputStream)
+//		let tokens = CommonTokenStream(lexer)
+//
+//		do {
+//			let parser = try JokrParser(tokens)
+//			parser.setBuildParseTree(true)
+//			let tree = try parser.program()
+//
+//			let statements = tree.filter(type:
+//				JokrParser.StatementContext.self)
+//				.map { $0.toJKRTreeStatement() }
+//
+//			let expectedStatements: [JKRTreeStatement] = [
+//				.functionDeclaration(
+//					JKRTreeFunctionDeclaration(
+//						type: "Int", id: "foo",
+//						parameters: [],
+//						block: [
+//							.assignment(.declaration("Int", "x", .int("0"))),
+//							.returnStm(.int("0"))])),
+//				.assignment(.declaration("Int", "x", .int("0"))),
+//				.returnStm(.int("0")),
+//
+//				.assignment(.declaration("Int", "y", .int("0"))),
+//				.returnStm(.int("1"))
+//			]
+//
+//			XCTAssertEqual(statements, expectedStatements)
+//		}
+//		catch (let error) {
+//			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+//		}
+//	}
+//
+//	func testProgram() {
+//		let contents = try! String(contentsOfFile:
+//			testFilesPath + "TestStatements")
+//
+//		let inputStream = ANTLRInputStream(contents)
+//		let lexer = JokrLexer(inputStream)
+//		let tokens = CommonTokenStream(lexer)
+//
+//		do {
+//			let parser = try JokrParser(tokens)
+//			parser.setBuildParseTree(true)
+//			let tree = try parser.program()
+//
+//			let statements = tree.toJKRTreeStatements()
+//
+//			let expectedStatements: [JKRTreeStatement] = [
+//				.functionDeclaration(
+//					JKRTreeFunctionDeclaration(
+//						type: "Int", id: "foo",
+//						parameters: [],
+//						block: [
+//							.assignment(.declaration("Int", "x", .int("0"))),
+//							.returnStm(.int("0"))])),
+//				.assignment(.declaration("Int", "y", .int("0"))),
+//				.returnStm(.int("1"))
+//			]
+//
+//			XCTAssertEqual(statements, expectedStatements)
+//		}
+//		catch (let error) {
+//			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+//		}
+//	}
+//
+//	func testEmpty() {
+//		let contents = try! String(contentsOfFile:
+//			testFilesPath + "TestEmpty")
+//
+//		let inputStream = ANTLRInputStream(contents)
+//		let lexer = JokrLexer(inputStream)
+//		let tokens = CommonTokenStream(lexer)
+//
+//		do {
+//			let parser = try JokrParser(tokens)
+//			parser.setBuildParseTree(true)
+//			let tree = try parser.program()
+//
+//			let statements = tree.toJKRTreeStatements()
+//
+//			XCTAssertEqual(statements, [])
+//		}
+//		catch (let error) {
+//			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+//		}
+//	}
 }
