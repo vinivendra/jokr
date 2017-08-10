@@ -2,7 +2,6 @@
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 
-// TODO: JKRTreeInt
 // TODO: FunctionDecl should be Decl not Stm
 // TODO: JKRTreeReturn, change translate(return:) to translate.
 // TODO: JKRTreeOperator
@@ -10,7 +9,7 @@
 enum JKRTreeStatement: Equatable {
 	case assignment(JKRTreeAssignment)
 	case functionDeclaration(JKRTreeFunctionDeclaration)
-	case returnStm(JKRTreeExpression)
+	case returnStm(JKRTreeReturn)
 
 	var block: [JKRTreeStatement]? {
 		switch self {
@@ -59,7 +58,7 @@ enum JKRTreeAssignment: Equatable {
 }
 
 indirect enum JKRTreeExpression: Equatable {
-	case int(String)
+	case int(JKRTreeInt)
 	case parenthesized(JKRTreeExpression)
 	case operation(JKRTreeExpression, String, JKRTreeExpression)
 	case lvalue(JKRTreeID)
@@ -110,6 +109,16 @@ struct JKRTreeParameter: Equatable {
 	}
 }
 
+struct JKRTreeReturn: Equatable {
+	let expression: JKRTreeExpression
+	init(_ expression: JKRTreeExpression) { self.expression = expression }
+
+	// Equatable
+	static func == (lhs: JKRTreeReturn, rhs: JKRTreeReturn) -> Bool {
+		return lhs.expression == rhs.expression
+	}
+}
+
 struct JKRTreeType: Equatable, ExpressibleByStringLiteral {
 	let text: String
 	init(_ text: String) { self.text = text }
@@ -144,6 +153,25 @@ struct JKRTreeID: Equatable, ExpressibleByStringLiteral {
 
 	// Equatable
 	static func == (lhs: JKRTreeID, rhs: JKRTreeID) -> Bool {
+		return lhs.text == rhs.text
+	}
+}
+
+struct JKRTreeInt: Equatable, ExpressibleByStringLiteral {
+	let text: String
+	init(_ text: String) { self.text = text }
+
+	// ExpressibleByStringLiteral
+	init(stringLiteral value: String) { self.text = value }
+	public init(extendedGraphemeClusterLiteral value: String) {
+		self.text = value
+	}
+	public init(unicodeScalarLiteral value: String) {
+		self.text = value
+	}
+
+	// Equatable
+	static func == (lhs: JKRTreeInt, rhs: JKRTreeInt) -> Bool {
 		return lhs.text == rhs.text
 	}
 }

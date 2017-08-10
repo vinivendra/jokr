@@ -74,7 +74,7 @@ class JKRObjcTranslator: JKRTranslator {
 		case let .assignment(assignment):
 			return translate(assignment)
 		case let .returnStm(returnStm):
-			return translate(return: returnStm)
+			return translate(returnStm)
 		case let .functionDeclaration(functionDeclaration):
 			return translateHeader(functionDeclaration)
 		}
@@ -113,8 +113,8 @@ class JKRObjcTranslator: JKRTranslator {
 		return contents
 	}
 
-	private func translate(return expression: JKRTreeExpression) -> String {
-		let expression = translate(expression)
+	private func translate(_ returnStm: JKRTreeReturn) -> String {
+		let expression = translate(returnStm.expression)
 		return "return \(expression);\n"
 	}
 
@@ -162,8 +162,8 @@ class JKRObjcTranslator: JKRTranslator {
 		return id.text
 	}
 
-	func string(for int: String) -> String {
-		return int
+	func string(for int: JKRTreeInt) -> String {
+		return int.text
 	}
 
 	// Writing

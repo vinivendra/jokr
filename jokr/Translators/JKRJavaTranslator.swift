@@ -71,14 +71,13 @@ class JKRJavaTranslator: JKRTranslator {
 		case let .assignment(assignment):
 			return translate(assignment)
 		case let .returnStm(returnStm):
-			return translate(return: returnStm)
+			return translate(returnStm)
 		case let .functionDeclaration(functionDeclaration):
 			return translateHeader(functionDeclaration)
 		}
 	}
 
-	private func translate(
-		_ assignment: JKRTreeAssignment) -> String {
+	private func translate(_ assignment: JKRTreeAssignment) -> String {
 		switch assignment {
 		case let .declaration(type, id, expression):
 			let typeText = string(for: type, withSpaces: true)
@@ -101,13 +100,12 @@ class JKRJavaTranslator: JKRTranslator {
 		// swiftlint:disable:previous line_length
 	}
 
-	private func translate(return expression: JKRTreeExpression) -> String {
-		let expression = translate(expression)
+	private func translate(_ returnStm: JKRTreeReturn) -> String {
+		let expression = translate(returnStm.expression)
 		return "return \(expression);\n"
 	}
 
-	private func translate(
-		_ expression: JKRTreeExpression) -> String {
+	private func translate(_ expression: JKRTreeExpression) -> String {
 		switch expression {
 		case let .int(int):
 			return string(for: int)
@@ -123,8 +121,7 @@ class JKRJavaTranslator: JKRTranslator {
 		}
 	}
 
-	private func string(
-		for parameter: JKRTreeParameter) -> String {
+	private func string(for parameter: JKRTreeParameter) -> String {
 		return "\(string(for: parameter.type)) \(string(for: parameter.id))"
 	}
 
@@ -150,8 +147,8 @@ class JKRJavaTranslator: JKRTranslator {
 		return id.text
 	}
 
-	func string(for int: String) -> String {
-		return int
+	func string(for int: JKRTreeInt) -> String {
+		return int.text
 	}
 
 	// Writing

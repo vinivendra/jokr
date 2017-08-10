@@ -15,6 +15,10 @@ extension TerminalNode {
 	func toJKRTreeType() -> JKRTreeType {
 		return JKRTreeType(getText())
 	}
+
+	func toJKRTreeInt() -> JKRTreeInt {
+		return JKRTreeInt(getText())
+	}
 }
 
 extension JokrParser.ProgramContext {
@@ -53,7 +57,7 @@ extension JokrParser.StatementContext {
 				functionDeclaration.toJKRTreeFunctionDeclaration())
 		}
 		else if let returnStatement = returnStatement() {
-			return .returnStm(returnStatement.getJKRTreeExpression())
+			return .returnStm(returnStatement.getJKRTreeReturn())
 		}
 
 		fatalError("Failed to transpile parameter")
@@ -132,7 +136,7 @@ extension JokrParser.AssignmentContext {
 
 extension JokrParser.ExpressionContext {
 	func toJKRTreeExpression() -> JKRTreeExpression {
-		if let int = self.INT()?.getText() {
+		if let int = self.INT()?.toJKRTreeInt() {
 			return .int(int)
 		}
 		else if self.LPAREN() != nil,
@@ -159,9 +163,9 @@ extension JokrParser.ExpressionContext {
 }
 
 extension JokrParser.ReturnStatementContext {
-	func getJKRTreeExpression() -> JKRTreeExpression {
+	func getJKRTreeReturn() -> JKRTreeReturn {
 		if let expression = self.expression()?.toJKRTreeExpression() {
-			return expression
+			return JKRTreeReturn(expression)
 		}
 
 		fatalError("Failed to transpile return")
