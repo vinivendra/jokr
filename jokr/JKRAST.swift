@@ -3,7 +3,6 @@
 /// about given the type safety and the enum coverage.
 
 // TODO: FunctionDecl should be Decl not Stm
-// TODO: JKRTreeReturn, change translate(return:) to translate.
 // TODO: JKRTreeOperator
 
 enum JKRTreeStatement: Equatable {
