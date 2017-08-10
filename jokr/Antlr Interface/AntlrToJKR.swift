@@ -22,12 +22,21 @@ extension TerminalNode {
 }
 
 extension JokrParser.ProgramContext {
-	func toJKRTreeStatements() -> [JKRTreeStatement] {
+	func toJKRTreeStatements() -> [JKRTreeStatement]? {
 		if let statementList = statementList() {
 			return statementList.toJKRTreeStatements()
 		}
 		else {
-			return []
+			return nil
+		}
+	}
+
+	func toJKRTreeDeclarations() -> [JKRTreeDeclaration]? {
+		if let declarationList = declarationList() {
+			return declarationList.toJKRTreeDeclarations()
+		}
+		else {
+			return nil
 		}
 	}
 }
@@ -35,7 +44,7 @@ extension JokrParser.ProgramContext {
 extension JokrParser.StatementListContext {
 	func toJKRTreeStatements() -> [JKRTreeStatement] {
 		guard let statement = statement()?.toJKRTreeStatement() else {
-			fatalError("Failed to transpile parameter")
+			fatalError("Failed to transpile statements")
 		}
 
 		if let statementList = statementList() {
@@ -47,17 +56,39 @@ extension JokrParser.StatementListContext {
 	}
 }
 
+extension JokrParser.DeclarationListContext {
+	func toJKRTreeDeclarations() -> [JKRTreeDeclaration] {
+		guard let declaration = declaration()?.toJKRTreeDeclaration() else {
+			fatalError("Failed to transpile declarations")
+		}
+
+		if let declarationList = declarationList() {
+			return declarationList.toJKRTreeDeclarations() + [declaration]
+		}
+		else {
+			return [declaration]
+		}
+	}
+}
+
 extension JokrParser.StatementContext {
 	func toJKRTreeStatement() -> JKRTreeStatement {
 		if let assignment = assignment() {
 			return .assignment(assignment.toJKRTreeAssignment())
 		}
-		else if let functionDeclaration = functionDeclaration() {
-			return .functionDeclaration(
-				functionDeclaration.toJKRTreeFunctionDeclaration())
-		}
 		else if let returnStatement = returnStatement() {
 			return .returnStm(returnStatement.getJKRTreeReturn())
+		}
+
+		fatalError("Failed to transpile parameter")
+	}
+}
+
+extension JokrParser.DeclarationContext {
+	func toJKRTreeDeclaration() -> JKRTreeDeclaration {
+		if let functionDeclaration = functionDeclaration() {
+			return .functionDeclaration(
+				functionDeclaration.toJKRTreeFunctionDeclaration())
 		}
 
 		fatalError("Failed to transpile parameter")

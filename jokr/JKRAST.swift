@@ -5,19 +5,33 @@
 // TODO: FunctionDecl should be Decl not Stm
 // TODO: JKRTreeOperator
 
-enum JKRTreeStatement: Equatable {
-	case assignment(JKRTreeAssignment)
+struct JKRTreeProgram {
+	let statements: [JKRTreeStatement]?
+	let declarations: [JKRTreeDeclaration]?
+}
+
+enum JKRTreeDeclaration: Equatable {
 	case functionDeclaration(JKRTreeFunctionDeclaration)
-	case returnStm(JKRTreeReturn)
 
 	var block: [JKRTreeStatement]? {
 		switch self {
 		case let .functionDeclaration(functionDeclaration):
 			return functionDeclaration.block
-		case .assignment, .returnStm:
-			return nil
 		}
 	}
+
+	static func == (lhs: JKRTreeDeclaration, rhs: JKRTreeDeclaration) -> Bool {
+		switch (lhs, rhs) {
+		case let (.functionDeclaration(functionDeclaration1),
+		          .functionDeclaration(functionDeclaration2)):
+			return functionDeclaration1 == functionDeclaration2
+		}
+	}
+}
+
+enum JKRTreeStatement: Equatable {
+	case assignment(JKRTreeAssignment)
+	case returnStm(JKRTreeReturn)
 
 	// Equatable
 	static func == (lhs: JKRTreeStatement, rhs: JKRTreeStatement) -> Bool {
@@ -25,9 +39,6 @@ enum JKRTreeStatement: Equatable {
 		case let (.assignment(assignment1),
 		          .assignment(assignment2)):
 			return assignment1 == assignment2
-		case let (.functionDeclaration(functionDeclaration1),
-		          .functionDeclaration(functionDeclaration2)):
-			return functionDeclaration1 == functionDeclaration2
 		case let (.returnStm(returnStm1),
 		          .returnStm(returnStm2)):
 			return returnStm1 == returnStm2

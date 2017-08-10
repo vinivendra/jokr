@@ -12,23 +12,28 @@ class JKRJavaTranslator: JKRTranslator {
 		return JKRJavaTranslator(writingWith: writer)
 	}
 
-	func translate(program statements: [JKRTreeStatement]) throws {
+	func translate(program: JKRTreeProgram) throws {
 		do {
-			changeFile("Main.java")
+			if let statements = program.statements {
+				changeFile("Main.java")
 
-			indentation = 0
-			write("public class Main {\n")
-			indentation += 1
+				indentation = 0
+				write("public class Main {\n")
+				indentation += 1
 
-			addIntentation()
-			write("public static void main(String []args) {\n")
-			indentation += 1
+				addIntentation()
+				write("public static void main(String []args) {\n")
+				indentation += 1
 
-			writeWithStructure(statements)
+				writeWithStructure(statements)
 
-			indentation = 1
-			addIntentation()
-			write("}\n}\n")
+				indentation = 1
+				addIntentation()
+				write("}\n}\n")
+			}
+
+//			if let declarations = program.declarations {
+//			}
 
 			try writer.finishWriting()
 		}
@@ -55,14 +60,14 @@ class JKRJavaTranslator: JKRTranslator {
 		addIntentation()
 		write(translate(statement))
 
-		if let block = statement.block {
-			write(" {\n")
-			indentation += 1
-			writeWithStructure(block)
-			indentation -= 1
-			addIntentation()
-			write("}\n")
-		}
+//		if let block = statement.block {
+//			write(" {\n")
+//			indentation += 1
+//			writeWithStructure(block)
+//			indentation -= 1
+//			addIntentation()
+//			write("}\n")
+//		}
 	}
 
 	// Translation (pieces of code)
@@ -72,8 +77,8 @@ class JKRJavaTranslator: JKRTranslator {
 			return translate(assignment)
 		case let .returnStm(returnStm):
 			return translate(returnStm)
-		case let .functionDeclaration(functionDeclaration):
-			return translateHeader(functionDeclaration)
+//		case let .functionDeclaration(functionDeclaration):
+//			return translateHeader(functionDeclaration)
 		}
 	}
 

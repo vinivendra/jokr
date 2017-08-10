@@ -1,2 +1,2 @@
-Int x = 7
-Int y = x - x
+Int x = 8
+Int y = x - 8

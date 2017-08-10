@@ -4,16 +4,24 @@ grammar Jokr;
 program:
 	// empty
 	| statementList
-	| statementList NEW_LINE;
+	| statementList NEW_LINE
+	| declarationList
+	| declarationList NEW_LINE;
 
 statementList:
 	statement
 	| statementList NEW_LINE statement;
 
 statement:
-	functionDeclaration
-	| assignment
+	assignment
 	| returnStatement;
+
+declarationList:
+	declaration
+	| declarationList NEW_LINE declaration;
+
+declaration:
+	functionDeclaration;
 
 assignment:
 	variableDeclaration ASSIGN expression

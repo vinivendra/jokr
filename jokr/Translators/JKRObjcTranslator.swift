@@ -12,26 +12,31 @@ class JKRObjcTranslator: JKRTranslator {
 		return JKRObjcTranslator(writingWith: writer)
 	}
 
-	func translate(program statements: [JKRTreeStatement]) throws {
+	func translate(program: JKRTreeProgram) throws {
 		do {
-			changeFile("main.m")
+			if let statements = program.statements {
+				changeFile("main.m")
 
-			indentation = 0
-			write("#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n")
-			// swiftlint:disable:previous line_length
-			indentation += 1
+				indentation = 0
+				write("#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n")
+				// swiftlint:disable:previous line_length
+				indentation += 1
 
-			addIntentation()
-			write("@autoreleasepool {\n")
-			indentation += 1
+				addIntentation()
+				write("@autoreleasepool {\n")
+				indentation += 1
 
-			writeWithStructure(statements)
+				writeWithStructure(statements)
 
-			indentation = 1
-			addIntentation()
-			write("}\n")
-			addIntentation()
-			write("return 0;\n}\n")
+				indentation = 1
+				addIntentation()
+				write("}\n")
+				addIntentation()
+				write("return 0;\n}\n")
+			}
+
+//			if let declarations = program.declarations {
+//			}
 
 			try writer.finishWriting()
 		}
@@ -58,14 +63,14 @@ class JKRObjcTranslator: JKRTranslator {
 		addIntentation()
 		write(translate(statement))
 
-		if let block = statement.block {
-			write(" {\n")
-			indentation += 1
-			writeWithStructure(block)
-			indentation -= 1
-			addIntentation()
-			write("}\n")
-		}
+//		if let block = statement.block {
+//			write(" {\n")
+//			indentation += 1
+//			writeWithStructure(block)
+//			indentation -= 1
+//			addIntentation()
+//			write("}\n")
+//		}
 	}
 
 	// Translation (pieces of code)
@@ -75,8 +80,8 @@ class JKRObjcTranslator: JKRTranslator {
 			return translate(assignment)
 		case let .returnStm(returnStm):
 			return translate(returnStm)
-		case let .functionDeclaration(functionDeclaration):
-			return translateHeader(functionDeclaration)
+//		case let .functionDeclaration(functionDeclaration):
+//			return translateHeader(functionDeclaration)
 		}
 	}
 

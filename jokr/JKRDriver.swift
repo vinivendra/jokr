@@ -45,7 +45,7 @@ class JKRDriver {
 	private let parser: JKRParser
 	private let language: JKRTargetLanguage
 
-	private var ast: [JKRTreeStatement]?
+	private var ast: JKRTreeProgram?
 
 	private func parseInputFiles() throws {
 		do {
