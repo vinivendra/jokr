@@ -2,8 +2,6 @@
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 
-// TODO: Check if there are any other root types in the AST
-// TODO: Check if the main program still works
 struct JKRTreeProgram {
 	let statements: [JKRTreeStatement]?
 	let declarations: [JKRTreeDeclaration]?

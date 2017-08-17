@@ -131,10 +131,10 @@ class JKRObjcTranslator: JKRTranslator {
 		case let .parenthesized(innerExpression):
 			let innerExpressionText = translate(innerExpression)
 			return "(\(innerExpressionText))"
-		case let .operation(leftExpression, operatorText, rightExpression):
+		case let .operation(leftExpression, op, rightExpression):
 			let leftText = translate(leftExpression)
 			let rightText = translate(rightExpression)
-			return "\(leftText) \(operatorText) \(rightText)"
+			return "\(leftText) \(op.text) \(rightText)"
 		case let .lvalue(id):
 			return string(for: id)
 		}
