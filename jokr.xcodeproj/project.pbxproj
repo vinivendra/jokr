@@ -229,9 +229,9 @@
 			isa = PBXGroup;
 			children = (
 				246BCC2A1F1957B7004BE84C /* ParserTests.swift */,
-				240F71801F1FF830005B971C /* TestFunctionDeclarations */,
 				246BCC2B1F1957B7004BE84C /* TestAssignments */,
 				246BCC2C1F1957B7004BE84C /* TestExpressions */,
+				240F71801F1FF830005B971C /* TestFunctionDeclarations */,
 				246BCC2D1F1957B7004BE84C /* TestStatementLists */,
 				246BCC2E1F1957B7004BE84C /* TestStatementListsWithNewline */,
 				246BCC2F1F1957B7004BE84C /* TestVariableDeclarations */,

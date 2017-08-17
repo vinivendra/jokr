@@ -53,7 +53,6 @@ extension MutableRandomAccessCollection {
 
 extension Array: MutableRandomAccessCollection { }
 
-// TODO: Add to all array equal tests
 extension Collection {
 	func arrayCopy() -> [Iterator.Element] {
 		return self.map { $0 }

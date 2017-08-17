@@ -101,8 +101,6 @@ class ASTTests: XCTestCase {
 		XCTAssertEqual(parameters.map { $0.id }, expectedData.map { $0.id })
 	}
 
-	// TODO: Review expression inits that can be replaced by literals
-	// TODO: Change JKRTreeInt's private data to be Int, and its inits too
 	func testExpressions() {
 		// WITH:
 		let expressions: [JKRTreeExpression] = [
