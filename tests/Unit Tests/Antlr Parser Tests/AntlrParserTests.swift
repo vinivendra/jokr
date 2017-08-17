@@ -33,6 +33,95 @@ class AntlrParserTests: XCTestCase {
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: - Tests
 
+	func testExpressions() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestExpressions")
+
+			let expressions = tree.filter(type:
+				JokrParser.ExpressionContext.self)
+
+			let expectedExpressions: [TokenTest] = [
+				(1, 10, "0"),
+				(2, 10, "(1)"), (2, 11, "1"),
+				(3, 10, "2+3"), (3, 10, "2"), (3, 14, "3"),
+				(4, 10, "foo"),
+				(5, 10, "4+((5)+foo)"), (5, 10, "4"), (5, 14, "((5)+foo)"),
+				(5, 15, "(5)+foo"), (5, 15, "(5)"), (5, 16, "5"),
+				(5, 21, "foo")]
+
+			// TEST: Parser found all expected elements
+			for (expected, actual) in zip(expectedExpressions, expressions) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(expressions.count, expectedExpressions.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testAssignments() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestAssignments")
+
+			let assignments = tree.filter(type:
+				JokrParser.AssignmentContext.self)
+
+			let expectedAssignments: [TokenTest] = [
+				(1, 0, "Intbla=2"), (2, 0, "FloatfooBar=3"),
+				(3, 0, "Blahbaz=fooBar"), (4, 0, "fooBar=bla"),
+				(5, 0, "bla=300")]
+
+			// TEST: Parser found all expected elements
+			for (expected, actual) in zip(expectedAssignments, assignments) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(assignments.count, expectedAssignments.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testVariableDeclarations() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestVariableDeclarations")
+
+			let declarations = tree.filter(type:
+				JokrParser.VariableDeclarationContext.self)
+
+			let expectedDeclarations: [TokenTest] = [(1, 0, "Intbla"),
+			                                         (2, 0, "Floatfoo")]
+
+			// TEST: Parser found all expected elements
+			for (expected, actual) in zip(expectedDeclarations, declarations) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(declarations.count, expectedDeclarations.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	func testStatementLists() {
 		do {
 			// WITH:
@@ -117,125 +206,6 @@ class AntlrParserTests: XCTestCase {
 		}
 	}
 
-	func testAssignments() {
-		do {
-			// WITH:
-			let tree = try getProgram(inFile: "TestAssignments")
-
-			let assignments = tree.filter(type:
-				JokrParser.AssignmentContext.self)
-
-			let expectedAssignments: [TokenTest] = [
-				(1, 0, "Intbla=2"), (2, 0, "FloatfooBar=3"),
-				(3, 0, "Blahbaz=fooBar"), (4, 0, "fooBar=bla"),
-				(5, 0, "bla=300")]
-
-			// TEST: Parser found all expected elements
-			for (expected, actual) in zip(expectedAssignments, assignments) {
-				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
-				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
-				               expected.startChar)
-				XCTAssertEqual(actual.getText(), expected.text)
-			}
-
-			// TEST: Parser didn't find any unexpected elements of this type
-			XCTAssertEqual(assignments.count, expectedAssignments.count)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testVariableDeclarations() {
-		do {
-			// WITH:
-			let tree = try getProgram(inFile: "TestVariableDeclarations")
-
-			let declarations = tree.filter(type:
-				JokrParser.VariableDeclarationContext.self)
-
-			let expectedDeclarations: [TokenTest] = [(1, 0, "Intbla"),
-			                                         (2, 0, "Floatfoo")]
-
-			// TEST: Parser found all expected elements
-			for (expected, actual) in zip(expectedDeclarations, declarations) {
-				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
-				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
-				               expected.startChar)
-				XCTAssertEqual(actual.getText(), expected.text)
-			}
-
-			// TEST: Parser didn't find any unexpected elements of this type
-			XCTAssertEqual(declarations.count, expectedDeclarations.count)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testExpressions() {
-		do {
-			// WITH:
-			let tree = try getProgram(inFile: "TestExpressions")
-
-			let expressions = tree.filter(type:
-				JokrParser.ExpressionContext.self)
-
-			let expectedExpressions: [TokenTest] = [
-				(1, 10, "0"),
-				(2, 10, "(1)"), (2, 11, "1"),
-				(3, 10, "2+3"), (3, 10, "2"), (3, 14, "3"),
-				(4, 10, "foo"),
-				(5, 10, "4+((5)+foo)"), (5, 10, "4"), (5, 14, "((5)+foo)"),
-				(5, 15, "(5)+foo"), (5, 15, "(5)"), (5, 16, "5"),
-				(5, 21, "foo")]
-
-			// TEST: Parser found all expected elements
-			for (expected, actual) in zip(expectedExpressions, expressions) {
-				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
-				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
-				               expected.startChar)
-				XCTAssertEqual(actual.getText(), expected.text)
-			}
-
-			// TEST: Parser didn't find any unexpected elements of this type
-			XCTAssertEqual(expressions.count, expectedExpressions.count)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testFunctionDeclarations() {
-		do {
-			// WITH:
-			let tree = try getProgram(inFile: "TestFunctionDeclarations")
-
-			let declarations = tree.filter(type:
-				JokrParser.FunctionDeclarationContext.self)
-
-			// TEST: Parser found all expected elements
-			let expectedDeclarations: [TokenTest] = [
-				(1, 0, "Intfive(){\nIntx=4\nx=5\nreturn5\n}"),
-				(7, 0,
-				 "Intnumber(Intnumber){\nresult=number\nreturnresult\n}"),
-				(12, 0, "Intsum(Inta,Intb,Intc){\nreturna+b+c\n}")]
-
-			for (expected, actual) in zip(expectedDeclarations, declarations) {
-				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
-				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
-				               expected.startChar)
-				XCTAssertEqual(actual.getText(), expected.text)
-			}
-
-			// TEST: Parser didn't find any unexpected elements of this type
-			XCTAssertEqual(declarations.count, expectedDeclarations.count)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
 	func testParameterDeclaration() {
 		do {
 			// WITH:
@@ -275,6 +245,36 @@ class AntlrParserTests: XCTestCase {
 			// TEST: Parser didn't find any unexpected elements of this type
 			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
 			XCTAssertEqual(parameters.count, expectedParameters.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testFunctionDeclarations() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestFunctionDeclarations")
+
+			let declarations = tree.filter(type:
+				JokrParser.FunctionDeclarationContext.self)
+
+			// TEST: Parser found all expected elements
+			let expectedDeclarations: [TokenTest] = [
+				(1, 0, "Intfive(){\nIntx=4\nx=5\nreturn5\n}"),
+				(7, 0,
+				 "Intnumber(Intnumber){\nresult=number\nreturnresult\n}"),
+				(12, 0, "Intsum(Inta,Intb,Intc){\nreturna+b+c\n}")]
+
+			for (expected, actual) in zip(expectedDeclarations, declarations) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(declarations.count, expectedDeclarations.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")

@@ -4,9 +4,8 @@ import XCTest
 private let testFilesPath = CommandLine.arguments[1] +
 "/tests/Unit Tests/Antlr To Jokr Tests/"
 
-// TODO: Check test orders in all files
 class ASTTests: XCTestCase {
-	
+
 	func testIDs() {
 		// WITH:
 		let ids: [JKRTreeID] = [
@@ -101,32 +100,6 @@ class ASTTests: XCTestCase {
 		XCTAssertEqual(operators.map { $0.text }, expectedOperators)
 	}
 
-	func testParameters() {
-		// WITH:
-		let parameters: [JKRTreeParameter] = [
-			JKRTreeParameter(type: "Int", id: "x"),
-			JKRTreeParameter(type: "Person", id: "x"),
-			JKRTreeParameter(type: "Person", id: "joe")
-		]
-
-		let expectedData: [(type: JKRTreeType, id: JKRTreeID)] =
-			[("Int", "x"), ("Person", "x"), ("Person", "joe")]
-
-		// TEST: == succeeds on equal instances (reflexive)
-		XCTAssertEqual(parameters, parameters.arrayCopy())
-
-		// TEST: == fails on different instances
-		for (parameter, differentParameter) in
-			zip(parameters, parameters.shifted())
-		{
-			XCTAssertNotEqual(parameter, differentParameter)
-		}
-
-		// TEST: data is initialized, stored and retrieved as expected
-		XCTAssertEqual(parameters.map { $0.type }, expectedData.map { $0.type })
-		XCTAssertEqual(parameters.map { $0.id }, expectedData.map { $0.id })
-	}
-
 	func testExpressions() {
 		// WITH:
 		let expressions: [JKRTreeExpression] = [
@@ -212,6 +185,33 @@ class ASTTests: XCTestCase {
 		{
 			XCTAssertNotEqual(statement, differentStatement)
 		}
+	}
+
+
+	func testParameters() {
+		// WITH:
+		let parameters: [JKRTreeParameter] = [
+			JKRTreeParameter(type: "Int", id: "x"),
+			JKRTreeParameter(type: "Person", id: "x"),
+			JKRTreeParameter(type: "Person", id: "joe")
+		]
+
+		let expectedData: [(type: JKRTreeType, id: JKRTreeID)] =
+			[("Int", "x"), ("Person", "x"), ("Person", "joe")]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(parameters, parameters.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (parameter, differentParameter) in
+			zip(parameters, parameters.shifted())
+		{
+			XCTAssertNotEqual(parameter, differentParameter)
+		}
+
+		// TEST: data is initialized, stored and retrieved as expected
+		XCTAssertEqual(parameters.map { $0.type }, expectedData.map { $0.type })
+		XCTAssertEqual(parameters.map { $0.id }, expectedData.map { $0.id })
 	}
 
 	func testFunctionDeclarations() {
