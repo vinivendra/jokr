@@ -7,7 +7,6 @@ import XCTest
 private let testFilesPath = CommandLine.arguments[1] +
 "/tests/Unit Tests/Antlr Parser Tests/"
 
-// TODO: Rename Lexer and Parser tests to be Antlr specific
 class AntlrParserTests: XCTestCase {
 	typealias TokenTest =
 		(startLine: Int,

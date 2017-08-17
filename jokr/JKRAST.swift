@@ -2,9 +2,7 @@
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 
-// TODO: FunctionDecl should be Decl not Stm
 // TODO: JKRTreeOperator
-
 struct JKRTreeProgram {
 	let statements: [JKRTreeStatement]?
 	let declarations: [JKRTreeDeclaration]?

@@ -1,6 +1,5 @@
 import XCTest
 
-// TODO: Add comments
 class FunctionListenerTests: XCTestCase {
 	func testContains() {
 		// WITH:
