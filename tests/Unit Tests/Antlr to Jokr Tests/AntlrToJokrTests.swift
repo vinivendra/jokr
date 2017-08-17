@@ -224,7 +224,6 @@ class AntlrToJokrTests: XCTestCase {
 		}
 	}
 
-	// TODO: Test Declarations
 	func testStatements() {
 		do {
 			// WITH:
@@ -248,39 +247,43 @@ class AntlrToJokrTests: XCTestCase {
 		}
 	}
 
-//	func testProgram() {
-//		let contents = try! String(contentsOfFile:
-//			testFilesPath + "TestStatements")
-//
-//		let inputStream = ANTLRInputStream(contents)
-//		let lexer = JokrLexer(inputStream)
-//		let tokens = CommonTokenStream(lexer)
-//
-//		do {
-//			let parser = try JokrParser(tokens)
-//			parser.setBuildParseTree(true)
-//			let tree = try parser.program()
-//
-//			let statements = tree.toJKRTreeStatements()
-//
-//			let expectedStatements: [JKRTreeStatement] = [
-//				.functionDeclaration(
-//					JKRTreeFunctionDeclaration(
-//						type: "Int", id: "foo",
-//						parameters: [],
-//						block: [
-//							.assignment(.declaration("Int", "x", 0)),
-//							.returnStm(0)])),
-//				.assignment(.declaration("Int", "y", 0)),
-//				.returnStm(1)
-//			]
-//
-//			XCTAssertEqual(statements, expectedStatements)
-//		}
-//		catch (let error) {
-//			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-//		}
-//	}
+	func testDeclarations() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile:  "TestDeclarations")
+
+			let declarations = tree.filter(type:
+				JokrParser.DeclarationContext.self)
+				.map { $0.toJKRTreeDeclaration() }
+
+			let expectedDeclarations: [JKRTreeDeclaration] = [
+				.functionDeclaration(
+					JKRTreeFunctionDeclaration(
+						type: "Int", id: "func1",
+						parameters: [],
+						block: [.returnStm(0)]
+					)
+				),
+				.functionDeclaration(
+					JKRTreeFunctionDeclaration(
+						type: "Int", id: "func2",
+						parameters: [JKRTreeParameter(type: "Float",
+						                              id: "bla")],
+						block: [
+							JKRTreeStatement.assignment(.declaration(
+								"String", "baz", .operation(5, "+", 6))),
+							JKRTreeStatement.returnStm(0)]
+					)
+				)
+			]
+
+			// TEST: All elements were converted successfully
+			XCTAssertEqual(declarations, expectedDeclarations)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
 
 	func testEmpty() {
 		do {

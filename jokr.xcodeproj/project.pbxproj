@@ -76,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		240F71801F1FF830005B971C /* TestFunctionDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestFunctionDeclarations; sourceTree = "<group>"; };
+		2432956E1F461EAA00478218 /* TestDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestDeclarations; path = "Antlr to Jokr Tests/TestDeclarations"; sourceTree = "<group>"; };
 		2433CFC91F33F8600027A15F /* TestIDs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestIDs; path = "Antlr to Jokr Tests/TestIDs"; sourceTree = "<group>"; };
 		2433CFCA1F33F9750027A15F /* TestTypes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestTypes; path = "Antlr to Jokr Tests/TestTypes"; sourceTree = "<group>"; };
 		2433CFCB1F33FA310027A15F /* TestExpressions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestExpressions; path = "Antlr to Jokr Tests/TestExpressions"; sourceTree = "<group>"; };
@@ -102,7 +103,7 @@
 		246BCC2E1F1957B7004BE84C /* TestStatementListsWithNewline */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementListsWithNewline; sourceTree = "<group>"; };
 		246BCC2F1F1957B7004BE84C /* TestVariableDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestVariableDeclarations; sourceTree = "<group>"; };
 		248F364A1F363D6800BCAF0A /* TestStatements */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestStatements; path = "Antlr to Jokr Tests/TestStatements"; sourceTree = "<group>"; };
-		248F364B1F3659F600BCAF0A /* TestEmpty */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestEmpty; path = "tests/Unit Tests/Antlr to Jokr Tests/TestEmpty"; sourceTree = "<group>"; };
+		248F364B1F3659F600BCAF0A /* TestEmpty */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestEmpty; path = "Antlr to Jokr Tests/TestEmpty"; sourceTree = "<group>"; };
 		248F364C1F365A6E00BCAF0A /* ASTTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ASTTests.swift; path = "AST Tests/ASTTests.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		248F364F1F36610200BCAF0A /* ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		24A414441F0F20CE0075993D /* jokr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jokr; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,7 +250,6 @@
 		24A4143B1F0F20CE0075993D = {
 			isa = PBXGroup;
 			children = (
-				248F364B1F3659F600BCAF0A /* TestEmpty */,
 				246BCBF31F19567E004BE84C /* jokr */,
 				246BCC1F1F1957B7004BE84C /* tests */,
 				24A414451F0F20CE0075993D /* Products */,
@@ -332,13 +332,15 @@
 			children = (
 				24E61C3E1F33AC5200A2B8F5 /* AntlrToJokrTests.swift */,
 				24E61C431F33B00C00A2B8F5 /* TestAssignments */,
-				2433CFC91F33F8600027A15F /* TestIDs */,
-				2433CFCA1F33F9750027A15F /* TestTypes */,
+				2432956E1F461EAA00478218 /* TestDeclarations */,
+				248F364B1F3659F600BCAF0A /* TestEmpty */,
 				2433CFCB1F33FA310027A15F /* TestExpressions */,
-				24DC8E101F34DB5B0015A211 /* TestParameters */,
 				24F3F57F1F3522AE00B75C3F /* TestFunctionDeclarations */,
+				2433CFC91F33F8600027A15F /* TestIDs */,
+				24DC8E101F34DB5B0015A211 /* TestParameters */,
 				24F3F5811F352C4500B75C3F /* TestReturns */,
 				248F364A1F363D6800BCAF0A /* TestStatements */,
+				2433CFCA1F33F9750027A15F /* TestTypes */,
 			);
 			name = "Antlr To Jokr Tests";
 			sourceTree = "<group>";
