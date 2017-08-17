@@ -12,6 +12,7 @@ class JKRContainsFunction: ParseTreeListener {
 		result = result || predicate(ctx)
 	}
 
+	// Unused protocol requirements
 	func visitTerminal(_ node: Antlr4.TerminalNode) { }
 	func visitErrorNode(_ node: Antlr4.ErrorNode) { }
 	func exitEveryRule(_ ctx: Antlr4.ParserRuleContext) throws { }
@@ -31,6 +32,7 @@ class JKRFilterFunction: ParseTreeListener {
 		}
 	}
 
+	// Unused protocol requirements
 	func visitTerminal(_ node: Antlr4.TerminalNode) { }
 	func visitErrorNode(_ node: Antlr4.ErrorNode) { }
 	func exitEveryRule(_ ctx: Antlr4.ParserRuleContext) throws { }
