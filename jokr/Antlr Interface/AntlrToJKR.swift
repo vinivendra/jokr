@@ -17,7 +17,12 @@ extension TerminalNode {
 	}
 
 	func toJKRTreeInt() -> JKRTreeInt {
-		return JKRTreeInt(getText())
+		guard let int = Int(getText()) else {
+			fatalError(
+				"Trying to create integer from invalid string: \(getText())")
+		}
+
+		return JKRTreeInt(int)
 	}
 }
 

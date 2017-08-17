@@ -56,14 +56,12 @@ class ASTTests: XCTestCase {
 	func testInts() {
 		// WITH:
 		let ints: [JKRTreeInt] = [
-			JKRTreeInt("0"),
-			JKRTreeInt(stringLiteral: "1"),
-			JKRTreeInt(extendedGraphemeClusterLiteral: "2"),
-			JKRTreeInt(unicodeScalarLiteral: "3"),
-			"4"
+			JKRTreeInt(0),
+			JKRTreeInt(integerLiteral: 1),
+			2
 		]
 
-		let expectedTexts = ["0", "1", "2", "3", "4"]
+		let expectedValues = [0, 1, 2]
 
 		// TEST: == succeeds on equal instances (reflexive)
 		XCTAssertEqual(ints, ints.arrayCopy())
@@ -74,7 +72,7 @@ class ASTTests: XCTestCase {
 		}
 
 		// TEST: data is initialized, stored and retrieved as expected
-		XCTAssertEqual(ints.map { $0.text }, expectedTexts)
+		XCTAssertEqual(ints.map { $0.value }, expectedValues)
 	}
 
 	func testParameters() {
@@ -110,8 +108,8 @@ class ASTTests: XCTestCase {
 		let expressions: [JKRTreeExpression] = [
 			JKRTreeExpression.lvalue("foo"),
 			JKRTreeExpression.lvalue("bar"),
-			JKRTreeExpression.int("0"),
-			JKRTreeExpression.int("1"),
+			JKRTreeExpression.int(0),
+			JKRTreeExpression.int(1),
 			JKRTreeExpression.parenthesized(0),
 			JKRTreeExpression.parenthesized(1),
 			.operation(0, "+", 1),
@@ -130,8 +128,8 @@ class ASTTests: XCTestCase {
 		]
 
 		let expectedLiteralExpressions: [JKRTreeExpression] = [
-			JKRTreeExpression.int("1"),
-			JKRTreeExpression.int("4"),
+			JKRTreeExpression.int(1),
+			JKRTreeExpression.int(4),
 			.lvalue("foo"), .lvalue("bar"), .lvalue("foo"), .lvalue("bar")
 		]
 

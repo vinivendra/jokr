@@ -105,7 +105,7 @@ indirect enum JKRTreeExpression: Equatable, ExpressibleByIntegerLiteral,
 
 	// ExpressibleByIntegerLiteral
 	public init(integerLiteral value: Int) {
-		self = .int(JKRTreeInt(String(value)))
+		self = .int(JKRTreeInt(value))
 	}
 }
 
@@ -182,21 +182,15 @@ struct JKRTreeID: Equatable, ExpressibleByStringLiteral {
 	}
 }
 
-struct JKRTreeInt: Equatable, ExpressibleByStringLiteral {
-	let text: String
-	init(_ text: String) { self.text = text }
+struct JKRTreeInt: Equatable, ExpressibleByIntegerLiteral {
+	let value: Int
+	init(_ value: Int) { self.value = value }
 
 	// ExpressibleByStringLiteral
-	init(stringLiteral value: String) { self.text = value }
-	public init(extendedGraphemeClusterLiteral value: String) {
-		self.text = value
-	}
-	public init(unicodeScalarLiteral value: String) {
-		self.text = value
-	}
+	public init(integerLiteral value: Int) { self.value = value }
 
 	// Equatable
 	static func == (lhs: JKRTreeInt, rhs: JKRTreeInt) -> Bool {
-		return lhs.text == rhs.text
+		return lhs.value == rhs.value
 	}
 }

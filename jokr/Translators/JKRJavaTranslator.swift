@@ -153,7 +153,7 @@ class JKRJavaTranslator: JKRTranslator {
 	}
 
 	func string(for int: JKRTreeInt) -> String {
-		return int.text
+		return String(int.value)
 	}
 
 	// Writing
