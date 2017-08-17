@@ -9,3 +9,8 @@ Int func2(Float bla) {
 Void func4(Int bla, Float foo, Double hue) {
 	return (9)
 }
+
+Int func4(Int bla, Float foo, Double hue) {
+	return bla
+}
+

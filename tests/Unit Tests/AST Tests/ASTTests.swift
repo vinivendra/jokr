@@ -175,8 +175,8 @@ class ASTTests: XCTestCase {
 		let statements: [JKRTreeStatement] = [
 			.assignment(.assignment("y", 1)),
 			.assignment(.assignment("y", 0)),
-			.returnStm(JKRTreeReturn(0)),
-			.returnStm(JKRTreeReturn(1))
+			.returnStm(0),
+			.returnStm(1)
 		]
 
 		// TEST: == succeeds on equal instances (reflexive)

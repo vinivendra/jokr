@@ -210,9 +210,10 @@ class AntlrToJokrTests: XCTestCase {
 				.map { $0.getJKRTreeReturn() }
 
 			let expectedReturns: [JKRTreeReturn] = [
-				JKRTreeReturn(0),
+				0,
 				JKRTreeReturn(.operation(5, "+", 6)),
-				JKRTreeReturn(.parenthesized(9))
+				JKRTreeReturn(.parenthesized(9)),
+				"bla"
 			]
 
 			// TEST: All elements were converted successfully
@@ -223,45 +224,30 @@ class AntlrToJokrTests: XCTestCase {
 		}
 	}
 
-//	func testStatements() {
-//		let contents = try! String(contentsOfFile:
-//			testFilesPath + "TestStatements")
-//
-//		let inputStream = ANTLRInputStream(contents)
-//		let lexer = JokrLexer(inputStream)
-//		let tokens = CommonTokenStream(lexer)
-//
-//		do {
-//			let parser = try JokrParser(tokens)
-//			parser.setBuildParseTree(true)
-//			let tree = try parser.program()
-//
-//			let statements = tree.filter(type:
-//				JokrParser.StatementContext.self)
-//				.map { $0.toJKRTreeStatement() }
-//
-//			let expectedStatements: [JKRTreeStatement] = [
-//				.functionDeclaration(
-//					JKRTreeFunctionDeclaration(
-//						type: "Int", id: "foo",
-//						parameters: [],
-//						block: [
-//							.assignment(.declaration("Int", "x", 0)),
-//							.returnStm(0)])),
-//				.assignment(.declaration("Int", "x", 0)),
-//				.returnStm(0),
-//
-//				.assignment(.declaration("Int", "y", 0)),
-//				.returnStm(1)
-//			]
-//
-//			XCTAssertEqual(statements, expectedStatements)
-//		}
-//		catch (let error) {
-//			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-//		}
-//	}
-//
+	// TODO: Test Declarations
+	func testStatements() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile:  "TestStatements")
+
+			let statements = tree.filter(type:
+				JokrParser.StatementContext.self)
+				.map { $0.toJKRTreeStatement() }
+
+			let expectedStatements: [JKRTreeStatement] = [
+				.assignment(.declaration("Int", "x", 0)),
+				.assignment(.declaration("Int", "y", 0)),
+				.returnStm(1)
+			]
+
+			// TEST: All elements were converted successfully
+			XCTAssertEqual(statements, expectedStatements)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 //	func testProgram() {
 //		let contents = try! String(contentsOfFile:
 //			testFilesPath + "TestStatements")

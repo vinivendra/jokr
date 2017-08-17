@@ -134,13 +134,31 @@ struct JKRTreeParameter: Equatable {
 	}
 }
 
-struct JKRTreeReturn: Equatable {
+struct JKRTreeReturn: Equatable, ExpressibleByIntegerLiteral,
+ExpressibleByStringLiteral {
 	let expression: JKRTreeExpression
 	init(_ expression: JKRTreeExpression) { self.expression = expression }
 
 	// Equatable
 	static func == (lhs: JKRTreeReturn, rhs: JKRTreeReturn) -> Bool {
 		return lhs.expression == rhs.expression
+	}
+
+	// ExpressibleByStringLiteral
+	init(stringLiteral value: String) {
+		self.expression = JKRTreeExpression(stringLiteral: value)
+	}
+	public init(extendedGraphemeClusterLiteral value: String) {
+		self.expression = JKRTreeExpression(
+			extendedGraphemeClusterLiteral: value)
+	}
+	public init(unicodeScalarLiteral value: String) {
+		self.expression = JKRTreeExpression(unicodeScalarLiteral: value)
+	}
+
+	// ExpressibleByIntegerLiteral
+	public init(integerLiteral value: Int) {
+		self.expression = JKRTreeExpression(integerLiteral: value)
 	}
 }
 
