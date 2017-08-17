@@ -5,18 +5,31 @@ private let testFilesPath = CommandLine.arguments[1] +
 "/tests/Unit Tests/Antlr To Jokr Tests/"
 
 class AntlrToJokrTests: XCTestCase {
-	func testIDs() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestIDs")
 
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
+	func getProgram(
+		inFile filename: String) throws -> JokrParser.ProgramContext {
 
 		do {
+			let contents = try! String(contentsOfFile: testFilesPath + filename)
+			let inputStream = ANTLRInputStream(contents)
+			let lexer = JokrLexer(inputStream)
+			let tokens = CommonTokenStream(lexer)
 			let parser = try JokrParser(tokens)
 			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			return try parser.program()
+		}
+		catch (let error) {
+			throw error
+		}
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// MARK: - Tests
+
+	func testIDs() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestIDs")
 
 			let ids = tree.filter(type:
 				JokrParser.AssignmentContext.self)
@@ -25,6 +38,7 @@ class AntlrToJokrTests: XCTestCase {
 			let expectedIDs: [JKRTreeID] = ["bla", "fooBar", "baz", "fooBar",
 			                                "bla"]
 
+			// TEST: All elements were converted successfully
 			XCTAssertEqual(ids, expectedIDs)
 		}
 		catch (let error) {
@@ -33,17 +47,9 @@ class AntlrToJokrTests: XCTestCase {
 	}
 
 	func testTypes() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestTypes")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			// WITH:
+			let tree = try getProgram(inFile: "TestTypes")
 
 			let types = tree.filter(type:
 				JokrParser.AssignmentContext.self)
@@ -52,6 +58,7 @@ class AntlrToJokrTests: XCTestCase {
 			let expectedTypess: [JKRTreeType] = ["Int", "Float", "Blah", "Int",
 			                                     "Void"]
 
+			// TEST: All elements were converted successfully
 			XCTAssertEqual(types, expectedTypess)
 		}
 		catch (let error) {
@@ -60,17 +67,8 @@ class AntlrToJokrTests: XCTestCase {
 	}
 
 	func testExpressions() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestExpressions")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			let tree = try getProgram(inFile: "TestExpressions")
 
 			let expressions = tree.filter(type:
 				JokrParser.ExpressionContext.self)
@@ -89,6 +87,7 @@ class AntlrToJokrTests: XCTestCase {
 							           "+", .lvalue("foo"))))
 			]
 
+			// TEST: All elements were converted successfully
 			XCTAssertEqual(expressions, expectedExpressions)
 		}
 		catch (let error) {
@@ -97,17 +96,8 @@ class AntlrToJokrTests: XCTestCase {
 	}
 
 	func testAssignments() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestAssignments")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			let tree = try getProgram(inFile: "TestAssignments")
 
 			let assignments = tree.filter(type:
 				JokrParser.AssignmentContext.self)
@@ -121,6 +111,7 @@ class AntlrToJokrTests: XCTestCase {
 				.assignment("bla", .int("300"))
 			]
 
+			// TEST: All elements were converted successfully
 			XCTAssertEqual(assignments, expectedAssignments)
 		}
 		catch (let error) {
@@ -129,26 +120,17 @@ class AntlrToJokrTests: XCTestCase {
 	}
 
 	func testParameters() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestParameters")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			let tree = try getProgram(inFile: "TestParameters")
 
-			let parameters = tree.filter(type:
+			let parameterLists = tree.filter(type:
 				JokrParser.ParameterDeclarationListContext.self)
 				// Filter only root parameter lists, sublists get tested too
 				.filter {
 					!($0.parent is JokrParser.ParameterDeclarationListContext)
 				}.map { $0.toJKRTreeParameters() }
 
-			let expectedParameters: [[JKRTreeParameter]] = [
+			let expectedParameterLists: [[JKRTreeParameter]] = [
 				[],
 				[JKRTreeParameter(type: "Float", id: "bla")],
 				[JKRTreeParameter(type: "Int", id: "bla"),
@@ -158,12 +140,14 @@ class AntlrToJokrTests: XCTestCase {
 				 JKRTreeParameter(type: "Double", id: "hue")]
 			]
 
-			for (parameter, expectedParameter)
-				in zip(parameters, expectedParameters)
+			// TEST: All elements were converted successfully
+			// (multi-dimensional array equality has to be unrolled like this)
+			for (parameterList, expectedParameterList)
+				in zip(parameterLists, expectedParameterLists)
 			{
-				XCTAssertEqual(parameter, expectedParameter)
+				XCTAssertEqual(parameterList, expectedParameterList)
 			}
-			XCTAssertEqual(parameters.count, expectedParameters.count)
+			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
