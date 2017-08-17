@@ -103,17 +103,36 @@ class ASTTests: XCTestCase {
 		XCTAssertEqual(parameters.map { $0.id }, expectedData.map { $0.id })
 	}
 
+	// TODO: Review expression inits that can be replaced by literals
+	// TODO: Change JKRTreeInt's private data to be Int, and its inits too
 	func testExpressions() {
 		// WITH:
 		let expressions: [JKRTreeExpression] = [
-			JKRTreeExpression.int("0"), .int("1"),
-			.parenthesized(.int("0")), .parenthesized(.int("1")),
-			.operation(.int("0"), "+", .int("1")),
-			.operation(.int("1"), "+", .int("1")),
-			.operation(.int("1"), "-", .int("1")),
-			.operation(.int("1"), "-", .int("2")),
 			JKRTreeExpression.lvalue("foo"),
-			JKRTreeExpression.lvalue("bar")
+			JKRTreeExpression.lvalue("bar"),
+			JKRTreeExpression.int("0"),
+			JKRTreeExpression.int("1"),
+			JKRTreeExpression.parenthesized(0),
+			JKRTreeExpression.parenthesized(1),
+			.operation(0, "+", 1),
+			.operation(1, "+", 1),
+			.operation(1, "-", 1),
+			.operation(1, "-", 2)
+		]
+
+		let literalExpessions: [JKRTreeExpression] = [
+			JKRTreeExpression(integerLiteral: 1),
+			4,
+			JKRTreeExpression(stringLiteral: "foo"),
+			JKRTreeExpression(extendedGraphemeClusterLiteral: "bar"),
+			JKRTreeExpression(unicodeScalarLiteral: "foo"),
+			"bar"
+		]
+
+		let expectedLiteralExpressions: [JKRTreeExpression] = [
+			JKRTreeExpression.int("1"),
+			JKRTreeExpression.int("4"),
+			.lvalue("foo"), .lvalue("bar"), .lvalue("foo"), .lvalue("bar")
 		]
 
 		// TEST: == succeeds on equal instances (reflexive)
@@ -125,18 +144,21 @@ class ASTTests: XCTestCase {
 		{
 			XCTAssertNotEqual(expression, differentExpression)
 		}
+
+		// TEST: Literal instances are created successfully
+		XCTAssertEqual(literalExpessions, expectedLiteralExpressions)
 	}
 
 	func testAssignments() {
 		// WITH:
 		let assignments: [JKRTreeAssignment] = [
-			.declaration("Int", "x", .int("0")),
-			.declaration("Float", "x", .int("0")),
-			.declaration("Float", "y", .int("0")),
-			.declaration("Float", "x", .int("1")),
-			.assignment("x", .int("0")),
-			.assignment("y", .int("0")),
-			.assignment("y", .int("1"))
+			.declaration("Int", "x", 0),
+			.declaration("Float", "x", 0),
+			.declaration("Float", "y", 0),
+			.declaration("Float", "x", 1),
+			.assignment("x", 0),
+			.assignment("y", 0),
+			.assignment("y", 1)
 		]
 
 		// TEST: == succeeds on equal instances (reflexive)
@@ -153,10 +175,10 @@ class ASTTests: XCTestCase {
 	func testStatements() {
 		// WITH:
 		let statements: [JKRTreeStatement] = [
-			.assignment(.assignment("y", .int("1"))),
-			.assignment(.assignment("y", .int("0"))),
-			.returnStm(JKRTreeReturn(.int("0"))),
-			.returnStm(JKRTreeReturn(.int("1")))
+			.assignment(.assignment("y", 1)),
+			.assignment(.assignment("y", 0)),
+			.returnStm(JKRTreeReturn(0)),
+			.returnStm(JKRTreeReturn(1))
 		]
 
 		// TEST: == succeeds on equal instances (reflexive)
@@ -175,36 +197,36 @@ class ASTTests: XCTestCase {
 			JKRTreeFunctionDeclaration(
 				type: "Int", id: "func1",
 				parameters: [],
-				block: [.assignment(.assignment("y", .int("1")))]),
+				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func1",
 				parameters: [],
-				block: [.assignment(.assignment("y", .int("1")))]),
+				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
 				parameters: [],
-				block: [.assignment(.assignment("y", .int("1")))]),
+				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
 				parameters: [JKRTreeParameter(type: "Float", id: "bla")],
-				block: [.assignment(.assignment("y", .int("1")))]),
+				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
 				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
-				block: [.assignment(.assignment("y", .int("1")))]),
+				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
 				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
-				block: [.assignment(.assignment("x", .int("1")))])
+				block: [.assignment(.assignment("x", 1))])
 		]
 
 		let expectedBlocks: [[JKRTreeStatement]] = [
-			[.assignment(.assignment("y", .int("1")))],
-			[.assignment(.assignment("y", .int("1")))],
-			[.assignment(.assignment("y", .int("1")))],
-			[.assignment(.assignment("y", .int("1")))],
-			[.assignment(.assignment("y", .int("1")))],
-			[.assignment(.assignment("x", .int("1")))]
+			[.assignment(.assignment("y", 1))],
+			[.assignment(.assignment("y", 1))],
+			[.assignment(.assignment("y", 1))],
+			[.assignment(.assignment("y", 1))],
+			[.assignment(.assignment("y", 1))],
+			[.assignment(.assignment("x", 1))]
 		]
 
 		// TEST: == succeeds on equal instances (reflexive)

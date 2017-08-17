@@ -67,7 +67,8 @@ enum JKRTreeAssignment: Equatable {
 	}
 }
 
-indirect enum JKRTreeExpression: Equatable {
+indirect enum JKRTreeExpression: Equatable, ExpressibleByIntegerLiteral,
+	ExpressibleByStringLiteral {
 	case int(JKRTreeInt)
 	case parenthesized(JKRTreeExpression)
 	case operation(JKRTreeExpression, String, JKRTreeExpression)
@@ -91,6 +92,20 @@ indirect enum JKRTreeExpression: Equatable {
 		default:
 			return false
 		}
+	}
+
+	// ExpressibleByStringLiteral
+	init(stringLiteral value: String) { self = .lvalue(JKRTreeID(value)) }
+	public init(extendedGraphemeClusterLiteral value: String) {
+		self = .lvalue(JKRTreeID(value))
+	}
+	public init(unicodeScalarLiteral value: String) {
+		self = .lvalue(JKRTreeID(value))
+	}
+
+	// ExpressibleByIntegerLiteral
+	public init(integerLiteral value: Int) {
+		self = .int(JKRTreeInt(String(value)))
 	}
 }
 

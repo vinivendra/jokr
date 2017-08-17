@@ -22,6 +22,7 @@ enum JKRTargetLanguage {
 }
 
 enum JKRError: Error {
+	/// Clang or javac errors
 	case compilation(CInt)
 }
 
