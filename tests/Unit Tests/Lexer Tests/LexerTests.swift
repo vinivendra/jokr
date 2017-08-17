@@ -24,7 +24,8 @@ class LexerTests: XCTestCase {
 			let inputStream = ANTLRInputStream(contents)
 			let lexer = JokrLexer(inputStream)
 			return try lexer.getAllTokens()
-		} catch (let error) {
+		}
+		catch (let error) {
 			throw error
 		}
 	}
