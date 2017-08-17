@@ -5,7 +5,7 @@ import Antlr4
 import XCTest
 
 private let testFilesPath = CommandLine.arguments[1] +
-"/tests/Unit Tests/Lexer Tests/"
+"/tests/Unit Tests/Antlr Lexer Tests/"
 
 extension Array where Element == Token {
 	func filter(byType type: Int) -> [Token] {
@@ -17,7 +17,7 @@ extension Array where Element == Token {
 	}
 }
 
-class LexerTests: XCTestCase {
+class AntlrLexerTests: XCTestCase {
 	func getTokens(inFile filename: String) throws -> [Token] {
 		do {
 			let contents = try! String(contentsOfFile: testFilesPath + filename)

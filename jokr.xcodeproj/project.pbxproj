@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2432957D1F46238D00478218 /* AntlrLexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243295701F46238D00478218 /* AntlrLexerTests.swift */; };
+		2432957E1F46238D00478218 /* TestComments in Resources */ = {isa = PBXBuildFile; fileRef = 243295711F46238D00478218 /* TestComments */; };
+		2432957F1F46238D00478218 /* TestIDs in Resources */ = {isa = PBXBuildFile; fileRef = 243295721F46238D00478218 /* TestIDs */; };
+		243295801F46238D00478218 /* TestNewlines in Resources */ = {isa = PBXBuildFile; fileRef = 243295731F46238D00478218 /* TestNewlines */; };
+		243295811F46238D00478218 /* TestTypes in Resources */ = {isa = PBXBuildFile; fileRef = 243295741F46238D00478218 /* TestTypes */; };
+		243295821F46238D00478218 /* AntlrParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243295761F46238D00478218 /* AntlrParserTests.swift */; };
+		243295831F46238D00478218 /* TestAssignments in Resources */ = {isa = PBXBuildFile; fileRef = 243295771F46238D00478218 /* TestAssignments */; };
+		243295841F46238D00478218 /* TestExpressions in Resources */ = {isa = PBXBuildFile; fileRef = 243295781F46238D00478218 /* TestExpressions */; };
+		243295851F46238D00478218 /* TestFunctionDeclarations in Resources */ = {isa = PBXBuildFile; fileRef = 243295791F46238D00478218 /* TestFunctionDeclarations */; };
+		243295861F46238D00478218 /* TestStatementLists in Resources */ = {isa = PBXBuildFile; fileRef = 2432957A1F46238D00478218 /* TestStatementLists */; };
+		243295871F46238D00478218 /* TestStatementListsWithNewline in Resources */ = {isa = PBXBuildFile; fileRef = 2432957B1F46238D00478218 /* TestStatementListsWithNewline */; };
+		243295881F46238D00478218 /* TestVariableDeclarations in Resources */ = {isa = PBXBuildFile; fileRef = 2432957C1F46238D00478218 /* TestVariableDeclarations */; };
 		246BCC051F19567E004BE84C /* JokrBaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCBF61F19567E004BE84C /* JokrBaseListener.swift */; };
 		246BCC061F19567E004BE84C /* JokrBaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCBF61F19567E004BE84C /* JokrBaseListener.swift */; };
 		246BCC071F19567E004BE84C /* JokrLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCBF71F19567E004BE84C /* JokrLexer.swift */; };
@@ -20,8 +32,6 @@
 		246BCC101F19567E004BE84C /* JokrParserATN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCBFC1F19567E004BE84C /* JokrParserATN.swift */; };
 		246BCC111F19567E004BE84C /* JokrParserATN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCBFC1F19567E004BE84C /* JokrParserATN.swift */; };
 		246BCC191F19567E004BE84C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC011F19567E004BE84C /* main.swift */; };
-		246BCC311F1957B7004BE84C /* LexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC231F1957B7004BE84C /* LexerTests.swift */; };
-		246BCC371F1957B7004BE84C /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246BCC2A1F1957B7004BE84C /* ParserTests.swift */; };
 		248F364D1F365A6E00BCAF0A /* ASTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F364C1F365A6E00BCAF0A /* ASTTests.swift */; };
 		248F36501F36610200BCAF0A /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F364F1F36610200BCAF0A /* ExtensionsTests.swift */; };
 		24A4146A1F0F29450075993D /* libAntlr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A414681F0F29450075993D /* libAntlr4.dylib */; };
@@ -75,8 +85,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		240F71801F1FF830005B971C /* TestFunctionDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestFunctionDeclarations; sourceTree = "<group>"; };
 		2432956E1F461EAA00478218 /* TestDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestDeclarations; path = "Antlr to Jokr Tests/TestDeclarations"; sourceTree = "<group>"; };
+		243295701F46238D00478218 /* AntlrLexerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntlrLexerTests.swift; sourceTree = "<group>"; };
+		243295711F46238D00478218 /* TestComments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestComments; sourceTree = "<group>"; };
+		243295721F46238D00478218 /* TestIDs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestIDs; sourceTree = "<group>"; };
+		243295731F46238D00478218 /* TestNewlines */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestNewlines; sourceTree = "<group>"; };
+		243295741F46238D00478218 /* TestTypes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestTypes; sourceTree = "<group>"; };
+		243295761F46238D00478218 /* AntlrParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntlrParserTests.swift; sourceTree = "<group>"; };
+		243295771F46238D00478218 /* TestAssignments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestAssignments; sourceTree = "<group>"; };
+		243295781F46238D00478218 /* TestExpressions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestExpressions; sourceTree = "<group>"; };
+		243295791F46238D00478218 /* TestFunctionDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestFunctionDeclarations; sourceTree = "<group>"; };
+		2432957A1F46238D00478218 /* TestStatementLists */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementLists; sourceTree = "<group>"; };
+		2432957B1F46238D00478218 /* TestStatementListsWithNewline */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementListsWithNewline; sourceTree = "<group>"; };
+		2432957C1F46238D00478218 /* TestVariableDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestVariableDeclarations; sourceTree = "<group>"; };
 		2433CFC91F33F8600027A15F /* TestIDs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestIDs; path = "Antlr to Jokr Tests/TestIDs"; sourceTree = "<group>"; };
 		2433CFCA1F33F9750027A15F /* TestTypes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestTypes; path = "Antlr to Jokr Tests/TestTypes"; sourceTree = "<group>"; };
 		2433CFCB1F33FA310027A15F /* TestExpressions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestExpressions; path = "Antlr to Jokr Tests/TestExpressions"; sourceTree = "<group>"; };
@@ -91,17 +112,6 @@
 		246BCBFF1F19567E004BE84C /* Jokr.g4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Jokr.g4; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		246BCC011F19567E004BE84C /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		246BCC211F1957B7004BE84C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		246BCC231F1957B7004BE84C /* LexerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexerTests.swift; sourceTree = "<group>"; };
-		246BCC241F1957B7004BE84C /* TestComments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestComments; sourceTree = "<group>"; };
-		246BCC251F1957B7004BE84C /* TestIDs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestIDs; sourceTree = "<group>"; };
-		246BCC261F1957B7004BE84C /* TestNewlines */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestNewlines; sourceTree = "<group>"; };
-		246BCC271F1957B7004BE84C /* TestTypes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestTypes; sourceTree = "<group>"; };
-		246BCC2A1F1957B7004BE84C /* ParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
-		246BCC2B1F1957B7004BE84C /* TestAssignments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestAssignments; sourceTree = "<group>"; };
-		246BCC2C1F1957B7004BE84C /* TestExpressions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestExpressions; sourceTree = "<group>"; };
-		246BCC2D1F1957B7004BE84C /* TestStatementLists */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementLists; sourceTree = "<group>"; };
-		246BCC2E1F1957B7004BE84C /* TestStatementListsWithNewline */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementListsWithNewline; sourceTree = "<group>"; };
-		246BCC2F1F1957B7004BE84C /* TestVariableDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestVariableDeclarations; sourceTree = "<group>"; };
 		248F364A1F363D6800BCAF0A /* TestStatements */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestStatements; path = "Antlr to Jokr Tests/TestStatements"; sourceTree = "<group>"; };
 		248F364B1F3659F600BCAF0A /* TestEmpty */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestEmpty; path = "Antlr to Jokr Tests/TestEmpty"; sourceTree = "<group>"; };
 		248F364C1F365A6E00BCAF0A /* ASTTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ASTTests.swift; path = "AST Tests/ASTTests.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -158,6 +168,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2432956F1F46238D00478218 /* Antlr Lexer Tests */ = {
+			isa = PBXGroup;
+			children = (
+				243295701F46238D00478218 /* AntlrLexerTests.swift */,
+				243295711F46238D00478218 /* TestComments */,
+				243295721F46238D00478218 /* TestIDs */,
+				243295731F46238D00478218 /* TestNewlines */,
+				243295741F46238D00478218 /* TestTypes */,
+			);
+			path = "Antlr Lexer Tests";
+			sourceTree = "<group>";
+		};
+		243295751F46238D00478218 /* Antlr Parser Tests */ = {
+			isa = PBXGroup;
+			children = (
+				243295761F46238D00478218 /* AntlrParserTests.swift */,
+				243295771F46238D00478218 /* TestAssignments */,
+				243295781F46238D00478218 /* TestExpressions */,
+				243295791F46238D00478218 /* TestFunctionDeclarations */,
+				2432957A1F46238D00478218 /* TestStatementLists */,
+				2432957B1F46238D00478218 /* TestStatementListsWithNewline */,
+				2432957C1F46238D00478218 /* TestVariableDeclarations */,
+			);
+			path = "Antlr Parser Tests";
+			sourceTree = "<group>";
+		};
 		246BCBF31F19567E004BE84C /* jokr */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,38 +241,12 @@
 				246BCC211F1957B7004BE84C /* Info.plist */,
 				248F364F1F36610200BCAF0A /* ExtensionsTests.swift */,
 				24FAA0CF1F369D9A0053A6BC /* FunctionListenerTests.swift */,
-				246BCC221F1957B7004BE84C /* Lexer Tests */,
-				246BCC281F1957B7004BE84C /* Parser Tests */,
+				2432956F1F46238D00478218 /* Antlr Lexer Tests */,
+				243295751F46238D00478218 /* Antlr Parser Tests */,
 				24E61C401F33AC6000A2B8F5 /* Antlr To Jokr Tests */,
 				248F364E1F365A7800BCAF0A /* AST Tests */,
 			);
 			path = "Unit Tests";
-			sourceTree = "<group>";
-		};
-		246BCC221F1957B7004BE84C /* Lexer Tests */ = {
-			isa = PBXGroup;
-			children = (
-				246BCC231F1957B7004BE84C /* LexerTests.swift */,
-				246BCC241F1957B7004BE84C /* TestComments */,
-				246BCC251F1957B7004BE84C /* TestIDs */,
-				246BCC261F1957B7004BE84C /* TestNewlines */,
-				246BCC271F1957B7004BE84C /* TestTypes */,
-			);
-			path = "Lexer Tests";
-			sourceTree = "<group>";
-		};
-		246BCC281F1957B7004BE84C /* Parser Tests */ = {
-			isa = PBXGroup;
-			children = (
-				246BCC2A1F1957B7004BE84C /* ParserTests.swift */,
-				246BCC2B1F1957B7004BE84C /* TestAssignments */,
-				246BCC2C1F1957B7004BE84C /* TestExpressions */,
-				240F71801F1FF830005B971C /* TestFunctionDeclarations */,
-				246BCC2D1F1957B7004BE84C /* TestStatementLists */,
-				246BCC2E1F1957B7004BE84C /* TestStatementListsWithNewline */,
-				246BCC2F1F1957B7004BE84C /* TestVariableDeclarations */,
-			);
-			path = "Parser Tests";
 			sourceTree = "<group>";
 		};
 		248F364E1F365A7800BCAF0A /* AST Tests */ = {
@@ -430,6 +440,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2432957E1F46238D00478218 /* TestComments in Resources */,
+				243295831F46238D00478218 /* TestAssignments in Resources */,
+				2432957F1F46238D00478218 /* TestIDs in Resources */,
+				243295871F46238D00478218 /* TestStatementListsWithNewline in Resources */,
+				243295811F46238D00478218 /* TestTypes in Resources */,
+				243295881F46238D00478218 /* TestVariableDeclarations in Resources */,
+				243295851F46238D00478218 /* TestFunctionDeclarations in Resources */,
+				243295841F46238D00478218 /* TestExpressions in Resources */,
+				243295861F46238D00478218 /* TestStatementLists in Resources */,
+				243295801F46238D00478218 /* TestNewlines in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +538,7 @@
 				24C65CDC1F3B838600FCFFF2 /* Extensions.swift in Sources */,
 				246BCC0B1F19567E004BE84C /* JokrLexerATN.swift in Sources */,
 				24C65CE21F3B838600FCFFF2 /* JKRAST.swift in Sources */,
+				2432957D1F46238D00478218 /* AntlrLexerTests.swift in Sources */,
 				24C65CE01F3B838600FCFFF2 /* Shell.swift in Sources */,
 				24ABAA381F3CA7EB005E22EF /* JKRUtilities.swift in Sources */,
 				24C65CD21F3B838600FCFFF2 /* AntlrToJKR.swift in Sources */,
@@ -526,17 +547,16 @@
 				24C65CE61F3B838600FCFFF2 /* JKRParser.swift in Sources */,
 				24C65CD81F3B838600FCFFF2 /* JKRJavaCompiler.swift in Sources */,
 				24C65CEC1F3B838600FCFFF2 /* JKRWriter.swift in Sources */,
+				243295821F46238D00478218 /* AntlrParserTests.swift in Sources */,
 				246BCC0D1F19567E004BE84C /* JokrListener.swift in Sources */,
 				248F36501F36610200BCAF0A /* ExtensionsTests.swift in Sources */,
 				246BCC111F19567E004BE84C /* JokrParserATN.swift in Sources */,
 				24C65CE41F3B838600FCFFF2 /* JKRDriver.swift in Sources */,
 				24C65CDE1F3B838600FCFFF2 /* FunctionListener.swift in Sources */,
 				246BCC081F19567E004BE84C /* JokrLexer.swift in Sources */,
-				246BCC371F1957B7004BE84C /* ParserTests.swift in Sources */,
 				24C65CD61F3B838600FCFFF2 /* JKRCompiler.swift in Sources */,
 				24C65CDA1F3B838600FCFFF2 /* JKRObjcCompiler.swift in Sources */,
 				246BCC061F19567E004BE84C /* JokrBaseListener.swift in Sources */,
-				246BCC311F1957B7004BE84C /* LexerTests.swift in Sources */,
 				24C65CE81F3B838600FCFFF2 /* JKRJavaTranslator.swift in Sources */,
 				24FAA0D11F369DA90053A6BC /* FunctionListenerTests.swift in Sources */,
 				24C65CEA1F3B838600FCFFF2 /* JKRObjcTranslator.swift in Sources */,
