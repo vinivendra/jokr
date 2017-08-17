@@ -13,7 +13,7 @@ struct JKRTreeProgram {
 enum JKRTreeDeclaration: Equatable {
 	case functionDeclaration(JKRTreeFunctionDeclaration)
 
-	var block: [JKRTreeStatement]? {
+	var block: [JKRTreeStatement] {
 		switch self {
 		case let .functionDeclaration(functionDeclaration):
 			return functionDeclaration.block

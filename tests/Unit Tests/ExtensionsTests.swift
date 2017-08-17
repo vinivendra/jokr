@@ -1,5 +1,7 @@
 import XCTest
 
+private class TestClass { }
+
 class ExtensionsTests: XCTestCase {
 	func testShift() {
 		let empty = Array([0].dropFirst())
