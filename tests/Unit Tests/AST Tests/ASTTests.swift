@@ -53,6 +53,30 @@ class ASTTests: XCTestCase {
 		XCTAssertEqual(types.map { $0.text }, expectedTexts)
 	}
 
+	func testInts() {
+		// WITH:
+		let ints: [JKRTreeInt] = [
+			JKRTreeInt("0"),
+			JKRTreeInt(stringLiteral: "1"),
+			JKRTreeInt(extendedGraphemeClusterLiteral: "2"),
+			JKRTreeInt(unicodeScalarLiteral: "3"),
+			"4"
+		]
+
+		let expectedTexts = ["0", "1", "2", "3", "4"]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(ints, ints.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (int, differentInt) in zip(ints, ints.shifted()) {
+			XCTAssertNotEqual(int, differentInt)
+		}
+
+		// TEST: data is initialized, stored and retrieved as expected
+		XCTAssertEqual(ints.map { $0.text }, expectedTexts)
+	}
+
 	func testParameters() {
 		// WITH:
 		let parameters: [JKRTreeParameter] = [
