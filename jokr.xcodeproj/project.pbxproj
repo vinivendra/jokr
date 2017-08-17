@@ -98,6 +98,7 @@
 		2432957A1F46238D00478218 /* TestStatementLists */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementLists; sourceTree = "<group>"; };
 		2432957B1F46238D00478218 /* TestStatementListsWithNewline */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementListsWithNewline; sourceTree = "<group>"; };
 		2432957C1F46238D00478218 /* TestVariableDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestVariableDeclarations; sourceTree = "<group>"; };
+		243295891F46250700478218 /* TestOperators */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestOperators; path = "Antlr to Jokr Tests/TestOperators"; sourceTree = "<group>"; };
 		2433CFC91F33F8600027A15F /* TestIDs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestIDs; path = "Antlr to Jokr Tests/TestIDs"; sourceTree = "<group>"; };
 		2433CFCA1F33F9750027A15F /* TestTypes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestTypes; path = "Antlr to Jokr Tests/TestTypes"; sourceTree = "<group>"; };
 		2433CFCB1F33FA310027A15F /* TestExpressions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestExpressions; path = "Antlr to Jokr Tests/TestExpressions"; sourceTree = "<group>"; };
@@ -347,6 +348,7 @@
 				2433CFCB1F33FA310027A15F /* TestExpressions */,
 				24F3F57F1F3522AE00B75C3F /* TestFunctionDeclarations */,
 				2433CFC91F33F8600027A15F /* TestIDs */,
+				243295891F46250700478218 /* TestOperators */,
 				24DC8E101F34DB5B0015A211 /* TestParameters */,
 				24F3F5811F352C4500B75C3F /* TestReturns */,
 				248F364A1F363D6800BCAF0A /* TestStatements */,

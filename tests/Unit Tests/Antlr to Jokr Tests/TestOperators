@@ -1,0 +1,2 @@
+Int bla = 2 + 3
+Int foo = 2 + foo - 2

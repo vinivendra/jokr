@@ -8,6 +8,10 @@ import Antlr4
 /// jokr grammar and then builds the corresponding jokr AST data structure.
 
 extension TerminalNode {
+	func toJKRTreeOperator() -> JKRTreeOperator {
+		return JKRTreeOperator(getText())
+	}
+
 	func toJKRTreeID() -> JKRTreeID {
 		return JKRTreeID(getText())
 	}
@@ -180,13 +184,13 @@ extension JokrParser.ExpressionContext {
 		{
 			return .parenthesized(expression.toJKRTreeExpression())
 		}
-		else if let operatorText = self.OPERATOR()?.getText(),
+		else if let op = self.OPERATOR()?.toJKRTreeOperator(),
 			let lhs = self.expression(0),
 			let rhs = self.expression(1)
 		{
 			let lhsExp = lhs.toJKRTreeExpression()
 			let rhsExp = rhs.toJKRTreeExpression()
-			return .operation(lhsExp, operatorText, rhsExp)
+			return .operation(lhsExp, op, rhsExp)
 		}
 		else if let lvalue = self.lvalue(),
 			let id = lvalue.ID()?.toJKRTreeID()

@@ -2,7 +2,8 @@
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 
-// TODO: JKRTreeOperator
+// TODO: Check if there are any other root types in the AST
+// TODO: Check if the main program still works
 struct JKRTreeProgram {
 	let statements: [JKRTreeStatement]?
 	let declarations: [JKRTreeDeclaration]?
@@ -69,7 +70,7 @@ indirect enum JKRTreeExpression: Equatable, ExpressibleByIntegerLiteral,
 	ExpressibleByStringLiteral {
 	case int(JKRTreeInt)
 	case parenthesized(JKRTreeExpression)
-	case operation(JKRTreeExpression, String, JKRTreeExpression)
+	case operation(JKRTreeExpression, JKRTreeOperator, JKRTreeExpression)
 	case lvalue(JKRTreeID)
 
 	// Equatable
@@ -157,6 +158,25 @@ ExpressibleByStringLiteral {
 	// ExpressibleByIntegerLiteral
 	public init(integerLiteral value: Int) {
 		self.expression = JKRTreeExpression(integerLiteral: value)
+	}
+}
+
+struct JKRTreeOperator: Equatable, ExpressibleByStringLiteral {
+	let text: String
+	init(_ text: String) { self.text = text }
+
+	// ExpressibleByStringLiteral
+	init(stringLiteral value: String) { self.text = value }
+	public init(extendedGraphemeClusterLiteral value: String) {
+		self.text = value
+	}
+	public init(unicodeScalarLiteral value: String) {
+		self.text = value
+	}
+
+	// Equatable
+	static func == (lhs: JKRTreeOperator, rhs: JKRTreeOperator) -> Bool {
+		return lhs.text == rhs.text
 	}
 }
 

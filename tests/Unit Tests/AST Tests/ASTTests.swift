@@ -4,7 +4,9 @@ import XCTest
 private let testFilesPath = CommandLine.arguments[1] +
 "/tests/Unit Tests/Antlr To Jokr Tests/"
 
+// TODO: Check test orders in all files
 class ASTTests: XCTestCase {
+	
 	func testIDs() {
 		// WITH:
 		let ids: [JKRTreeID] = [
@@ -73,6 +75,30 @@ class ASTTests: XCTestCase {
 
 		// TEST: data is initialized, stored and retrieved as expected
 		XCTAssertEqual(ints.map { $0.value }, expectedValues)
+	}
+
+	func testOperators() {
+		// WITH:
+		let operators: [JKRTreeOperator] = [
+			JKRTreeOperator("+"),
+			JKRTreeOperator(stringLiteral: "-"),
+			JKRTreeOperator(extendedGraphemeClusterLiteral: "/"),
+			JKRTreeOperator(unicodeScalarLiteral: "*"),
+			">>"
+		]
+
+		let expectedOperators = ["+", "-", "/", "*", ">>"]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(operators, operators.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (op, differentOp) in zip(operators, operators.shifted()) {
+			XCTAssertNotEqual(op, differentOp)
+		}
+
+		// TEST: data is initialized, stored and retrieved as expected
+		XCTAssertEqual(operators.map { $0.text }, expectedOperators)
 	}
 
 	func testParameters() {

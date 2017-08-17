@@ -69,11 +69,30 @@ class AntlrToJokrTests: XCTestCase {
 				JokrParser.AssignmentContext.self)
 				.flatMap { $0.variableDeclaration()?.TYPE()?.toJKRTreeType() }
 
-			let expectedTypess: [JKRTreeType] = ["Int", "Float", "Blah", "Int",
+			let expectedTypes: [JKRTreeType] = ["Int", "Float", "Blah", "Int",
 			                                     "Void"]
 
 			// TEST: All elements were converted successfully
-			XCTAssertEqual(types, expectedTypess)
+			XCTAssertEqual(types, expectedTypes)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testOperator() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestOperators")
+
+			let operators = tree.filter(type:
+				JokrParser.ExpressionContext.self)
+				.flatMap { $0.OPERATOR()?.toJKRTreeOperator() }
+
+			let expectedOperators: [JKRTreeOperator] = ["+", "-", "+"]
+
+			// TEST: All elements were converted successfully
+			XCTAssertEqual(operators, expectedOperators)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
