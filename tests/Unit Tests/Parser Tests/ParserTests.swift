@@ -13,18 +13,30 @@ class ParserTests: XCTestCase {
 		startChar: Int,
 		text: String)
 
-	func testStatementLists() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestStatementLists")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
+	func getProgram(
+		inFile filename: String) throws -> JokrParser.ProgramContext {
 
 		do {
+			let contents = try! String(contentsOfFile: testFilesPath + filename)
+			let inputStream = ANTLRInputStream(contents)
+			let lexer = JokrLexer(inputStream)
+			let tokens = CommonTokenStream(lexer)
 			let parser = try JokrParser(tokens)
 			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			return try parser.program()
+		}
+		catch (let error) {
+			throw error
+		}
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// MARK: - Tests
+
+	func testStatementLists() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestStatementLists")
 
 			let statementLists = tree.filter(type:
 				JokrParser.StatementListContext.self)
@@ -36,9 +48,7 @@ class ParserTests: XCTestCase {
 
 			let expectedStatements: [TokenTest] = [(1, 0, "x=0"), (2, 0, "x=1")]
 
-			XCTAssertEqual(statementLists.count, expectedStatementLists.count)
-			XCTAssertEqual(statements.count, expectedStatementLists.count)
-
+			// TEST: Parser found all expected elements
 			for (expected, actual) in
 				zip(expectedStatementLists, statementLists)
 			{
@@ -55,6 +65,9 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(statementLists.count, expectedStatementLists.count)
+			XCTAssertEqual(statements.count, expectedStatementLists.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
@@ -62,17 +75,9 @@ class ParserTests: XCTestCase {
 	}
 
 	func testStatementListsWithNewline() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestStatementListsWithNewline")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			// WITH:
+			let tree = try getProgram(inFile: "TestStatementListsWithNewline")
 
 			let statementLists = tree.filter(type:
 				JokrParser.StatementListContext.self)
@@ -86,9 +91,7 @@ class ParserTests: XCTestCase {
 			let expectedStatements: [TokenTest] =
 				[(1, 0, "x=0"), (2, 0, "x=1"), (3, 0, "x=2")]
 
-			XCTAssertEqual(statementLists.count, expectedStatementLists.count)
-			XCTAssertEqual(statements.count, expectedStatementLists.count)
-
+			// TEST: Parser found all expected elements
 			for (expected, actual) in
 				zip(expectedStatementLists, statementLists)
 			{
@@ -105,6 +108,9 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(statementLists.count, expectedStatementLists.count)
+			XCTAssertEqual(statements.count, expectedStatementLists.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
@@ -112,17 +118,9 @@ class ParserTests: XCTestCase {
 	}
 
 	func testAssignments() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestAssignments")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			// WITH:
+			let tree = try getProgram(inFile: "TestAssignments")
 
 			let assignments = tree.filter(type:
 				JokrParser.AssignmentContext.self)
@@ -132,8 +130,7 @@ class ParserTests: XCTestCase {
 				(3, 0, "Blahbaz=fooBar"), (4, 0, "fooBar=bla"),
 				(5, 0, "bla=300")]
 
-			XCTAssertEqual(assignments.count, expectedAssignments.count)
-
+			// TEST: Parser found all expected elements
 			for (expected, actual) in zip(expectedAssignments, assignments) {
 				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
 				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
@@ -141,6 +138,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(assignments.count, expectedAssignments.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
@@ -148,17 +147,9 @@ class ParserTests: XCTestCase {
 	}
 
 	func testVariableDeclarations() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestVariableDeclarations")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			// WITH:
+			let tree = try getProgram(inFile: "TestVariableDeclarations")
 
 			let declarations = tree.filter(type:
 				JokrParser.VariableDeclarationContext.self)
@@ -166,8 +157,7 @@ class ParserTests: XCTestCase {
 			let expectedDeclarations: [TokenTest] = [(1, 0, "Intbla"),
 			                                         (2, 0, "Floatfoo")]
 
-			XCTAssertEqual(declarations.count, expectedDeclarations.count)
-
+			// TEST: Parser found all expected elements
 			for (expected, actual) in zip(expectedDeclarations, declarations) {
 				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
 				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
@@ -175,6 +165,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(declarations.count, expectedDeclarations.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
@@ -182,17 +174,9 @@ class ParserTests: XCTestCase {
 	}
 
 	func testExpressions() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestExpressions")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			// WITH:
+			let tree = try getProgram(inFile: "TestExpressions")
 
 			let expressions = tree.filter(type:
 				JokrParser.ExpressionContext.self)
@@ -206,8 +190,7 @@ class ParserTests: XCTestCase {
 				(5, 15, "(5)+foo"), (5, 15, "(5)"), (5, 16, "5"),
 				(5, 21, "foo")]
 
-			XCTAssertEqual(expressions.count, expectedExpressions.count)
-
+			// TEST: Parser found all expected elements
 			for (expected, actual) in zip(expectedExpressions, expressions) {
 				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
 				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
@@ -215,6 +198,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(expressions.count, expectedExpressions.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
@@ -222,28 +207,19 @@ class ParserTests: XCTestCase {
 	}
 
 	func testFunctionDeclarations() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestFunctionDeclarations")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			// WITH:
+			let tree = try getProgram(inFile: "TestFunctionDeclarations")
 
 			let declarations = tree.filter(type:
 				JokrParser.FunctionDeclarationContext.self)
 
+			// TEST: Parser found all expected elements
 			let expectedDeclarations: [TokenTest] = [
 				(1, 0, "Intfive(){\nIntx=4\nx=5\nreturn5\n}"),
 				(7, 0,
 				 "Intnumber(Intnumber){\nresult=number\nreturnresult\n}"),
 				(12, 0, "Intsum(Inta,Intb,Intc){\nreturna+b+c\n}")]
-
-			XCTAssertEqual(declarations.count, expectedDeclarations.count)
 
 			for (expected, actual) in zip(expectedDeclarations, declarations) {
 				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
@@ -252,6 +228,8 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(declarations.count, expectedDeclarations.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
@@ -259,17 +237,9 @@ class ParserTests: XCTestCase {
 	}
 
 	func testParameterDeclaration() {
-		let contents = try! String(contentsOfFile:
-			testFilesPath + "TestFunctionDeclarations")
-
-		let inputStream = ANTLRInputStream(contents)
-		let lexer = JokrLexer(inputStream)
-		let tokens = CommonTokenStream(lexer)
-
 		do {
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+			// WITH:
+			let tree = try getProgram(inFile: "TestFunctionDeclarations")
 
 			let parameterLists = tree.filter(type:
 				JokrParser.ParameterDeclarationListContext.self)
@@ -285,9 +255,7 @@ class ParserTests: XCTestCase {
 				(7, 11, "Intnumber"), (12, 8, "Inta"), (12, 15, "Intb"),
 				(12, 22, "Intc")]
 
-			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
-			XCTAssertEqual(parameters.count, expectedParameters.count)
-
+			// TEST: Parser found all expected elements
 			for (expected, actual) in
 				zip(expectedParameterLists, parameterLists)
 			{
@@ -304,16 +272,20 @@ class ParserTests: XCTestCase {
 				XCTAssertEqual(actual.getText(), expected.text)
 			}
 
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
+			XCTAssertEqual(parameters.count, expectedParameters.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
 	}
 
-	//	for context in parameterLists {
+	// Code snippet to print all found contexts, helps when creating new tests.
+	//
+	//	for context in contexts {
 	//		print(context.getStart()!.getLine())
 	//		print(context.getStart()!.getCharPositionInLine())
 	//		print(context.getText())
 	//	}
-
 }

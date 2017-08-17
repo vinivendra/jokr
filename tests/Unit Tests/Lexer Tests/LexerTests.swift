@@ -30,6 +30,9 @@ class LexerTests: XCTestCase {
 		}
 	}
 
+	////////////////////////////////////////////////////////////////////////////
+	// MARK: - Tests
+
 	func testIDs() {
 		do {
 			// WITH:
