@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		240409421F47223800FC2AD4 /* Java Translator Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240409411F47223800FC2AD4 /* Java Translator Tests.swift */; };
+		2404094A1F47288C00FC2AD4 /* Objc Translator Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240409471F47288C00FC2AD4 /* Objc Translator Tests.swift */; };
 		2432957D1F46238D00478218 /* AntlrLexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243295701F46238D00478218 /* AntlrLexerTests.swift */; };
 		2432957E1F46238D00478218 /* TestComments in Resources */ = {isa = PBXBuildFile; fileRef = 243295711F46238D00478218 /* TestComments */; };
 		2432957F1F46238D00478218 /* TestIDs in Resources */ = {isa = PBXBuildFile; fileRef = 243295721F46238D00478218 /* TestIDs */; };
@@ -89,6 +90,9 @@
 		240409411F47223800FC2AD4 /* Java Translator Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Java Translator Tests.swift"; path = "Java Translator Tests/Java Translator Tests.swift"; sourceTree = "<group>"; };
 		240409441F47230900FC2AD4 /* TestEmpty.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestEmpty.jkr; path = "Java Translator Tests/TestEmpty.jkr"; sourceTree = "<group>"; };
 		240409451F4726FA00FC2AD4 /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestAssignments.jkr; path = "tests/Unit Tests/Java Translator Tests/TestAssignments.jkr"; sourceTree = SOURCE_ROOT; };
+		240409471F47288C00FC2AD4 /* Objc Translator Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Objc Translator Tests.swift"; sourceTree = "<group>"; };
+		240409481F47288C00FC2AD4 /* TestAssignments.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
+		240409491F47288C00FC2AD4 /* TestEmpty.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestEmpty.jkr; sourceTree = "<group>"; };
 		2432956E1F461EAA00478218 /* TestDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestDeclarations; path = "Antlr to Jokr Tests/TestDeclarations"; sourceTree = "<group>"; };
 		243295701F46238D00478218 /* AntlrLexerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntlrLexerTests.swift; sourceTree = "<group>"; };
 		243295711F46238D00478218 /* TestComments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestComments; sourceTree = "<group>"; };
@@ -182,6 +186,16 @@
 			name = "Java Translator Tests";
 			sourceTree = "<group>";
 		};
+		240409461F47288C00FC2AD4 /* ObjC Translator Tests */ = {
+			isa = PBXGroup;
+			children = (
+				240409471F47288C00FC2AD4 /* Objc Translator Tests.swift */,
+				240409481F47288C00FC2AD4 /* TestAssignments.jkr */,
+				240409491F47288C00FC2AD4 /* TestEmpty.jkr */,
+			);
+			path = "ObjC Translator Tests";
+			sourceTree = "<group>";
+		};
 		2432956F1F46238D00478218 /* Antlr Lexer Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +270,7 @@
 				246BCC211F1957B7004BE84C /* Info.plist */,
 				248F364F1F36610200BCAF0A /* ExtensionsTests.swift */,
 				24FAA0CF1F369D9A0053A6BC /* FunctionListenerTests.swift */,
+				240409461F47288C00FC2AD4 /* ObjC Translator Tests */,
 				240409431F47225700FC2AD4 /* Java Translator Tests */,
 				2432956F1F46238D00478218 /* Antlr Lexer Tests */,
 				243295751F46238D00478218 /* Antlr Parser Tests */,
@@ -555,6 +570,7 @@
 				24C65CDC1F3B838600FCFFF2 /* Extensions.swift in Sources */,
 				246BCC0B1F19567E004BE84C /* JokrLexerATN.swift in Sources */,
 				24C65CE21F3B838600FCFFF2 /* JKRAST.swift in Sources */,
+				2404094A1F47288C00FC2AD4 /* Objc Translator Tests.swift in Sources */,
 				2432957D1F46238D00478218 /* AntlrLexerTests.swift in Sources */,
 				24C65CE01F3B838600FCFFF2 /* Shell.swift in Sources */,
 				240409421F47223800FC2AD4 /* Java Translator Tests.swift in Sources */,

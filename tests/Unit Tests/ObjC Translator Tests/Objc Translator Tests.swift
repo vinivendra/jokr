@@ -9,12 +9,12 @@ private let errorMessage =
 
 ////////////////////////////////////////////////////////////////////////////////
 // swiftlint:disable line_length
-private let emptyMainContents = "public class Main {\n\tpublic static void main(String []args) {\n\t}\n}\n"
-private let assignmentMainContents = "public class Main {\n\tpublic static void main(String []args) {\n\t\tint x = 2;\n\t\tint y = x + x;\n\t\tfloat z = y - x;\n\t\ty = (z + x) - y;\n\t}\n}\n"
+private let emptyMainContents = "#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n\t@autoreleasepool {\n\t}\n\treturn 0;\n}\n"
+private let assignmentMainContents = "#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n\t@autoreleasepool {\n\t\tint x = 2;\n\t\tint y = x + x;\n\t\tfloat z = y - x;\n\t\ty = (z + x) - y;\n\t}\n\treturn 0;\n}\n"
 // swiftlint:enable line_length
 
 ////////////////////////////////////////////////////////////////////////////////
-class JavaTranslatorTests: XCTestCase {
+class ObjCTranslatorTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
 	func translate(
@@ -22,7 +22,7 @@ class JavaTranslatorTests: XCTestCase {
 		do {
 			let program = try parser.parse(file: testFilesPath + filename)
 			let writer = JKRStringWriter()
-			let translator = JKRJavaTranslator(writingWith: writer)
+			let translator = JKRObjcTranslator(writingWith: writer)
 			try translator.translate(program: program)
 			writer.prettyPrint()
 			return writer.files
@@ -41,7 +41,7 @@ class JavaTranslatorTests: XCTestCase {
 			let files = try translate(file: "TestEmpty.jkr")
 
 			// TEST: Empty main file gets created
-			XCTAssertEqual(files["Main.java"], emptyMainContents)
+			XCTAssertEqual(files["main.m"], emptyMainContents)
 
 			// TEST: No other files get created
 			XCTAssertEqual(files.count, 1)
@@ -57,7 +57,7 @@ class JavaTranslatorTests: XCTestCase {
 			let files = try translate(file: "TestAssignments.jkr")
 
 			// TEST: Empty main file gets created
-			XCTAssertEqual(files["Main.java"], assignmentMainContents)
+			XCTAssertEqual(files["main.m"], assignmentMainContents)
 
 			// TEST: No other files get created
 			XCTAssertEqual(files.count, 1)
