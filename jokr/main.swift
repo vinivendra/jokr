@@ -1,8 +1,17 @@
 import Foundation
 import Antlr4
 
-// TODO: Add tests for Java translator and ObjC translator
 // TODO: Add integration/acceptance tests for Java and ObjC
+// TODO: Close main branch
+
+// Branch - acceptance tests
+// TODO: Add function calls to add print statement to acceptance tests
+
+// Branch - declarations
+// TODO: Add class declarations
+// TODO: Integrate class declarations to output file structure
+// TODO: Add missing tests for declaration files, function declarations and
+// returns
 
 private let filePath = CommandLine.arguments[1] + "/tests/"
 
