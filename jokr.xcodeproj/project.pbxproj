@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240409421F47223800FC2AD4 /* Java Translator Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240409411F47223800FC2AD4 /* Java Translator Tests.swift */; };
 		2432957D1F46238D00478218 /* AntlrLexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243295701F46238D00478218 /* AntlrLexerTests.swift */; };
 		2432957E1F46238D00478218 /* TestComments in Resources */ = {isa = PBXBuildFile; fileRef = 243295711F46238D00478218 /* TestComments */; };
 		2432957F1F46238D00478218 /* TestIDs in Resources */ = {isa = PBXBuildFile; fileRef = 243295721F46238D00478218 /* TestIDs */; };
@@ -85,6 +86,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		240409411F47223800FC2AD4 /* Java Translator Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Java Translator Tests.swift"; path = "Java Translator Tests/Java Translator Tests.swift"; sourceTree = "<group>"; };
+		240409441F47230900FC2AD4 /* TestEmpty.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestEmpty.jkr; path = "Java Translator Tests/TestEmpty.jkr"; sourceTree = "<group>"; };
 		2432956E1F461EAA00478218 /* TestDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestDeclarations; path = "Antlr to Jokr Tests/TestDeclarations"; sourceTree = "<group>"; };
 		243295701F46238D00478218 /* AntlrLexerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntlrLexerTests.swift; sourceTree = "<group>"; };
 		243295711F46238D00478218 /* TestComments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestComments; sourceTree = "<group>"; };
@@ -169,6 +172,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		240409431F47225700FC2AD4 /* Java Translator Tests */ = {
+			isa = PBXGroup;
+			children = (
+				240409411F47223800FC2AD4 /* Java Translator Tests.swift */,
+				240409441F47230900FC2AD4 /* TestEmpty.jkr */,
+			);
+			name = "Java Translator Tests";
+			sourceTree = "<group>";
+		};
 		2432956F1F46238D00478218 /* Antlr Lexer Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +254,7 @@
 				246BCC211F1957B7004BE84C /* Info.plist */,
 				248F364F1F36610200BCAF0A /* ExtensionsTests.swift */,
 				24FAA0CF1F369D9A0053A6BC /* FunctionListenerTests.swift */,
+				240409431F47225700FC2AD4 /* Java Translator Tests */,
 				2432956F1F46238D00478218 /* Antlr Lexer Tests */,
 				243295751F46238D00478218 /* Antlr Parser Tests */,
 				24E61C401F33AC6000A2B8F5 /* Antlr To Jokr Tests */,
@@ -542,6 +555,7 @@
 				24C65CE21F3B838600FCFFF2 /* JKRAST.swift in Sources */,
 				2432957D1F46238D00478218 /* AntlrLexerTests.swift in Sources */,
 				24C65CE01F3B838600FCFFF2 /* Shell.swift in Sources */,
+				240409421F47223800FC2AD4 /* Java Translator Tests.swift in Sources */,
 				24ABAA381F3CA7EB005E22EF /* JKRUtilities.swift in Sources */,
 				24C65CD21F3B838600FCFFF2 /* AntlrToJKR.swift in Sources */,
 				248F364D1F365A6E00BCAF0A /* ASTTests.swift in Sources */,
