@@ -1,10 +1,10 @@
 import Foundation
 
 enum Shell {
+	typealias CommandResult = (output: String, status: Int32)
+
 	@discardableResult
-	static func runEnvCommand(_ command: String)
-		-> (output: String, status: Int32)
-	{
+	static func runEnvCommand(_ command: String) -> CommandResult {
 		let arguments = command.components(separatedBy: " ")
 		let pipe = Pipe()
 		let task = Process()
@@ -20,9 +20,7 @@ enum Shell {
 	}
 
 	@discardableResult
-	static func runCommand(_ command: String)
-		-> (output: String, status: Int32)
-	{
+	static func runCommand(_ command: String) -> CommandResult {
 		let pipe = Pipe()
 		let task = Process()
 		task.launchPath = "/bin/bash"
@@ -37,7 +35,7 @@ enum Shell {
 	}
 
 	@discardableResult
-	static func runBinary(_ path: String) -> (output: String, status: Int32) {
+	static func runBinary(_ path: String) -> CommandResult {
 		let pipe = Pipe()
 		let task = Process()
 		task.launchPath = path

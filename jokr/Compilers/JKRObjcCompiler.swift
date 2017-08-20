@@ -27,7 +27,7 @@ struct JKRObjcCompiler: JKRCompiler {
 	}
 
 	@discardableResult
-	func runProgram(atPath folderPath: String) -> CInt {
+	func runProgram(atPath folderPath: String) -> Shell.CommandResult {
 		log("======== Running program...")
 		let (output, status) = Shell.runBinary(folderPath + "a.out")
 
@@ -37,6 +37,6 @@ struct JKRObjcCompiler: JKRCompiler {
 
 		log("======== Program finished with status \(status)")
 
-		return status
+		return (output, status)
 	}
 }
