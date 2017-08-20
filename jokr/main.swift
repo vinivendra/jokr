@@ -1,9 +1,6 @@
 import Foundation
 import Antlr4
 
-// TODO: Add integration/acceptance tests for Java and ObjC
-// TODO: Close main branch
-
 // Branch - acceptance tests
 // TODO: Add function calls to add print statement to acceptance tests
 
