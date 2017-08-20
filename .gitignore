@@ -2,6 +2,8 @@
 # Executable files
 a.out
 *.class
+*.m
+*.java
 
 #######################
 # Macos
