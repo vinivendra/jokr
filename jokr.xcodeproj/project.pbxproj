@@ -40,8 +40,8 @@
 		24ABAA371F3CA7EB005E22EF /* JKRUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAA361F3CA7EB005E22EF /* JKRUtilities.swift */; };
 		24ABAA381F3CA7EB005E22EF /* JKRUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAA361F3CA7EB005E22EF /* JKRUtilities.swift */; };
 		24B5F5231F17B8480045FF6A /* libAntlr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A414681F0F29450075993D /* libAntlr4.dylib */; };
-		24BF551B1F49F04300D3225B /* JavaAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BF551A1F49F04300D3225B /* JavaAcceptanceTests.swift */; };
-		24BF55241F4A0C3300D3225B /* ObjCAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BF551F1F4A0C3300D3225B /* ObjCAcceptanceTests.swift */; };
+		24C037601F4A0DFD00C88FCF /* JavaAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C037551F4A0DFD00C88FCF /* JavaAcceptanceTests.swift */; };
+		24C037641F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C0375B1F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift */; };
 		24C65CD11F3B838600FCFFF2 /* AntlrToJKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C65CC01F3B838600FCFFF2 /* AntlrToJKR.swift */; };
 		24C65CD21F3B838600FCFFF2 /* AntlrToJKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C65CC01F3B838600FCFFF2 /* AntlrToJKR.swift */; };
 		24C65CD31F3B838600FCFFF2 /* JKRAntlrParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C65CC11F3B838600FCFFF2 /* JKRAntlrParser.swift */; };
@@ -135,10 +135,11 @@
 		24A414691F0F29450075993D /* libAntlr4.dylib.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = libAntlr4.dylib.dSYM; path = "antlr4-master/runtime/Swift/.build/debug/libAntlr4.dylib.dSYM"; sourceTree = "<group>"; };
 		24ABAA361F3CA7EB005E22EF /* JKRUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JKRUtilities.swift; path = ../JKRUtilities.swift; sourceTree = "<group>"; };
 		24B5F50C1F17B7E80045FF6A /* jokrUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jokrUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		24BF551A1F49F04300D3225B /* JavaAcceptanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JavaAcceptanceTests.swift; path = "Java Acceptance Tests/JavaAcceptanceTests.swift"; sourceTree = "<group>"; };
 		24BF551D1F49F30F00D3225B /* TestEmpty.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestEmpty.jkr; path = "tests/Unit Tests/Java Acceptance Tests/TestEmpty.jkr"; sourceTree = SOURCE_ROOT; };
-		24BF551F1F4A0C3300D3225B /* ObjCAcceptanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCAcceptanceTests.swift; sourceTree = "<group>"; };
-		24BF55231F4A0C3300D3225B /* TestEmpty.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestEmpty.jkr; sourceTree = "<group>"; };
+		24C037551F4A0DFD00C88FCF /* JavaAcceptanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavaAcceptanceTests.swift; sourceTree = "<group>"; };
+		24C037591F4A0DFD00C88FCF /* TestEmpty.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestEmpty.jkr; sourceTree = "<group>"; };
+		24C0375B1F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCAcceptanceTests.swift; sourceTree = "<group>"; };
+		24C0375F1F4A0DFD00C88FCF /* TestEmpty.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestEmpty.jkr; sourceTree = "<group>"; };
 		24C65CB41F3B65EE00FCFFF2 /* main.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jkr; path = tests/main.jkr; sourceTree = SOURCE_ROOT; };
 		24C65CC01F3B838600FCFFF2 /* AntlrToJKR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntlrToJKR.swift; sourceTree = "<group>"; };
 		24C65CC11F3B838600FCFFF2 /* JKRAntlrParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKRAntlrParser.swift; sourceTree = "<group>"; };
@@ -265,6 +266,7 @@
 		246BCC1F1F1957B7004BE84C /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				24C037531F4A0DFD00C88FCF /* Acceptance Tests */,
 				246BCC201F1957B7004BE84C /* Unit Tests */,
 			);
 			path = tests;
@@ -276,8 +278,6 @@
 				246BCC211F1957B7004BE84C /* Info.plist */,
 				248F364F1F36610200BCAF0A /* ExtensionsTests.swift */,
 				24FAA0CF1F369D9A0053A6BC /* FunctionListenerTests.swift */,
-				24BF551E1F4A0C3300D3225B /* ObjC Acceptance Tests */,
-				24BF551C1F49F04800D3225B /* Java Acceptance Tests */,
 				240409461F47288C00FC2AD4 /* ObjC Translator Tests */,
 				240409431F47225700FC2AD4 /* Java Translator Tests */,
 				2432956F1F46238D00478218 /* Antlr Lexer Tests */,
@@ -335,21 +335,31 @@
 			name = Antlr4;
 			sourceTree = "<group>";
 		};
-		24BF551C1F49F04800D3225B /* Java Acceptance Tests */ = {
+		24C037531F4A0DFD00C88FCF /* Acceptance Tests */ = {
 			isa = PBXGroup;
 			children = (
-				24BF551A1F49F04300D3225B /* JavaAcceptanceTests.swift */,
+				24C037541F4A0DFD00C88FCF /* Java */,
+				24C0375A1F4A0DFD00C88FCF /* ObjC */,
 			);
-			name = "Java Acceptance Tests";
+			path = "Acceptance Tests";
 			sourceTree = "<group>";
 		};
-		24BF551E1F4A0C3300D3225B /* ObjC Acceptance Tests */ = {
+		24C037541F4A0DFD00C88FCF /* Java */ = {
 			isa = PBXGroup;
 			children = (
-				24BF551F1F4A0C3300D3225B /* ObjCAcceptanceTests.swift */,
-				24BF55231F4A0C3300D3225B /* TestEmpty.jkr */,
+				24C037551F4A0DFD00C88FCF /* JavaAcceptanceTests.swift */,
+				24C037591F4A0DFD00C88FCF /* TestEmpty.jkr */,
 			);
-			path = "ObjC Acceptance Tests";
+			path = Java;
+			sourceTree = "<group>";
+		};
+		24C0375A1F4A0DFD00C88FCF /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				24C0375B1F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift */,
+				24C0375F1F4A0DFD00C88FCF /* TestEmpty.jkr */,
+			);
+			path = ObjC;
 			sourceTree = "<group>";
 		};
 		24C65CBF1F3B838600FCFFF2 /* Antlr Interface */ = {
@@ -594,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24C65CDC1F3B838600FCFFF2 /* Extensions.swift in Sources */,
+				24C037641F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift in Sources */,
 				246BCC0B1F19567E004BE84C /* JokrLexerATN.swift in Sources */,
 				24C65CE21F3B838600FCFFF2 /* JKRAST.swift in Sources */,
 				2404094A1F47288C00FC2AD4 /* Objc Translator Tests.swift in Sources */,
@@ -604,8 +615,8 @@
 				24C65CD21F3B838600FCFFF2 /* AntlrToJKR.swift in Sources */,
 				248F364D1F365A6E00BCAF0A /* ASTTests.swift in Sources */,
 				24C65CD41F3B838600FCFFF2 /* JKRAntlrParser.swift in Sources */,
+				24C037601F4A0DFD00C88FCF /* JavaAcceptanceTests.swift in Sources */,
 				24C65CE61F3B838600FCFFF2 /* JKRParser.swift in Sources */,
-				24BF55241F4A0C3300D3225B /* ObjCAcceptanceTests.swift in Sources */,
 				24C65CD81F3B838600FCFFF2 /* JKRJavaCompiler.swift in Sources */,
 				24C65CEC1F3B838600FCFFF2 /* JKRWriter.swift in Sources */,
 				243295821F46238D00478218 /* AntlrParserTests.swift in Sources */,
@@ -624,7 +635,6 @@
 				246BCC0F1F19567E004BE84C /* JokrParser.swift in Sources */,
 				24E61C3F1F33AC5200A2B8F5 /* AntlrToJokrTests.swift in Sources */,
 				24C65CEF1F3B84B400FCFFF2 /* JKRTranslator.swift in Sources */,
-				24BF551B1F49F04300D3225B /* JavaAcceptanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
