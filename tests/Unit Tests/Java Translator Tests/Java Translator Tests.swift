@@ -1,4 +1,3 @@
-import Antlr4
 import XCTest
 
 private let testFilesPath = CommandLine.arguments[1] +

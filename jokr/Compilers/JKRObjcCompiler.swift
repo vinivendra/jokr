@@ -9,7 +9,7 @@ struct JKRObjcCompiler: JKRCompiler {
 	func compileFiles(atPath folderPath: String) throws -> CInt {
 		log("======== Compiling Obj-C...")
 		let (output, status) =
-			Shell.runCommand("clang -framework Foundation \(folderPath)main.m -o \(folderPath)a.out")
+			Shell.runCommand("clang -framework Foundation \"\(folderPath)main.m\" -o \"\(folderPath)a.out\"")
 		// swiftlint:disable:previous line_length
 		if output != "" {
 			log(output)
@@ -29,7 +29,7 @@ struct JKRObjcCompiler: JKRCompiler {
 	@discardableResult
 	func runProgram(atPath folderPath: String) -> Shell.CommandResult {
 		log("======== Running program...")
-		let (output, status) = Shell.runBinary(folderPath + "a.out")
+		let (output, status) = Shell.runBinary("\(folderPath)a.out")
 
 		if output != "" {
 			log(output)

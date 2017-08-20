@@ -1,15 +1,15 @@
 import XCTest
 
 private let testFilesPath = CommandLine.arguments[1] +
-	"/tests/Unit Tests/Java Acceptance Tests/"
+"/tests/Unit Tests/ObjC Acceptance Tests/"
 
 private let outputDirectory = CommandLine.arguments[1] +
-	"/tests/Unit Tests/Java Acceptance Tests/Output/"
+"/tests/Unit Tests/ObjC Acceptance Tests/Output/"
 
 private let errorMessage =
-	"Transpiler failed during test.\nError: "
+"Transpiler failed during test.\nError: "
 
-class JavaAcceptanceTests: XCTestCase {
+class ObjCAcceptanceTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
 	func transpileAndRun(
@@ -17,9 +17,9 @@ class JavaAcceptanceTests: XCTestCase {
 		do {
 			let program = try parser.parse(file: testFilesPath + filename)
 			let writer = JKRFileWriter(outputDirectory: outputDirectory)
-			let translator = JKRJavaTranslator(writingWith: writer)
+			let translator = JKRObjcTranslator(writingWith: writer)
 			try translator.translate(program: program)
-			let compiler = JKRJavaCompiler()
+			let compiler = JKRObjcCompiler()
 			try compiler.compileFiles(atPath: outputDirectory)
 			return compiler.runProgram(atPath: outputDirectory)
 		}
