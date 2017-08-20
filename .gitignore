@@ -1,7 +1,16 @@
-# Xcode
+#######################
+# Executable files
+a.out
+*.class
+*.m
+*.java
 
-## Macos
+#######################
+# Macos
 .DS_Store
+
+#######################
+# Xcode
 
 ## Build generated
 DerivedData/
@@ -15,7 +24,10 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+
+# Substitute xcuserdata for individual files
 *.xcuserstate
+*.xcbkptlist
 
 ## Other
 *.moved-aside

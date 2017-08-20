@@ -1,20 +1,28 @@
 import Foundation
 import Antlr4
 
+// Branch - acceptance tests
+// TODO: Add function calls to add print statement to acceptance tests
+
+// Branch - declarations
+// TODO: Add class declarations
+// TODO: Integrate class declarations to output file structure
+// TODO: Add missing tests for declaration files, function declarations and
+// returns
+
+private let filePath = CommandLine.arguments[1] + "/tests/"
+
 do {
-	print("Parsing...")
-	let char = ANTLRInputStream("x = 2")
-	let lexer = JokrLexer(char)
-	let tokens = CommonTokenStream(lexer)
-	let parser = try JokrParser(tokens)
-	parser.setBuildParseTree(true)
-	let tree = try parser.program()
-	let listener = ObjcCompilerListener()
-	try ParseTreeWalker.DEFAULT.walk(listener, tree)
+	let driver = JKRDriver(folderPath: filePath,
+	                       parser: JKRAntlrParser(),
+	                       language: .objectiveC)
+
+	try driver.transpile()
+	driver.run()
 
 	print("Done!")
-	print(listener.contents)
-} catch (let error) {
+}
+catch (let error) {
 	print("Failed :(")
 	print(error)
 }
