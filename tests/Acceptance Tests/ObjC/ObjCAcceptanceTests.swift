@@ -30,9 +30,22 @@ class ObjCAcceptanceTests: XCTestCase {
 
 	func testEmpty() {
 		do {
-			let (output, status) = try transpileAndRun(file: "TestEmpty.jkr")
-			XCTAssertEqual(status, 0)
-			XCTAssertEqual(output, "")
+			let result = try transpileAndRun(file: "TestEmpty.jkr")
+			XCTAssertEqual(result.status, 0)
+			XCTAssertEqual(result.output, "")
+			XCTAssertEqual(result.error, "")
+		}
+		catch (let error) {
+			XCTFail(errorMessage + "\(error)")
+		}
+	}
+
+	func testFunctionCalls() {
+		do {
+			let result = try transpileAndRun(file: "TestFunctionCalls.jkr")
+			XCTAssertEqual(result.status, 0)
+			XCTAssertEqual(result.output, "")
+			XCTAssert(result.error.hasSuffix("] Hello jokr!\n"))
 		}
 		catch (let error) {
 			XCTFail(errorMessage + "\(error)")

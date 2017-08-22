@@ -99,6 +99,8 @@
 		24171CBD1F4CAE62002C136B /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
 		24171CBE1F4CAE6C002C136B /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestAssignments.jkr; path = "Java Translator Tests/TestAssignments.jkr"; sourceTree = "<group>"; };
 		24171CBF1F4CAEE0002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestFunctionCalls.jkr; path = "Java Translator Tests/TestFunctionCalls.jkr"; sourceTree = "<group>"; };
+		24171CC01F4CAF9B002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
+		24171CC11F4CAFBA002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
 		2432956E1F461EAA00478218 /* TestDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestDeclarations; path = "Antlr to Jokr Tests/TestDeclarations"; sourceTree = "<group>"; };
 		243295701F46238D00478218 /* AntlrLexerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntlrLexerTests.swift; sourceTree = "<group>"; };
 		243295711F46238D00478218 /* TestComments */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestComments; sourceTree = "<group>"; };
@@ -291,8 +293,8 @@
 				243295751F46238D00478218 /* Antlr Parser Tests */,
 				24E61C401F33AC6000A2B8F5 /* Antlr To Jokr Tests */,
 				248F364E1F365A7800BCAF0A /* AST Tests */,
-				240409461F47288C00FC2AD4 /* ObjC Translator Tests */,
 				240409431F47225700FC2AD4 /* Java Translator Tests */,
+				240409461F47288C00FC2AD4 /* ObjC Translator Tests */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -358,6 +360,7 @@
 			children = (
 				24C037551F4A0DFD00C88FCF /* JavaAcceptanceTests.swift */,
 				24C037591F4A0DFD00C88FCF /* TestEmpty.jkr */,
+				24171CC01F4CAF9B002C136B /* TestFunctionCalls.jkr */,
 			);
 			path = Java;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 			children = (
 				24C0375B1F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift */,
 				24C0375F1F4A0DFD00C88FCF /* TestEmpty.jkr */,
+				24171CC11F4CAFBA002C136B /* TestFunctionCalls.jkr */,
 			);
 			path = ObjC;
 			sourceTree = "<group>";

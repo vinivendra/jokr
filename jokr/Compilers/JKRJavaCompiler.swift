@@ -8,18 +8,18 @@ struct JKRJavaCompiler: JKRCompiler {
 	@discardableResult
 	func compileFiles(atPath folderPath: String) throws -> CInt {
 		log("======== Compiling Java...")
-		let (output, status) = Shell.runCommand(
-			"javac \"\(folderPath)Main.java\"")
-		if output != "" {
-			log(output)
+		let result = Shell.runCommand("javac \"\(folderPath)Main.java\"")
+
+		if result.output != "" {
+			log(result.output)
 		}
 
-		if status == 0 {
+		if result.status == 0 {
 			log("======== Compilation succeeded!")
 		}
 		else {
-			log("======== Compilation failed with status \(status)")
-			throw JKRError.compilation(status)
+			log("======== Compilation failed with status \(result.status)")
+			throw JKRError.compilation(result.status)
 		}
 
 		return 0
@@ -28,16 +28,15 @@ struct JKRJavaCompiler: JKRCompiler {
 	@discardableResult
 	func runProgram(atPath folderPath: String) -> Shell.CommandResult {
 		log("======== Running program...")
-		let (output, status) = Shell.runCommand(
-			"cd \"\(folderPath)\" ;java -cp . Main ;")
+		let result = Shell.runCommand("cd \"\(folderPath)\" ;java -cp . Main ;")
 		// swiftlint:disable:previous line_length
 
-		if output != "" {
-			log(output)
+		if result.output != "" {
+			log(result.output)
 		}
 
-		log("======== Program finished with status \(status)")
+		log("======== Program finished with status \(result.status)")
 
-		return (output, status)
+		return result
 	}
 }
