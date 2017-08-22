@@ -75,10 +75,10 @@ class JKRJavaTranslator: JKRTranslator {
 		switch statement {
 		case let .assignment(assignment):
 			return translate(assignment)
+		case let .functionCall(functionCall):
+			return translate(functionCall)
 		case let .returnStm(returnStm):
 			return translate(returnStm)
-//		case let .functionDeclaration(functionDeclaration):
-//			return translateHeader(functionDeclaration)
 		}
 	}
 
@@ -94,6 +94,11 @@ class JKRJavaTranslator: JKRTranslator {
 			let expressionText = translate(expression)
 			return "\(idText) = \(expressionText);\n"
 		}
+	}
+
+	private func translate(
+		_ functionCall: JKRTreeFunctionCall) -> String {
+		return "\(functionCall.id)();"
 	}
 
 	private func translateHeader(

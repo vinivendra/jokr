@@ -9,6 +9,7 @@ struct JKRTreeProgram {
 
 enum JKRTreeStatement: Equatable {
 	case assignment(JKRTreeAssignment)
+	case functionCall(JKRTreeFunctionCall)
 	case returnStm(JKRTreeReturn)
 
 	// Equatable
@@ -17,6 +18,9 @@ enum JKRTreeStatement: Equatable {
 		case let (.assignment(assignment1),
 		          .assignment(assignment2)):
 			return assignment1 == assignment2
+		case let (.functionCall(functionCall1),
+		          .functionCall(functionCall2)):
+			return functionCall1 == functionCall2
 		case let (.returnStm(returnStm1),
 		          .returnStm(returnStm2)):
 			return returnStm1 == returnStm2

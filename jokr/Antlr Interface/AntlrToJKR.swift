@@ -70,6 +70,9 @@ extension JokrParser.StatementContext {
 		if let assignment = assignment() {
 			return .assignment(assignment.toJKRTreeAssignment())
 		}
+		else if let functionCall = functionCall() {
+			return .functionCall(functionCall.toJKRTreeFunctionCall())
+		}
 		else if let returnStatement = returnStatement() {
 			return .returnStm(returnStatement.toJKRTreeReturn())
 		}
@@ -154,8 +157,6 @@ extension JokrParser.AssignmentContext {
 	}
 }
 
-// TODO: Add JKRTreeFunctionCall to AST and its tests
-// TODO: Add toJKRTreeFunctionCall here
 // TODO: Add toJKRTreeFunctionCall tests
 extension JokrParser.FunctionCallContext {
 	func toJKRTreeFunctionCall() -> JKRTreeFunctionCall {
