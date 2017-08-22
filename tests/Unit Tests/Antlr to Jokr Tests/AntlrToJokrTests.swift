@@ -93,6 +93,7 @@ class AntlrToJokrTests: XCTestCase {
 			let expectedStatements: [JKRTreeStatement] = [
 				.assignment(.declaration("Int", "x", 0)),
 				.assignment(.declaration("Int", "y", 0)),
+				.functionCall(JKRTreeFunctionCall(id: "f")),
 				.returnStm(1)
 			]
 

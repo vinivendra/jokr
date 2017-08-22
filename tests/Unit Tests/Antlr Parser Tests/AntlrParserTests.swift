@@ -43,10 +43,15 @@ class AntlrParserTests: XCTestCase {
 
 			let statements = tree.filter(type: JokrParser.StatementContext.self)
 
-			let expectedStatementLists: [TokenTest] = [(1, 0, "x=0\nx=1"),
-			                                           (1, 0, "x=0")]
+			let expectedStatementLists: [TokenTest] = [
+				(1, 0, "x=0\nx=1\nf()"),
+				(1, 0, "x=0\nx=1"),
+				(1, 0, "x=0")]
 
-			let expectedStatements: [TokenTest] = [(1, 0, "x=0"), (2, 0, "x=1")]
+			let expectedStatements: [TokenTest] = [
+				(1, 0, "x=0"),
+				(2, 0, "x=1"),
+				(3, 0, "f()")]
 
 			// TEST: Parser found all expected elements
 			for (expected, actual) in
@@ -85,11 +90,11 @@ class AntlrParserTests: XCTestCase {
 			let statements = tree.filter(type: JokrParser.StatementContext.self)
 
 			let expectedStatementLists: [TokenTest] = [
-				(1, 0, "x=0\nx=1\nx=2"), (1, 0, "x=0\nx=1"),
-				(1, 0, "x=0")]
+				(1, 0, "x=0\nx=1\nx=2\nf()"), (1, 0, "x=0\nx=1\nx=2"),
+				(1, 0, "x=0\nx=1"), (1, 0, "x=0")]
 
 			let expectedStatements: [TokenTest] =
-				[(1, 0, "x=0"), (2, 0, "x=1"), (3, 0, "x=2")]
+				[(1, 0, "x=0"), (2, 0, "x=1"), (3, 0, "x=2"), (4, 0, "f()")]
 
 			// TEST: Parser found all expected elements
 			for (expected, actual) in
