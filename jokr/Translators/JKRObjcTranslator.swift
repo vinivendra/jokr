@@ -102,7 +102,7 @@ class JKRObjcTranslator: JKRTranslator {
 
 	private func translate(
 		_ functionCall: JKRTreeFunctionCall) -> String {
-		return "\(functionCall.id)();"
+		return "\(string(for: functionCall.id))();\n"
 	}
 
 	private func translateHeader(
