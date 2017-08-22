@@ -100,8 +100,11 @@ class JKRObjcTranslator: JKRTranslator {
 		}
 	}
 
-	private func translate(
-		_ functionCall: JKRTreeFunctionCall) -> String {
+	private func translate(_ functionCall: JKRTreeFunctionCall) -> String {
+		if functionCall.id == "print" {
+			return "NSLog(@\"Hello jokr!\");\n"
+		}
+
 		return "\(string(for: functionCall.id))();\n"
 	}
 

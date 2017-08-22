@@ -96,9 +96,12 @@ class JKRJavaTranslator: JKRTranslator {
 		}
 	}
 
-	private func translate(
-		_ functionCall: JKRTreeFunctionCall) -> String {
-		return "\(functionCall.id)();"
+	private func translate(_ functionCall: JKRTreeFunctionCall) -> String {
+		if functionCall.id == "print" {
+			return "System.out.println(\"Hello jokr!\");\n"
+		}
+
+		return "\(string(for: functionCall.id))();\n"
 	}
 
 	private func translateHeader(
