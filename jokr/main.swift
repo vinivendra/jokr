@@ -2,7 +2,7 @@ import Foundation
 import Antlr4
 
 // Branch - acceptance tests
-// TODO: Add function calls to add print statement to acceptance tests
+// TODO: Add parameters to function calls.
 
 // Branch - declarations
 // TODO: Add class declarations

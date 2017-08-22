@@ -1,8 +1,6 @@
 // Define a grammar called Hello
 grammar Jokr;
 
-// TODO: Change test orders to reflect rule order
-
 ////////////////////////////////////////////////////////////////////////////////
 // Top level
 

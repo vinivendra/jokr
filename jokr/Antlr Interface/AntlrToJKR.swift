@@ -157,7 +157,6 @@ extension JokrParser.AssignmentContext {
 	}
 }
 
-// TODO: Add toJKRTreeFunctionCall tests
 extension JokrParser.FunctionCallContext {
 	func toJKRTreeFunctionCall() -> JKRTreeFunctionCall {
 		if let id = self.ID()?.toJKRTreeID() {
