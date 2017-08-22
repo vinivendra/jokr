@@ -33,6 +33,90 @@ class AntlrParserTests: XCTestCase {
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: - Tests
 
+	func testStatementLists() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestStatementLists")
+
+			let statementLists = tree.filter(type:
+				JokrParser.StatementListContext.self)
+
+			let statements = tree.filter(type: JokrParser.StatementContext.self)
+
+			let expectedStatementLists: [TokenTest] = [(1, 0, "x=0\nx=1"),
+			                                           (1, 0, "x=0")]
+
+			let expectedStatements: [TokenTest] = [(1, 0, "x=0"), (2, 0, "x=1")]
+
+			// TEST: Parser found all expected elements
+			for (expected, actual) in
+				zip(expectedStatementLists, statementLists)
+			{
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			for (expected, actual) in zip(expectedStatements, statements) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(statementLists.count, expectedStatementLists.count)
+			XCTAssertEqual(statements.count, expectedStatementLists.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testStatementListsWithNewline() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestStatementListsWithNewline")
+
+			let statementLists = tree.filter(type:
+				JokrParser.StatementListContext.self)
+
+			let statements = tree.filter(type: JokrParser.StatementContext.self)
+
+			let expectedStatementLists: [TokenTest] = [
+				(1, 0, "x=0\nx=1\nx=2"), (1, 0, "x=0\nx=1"),
+				(1, 0, "x=0")]
+
+			let expectedStatements: [TokenTest] =
+				[(1, 0, "x=0"), (2, 0, "x=1"), (3, 0, "x=2")]
+
+			// TEST: Parser found all expected elements
+			for (expected, actual) in
+				zip(expectedStatementLists, statementLists)
+			{
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			for (expected, actual) in zip(expectedStatements, statements) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(statementLists.count, expectedStatementLists.count)
+			XCTAssertEqual(statements.count, expectedStatementLists.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	func testExpressions() {
 		do {
 			// WITH:
@@ -146,90 +230,6 @@ class AntlrParserTests: XCTestCase {
 
 			// TEST: Parser didn't find any unexpected elements of this type
 			XCTAssertEqual(functionCalls.count, expectedFunctionCalls.count)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testStatementLists() {
-		do {
-			// WITH:
-			let tree = try getProgram(inFile: "TestStatementLists")
-
-			let statementLists = tree.filter(type:
-				JokrParser.StatementListContext.self)
-
-			let statements = tree.filter(type: JokrParser.StatementContext.self)
-
-			let expectedStatementLists: [TokenTest] = [(1, 0, "x=0\nx=1"),
-			                                           (1, 0, "x=0")]
-
-			let expectedStatements: [TokenTest] = [(1, 0, "x=0"), (2, 0, "x=1")]
-
-			// TEST: Parser found all expected elements
-			for (expected, actual) in
-				zip(expectedStatementLists, statementLists)
-			{
-				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
-				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
-				               expected.startChar)
-				XCTAssertEqual(actual.getText(), expected.text)
-			}
-
-			for (expected, actual) in zip(expectedStatements, statements) {
-				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
-				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
-				               expected.startChar)
-				XCTAssertEqual(actual.getText(), expected.text)
-			}
-
-			// TEST: Parser didn't find any unexpected elements of this type
-			XCTAssertEqual(statementLists.count, expectedStatementLists.count)
-			XCTAssertEqual(statements.count, expectedStatementLists.count)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testStatementListsWithNewline() {
-		do {
-			// WITH:
-			let tree = try getProgram(inFile: "TestStatementListsWithNewline")
-
-			let statementLists = tree.filter(type:
-				JokrParser.StatementListContext.self)
-
-			let statements = tree.filter(type: JokrParser.StatementContext.self)
-
-			let expectedStatementLists: [TokenTest] = [
-				(1, 0, "x=0\nx=1\nx=2"), (1, 0, "x=0\nx=1"),
-				(1, 0, "x=0")]
-
-			let expectedStatements: [TokenTest] =
-				[(1, 0, "x=0"), (2, 0, "x=1"), (3, 0, "x=2")]
-
-			// TEST: Parser found all expected elements
-			for (expected, actual) in
-				zip(expectedStatementLists, statementLists)
-			{
-				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
-				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
-				               expected.startChar)
-				XCTAssertEqual(actual.getText(), expected.text)
-			}
-
-			for (expected, actual) in zip(expectedStatements, statements) {
-				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
-				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
-				               expected.startChar)
-				XCTAssertEqual(actual.getText(), expected.text)
-			}
-
-			// TEST: Parser didn't find any unexpected elements of this type
-			XCTAssertEqual(statementLists.count, expectedStatementLists.count)
-			XCTAssertEqual(statements.count, expectedStatementLists.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")

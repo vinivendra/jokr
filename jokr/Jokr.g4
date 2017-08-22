@@ -63,6 +63,14 @@ returnStatement:
 ////////////////////////////////////////////////////////////////////////////////
 // Declarations
 
+parameterDeclarationList:
+	// empty
+	| parameterDeclaration
+	| parameterDeclarationList COMMA parameterDeclaration;
+
+parameterDeclaration:
+	TYPE ID;
+
 functionDeclaration:
 	functionDeclarationHeader functionDeclarationParameters block;
 
@@ -71,14 +79,6 @@ functionDeclarationHeader:
 
 functionDeclarationParameters:
 	LPAREN parameterDeclarationList RPAREN;
-
-parameterDeclarationList:
-	// empty
-	| parameterDeclaration
-	| parameterDeclarationList COMMA parameterDeclaration;
-
-parameterDeclaration:
-	TYPE ID;
 
 ///////////////////////////////////////////////////////
 BLOCK_COMMENT : '/*' (BLOCK_COMMENT|.)*? '*/' -> channel(HIDDEN);

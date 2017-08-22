@@ -151,6 +151,30 @@ public protocol JokrListener: ParseTreeListener {
 	 */
 	func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
 	/**
+	 * Enter a parse tree produced by {@link JokrParser#parameterDeclarationList}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#parameterDeclarationList}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext)
+	/**
+	 * Enter a parse tree produced by {@link JokrParser#parameterDeclaration}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#parameterDeclaration}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext)
+	/**
 	 * Enter a parse tree produced by {@link JokrParser#functionDeclaration}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -186,28 +210,4 @@ public protocol JokrListener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitFunctionDeclarationParameters(_ ctx: JokrParser.FunctionDeclarationParametersContext)
-	/**
-	 * Enter a parse tree produced by {@link JokrParser#parameterDeclarationList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext)
-	/**
-	 * Exit a parse tree produced by {@link JokrParser#parameterDeclarationList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext)
-	/**
-	 * Enter a parse tree produced by {@link JokrParser#parameterDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext)
-	/**
-	 * Exit a parse tree produced by {@link JokrParser#parameterDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext)
 }
