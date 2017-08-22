@@ -187,7 +187,6 @@ class ASTTests: XCTestCase {
 		}
 	}
 
-
 	func testParameters() {
 		// WITH:
 		let parameters: [JKRTreeParameter] = [

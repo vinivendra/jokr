@@ -71,7 +71,7 @@ extension JokrParser.StatementContext {
 			return .assignment(assignment.toJKRTreeAssignment())
 		}
 		else if let returnStatement = returnStatement() {
-			return .returnStm(returnStatement.getJKRTreeReturn())
+			return .returnStm(returnStatement.toJKRTreeReturn())
 		}
 
 		fatalError("Failed to transpile parameter")
@@ -154,8 +154,21 @@ extension JokrParser.AssignmentContext {
 	}
 }
 
+// TODO: Add JKRTreeFunctionCall to AST and its tests
+// TODO: Add toJKRTreeFunctionCall here
+// TODO: Add toJKRTreeFunctionCall tests
+extension JokrParser.FunctionCallContext {
+	func toJKRTreeFunctionCall() -> JKRTreeFunctionCall {
+		if let id = self.ID()?.toJKRTreeID() {
+			return JKRTreeFunctionCall(id: id)
+		}
+
+		fatalError("Failed to transpile function call")
+	}
+}
+
 extension JokrParser.ReturnStatementContext {
-	func getJKRTreeReturn() -> JKRTreeReturn {
+	func toJKRTreeReturn() -> JKRTreeReturn {
 		if let expression = self.expression()?.toJKRTreeExpression() {
 			return JKRTreeReturn(expression)
 		}

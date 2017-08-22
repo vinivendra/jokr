@@ -7,25 +7,6 @@ struct JKRTreeProgram {
 	let declarations: [JKRTreeDeclaration]?
 }
 
-enum JKRTreeDeclaration: Equatable {
-	case functionDeclaration(JKRTreeFunctionDeclaration)
-
-	var block: [JKRTreeStatement] {
-		switch self {
-		case let .functionDeclaration(functionDeclaration):
-			return functionDeclaration.block
-		}
-	}
-
-	static func == (lhs: JKRTreeDeclaration, rhs: JKRTreeDeclaration) -> Bool {
-		switch (lhs, rhs) {
-		case let (.functionDeclaration(functionDeclaration1),
-		          .functionDeclaration(functionDeclaration2)):
-			return functionDeclaration1 == functionDeclaration2
-		}
-	}
-}
-
 enum JKRTreeStatement: Equatable {
 	case assignment(JKRTreeAssignment)
 	case returnStm(JKRTreeReturn)
@@ -45,27 +26,27 @@ enum JKRTreeStatement: Equatable {
 	}
 }
 
-enum JKRTreeAssignment: Equatable {
-	case declaration(JKRTreeType, JKRTreeID, JKRTreeExpression)
-	case assignment(JKRTreeID, JKRTreeExpression)
+enum JKRTreeDeclaration: Equatable {
+	case functionDeclaration(JKRTreeFunctionDeclaration)
 
-	// Equatable
-	static func == (lhs: JKRTreeAssignment, rhs: JKRTreeAssignment) -> Bool {
+	var block: [JKRTreeStatement] {
+		switch self {
+		case let .functionDeclaration(functionDeclaration):
+			return functionDeclaration.block
+		}
+	}
+
+	static func == (lhs: JKRTreeDeclaration, rhs: JKRTreeDeclaration) -> Bool {
 		switch (lhs, rhs) {
-		case let (.declaration(type1, id1, exp1),
-		          .declaration(type2, id2, exp2)):
-			return type1 == type2 && id1 == id2 && exp1 == exp2
-		case let (.assignment(id1, exp1),
-		          .assignment(id2, exp2)):
-			return id1 == id2 && exp1 == exp2
-		default:
-			return false
+		case let (.functionDeclaration(functionDeclaration1),
+		          .functionDeclaration(functionDeclaration2)):
+			return functionDeclaration1 == functionDeclaration2
 		}
 	}
 }
 
 indirect enum JKRTreeExpression: Equatable, ExpressibleByIntegerLiteral,
-	ExpressibleByStringLiteral {
+ExpressibleByStringLiteral {
 	case int(JKRTreeInt)
 	case parenthesized(JKRTreeExpression)
 	case operation(JKRTreeExpression, JKRTreeOperator, JKRTreeExpression)
@@ -106,28 +87,32 @@ indirect enum JKRTreeExpression: Equatable, ExpressibleByIntegerLiteral,
 	}
 }
 
-struct JKRTreeFunctionDeclaration: Equatable {
-	let type: JKRTreeType
-	let id: JKRTreeID
-	let parameters: [JKRTreeParameter]
-	let block: [JKRTreeStatement]
+enum JKRTreeAssignment: Equatable {
+	case declaration(JKRTreeType, JKRTreeID, JKRTreeExpression)
+	case assignment(JKRTreeID, JKRTreeExpression)
 
 	// Equatable
-	static func == (lhs: JKRTreeFunctionDeclaration,
-	                rhs: JKRTreeFunctionDeclaration) -> Bool
-	{
-		return lhs.type == rhs.type && lhs.id == rhs.id &&
-			lhs.parameters == rhs.parameters && lhs.block == rhs.block
+	static func == (lhs: JKRTreeAssignment, rhs: JKRTreeAssignment) -> Bool {
+		switch (lhs, rhs) {
+		case let (.declaration(type1, id1, exp1),
+		          .declaration(type2, id2, exp2)):
+			return type1 == type2 && id1 == id2 && exp1 == exp2
+		case let (.assignment(id1, exp1),
+		          .assignment(id2, exp2)):
+			return id1 == id2 && exp1 == exp2
+		default:
+			return false
+		}
 	}
 }
 
-struct JKRTreeParameter: Equatable {
-	let type: JKRTreeType
+struct JKRTreeFunctionCall: Equatable {
 	let id: JKRTreeID
 
 	// Equatable
-	static func == (lhs: JKRTreeParameter, rhs: JKRTreeParameter) -> Bool {
-		return lhs.type == rhs.type && lhs.id == rhs.id
+	static func == (lhs: JKRTreeFunctionCall,
+	                rhs: JKRTreeFunctionCall) -> Bool {
+		return lhs.id == rhs.id
 	}
 }
 
@@ -156,6 +141,31 @@ ExpressibleByStringLiteral {
 	// ExpressibleByIntegerLiteral
 	public init(integerLiteral value: Int) {
 		self.expression = JKRTreeExpression(integerLiteral: value)
+	}
+}
+
+struct JKRTreeParameter: Equatable {
+	let type: JKRTreeType
+	let id: JKRTreeID
+
+	// Equatable
+	static func == (lhs: JKRTreeParameter, rhs: JKRTreeParameter) -> Bool {
+		return lhs.type == rhs.type && lhs.id == rhs.id
+	}
+}
+
+struct JKRTreeFunctionDeclaration: Equatable {
+	let type: JKRTreeType
+	let id: JKRTreeID
+	let parameters: [JKRTreeParameter]
+	let block: [JKRTreeStatement]
+
+	// Equatable
+	static func == (lhs: JKRTreeFunctionDeclaration,
+	                rhs: JKRTreeFunctionDeclaration) -> Bool
+	{
+		return lhs.type == rhs.type && lhs.id == rhs.id &&
+			lhs.parameters == rhs.parameters && lhs.block == rhs.block
 	}
 }
 
