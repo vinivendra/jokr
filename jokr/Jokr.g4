@@ -1,6 +1,11 @@
 // Define a grammar called Hello
 grammar Jokr;
 
+// TODO: Change test orders to reflect rule order
+
+////////////////////////////////////////////////////////////////////////////////
+// Top level
+
 program:
 	// empty
 	| statementList
@@ -14,6 +19,7 @@ statementList:
 
 statement:
 	assignment
+	| functionCall
 	| returnStatement;
 
 declarationList:
@@ -23,9 +29,39 @@ declarationList:
 declaration:
 	functionDeclaration;
 
+////////////////////////////////////////////////////////////////////////////////
+// Building blocks
+
+block:
+	LBRACE NEW_LINE statementList NEW_LINE RBRACE;
+
+lvalue:
+	ID;
+
+expression:
+	INT
+	| LPAREN expression RPAREN
+	| expression OPERATOR expression
+	| lvalue;
+
+////////////////////////////////////////////////////////////////////////////////
+// Statements
+
 assignment:
 	variableDeclaration ASSIGN expression
 	| lvalue ASSIGN expression;
+
+variableDeclaration:
+	TYPE ID;
+
+functionCall:
+	ID LPAREN RPAREN;
+
+returnStatement:
+	RETURN expression;
+
+////////////////////////////////////////////////////////////////////////////////
+// Declarations
 
 functionDeclaration:
 	functionDeclarationHeader functionDeclarationParameters block;
@@ -43,24 +79,6 @@ parameterDeclarationList:
 
 parameterDeclaration:
 	TYPE ID;
-
-block:
-	LBRACE NEW_LINE statementList NEW_LINE RBRACE;
-
-expression:
-	INT
-	| LPAREN expression RPAREN
-	| expression OPERATOR expression
-	| lvalue;
-
-returnStatement:
-	RETURN expression;
-
-variableDeclaration:
-	TYPE ID;
-
-lvalue:
-	ID;
 
 ///////////////////////////////////////////////////////
 BLOCK_COMMENT : '/*' (BLOCK_COMMENT|.)*? '*/' -> channel(HIDDEN);

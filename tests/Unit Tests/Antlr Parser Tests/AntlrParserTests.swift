@@ -122,6 +122,36 @@ class AntlrParserTests: XCTestCase {
 		}
 	}
 
+	func testFunctionCalls() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestFunctionCalls")
+
+			let functionCalls = tree.filter(type:
+				JokrParser.FunctionCallContext.self)
+
+			let expectedFunctionCalls: [TokenTest] = [
+				(1, 0, "print()"),
+				(2, 0, "f()"),
+				(3, 0, "someFunctionName()")
+			]
+
+			// TEST: Parser found all expected elements
+			for (expected, actual) in zip(expectedFunctionCalls, functionCalls) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(functionCalls.count, expectedFunctionCalls.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	func testStatementLists() {
 		do {
 			// WITH:

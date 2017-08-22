@@ -80,6 +80,45 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	open func enterBlock(_ ctx: JokrParser.BlockContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitBlock(_ ctx: JokrParser.BlockContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterLvalue(_ ctx: JokrParser.LvalueContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitLvalue(_ ctx: JokrParser.LvalueContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterExpression(_ ctx: JokrParser.ExpressionContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitExpression(_ ctx: JokrParser.ExpressionContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	open func enterAssignment(_ ctx: JokrParser.AssignmentContext) { }
 	/**
 	 * {@inheritDoc}
@@ -87,6 +126,45 @@ open class JokrBaseListener: JokrListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitAssignment(_ ctx: JokrParser.AssignmentContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterVariableDeclaration(_ ctx: JokrParser.VariableDeclarationContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitVariableDeclaration(_ ctx: JokrParser.VariableDeclarationContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterFunctionCall(_ ctx: JokrParser.FunctionCallContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitFunctionCall(_ ctx: JokrParser.FunctionCallContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -152,71 +230,6 @@ open class JokrBaseListener: JokrListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterBlock(_ ctx: JokrParser.BlockContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitBlock(_ ctx: JokrParser.BlockContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterExpression(_ ctx: JokrParser.ExpressionContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitExpression(_ ctx: JokrParser.ExpressionContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterVariableDeclaration(_ ctx: JokrParser.VariableDeclarationContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitVariableDeclaration(_ ctx: JokrParser.VariableDeclarationContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterLvalue(_ ctx: JokrParser.LvalueContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitLvalue(_ ctx: JokrParser.LvalueContext) { }
 
 	/**
 	 * {@inheritDoc}
