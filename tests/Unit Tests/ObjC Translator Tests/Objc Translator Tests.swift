@@ -56,7 +56,7 @@ class ObjCTranslatorTests: XCTestCase {
 			// WITH:
 			let files = try translate(file: "TestAssignments.jkr")
 
-			// TEST: Empty main file gets created
+			// TEST: Main file gets created with correct contents
 			XCTAssertEqual(files["main.m"], assignmentMainContents)
 
 			// TEST: No other files get created
@@ -72,7 +72,7 @@ class ObjCTranslatorTests: XCTestCase {
 			// WITH:
 			let files = try translate(file: "TestFunctionCalls.jkr")
 
-			// TEST: Empty main file gets created
+			// TEST: Main file gets created with correct contents
 			XCTAssertEqual(files["main.m"], functionCallMainContents)
 
 			// TEST: No other files get created
