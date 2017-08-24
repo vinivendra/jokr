@@ -51,7 +51,7 @@ parameterList:
 	| parameterList COMMA parameter;
 
 parameter:
-	lvalue;
+	expression;
 
 assignment:
 	variableDeclaration ASSIGN expression

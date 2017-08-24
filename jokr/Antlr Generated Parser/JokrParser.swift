@@ -723,8 +723,8 @@ open class JokrParser: Parser {
 		return _localctx;
 	}
 	open class ParameterContext:ParserRuleContext {
-		open func lvalue() -> LvalueContext? {
-			return getRuleContext(LvalueContext.self,0)
+		open func expression() -> ExpressionContext? {
+			return getRuleContext(ExpressionContext.self,0)
 		}
 		open override func getRuleIndex() -> Int { return JokrParser.RULE_parameter }
 		override
@@ -750,7 +750,7 @@ open class JokrParser: Parser {
 		do {
 		 	try enterOuterAlt(_localctx, 1)
 		 	setState(115)
-		 	try lvalue()
+		 	try expression(0)
 
 		}
 		catch ANTLRException.recognition(let re) {
