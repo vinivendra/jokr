@@ -155,6 +155,52 @@ class AntlrParserTests: XCTestCase {
 		}
 	}
 
+	func testParameters() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestParameters")
+
+			let parameterLists = tree.filter(type:
+				JokrParser.ParameterListContext.self)
+
+			let parameters = tree.filter(type:
+				JokrParser.ParameterContext.self)
+
+			let expectedParameterLists: [TokenTest] = [
+				(1, 4, ""),
+				(2, 4, "bar"),
+				(3, 4, "baz,blah"), (3, 4, "baz")
+			]
+
+			let expectedParameters: [TokenTest] = [
+				(2, 4, "bar"), (3, 4, "baz"), (3, 9, "blah")]
+
+			// TEST: Parser founAd all expected elements
+			for (expected, actual) in
+				zip(expectedParameterLists, parameterLists)
+			{
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			for (expected, actual) in zip(expectedParameters, parameters) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
+			XCTAssertEqual(parameters.count, expectedParameters.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	func testAssignments() {
 		do {
 			// WITH:
