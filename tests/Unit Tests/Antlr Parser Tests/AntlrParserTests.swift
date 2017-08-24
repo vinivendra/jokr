@@ -278,11 +278,13 @@ class AntlrParserTests: XCTestCase {
 			let expectedFunctionCalls: [TokenTest] = [
 				(1, 0, "print()"),
 				(2, 0, "f()"),
-				(3, 0, "someFunctionName()")
+				(3, 0, "someFunctionName(1)"),
+				(4, 0, "someFunctionName(1,2)")
 			]
 
 			// TEST: Parser found all expected elements
-			for (expected, actual) in zip(expectedFunctionCalls, functionCalls) {
+			for (expected, actual) in zip(expectedFunctionCalls, functionCalls)
+			{
 				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
 				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
 				               expected.startChar)

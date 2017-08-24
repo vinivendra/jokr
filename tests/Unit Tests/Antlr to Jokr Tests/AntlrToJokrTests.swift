@@ -262,8 +262,10 @@ class AntlrToJokrTests: XCTestCase {
 
 			let expectedFunctionCalls: [JKRTreeFunctionCall] = [
 				JKRTreeFunctionCall(id: "print"),
+				JKRTreeFunctionCall(id: "someFunctionName"),
 				JKRTreeFunctionCall(id: "f"),
-				JKRTreeFunctionCall(id: "someFunctionName")
+				JKRTreeFunctionCall(id: "f", parameters: [1]),
+				JKRTreeFunctionCall(id: "f", parameters: [1, 2])
 			]
 
 			// TEST: All elements were converted successfully
