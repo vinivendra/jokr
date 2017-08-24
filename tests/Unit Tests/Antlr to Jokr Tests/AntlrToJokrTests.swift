@@ -194,38 +194,36 @@ class AntlrToJokrTests: XCTestCase {
 	}
 
 	func testParameters() {
-//		do {
-//			let tree = try getProgram(inFile: "TestParameters")
-//
-//			let parameterLists = tree.filter(type:
-//				JokrParser.ParameterListContext.self)
-//				// Filter only root parameter lists, sublists get tested too
-//				.filter {
-//					!($0.parent is JokrParser.ParameterDeclarationListContext)
-//				}.map { $0.toJKRTreeExpressions() }
-//
-//			let expectedParameterLists: [[JKRTreeExpression]] = [
-//				[],
-//				[JKRTreeParameterDeclaration(type: "Float", id: "bla")],
-//				[JKRTreeParameterDeclaration(type: "Int", id: "bla"),
-//				 JKRTreeParameterDeclaration(type: "Float", id: "foo")],
-//				[JKRTreeParameterDeclaration(type: "Int", id: "bla"),
-//				 JKRTreeParameterDeclaration(type: "Float", id: "foo"),
-//				 JKRTreeParameterDeclaration(type: "Double", id: "hue")]
-//			]
-//
-//			// TEST: All elements were converted successfully
-//			// (multi-dimensional array equality has to be unrolled like this)
-//			for (parameterList, expectedParameterList)
-//				in zip(parameterLists, expectedParameterLists)
-//			{
-//				XCTAssertEqual(parameterList, expectedParameterList)
-//			}
-//			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
-//		}
-//		catch (let error) {
-//			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-//		}
+		do {
+			let tree = try getProgram(inFile: "TestParameters")
+
+			let parameterLists = tree.filter(type:
+				JokrParser.ParameterListContext.self)
+				// Filter only root parameter lists, sublists get tested too
+				.filter {
+					!($0.parent is JokrParser.ParameterListContext)
+				}.map { $0.toJKRTreeExpressions() }
+
+			let expectedParameterLists: [[JKRTreeExpression]] = [
+				[],
+				["bar"],
+				[.parenthesized(.operation(1, "+", 2))],
+				[.parenthesized("hue")],
+				["foo", .parenthesized("baz"), "blah"]
+			]
+
+			// TEST: All elements were converted successfully
+			// (multi-dimensional array equality has to be unrolled like this)
+			for (parameterList, expectedParameterList)
+				in zip(parameterLists, expectedParameterLists)
+			{
+				XCTAssertEqual(parameterList, expectedParameterList)
+			}
+			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
 	}
 
 	func testAssignments() {
