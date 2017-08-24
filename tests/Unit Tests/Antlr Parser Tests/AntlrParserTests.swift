@@ -169,11 +169,21 @@ class AntlrParserTests: XCTestCase {
 			let expectedParameterLists: [TokenTest] = [
 				(1, 4, ""),
 				(2, 4, "bar"),
-				(3, 4, "baz,blah"), (3, 4, "baz")
+				(3, 4, "(1+2)"),
+				(4, 4, "(hue)"),
+				(5, 4, "foo,(baz),blah"),
+				(5, 4, "foo,(baz)"),
+				(5, 4, "foo")
 			]
 
 			let expectedParameters: [TokenTest] = [
-				(2, 4, "bar"), (3, 4, "baz"), (3, 9, "blah")]
+				(2, 4, "bar"),
+				(3, 4, "(1+2)"),
+				(4, 4, "(hue)"),
+				(5, 4, "foo"),
+				(5, 9, "(baz)"),
+				(5, 16, "blah")
+			]
 
 			// TEST: Parser founAd all expected elements
 			for (expected, actual) in

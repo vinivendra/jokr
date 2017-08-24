@@ -202,9 +202,9 @@ class AntlrToJokrTests: XCTestCase {
 //				// Filter only root parameter lists, sublists get tested too
 //				.filter {
 //					!($0.parent is JokrParser.ParameterDeclarationListContext)
-//				}.map { $0.toJKRTreeParameterDeclarations() }
+//				}.map { $0.toJKRTreeExpressions() }
 //
-//			let expectedParameterLists: [[JKRTreeParameterDeclaration]] = [
+//			let expectedParameterLists: [[JKRTreeExpression]] = [
 //				[],
 //				[JKRTreeParameterDeclaration(type: "Float", id: "bla")],
 //				[JKRTreeParameterDeclaration(type: "Int", id: "bla"),

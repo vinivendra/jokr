@@ -136,29 +136,26 @@ extension JokrParser.ExpressionContext {
 }
 
 extension JokrParser.ParameterListContext {
-//	func toJKRTreeParameterDeclarations() -> [JKRTreeParameterDeclaration] {
-//		if let parameter = parameterDeclaration() {
-//
-//			guard let type = parameter.TYPE()?.toJKRTreeType(),
-//				let id = parameter.ID()?.toJKRTreeID() else
-//			{
-//				fatalError("Failed to transpile parameter")
-//			}
-//
-//			let parameter = JKRTreeParameterDeclaration(type: type,
-//			                                 id: id)
-//
-//			if let parameterList = parameterDeclarationList() {
-//				return parameterList.toJKRTreeParameterDeclarations() + [parameter]
-//			}
-//			else {
-//				return [parameter]
-//			}
-//		}
-//		else {
-//			return []
-//		}
-//	}
+	func toJKRTreeExpressions() -> [JKRTreeExpression] {
+		if let parameter = parameter() {
+
+			guard let expression = parameter.expression()?.toJKRTreeExpression()
+				else
+			{
+				fatalError("Failed to transpile parameter")
+			}
+
+			if let parameterList = parameterList() {
+				return parameterList.toJKRTreeExpressions() + [expression]
+			}
+			else {
+				return [expression]
+			}
+		}
+		else {
+			return []
+		}
+	}
 }
 
 extension JokrParser.AssignmentContext {
