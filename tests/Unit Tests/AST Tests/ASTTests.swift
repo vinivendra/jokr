@@ -13,6 +13,8 @@ class ASTTests: XCTestCase {
 			.assignment(.assignment("y", 0)),
 			.functionCall(JKRTreeFunctionCall(id: "f")),
 			.functionCall(JKRTreeFunctionCall(id: "methodName")),
+			.functionCall(JKRTreeFunctionCall(id: "methodName",
+			                                  parameters: [1])),
 			.returnStm(0),
 			.returnStm(1)
 		]
@@ -124,7 +126,8 @@ class ASTTests: XCTestCase {
 		let functionCalls: [JKRTreeFunctionCall] = [
 			JKRTreeFunctionCall(id: "print"),
 			JKRTreeFunctionCall(id: "f"),
-			JKRTreeFunctionCall(id: "someFunctionName")
+			JKRTreeFunctionCall(id: "f", parameters: [1]),
+			JKRTreeFunctionCall(id: "f", parameters: [1, 2])
 		]
 
 		// TEST: == succeeds on equal instances (reflexive)

@@ -112,11 +112,22 @@ enum JKRTreeAssignment: Equatable {
 
 struct JKRTreeFunctionCall: Equatable {
 	let id: JKRTreeID
+	let parameters: [JKRTreeExpression]
+
+	init(id: JKRTreeID, parameters: [JKRTreeExpression]) {
+		self.id = id
+		self.parameters = parameters
+	}
+
+	init(id: JKRTreeID) {
+		self.id = id
+		self.parameters = []
+	}
 
 	// Equatable
 	static func == (lhs: JKRTreeFunctionCall,
 	                rhs: JKRTreeFunctionCall) -> Bool {
-		return lhs.id == rhs.id
+		return lhs.id == rhs.id && rhs.parameters == lhs.parameters
 	}
 }
 
