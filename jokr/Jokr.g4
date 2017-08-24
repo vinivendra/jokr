@@ -45,6 +45,14 @@ expression:
 ////////////////////////////////////////////////////////////////////////////////
 // Statements
 
+parameterList:
+	// empty
+	| parameter
+	| parameterList COMMA parameter;
+
+parameter:
+	lvalue;
+
 assignment:
 	variableDeclaration ASSIGN expression
 	| lvalue ASSIGN expression;
@@ -53,7 +61,7 @@ variableDeclaration:
 	TYPE ID;
 
 functionCall:
-	ID LPAREN RPAREN;
+	ID LPAREN parameterList RPAREN;
 
 returnStatement:
 	RETURN expression;

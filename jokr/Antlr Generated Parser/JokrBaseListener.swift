@@ -119,6 +119,32 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	open func enterParameterList(_ ctx: JokrParser.ParameterListContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitParameterList(_ ctx: JokrParser.ParameterListContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterParameter(_ ctx: JokrParser.ParameterContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitParameter(_ ctx: JokrParser.ParameterContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	open func enterAssignment(_ ctx: JokrParser.AssignmentContext) { }
 	/**
 	 * {@inheritDoc}
