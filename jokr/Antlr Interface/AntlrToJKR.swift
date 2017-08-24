@@ -182,8 +182,10 @@ extension JokrParser.AssignmentContext {
 
 extension JokrParser.FunctionCallContext {
 	func toJKRTreeFunctionCall() -> JKRTreeFunctionCall {
-		if let id = self.ID()?.toJKRTreeID() {
-			return JKRTreeFunctionCall(id: id)
+		if let id = self.ID()?.toJKRTreeID(),
+			let parameters = self.parameterList()?.toJKRTreeExpressions()
+		{
+			return JKRTreeFunctionCall(id: id, parameters: parameters)
 		}
 
 		fatalError("Failed to transpile function call")
