@@ -22,20 +22,28 @@ class JKRDriver {
 		}
 	}
 
-	func transpile() throws {
+	@discardableResult
+	func transpile() throws -> Shell.CommandResult {
 		do {
 			try parseInputFiles()
 			try writeOutputFiles()
-			try compile()
+			return try compile()
 		}
 		catch (let error) {
 			throw error
 		}
 	}
 
-	func run() {
+	@discardableResult
+	func run() -> Shell.CommandResult {
+		log("======== Running...")
 		let compiler = language.compiler.create()
-		compiler.runProgram(atPath: folderPath)
+		let result = compiler.runProgram(atPath: folderPath)
+		log(result.output)
+		log("================")
+		log(result.error)
+		log("======== Done!...")
+		return result
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -49,36 +57,50 @@ class JKRDriver {
 
 	private func parseInputFiles() throws {
 		do {
+			log("======== Parsing...")
 			ast = try parser.parse(file: folderPath + "main.jkr")
+			log("======== Done!")
 		}
 		catch (let error) {
+			log("======== Parsing failed.")
 			throw error
 		}
 	}
 
 	private func writeOutputFiles() throws {
 		do {
+			log("======== Transpiling files...")
+
 			if ast == nil {
 				try parseInputFiles()
 			}
 
-			let translator = language.translator.create(writingWith:
-					JKRFileWriter(outputDirectory: folderPath))
+			let writer = JKRFileWriter(outputDirectory: folderPath)
+			let translator = language.translator.create(writingWith: writer)
 
 			try translator.translate(program: ast!)
 			// swiftlint:disable:previous force_unwrapping
+
+			writer.prettyPrint()
+
+			log("======== Done!")
 		}
 		catch (let error) {
+			log("======== Transpilation failed.")
 			throw error
 		}
 	}
 
-	private func compile() throws {
+	private func compile() throws -> Shell.CommandResult{
 		do {
+			log("======== Compiling...")
 			let compiler = language.compiler.create()
-			try compiler.compileFiles(atPath: folderPath)
+			let result = try compiler.compileFiles(atPath: folderPath)
+			log("======== Done!")
+			return result
 		}
 		catch (let error) {
+			log("======== Compilation failed.")
 			throw error
 		}
 	}

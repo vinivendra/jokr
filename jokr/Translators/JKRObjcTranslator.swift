@@ -102,7 +102,16 @@ class JKRObjcTranslator: JKRTranslator {
 
 	private func translate(_ functionCall: JKRTreeFunctionCall) -> String {
 		if functionCall.id == "print" {
-			return "NSLog(@\"Hello jokr!\\n\");\n"
+			if functionCall.parameters.count == 0 {
+				return "NSLog(@\"Hello jokr!\\n\");\n"
+			}
+			else {
+				let format = functionCall.parameters.map {_ in "%d" }
+					.joined(separator: " ")
+				let parameters = functionCall.parameters.map(translate)
+					.joined(separator: ", ")
+				return "NSLog(@\"\(format)\\n\", \(parameters));\n"
+			}
 		}
 
 		return "\(string(for: functionCall.id))();\n"

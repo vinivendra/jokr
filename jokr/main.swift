@@ -18,11 +18,9 @@ do {
 	                       language: .objectiveC)
 
 	try driver.transpile()
-	driver.run()
-
-	print("Done!")
+	let result = driver.run()
 }
 catch (let error) {
-	print("Failed :(")
-	print(error)
+	log("Failed :(")
+	log(String(describing: error))
 }
