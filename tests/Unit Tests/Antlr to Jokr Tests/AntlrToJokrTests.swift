@@ -126,7 +126,7 @@ class AntlrToJokrTests: XCTestCase {
 				.functionDeclaration(
 					JKRTreeFunctionDeclaration(
 						type: "Int", id: "func2",
-						parameters: [JKRTreeParameter(type: "Float",
+						parameters: [JKRTreeParameterDeclaration(type: "Float",
 						                              id: "bla")],
 						block: [
 							JKRTreeStatement.assignment(.declaration(
@@ -191,6 +191,41 @@ class AntlrToJokrTests: XCTestCase {
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
 		}
+	}
+
+	func testParameters() {
+//		do {
+//			let tree = try getProgram(inFile: "TestParameters")
+//
+//			let parameterLists = tree.filter(type:
+//				JokrParser.ParameterListContext.self)
+//				// Filter only root parameter lists, sublists get tested too
+//				.filter {
+//					!($0.parent is JokrParser.ParameterDeclarationListContext)
+//				}.map { $0.toJKRTreeParameterDeclarations() }
+//
+//			let expectedParameterLists: [[JKRTreeParameterDeclaration]] = [
+//				[],
+//				[JKRTreeParameterDeclaration(type: "Float", id: "bla")],
+//				[JKRTreeParameterDeclaration(type: "Int", id: "bla"),
+//				 JKRTreeParameterDeclaration(type: "Float", id: "foo")],
+//				[JKRTreeParameterDeclaration(type: "Int", id: "bla"),
+//				 JKRTreeParameterDeclaration(type: "Float", id: "foo"),
+//				 JKRTreeParameterDeclaration(type: "Double", id: "hue")]
+//			]
+//
+//			// TEST: All elements were converted successfully
+//			// (multi-dimensional array equality has to be unrolled like this)
+//			for (parameterList, expectedParameterList)
+//				in zip(parameterLists, expectedParameterLists)
+//			{
+//				XCTAssertEqual(parameterList, expectedParameterList)
+//			}
+//			XCTAssertEqual(parameterLists.count, expectedParameterLists.count)
+//		}
+//		catch (let error) {
+//			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+//		}
 	}
 
 	func testAssignments() {
@@ -265,25 +300,25 @@ class AntlrToJokrTests: XCTestCase {
 		}
 	}
 
-	func testParameters() {
+	func testParameterDeclarations() {
 		do {
-			let tree = try getProgram(inFile: "TestParameters")
+			let tree = try getProgram(inFile: "TestParameterDeclarations")
 
 			let parameterLists = tree.filter(type:
 				JokrParser.ParameterDeclarationListContext.self)
 				// Filter only root parameter lists, sublists get tested too
 				.filter {
 					!($0.parent is JokrParser.ParameterDeclarationListContext)
-				}.map { $0.toJKRTreeParameters() }
+				}.map { $0.toJKRTreeParameterDeclarations() }
 
-			let expectedParameterLists: [[JKRTreeParameter]] = [
+			let expectedParameterLists: [[JKRTreeParameterDeclaration]] = [
 				[],
-				[JKRTreeParameter(type: "Float", id: "bla")],
-				[JKRTreeParameter(type: "Int", id: "bla"),
-				 JKRTreeParameter(type: "Float", id: "foo")],
-				[JKRTreeParameter(type: "Int", id: "bla"),
-				 JKRTreeParameter(type: "Float", id: "foo"),
-				 JKRTreeParameter(type: "Double", id: "hue")]
+				[JKRTreeParameterDeclaration(type: "Float", id: "bla")],
+				[JKRTreeParameterDeclaration(type: "Int", id: "bla"),
+				 JKRTreeParameterDeclaration(type: "Float", id: "foo")],
+				[JKRTreeParameterDeclaration(type: "Int", id: "bla"),
+				 JKRTreeParameterDeclaration(type: "Float", id: "foo"),
+				 JKRTreeParameterDeclaration(type: "Double", id: "hue")]
 			]
 
 			// TEST: All elements were converted successfully
@@ -316,7 +351,7 @@ class AntlrToJokrTests: XCTestCase {
 					block: [.returnStm(0)]),
 				JKRTreeFunctionDeclaration(
 					type: "Int", id: "func2",
-					parameters: [JKRTreeParameter(type: "Float", id: "bla")],
+					parameters: [JKRTreeParameterDeclaration(type: "Float", id: "bla")],
 					block: [
 						.assignment(.declaration(
 							"String", "baz",
@@ -324,9 +359,9 @@ class AntlrToJokrTests: XCTestCase {
 						.returnStm(0)]),
 				JKRTreeFunctionDeclaration(
 					type: "Void", id: "func4",
-					parameters: [JKRTreeParameter(type: "Int", id: "bla"),
-					             JKRTreeParameter(type: "Float", id: "foo"),
-					             JKRTreeParameter(type: "Double", id: "hue")],
+					parameters: [JKRTreeParameterDeclaration(type: "Int", id: "bla"),
+					             JKRTreeParameterDeclaration(type: "Float", id: "foo"),
+					             JKRTreeParameterDeclaration(type: "Double", id: "hue")],
 					block: [.returnStm(0)])
 			]
 

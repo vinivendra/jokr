@@ -1,15 +1,3 @@
-Int func1() {
-	return 0
-}
-
-Int func2(Float bla) {
-	return 0
-}
-
-Int func3(Int bla, Float foo) {
-	return 0
-}
-
-Int func4(Int bla, Float foo, Double hue) {
-	return 0
-}
+foo()
+foo(bar)
+foo(baz, blah)

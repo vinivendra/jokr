@@ -135,6 +135,32 @@ extension JokrParser.ExpressionContext {
 	}
 }
 
+extension JokrParser.ParameterListContext {
+//	func toJKRTreeParameterDeclarations() -> [JKRTreeParameterDeclaration] {
+//		if let parameter = parameterDeclaration() {
+//
+//			guard let type = parameter.TYPE()?.toJKRTreeType(),
+//				let id = parameter.ID()?.toJKRTreeID() else
+//			{
+//				fatalError("Failed to transpile parameter")
+//			}
+//
+//			let parameter = JKRTreeParameterDeclaration(type: type,
+//			                                 id: id)
+//
+//			if let parameterList = parameterDeclarationList() {
+//				return parameterList.toJKRTreeParameterDeclarations() + [parameter]
+//			}
+//			else {
+//				return [parameter]
+//			}
+//		}
+//		else {
+//			return []
+//		}
+//	}
+}
+
 extension JokrParser.AssignmentContext {
 	func toJKRTreeAssignment() -> JKRTreeAssignment {
 		if let variableDeclaration = self.variableDeclaration(),
@@ -178,7 +204,7 @@ extension JokrParser.ReturnStatementContext {
 }
 
 extension JokrParser.ParameterDeclarationListContext {
-	func toJKRTreeParameters() -> [JKRTreeParameter] {
+	func toJKRTreeParameterDeclarations() -> [JKRTreeParameterDeclaration] {
 		if let parameter = parameterDeclaration() {
 
 			guard let type = parameter.TYPE()?.toJKRTreeType(),
@@ -187,11 +213,11 @@ extension JokrParser.ParameterDeclarationListContext {
 				fatalError("Failed to transpile parameter")
 			}
 
-			let parameter = JKRTreeParameter(type: type,
+			let parameter = JKRTreeParameterDeclaration(type: type,
 			                                 id: id)
 
 			if let parameterList = parameterDeclarationList() {
-				return parameterList.toJKRTreeParameters() + [parameter]
+				return parameterList.toJKRTreeParameterDeclarations() + [parameter]
 			}
 			else {
 				return [parameter]
@@ -212,7 +238,7 @@ extension JokrParser.FunctionDeclarationContext {
 			let id = functionHeader.ID()?.toJKRTreeID(),
 			let statementList = block()?.statementList()
 		{
-			let parameters = parameterList.toJKRTreeParameters()
+			let parameters = parameterList.toJKRTreeParameterDeclarations()
 			let block = statementList.toJKRTreeStatements()
 
 			return JKRTreeFunctionDeclaration(type: type,

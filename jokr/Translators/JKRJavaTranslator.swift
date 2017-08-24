@@ -134,7 +134,7 @@ class JKRJavaTranslator: JKRTranslator {
 		}
 	}
 
-	private func string(for parameter: JKRTreeParameter) -> String {
+	private func string(for parameter: JKRTreeParameterDeclaration) -> String {
 		return "\(string(for: parameter.type)) \(string(for: parameter.id))"
 	}
 

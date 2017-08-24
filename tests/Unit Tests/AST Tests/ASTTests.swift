@@ -140,10 +140,10 @@ class ASTTests: XCTestCase {
 
 	func testParameters() {
 		// WITH:
-		let parameters: [JKRTreeParameter] = [
-			JKRTreeParameter(type: "Int", id: "x"),
-			JKRTreeParameter(type: "Person", id: "x"),
-			JKRTreeParameter(type: "Person", id: "joe")
+		let parameters: [JKRTreeParameterDeclaration] = [
+			JKRTreeParameterDeclaration(type: "Int", id: "x"),
+			JKRTreeParameterDeclaration(type: "Person", id: "x"),
+			JKRTreeParameterDeclaration(type: "Person", id: "joe")
 		]
 
 		let expectedData: [(type: JKRTreeType, id: JKRTreeID)] =
@@ -180,15 +180,15 @@ class ASTTests: XCTestCase {
 				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
-				parameters: [JKRTreeParameter(type: "Float", id: "bla")],
+				parameters: [JKRTreeParameterDeclaration(type: "Float", id: "bla")],
 				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
-				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
+				parameters: [JKRTreeParameterDeclaration(type: "Int", id: "bla")],
 				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
-				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
+				parameters: [JKRTreeParameterDeclaration(type: "Int", id: "bla")],
 				block: [.assignment(.assignment("x", 1))])
 		]
 

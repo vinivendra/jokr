@@ -149,7 +149,9 @@ class JKRObjcTranslator: JKRTranslator {
 	}
 
 	private func strings(
-		for parameter: JKRTreeParameter) -> (type: String, id: String) {
+		for parameter: JKRTreeParameterDeclaration)
+		-> (type: String, id: String)
+	{
 		return (string(for: parameter.type),
 		        string(for: parameter.id))
 	}

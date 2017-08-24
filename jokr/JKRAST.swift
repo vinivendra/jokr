@@ -148,12 +148,13 @@ ExpressibleByStringLiteral {
 	}
 }
 
-struct JKRTreeParameter: Equatable {
+struct JKRTreeParameterDeclaration: Equatable {
 	let type: JKRTreeType
 	let id: JKRTreeID
 
 	// Equatable
-	static func == (lhs: JKRTreeParameter, rhs: JKRTreeParameter) -> Bool {
+	static func == (lhs: JKRTreeParameterDeclaration,
+	                rhs: JKRTreeParameterDeclaration) -> Bool {
 		return lhs.type == rhs.type && lhs.id == rhs.id
 	}
 }
@@ -161,13 +162,12 @@ struct JKRTreeParameter: Equatable {
 struct JKRTreeFunctionDeclaration: Equatable {
 	let type: JKRTreeType
 	let id: JKRTreeID
-	let parameters: [JKRTreeParameter]
+	let parameters: [JKRTreeParameterDeclaration]
 	let block: [JKRTreeStatement]
 
 	// Equatable
 	static func == (lhs: JKRTreeFunctionDeclaration,
-	                rhs: JKRTreeFunctionDeclaration) -> Bool
-	{
+	                rhs: JKRTreeFunctionDeclaration) -> Bool {
 		return lhs.type == rhs.type && lhs.id == rhs.id &&
 			lhs.parameters == rhs.parameters && lhs.block == rhs.block
 	}
