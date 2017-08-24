@@ -56,7 +56,7 @@ class JavaTranslatorTests: XCTestCase {
 			// WITH:
 			let files = try translate(file: "TestAssignments.jkr")
 
-			// TEST: Empty main file gets created
+			// TEST: Main file gets created with correct contents
 			XCTAssertEqual(files["Main.java"], assignmentMainContents)
 
 			// TEST: No other files get created
@@ -72,7 +72,7 @@ class JavaTranslatorTests: XCTestCase {
 			// WITH:
 			let files = try translate(file: "TestFunctionCalls.jkr")
 
-			// TEST: Empty main file gets created
+			// TEST: Main file gets created with correct contents
 			XCTAssertEqual(files["Main.java"], functionCallMainContents)
 
 			// TEST: No other files get created
