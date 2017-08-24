@@ -10,7 +10,7 @@ private let errorMessage =
 // swiftlint:disable line_length
 private let emptyMainContents = "public class Main {\n\tpublic static void main(String []args) {\n\t}\n}\n"
 private let assignmentMainContents = "public class Main {\n\tpublic static void main(String []args) {\n\t\tint x = 2;\n\t\tint y = x + x;\n\t\tfloat z = y - x;\n\t\ty = (z + x) - y;\n\t}\n}\n"
-private let functionCallMainContents = "public class Main {\n\tpublic static void main(String []args) {\n\t\tSystem.out.println(\"Hello jokr!\");\n\t}\n}\n"
+private let functionCallMainContents = "public class Main {\n\tpublic static void main(String []args) {\n\t\tSystem.out.format(\"Hello jokr!\\n\");\n\t\tSystem.out.format(\"%d\\n\", 1);\n\t\tSystem.out.format(\"%d %d\\n\", 1, 2);\n\t}\n}\n"
 // swiftlint:enable line_length
 
 ////////////////////////////////////////////////////////////////////////////////

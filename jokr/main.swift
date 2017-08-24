@@ -15,7 +15,7 @@ private let filePath = CommandLine.arguments[1] + "/tests/"
 do {
 	let driver = JKRDriver(folderPath: filePath,
 	                       parser: JKRAntlrParser(),
-	                       language: .objectiveC)
+	                       language: .java)
 
 	try driver.transpile()
 	let result = driver.run()

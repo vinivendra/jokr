@@ -98,7 +98,16 @@ class JKRJavaTranslator: JKRTranslator {
 
 	private func translate(_ functionCall: JKRTreeFunctionCall) -> String {
 		if functionCall.id == "print" {
-			return "System.out.println(\"Hello jokr!\");\n"
+			if functionCall.parameters.count == 0 {
+				return "System.out.format(\"Hello jokr!\\n\");\n"
+			}
+			else {
+				let format = functionCall.parameters.map {_ in "%d" }
+					.joined(separator: " ")
+				let parameters = functionCall.parameters.map(translate)
+					.joined(separator: ", ")
+				return "System.out.format(\"\(format)\\n\", \(parameters));\n"
+			}
 		}
 
 		return "\(string(for: functionCall.id))();\n"
