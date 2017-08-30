@@ -64,7 +64,6 @@ extension Collection {
 
 // String Strip NSLog data
 extension String {
-	// TODO: test
 	func strippingNSLogData() -> String {
 		let lines = self.components(separatedBy: "\n")
 		let contents = lines.map { (string: String) -> String in
