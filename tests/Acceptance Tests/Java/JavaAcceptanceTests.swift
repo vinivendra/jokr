@@ -44,12 +44,11 @@ class JavaAcceptanceTests: XCTestCase {
 		do {
 			let result = try transpileAndRun(file: "TestFunctionCalls.jkr")
 			XCTAssertEqual(result.status, 0)
-			XCTAssertEqual(result.output, "Hello jokr!\n")
+			XCTAssertEqual(result.output, "Hello jokr!\n1\n1 2\n")
 			XCTAssertEqual(result.error, (""))
 		}
 		catch (let error) {
 			XCTFail(errorMessage + "\(error)")
 		}
 	}
-
 }

@@ -45,7 +45,8 @@ class ObjCAcceptanceTests: XCTestCase {
 			let result = try transpileAndRun(file: "TestFunctionCalls.jkr")
 			XCTAssertEqual(result.status, 0)
 			XCTAssertEqual(result.output, "")
-			XCTAssert(result.error.hasSuffix("] Hello jokr!\n"))
+			XCTAssertEqual(result.error.strippingNSLogData(),
+			               "Hello jokr!\n1\n1 2\n")
 		}
 		catch (let error) {
 			XCTFail(errorMessage + "\(error)")

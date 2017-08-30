@@ -141,7 +141,6 @@
 		24A414691F0F29450075993D /* libAntlr4.dylib.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = libAntlr4.dylib.dSYM; path = "antlr4-master/runtime/Swift/.build/debug/libAntlr4.dylib.dSYM"; sourceTree = "<group>"; };
 		24ABAA361F3CA7EB005E22EF /* JKRUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JKRUtilities.swift; path = ../JKRUtilities.swift; sourceTree = "<group>"; };
 		24B5F50C1F17B7E80045FF6A /* jokrUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jokrUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		24BF551D1F49F30F00D3225B /* TestEmpty.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestEmpty.jkr; path = "tests/Unit Tests/Java Acceptance Tests/TestEmpty.jkr"; sourceTree = SOURCE_ROOT; };
 		24C037551F4A0DFD00C88FCF /* JavaAcceptanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavaAcceptanceTests.swift; sourceTree = "<group>"; };
 		24C037591F4A0DFD00C88FCF /* TestEmpty.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestEmpty.jkr; sourceTree = "<group>"; };
 		24C0375B1F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCAcceptanceTests.swift; sourceTree = "<group>"; };
@@ -403,7 +402,6 @@
 				24C65CC71F3B838600FCFFF2 /* Extensions.swift */,
 				24C65CC81F3B838600FCFFF2 /* FunctionListener.swift */,
 				24C65CC91F3B838600FCFFF2 /* Shell.swift */,
-				24BF551D1F49F30F00D3225B /* TestEmpty.jkr */,
 				24ABAA361F3CA7EB005E22EF /* JKRUtilities.swift */,
 			);
 			path = Helpers;
