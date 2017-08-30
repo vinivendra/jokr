@@ -12,6 +12,7 @@ class JKRContainsFunction: ParseTreeListener {
 		result = result || predicate(ctx)
 	}
 
+	// Unused protocol requirements
 	func visitTerminal(_ node: Antlr4.TerminalNode) { }
 	func visitErrorNode(_ node: Antlr4.ErrorNode) { }
 	func exitEveryRule(_ ctx: Antlr4.ParserRuleContext) throws { }
@@ -31,6 +32,7 @@ class JKRFilterFunction: ParseTreeListener {
 		}
 	}
 
+	// Unused protocol requirements
 	func visitTerminal(_ node: Antlr4.TerminalNode) { }
 	func visitErrorNode(_ node: Antlr4.ErrorNode) { }
 	func exitEveryRule(_ ctx: Antlr4.ParserRuleContext) throws { }
@@ -43,6 +45,7 @@ extension ParserRuleContext {
 		let listener = JKRContainsFunction(predicate)
 
 		// JKRContainsFunction's only throwing function is empty
+		// swiftlint:disable:next force_try
 		try! ParseTreeWalker.DEFAULT.walk(listener, self)
 
 		return listener.result
@@ -54,8 +57,22 @@ extension ParserRuleContext {
 		let listener = JKRFilterFunction(predicate)
 
 		// JKRContainsFunction's only throwing function is empty
+		// swiftlint:disable:next force_try
 		try! ParseTreeWalker.DEFAULT.walk(listener, self)
 
 		return listener.result
+	}
+
+	func filter<T: ParserRuleContext>(type: T.Type) -> [T] {
+		let listener = JKRFilterFunction({ $0 is T })
+
+		// JKRContainsFunction's only throwing function is empty
+		// swiftlint:disable:next force_try
+		try! ParseTreeWalker.DEFAULT.walk(listener, self)
+
+		// The casting closure above + filter(where:)'s unit tests ensure this
+		// is safe
+		// swiftlint:disable:next force_cast
+		return listener.result as! [T]
 	}
 }

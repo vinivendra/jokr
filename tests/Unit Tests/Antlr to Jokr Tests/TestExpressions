@@ -1,0 +1,5 @@
+Int bla = 0
+Int bla = (1)
+Int bla = 2 + 3
+Int bla = foo
+Int bla = 4 + ((5) + foo)

@@ -1,0 +1,5 @@
+foo()
+foo(bar)
+foo((1 + 2))
+foo((hue))
+foo(foo, (baz), blah)
