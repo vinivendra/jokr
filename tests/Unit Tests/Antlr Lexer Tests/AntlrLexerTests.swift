@@ -93,6 +93,33 @@ class AntlrLexerTests: XCTestCase {
 		}
 	}
 
+	func testClass() {
+		do {
+			// WITH:
+			let tokens = try getTokens(inFile: "TestClass")
+
+			let expectedTokens: [(line: Int, charInLine: Int, text: String)] =
+				[(1, 0, "class")]
+
+			// TEST: Lexer found all expected tokens (in order)
+			for expected in expectedTokens {
+				XCTAssert(tokens.contains { token in
+					return token.getType() == JokrLexer.CLASS
+						&& token.getLine() == expected.line
+						&& token.getCharPositionInLine() == expected.charInLine
+						&& token.getText() == expected.text
+				}, "Token not found: \(expected)")
+			}
+
+			// TEST: Lexer didn't find any other tokens of this type
+			XCTAssertEqual(tokens.countTokens(ofType: JokrLexer.CLASS),
+			               expectedTokens.count)
+		}
+		catch (let error) {
+			XCTFail("JokrLexer failed to get tokens.\nError: \(error)")
+		}
+	}
+
 	func testComments() {
 		do {
 			// WITH:

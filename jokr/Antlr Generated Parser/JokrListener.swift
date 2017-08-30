@@ -234,4 +234,16 @@ public protocol JokrListener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitFunctionDeclarationParameters(_ ctx: JokrParser.FunctionDeclarationParametersContext)
+	/**
+	 * Enter a parse tree produced by {@link JokrParser#classDeclaration}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterClassDeclaration(_ ctx: JokrParser.ClassDeclarationContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#classDeclaration}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitClassDeclaration(_ ctx: JokrParser.ClassDeclarationContext)
 }

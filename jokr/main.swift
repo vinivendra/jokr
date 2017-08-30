@@ -1,7 +1,7 @@
 import Foundation
 import Antlr4
 
-// Branch - declarations
+// Branch - ClassDeclarations
 // TODO: Add class declarations
 // TODO: Integrate class declarations to output file structure
 // TODO: Add missing tests for declaration files, function declarations and

@@ -25,7 +25,8 @@ declarationList:
 	| declarationList NEW_LINE declaration;
 
 declaration:
-	functionDeclaration;
+	functionDeclaration
+	| classDeclaration;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Building blocks
@@ -86,7 +87,14 @@ functionDeclarationHeader:
 functionDeclarationParameters:
 	LPAREN parameterDeclarationList RPAREN;
 
+classDeclaration:
+	CLASS TYPE LBRACE RBRACE;
+
 ///////////////////////////////////////////////////////
+// Keywords
+CLASS: 'class';
+
+// Tokens
 BLOCK_COMMENT : '/*' (BLOCK_COMMENT|.)*? '*/' -> channel(HIDDEN);
 LINE_COMMENT : '//' ~('\n')* -> channel(HIDDEN);
 OPERATOR: OPERATOR_CHAR+;

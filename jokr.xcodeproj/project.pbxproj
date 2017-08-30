@@ -173,6 +173,7 @@
 		24FAA9A31F573BEE00752153 /* TestExpressions.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestExpressions.jkr; sourceTree = "<group>"; };
 		24FAA9A41F573CC600752153 /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
 		24FAA9A51F573CD300752153 /* TestExpressions.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestExpressions.jkr; sourceTree = "<group>"; };
+		24FAA9A71F5740AA00752153 /* TestClass */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClass; sourceTree = "<group>"; };
 		24FFE8641F4C48D400234B34 /* TestFunctionCalls */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -223,6 +224,7 @@
 			children = (
 				243295701F46238D00478218 /* AntlrLexerTests.swift */,
 				243295711F46238D00478218 /* TestComments */,
+				24FAA9A71F5740AA00752153 /* TestClass */,
 				243295721F46238D00478218 /* TestIDs */,
 				243295731F46238D00478218 /* TestNewlines */,
 				243295741F46238D00478218 /* TestTypes */,
