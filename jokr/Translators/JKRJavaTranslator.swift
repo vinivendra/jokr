@@ -75,10 +75,10 @@ class JKRJavaTranslator: JKRTranslator {
 		switch statement {
 		case let .assignment(assignment):
 			return translate(assignment)
+		case let .functionCall(functionCall):
+			return translate(functionCall)
 		case let .returnStm(returnStm):
 			return translate(returnStm)
-//		case let .functionDeclaration(functionDeclaration):
-//			return translateHeader(functionDeclaration)
 		}
 	}
 
@@ -94,6 +94,23 @@ class JKRJavaTranslator: JKRTranslator {
 			let expressionText = translate(expression)
 			return "\(idText) = \(expressionText);\n"
 		}
+	}
+
+	private func translate(_ functionCall: JKRTreeFunctionCall) -> String {
+		if functionCall.id == "print" {
+			if functionCall.parameters.count == 0 {
+				return "System.out.format(\"Hello jokr!\\n\");\n"
+			}
+			else {
+				let format = functionCall.parameters.map {_ in "%d" }
+					.joined(separator: " ")
+				let parameters = functionCall.parameters.map(translate)
+					.joined(separator: ", ")
+				return "System.out.format(\"\(format)\\n\", \(parameters));\n"
+			}
+		}
+
+		return "\(string(for: functionCall.id))();\n"
 	}
 
 	private func translateHeader(
@@ -126,7 +143,7 @@ class JKRJavaTranslator: JKRTranslator {
 		}
 	}
 
-	private func string(for parameter: JKRTreeParameter) -> String {
+	private func string(for parameter: JKRTreeParameterDeclaration) -> String {
 		return "\(string(for: parameter.type)) \(string(for: parameter.id))"
 	}
 

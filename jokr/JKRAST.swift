@@ -7,6 +7,29 @@ struct JKRTreeProgram {
 	let declarations: [JKRTreeDeclaration]?
 }
 
+enum JKRTreeStatement: Equatable {
+	case assignment(JKRTreeAssignment)
+	case functionCall(JKRTreeFunctionCall)
+	case returnStm(JKRTreeReturn)
+
+	// Equatable
+	static func == (lhs: JKRTreeStatement, rhs: JKRTreeStatement) -> Bool {
+		switch (lhs, rhs) {
+		case let (.assignment(assignment1),
+		          .assignment(assignment2)):
+			return assignment1 == assignment2
+		case let (.functionCall(functionCall1),
+		          .functionCall(functionCall2)):
+			return functionCall1 == functionCall2
+		case let (.returnStm(returnStm1),
+		          .returnStm(returnStm2)):
+			return returnStm1 == returnStm2
+		default:
+			return false
+		}
+	}
+}
+
 enum JKRTreeDeclaration: Equatable {
 	case functionDeclaration(JKRTreeFunctionDeclaration)
 
@@ -26,46 +49,8 @@ enum JKRTreeDeclaration: Equatable {
 	}
 }
 
-enum JKRTreeStatement: Equatable {
-	case assignment(JKRTreeAssignment)
-	case returnStm(JKRTreeReturn)
-
-	// Equatable
-	static func == (lhs: JKRTreeStatement, rhs: JKRTreeStatement) -> Bool {
-		switch (lhs, rhs) {
-		case let (.assignment(assignment1),
-		          .assignment(assignment2)):
-			return assignment1 == assignment2
-		case let (.returnStm(returnStm1),
-		          .returnStm(returnStm2)):
-			return returnStm1 == returnStm2
-		default:
-			return false
-		}
-	}
-}
-
-enum JKRTreeAssignment: Equatable {
-	case declaration(JKRTreeType, JKRTreeID, JKRTreeExpression)
-	case assignment(JKRTreeID, JKRTreeExpression)
-
-	// Equatable
-	static func == (lhs: JKRTreeAssignment, rhs: JKRTreeAssignment) -> Bool {
-		switch (lhs, rhs) {
-		case let (.declaration(type1, id1, exp1),
-		          .declaration(type2, id2, exp2)):
-			return type1 == type2 && id1 == id2 && exp1 == exp2
-		case let (.assignment(id1, exp1),
-		          .assignment(id2, exp2)):
-			return id1 == id2 && exp1 == exp2
-		default:
-			return false
-		}
-	}
-}
-
 indirect enum JKRTreeExpression: Equatable, ExpressibleByIntegerLiteral,
-	ExpressibleByStringLiteral {
+ExpressibleByStringLiteral {
 	case int(JKRTreeInt)
 	case parenthesized(JKRTreeExpression)
 	case operation(JKRTreeExpression, JKRTreeOperator, JKRTreeExpression)
@@ -106,28 +91,43 @@ indirect enum JKRTreeExpression: Equatable, ExpressibleByIntegerLiteral,
 	}
 }
 
-struct JKRTreeFunctionDeclaration: Equatable {
-	let type: JKRTreeType
-	let id: JKRTreeID
-	let parameters: [JKRTreeParameter]
-	let block: [JKRTreeStatement]
+enum JKRTreeAssignment: Equatable {
+	case declaration(JKRTreeType, JKRTreeID, JKRTreeExpression)
+	case assignment(JKRTreeID, JKRTreeExpression)
 
 	// Equatable
-	static func == (lhs: JKRTreeFunctionDeclaration,
-	                rhs: JKRTreeFunctionDeclaration) -> Bool
-	{
-		return lhs.type == rhs.type && lhs.id == rhs.id &&
-			lhs.parameters == rhs.parameters && lhs.block == rhs.block
+	static func == (lhs: JKRTreeAssignment, rhs: JKRTreeAssignment) -> Bool {
+		switch (lhs, rhs) {
+		case let (.declaration(type1, id1, exp1),
+		          .declaration(type2, id2, exp2)):
+			return type1 == type2 && id1 == id2 && exp1 == exp2
+		case let (.assignment(id1, exp1),
+		          .assignment(id2, exp2)):
+			return id1 == id2 && exp1 == exp2
+		default:
+			return false
+		}
 	}
 }
 
-struct JKRTreeParameter: Equatable {
-	let type: JKRTreeType
+struct JKRTreeFunctionCall: Equatable {
 	let id: JKRTreeID
+	let parameters: [JKRTreeExpression]
+
+	init(id: JKRTreeID, parameters: [JKRTreeExpression]) {
+		self.id = id
+		self.parameters = parameters
+	}
+
+	init(id: JKRTreeID) {
+		self.id = id
+		self.parameters = []
+	}
 
 	// Equatable
-	static func == (lhs: JKRTreeParameter, rhs: JKRTreeParameter) -> Bool {
-		return lhs.type == rhs.type && lhs.id == rhs.id
+	static func == (lhs: JKRTreeFunctionCall,
+	                rhs: JKRTreeFunctionCall) -> Bool {
+		return lhs.id == rhs.id && rhs.parameters == lhs.parameters
 	}
 }
 
@@ -156,6 +156,31 @@ ExpressibleByStringLiteral {
 	// ExpressibleByIntegerLiteral
 	public init(integerLiteral value: Int) {
 		self.expression = JKRTreeExpression(integerLiteral: value)
+	}
+}
+
+struct JKRTreeParameterDeclaration: Equatable {
+	let type: JKRTreeType
+	let id: JKRTreeID
+
+	// Equatable
+	static func == (lhs: JKRTreeParameterDeclaration,
+	                rhs: JKRTreeParameterDeclaration) -> Bool {
+		return lhs.type == rhs.type && lhs.id == rhs.id
+	}
+}
+
+struct JKRTreeFunctionDeclaration: Equatable {
+	let type: JKRTreeType
+	let id: JKRTreeID
+	let parameters: [JKRTreeParameterDeclaration]
+	let block: [JKRTreeStatement]
+
+	// Equatable
+	static func == (lhs: JKRTreeFunctionDeclaration,
+	                rhs: JKRTreeFunctionDeclaration) -> Bool {
+		return lhs.type == rhs.type && lhs.id == rhs.id &&
+			lhs.parameters == rhs.parameters && lhs.block == rhs.block
 	}
 }
 

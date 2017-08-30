@@ -6,74 +6,28 @@ private let testFilesPath = CommandLine.arguments[1] +
 
 class ASTTests: XCTestCase {
 
-	func testIDs() {
+	func testStatements() {
 		// WITH:
-		let ids: [JKRTreeID] = [
-			JKRTreeID("foo"),
-			JKRTreeID(stringLiteral: "bar"),
-			JKRTreeID(extendedGraphemeClusterLiteral: "baz"),
-			JKRTreeID(unicodeScalarLiteral: "bla"),
-			"hue"
+		let statements: [JKRTreeStatement] = [
+			.assignment(.assignment("y", 1)),
+			.assignment(.assignment("y", 0)),
+			.functionCall(JKRTreeFunctionCall(id: "f")),
+			.functionCall(JKRTreeFunctionCall(id: "methodName")),
+			.functionCall(JKRTreeFunctionCall(id: "methodName",
+			                                  parameters: [1])),
+			.returnStm(0),
+			.returnStm(1)
 		]
 
-		let expectedTexts = ["foo", "bar", "baz", "bla", "hue"]
-
 		// TEST: == succeeds on equal instances (reflexive)
-		XCTAssertEqual(ids, ids.arrayCopy())
+		XCTAssertEqual(statements, statements.arrayCopy())
 
 		// TEST: == fails on different instances
-		for (id, differentID) in zip(ids, ids.shifted()) {
-			XCTAssertNotEqual(id, differentID)
+		for (statement, differentStatement) in
+			zip(statements, statements.shifted())
+		{
+			XCTAssertNotEqual(statement, differentStatement)
 		}
-
-		// TEST: data is initialized, stored and retrieved as expected
-		XCTAssertEqual(ids.map { $0.text }, expectedTexts)
-	}
-
-	func testTypes() {
-		// WITH:
-		let types: [JKRTreeType] = [
-			JKRTreeType("Foo"),
-			JKRTreeType(stringLiteral: "Bar"),
-			JKRTreeType(extendedGraphemeClusterLiteral: "Baz"),
-			JKRTreeType(unicodeScalarLiteral: "Bla"),
-			"Hue"
-		]
-
-		let expectedTexts = ["Foo", "Bar", "Baz", "Bla", "Hue"]
-
-		// TEST: == succeeds on equal instances (reflexive)
-		XCTAssertEqual(types, types.arrayCopy())
-
-		// TEST: == fails on different instances
-		for (type, differentType) in zip(types, types.shifted()) {
-			XCTAssertNotEqual(type, differentType)
-		}
-
-		// TEST: data is initialized, stored and retrieved as expected
-		XCTAssertEqual(types.map { $0.text }, expectedTexts)
-	}
-
-	func testInts() {
-		// WITH:
-		let ints: [JKRTreeInt] = [
-			JKRTreeInt(0),
-			JKRTreeInt(integerLiteral: 1),
-			2
-		]
-
-		let expectedValues = [0, 1, 2]
-
-		// TEST: == succeeds on equal instances (reflexive)
-		XCTAssertEqual(ints, ints.arrayCopy())
-
-		// TEST: == fails on different instances
-		for (int, differentInt) in zip(ints, ints.shifted()) {
-			XCTAssertNotEqual(int, differentInt)
-		}
-
-		// TEST: data is initialized, stored and retrieved as expected
-		XCTAssertEqual(ints.map { $0.value }, expectedValues)
 	}
 
 	func testOperators() {
@@ -167,33 +121,32 @@ class ASTTests: XCTestCase {
 		}
 	}
 
-	func testStatements() {
+	func testFunctionCalls() {
 		// WITH:
-		let statements: [JKRTreeStatement] = [
-			.assignment(.assignment("y", 1)),
-			.assignment(.assignment("y", 0)),
-			.returnStm(0),
-			.returnStm(1)
+		let functionCalls: [JKRTreeFunctionCall] = [
+			JKRTreeFunctionCall(id: "print"),
+			JKRTreeFunctionCall(id: "f"),
+			JKRTreeFunctionCall(id: "f", parameters: [1]),
+			JKRTreeFunctionCall(id: "f", parameters: [1, 2])
 		]
 
 		// TEST: == succeeds on equal instances (reflexive)
-		XCTAssertEqual(statements, statements.arrayCopy())
+		XCTAssertEqual(functionCalls, functionCalls.arrayCopy())
 
 		// TEST: == fails on different instances
-		for (statement, differentStatement) in
-			zip(statements, statements.shifted())
+		for (functionCall, differentFunctionCall) in
+			zip(functionCalls, functionCalls.shifted())
 		{
-			XCTAssertNotEqual(statement, differentStatement)
+			XCTAssertNotEqual(functionCall, differentFunctionCall)
 		}
 	}
 
-
-	func testParameters() {
+	func testParameterDeclarations() {
 		// WITH:
-		let parameters: [JKRTreeParameter] = [
-			JKRTreeParameter(type: "Int", id: "x"),
-			JKRTreeParameter(type: "Person", id: "x"),
-			JKRTreeParameter(type: "Person", id: "joe")
+		let parameters: [JKRTreeParameterDeclaration] = [
+			JKRTreeParameterDeclaration(type: "Int", id: "x"),
+			JKRTreeParameterDeclaration(type: "Person", id: "x"),
+			JKRTreeParameterDeclaration(type: "Person", id: "joe")
 		]
 
 		let expectedData: [(type: JKRTreeType, id: JKRTreeID)] =
@@ -230,15 +183,15 @@ class ASTTests: XCTestCase {
 				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
-				parameters: [JKRTreeParameter(type: "Float", id: "bla")],
+				parameters: [JKRTreeParameterDeclaration(type: "Float", id: "bla")],
 				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
-				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
+				parameters: [JKRTreeParameterDeclaration(type: "Int", id: "bla")],
 				block: [.assignment(.assignment("y", 1))]),
 			JKRTreeFunctionDeclaration(
 				type: "Float", id: "func2",
-				parameters: [JKRTreeParameter(type: "Int", id: "bla")],
+				parameters: [JKRTreeParameterDeclaration(type: "Int", id: "bla")],
 				block: [.assignment(.assignment("x", 1))])
 		]
 
@@ -267,5 +220,75 @@ class ASTTests: XCTestCase {
 		{
 			XCTAssertEqual(block, expectedBlock)
 		}
+	}
+
+	func testIDs() {
+		// WITH:
+		let ids: [JKRTreeID] = [
+			JKRTreeID("foo"),
+			JKRTreeID(stringLiteral: "bar"),
+			JKRTreeID(extendedGraphemeClusterLiteral: "baz"),
+			JKRTreeID(unicodeScalarLiteral: "bla"),
+			"hue"
+		]
+
+		let expectedTexts = ["foo", "bar", "baz", "bla", "hue"]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(ids, ids.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (id, differentID) in zip(ids, ids.shifted()) {
+			XCTAssertNotEqual(id, differentID)
+		}
+
+		// TEST: data is initialized, stored and retrieved as expected
+		XCTAssertEqual(ids.map { $0.text }, expectedTexts)
+	}
+
+	func testTypes() {
+		// WITH:
+		let types: [JKRTreeType] = [
+			JKRTreeType("Foo"),
+			JKRTreeType(stringLiteral: "Bar"),
+			JKRTreeType(extendedGraphemeClusterLiteral: "Baz"),
+			JKRTreeType(unicodeScalarLiteral: "Bla"),
+			"Hue"
+		]
+
+		let expectedTexts = ["Foo", "Bar", "Baz", "Bla", "Hue"]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(types, types.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (type, differentType) in zip(types, types.shifted()) {
+			XCTAssertNotEqual(type, differentType)
+		}
+
+		// TEST: data is initialized, stored and retrieved as expected
+		XCTAssertEqual(types.map { $0.text }, expectedTexts)
+	}
+
+	func testInts() {
+		// WITH:
+		let ints: [JKRTreeInt] = [
+			JKRTreeInt(0),
+			JKRTreeInt(integerLiteral: 1),
+			2
+		]
+
+		let expectedValues = [0, 1, 2]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(ints, ints.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (int, differentInt) in zip(ints, ints.shifted()) {
+			XCTAssertNotEqual(int, differentInt)
+		}
+
+		// TEST: data is initialized, stored and retrieved as expected
+		XCTAssertEqual(ints.map { $0.value }, expectedValues)
 	}
 }

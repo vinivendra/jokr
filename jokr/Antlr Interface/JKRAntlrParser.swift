@@ -3,7 +3,6 @@ import Antlr4
 class JKRAntlrParser: JKRParser {
 	func parse(file: String) throws -> JKRTreeProgram {
 		do {
-			log("Parsing...")
 			let contents = try String(contentsOfFile: file)
 			let char = ANTLRInputStream(contents)
 			let lexer = JokrLexer(char)

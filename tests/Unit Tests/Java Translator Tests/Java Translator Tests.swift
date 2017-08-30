@@ -10,6 +10,7 @@ private let errorMessage =
 // swiftlint:disable line_length
 private let emptyMainContents = "public class Main {\n\tpublic static void main(String []args) {\n\t}\n}\n"
 private let assignmentMainContents = "public class Main {\n\tpublic static void main(String []args) {\n\t\tint x = 2;\n\t\tint y = x + x;\n\t\tfloat z = y - x;\n\t\ty = (z + x) - y;\n\t}\n}\n"
+private let functionCallMainContents = "public class Main {\n\tpublic static void main(String []args) {\n\t\tSystem.out.format(\"Hello jokr!\\n\");\n\t\tSystem.out.format(\"%d\\n\", 1);\n\t\tSystem.out.format(\"%d %d\\n\", 1, 2);\n\t}\n}\n"
 // swiftlint:enable line_length
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -55,8 +56,24 @@ class JavaTranslatorTests: XCTestCase {
 			// WITH:
 			let files = try translate(file: "TestAssignments.jkr")
 
-			// TEST: Empty main file gets created
+			// TEST: Main file gets created with correct contents
 			XCTAssertEqual(files["Main.java"], assignmentMainContents)
+
+			// TEST: No other files get created
+			XCTAssertEqual(files.count, 1)
+		}
+		catch (let error) {
+			XCTFail(errorMessage + "\(error)")
+		}
+	}
+
+	func testFunctionCall() {
+		do {
+			// WITH:
+			let files = try translate(file: "TestFunctionCalls.jkr")
+
+			// TEST: Main file gets created with correct contents
+			XCTAssertEqual(files["Main.java"], functionCallMainContents)
 
 			// TEST: No other files get created
 			XCTAssertEqual(files.count, 1)

@@ -1,3 +1,4 @@
+// Array Pretty Print
 extension Array {
 	func prettyPrint(initiator: String = "[",
 	                 separator: String = ", ",
@@ -24,6 +25,7 @@ extension Array {
 	}
 }
 
+// Array Shift
 protocol MutableRandomAccessCollection:
 MutableCollection, RandomAccessCollection { }
 
@@ -53,8 +55,24 @@ extension MutableRandomAccessCollection {
 
 extension Array: MutableRandomAccessCollection { }
 
+// Array Copy
 extension Collection {
 	func arrayCopy() -> [Iterator.Element] {
 		return self.map { $0 }
+	}
+}
+
+// String Strip NSLog data
+extension String {
+	func strippingNSLogData() -> String {
+		let lines = self.components(separatedBy: "\n")
+		let contents = lines.map { (string: String) -> String in
+			var copy = string
+			guard let closeBracketRange = copy.range(of: "]") else { return "" }
+			let nslogDataEnd = copy.index(after: closeBracketRange.upperBound)
+			copy.removeSubrange(copy.startIndex..<nslogDataEnd)
+			return copy
+		}
+		return contents.joined(separator: "\n")
 	}
 }

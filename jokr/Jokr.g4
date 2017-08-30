@@ -1,6 +1,9 @@
 // Define a grammar called Hello
 grammar Jokr;
 
+////////////////////////////////////////////////////////////////////////////////
+// Top level
+
 program:
 	// empty
 	| statementList
@@ -14,6 +17,7 @@ statementList:
 
 statement:
 	assignment
+	| functionCall
 	| returnStatement;
 
 declarationList:
@@ -23,18 +27,47 @@ declarationList:
 declaration:
 	functionDeclaration;
 
+////////////////////////////////////////////////////////////////////////////////
+// Building blocks
+
+block:
+	LBRACE NEW_LINE statementList NEW_LINE RBRACE;
+
+lvalue:
+	ID;
+
+expression:
+	INT
+	| LPAREN expression RPAREN
+	| expression OPERATOR expression
+	| lvalue;
+
+////////////////////////////////////////////////////////////////////////////////
+// Statements
+
+parameterList:
+	// empty
+	| parameter
+	| parameterList COMMA parameter;
+
+parameter:
+	expression;
+
 assignment:
 	variableDeclaration ASSIGN expression
 	| lvalue ASSIGN expression;
 
-functionDeclaration:
-	functionDeclarationHeader functionDeclarationParameters block;
-
-functionDeclarationHeader:
+variableDeclaration:
 	TYPE ID;
 
-functionDeclarationParameters:
-	LPAREN parameterDeclarationList RPAREN;
+functionCall:
+	ID LPAREN parameterList RPAREN;
+
+returnStatement:
+	RETURN expression;
+
+////////////////////////////////////////////////////////////////////////////////
+// Declarations
 
 parameterDeclarationList:
 	// empty
@@ -44,23 +77,14 @@ parameterDeclarationList:
 parameterDeclaration:
 	TYPE ID;
 
-block:
-	LBRACE NEW_LINE statementList NEW_LINE RBRACE;
+functionDeclaration:
+	functionDeclarationHeader functionDeclarationParameters block;
 
-expression:
-	INT
-	| LPAREN expression RPAREN
-	| expression OPERATOR expression
-	| lvalue;
-
-returnStatement:
-	RETURN expression;
-
-variableDeclaration:
+functionDeclarationHeader:
 	TYPE ID;
 
-lvalue:
-	ID;
+functionDeclarationParameters:
+	LPAREN parameterDeclarationList RPAREN;
 
 ///////////////////////////////////////////////////////
 BLOCK_COMMENT : '/*' (BLOCK_COMMENT|.)*? '*/' -> channel(HIDDEN);

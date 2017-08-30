@@ -78,10 +78,10 @@ class JKRObjcTranslator: JKRTranslator {
 		switch statement {
 		case let .assignment(assignment):
 			return translate(assignment)
+		case let .functionCall(functionCall):
+			return translate(functionCall)
 		case let .returnStm(returnStm):
 			return translate(returnStm)
-//		case let .functionDeclaration(functionDeclaration):
-//			return translateHeader(functionDeclaration)
 		}
 	}
 
@@ -98,6 +98,23 @@ class JKRObjcTranslator: JKRTranslator {
 			let expressionText = translate(expression)
 			return "\(idText) = \(expressionText);\n"
 		}
+	}
+
+	private func translate(_ functionCall: JKRTreeFunctionCall) -> String {
+		if functionCall.id == "print" {
+			if functionCall.parameters.count == 0 {
+				return "NSLog(@\"Hello jokr!\\n\");\n"
+			}
+			else {
+				let format = functionCall.parameters.map {_ in "%d" }
+					.joined(separator: " ")
+				let parameters = functionCall.parameters.map(translate)
+					.joined(separator: ", ")
+				return "NSLog(@\"\(format)\\n\", \(parameters));\n"
+			}
+		}
+
+		return "\(string(for: functionCall.id))();\n"
 	}
 
 	private func translateHeader(
@@ -141,7 +158,9 @@ class JKRObjcTranslator: JKRTranslator {
 	}
 
 	private func strings(
-		for parameter: JKRTreeParameter) -> (type: String, id: String) {
+		for parameter: JKRTreeParameterDeclaration)
+		-> (type: String, id: String)
+	{
 		return (string(for: parameter.type),
 		        string(for: parameter.id))
 	}

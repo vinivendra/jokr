@@ -65,6 +65,22 @@ extension JokrParser.StatementListContext {
 	}
 }
 
+extension JokrParser.StatementContext {
+	func toJKRTreeStatement() -> JKRTreeStatement {
+		if let assignment = assignment() {
+			return .assignment(assignment.toJKRTreeAssignment())
+		}
+		else if let functionCall = functionCall() {
+			return .functionCall(functionCall.toJKRTreeFunctionCall())
+		}
+		else if let returnStatement = returnStatement() {
+			return .returnStm(returnStatement.toJKRTreeReturn())
+		}
+
+		fatalError("Failed to transpile parameter")
+	}
+}
+
 extension JokrParser.DeclarationListContext {
 	func toJKRTreeDeclarations() -> [JKRTreeDeclaration] {
 		guard let declaration = declaration()?.toJKRTreeDeclaration() else {
@@ -80,19 +96,6 @@ extension JokrParser.DeclarationListContext {
 	}
 }
 
-extension JokrParser.StatementContext {
-	func toJKRTreeStatement() -> JKRTreeStatement {
-		if let assignment = assignment() {
-			return .assignment(assignment.toJKRTreeAssignment())
-		}
-		else if let returnStatement = returnStatement() {
-			return .returnStm(returnStatement.getJKRTreeReturn())
-		}
-
-		fatalError("Failed to transpile parameter")
-	}
-}
-
 extension JokrParser.DeclarationContext {
 	func toJKRTreeDeclaration() -> JKRTreeDeclaration {
 		if let functionDeclaration = functionDeclaration() {
@@ -101,76 +104,6 @@ extension JokrParser.DeclarationContext {
 		}
 
 		fatalError("Failed to transpile parameter")
-	}
-}
-
-extension JokrParser.FunctionDeclarationContext {
-	func toJKRTreeFunctionDeclaration() -> JKRTreeFunctionDeclaration {
-		if let functionHeader = self.functionDeclarationHeader(),
-			let functionParameters = self.functionDeclarationParameters(),
-			let parameterList = functionParameters.parameterDeclarationList(),
-			let type = functionHeader.TYPE()?.toJKRTreeType(),
-			let id = functionHeader.ID()?.toJKRTreeID(),
-			let statementList = block()?.statementList()
-		{
-			let parameters = parameterList.toJKRTreeParameters()
-			let block = statementList.toJKRTreeStatements()
-
-			return JKRTreeFunctionDeclaration(type: type,
-			                                  id: id,
-			                                  parameters: parameters,
-			                                  block: block)
-		}
-
-		fatalError("Failed to transpile function declaration")
-	}
-}
-
-extension JokrParser.ParameterDeclarationListContext {
-	func toJKRTreeParameters() -> [JKRTreeParameter] {
-		if let parameter = parameterDeclaration() {
-
-			guard let type = parameter.TYPE()?.toJKRTreeType(),
-				let id = parameter.ID()?.toJKRTreeID() else
-			{
-				fatalError("Failed to transpile parameter")
-			}
-
-			let parameter = JKRTreeParameter(type: type,
-			                                 id: id)
-
-			if let parameterList = parameterDeclarationList() {
-				return parameterList.toJKRTreeParameters() + [parameter]
-			}
-			else {
-				return [parameter]
-			}
-		}
-		else {
-			return []
-		}
-	}
-}
-
-extension JokrParser.AssignmentContext {
-	func toJKRTreeAssignment() -> JKRTreeAssignment {
-		if let variableDeclaration = self.variableDeclaration(),
-			let expression = self.expression(),
-			let type = variableDeclaration.TYPE()?.toJKRTreeType(),
-			let id = variableDeclaration.ID()?.toJKRTreeID()
-		{
-			let expression = expression.toJKRTreeExpression()
-			return .declaration(type, id, expression)
-		}
-		else if let lvalue = self.lvalue(),
-			let expression = self.expression(),
-			let id = lvalue.ID()?.toJKRTreeID()
-		{
-			let expression = expression.toJKRTreeExpression()
-			return .assignment(id, expression)
-		}
-
-		fatalError("Failed to transpile assignment")
 	}
 }
 
@@ -202,12 +135,117 @@ extension JokrParser.ExpressionContext {
 	}
 }
 
+extension JokrParser.ParameterListContext {
+	func toJKRTreeExpressions() -> [JKRTreeExpression] {
+		if let parameter = parameter() {
+
+			guard let expression = parameter.expression()?.toJKRTreeExpression()
+				else
+			{
+				fatalError("Failed to transpile parameter")
+			}
+
+			if let parameterList = parameterList() {
+				return parameterList.toJKRTreeExpressions() + [expression]
+			}
+			else {
+				return [expression]
+			}
+		}
+		else {
+			return []
+		}
+	}
+}
+
+extension JokrParser.AssignmentContext {
+	func toJKRTreeAssignment() -> JKRTreeAssignment {
+		if let variableDeclaration = self.variableDeclaration(),
+			let expression = self.expression(),
+			let type = variableDeclaration.TYPE()?.toJKRTreeType(),
+			let id = variableDeclaration.ID()?.toJKRTreeID()
+		{
+			let expression = expression.toJKRTreeExpression()
+			return .declaration(type, id, expression)
+		}
+		else if let lvalue = self.lvalue(),
+			let expression = self.expression(),
+			let id = lvalue.ID()?.toJKRTreeID()
+		{
+			let expression = expression.toJKRTreeExpression()
+			return .assignment(id, expression)
+		}
+
+		fatalError("Failed to transpile assignment")
+	}
+}
+
+extension JokrParser.FunctionCallContext {
+	func toJKRTreeFunctionCall() -> JKRTreeFunctionCall {
+		if let id = self.ID()?.toJKRTreeID(),
+			let parameters = self.parameterList()?.toJKRTreeExpressions()
+		{
+			return JKRTreeFunctionCall(id: id, parameters: parameters)
+		}
+
+		fatalError("Failed to transpile function call")
+	}
+}
+
 extension JokrParser.ReturnStatementContext {
-	func getJKRTreeReturn() -> JKRTreeReturn {
+	func toJKRTreeReturn() -> JKRTreeReturn {
 		if let expression = self.expression()?.toJKRTreeExpression() {
 			return JKRTreeReturn(expression)
 		}
 
 		fatalError("Failed to transpile return")
+	}
+}
+
+extension JokrParser.ParameterDeclarationListContext {
+	func toJKRTreeParameterDeclarations() -> [JKRTreeParameterDeclaration] {
+		if let parameter = parameterDeclaration() {
+
+			guard let type = parameter.TYPE()?.toJKRTreeType(),
+				let id = parameter.ID()?.toJKRTreeID() else
+			{
+				fatalError("Failed to transpile parameter")
+			}
+
+			let parameter = JKRTreeParameterDeclaration(type: type,
+			                                 id: id)
+
+			if let parameterList = parameterDeclarationList() {
+				return parameterList.toJKRTreeParameterDeclarations() + [parameter]
+			}
+			else {
+				return [parameter]
+			}
+		}
+		else {
+			return []
+		}
+	}
+}
+
+extension JokrParser.FunctionDeclarationContext {
+	func toJKRTreeFunctionDeclaration() -> JKRTreeFunctionDeclaration {
+		if let functionHeader = self.functionDeclarationHeader(),
+			let functionParameters = self.functionDeclarationParameters(),
+			let parameterList = functionParameters.parameterDeclarationList(),
+			let type = functionHeader.TYPE()?.toJKRTreeType(),
+			let id = functionHeader.ID()?.toJKRTreeID(),
+			let statementList = block()?.statementList()
+		{
+			let parameters = parameterList.toJKRTreeParameterDeclarations()
+			let block = statementList.toJKRTreeStatements()
+
+			return JKRTreeFunctionDeclaration(type: type,
+			                                  id: id,
+			                                  parameters: parameters,
+			                                  block: block)
+		}
+
+		fatalError("Failed to transpile function declaration")
 	}
 }
