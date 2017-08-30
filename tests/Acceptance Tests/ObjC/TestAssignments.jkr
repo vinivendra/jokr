@@ -1,0 +1,4 @@
+Int x = 2
+Int y = 3
+x = 4
+print(x, y)

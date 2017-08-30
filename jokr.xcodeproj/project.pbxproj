@@ -171,6 +171,8 @@
 		24FAA0CF1F369D9A0053A6BC /* FunctionListenerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionListenerTests.swift; sourceTree = "<group>"; };
 		24FAA9A21F573B9900752153 /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
 		24FAA9A31F573BEE00752153 /* TestExpressions.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestExpressions.jkr; sourceTree = "<group>"; };
+		24FAA9A41F573CC600752153 /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
+		24FAA9A51F573CD300752153 /* TestExpressions.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestExpressions.jkr; sourceTree = "<group>"; };
 		24FFE8641F4C48D400234B34 /* TestFunctionCalls */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -363,10 +365,10 @@
 			isa = PBXGroup;
 			children = (
 				24C037551F4A0DFD00C88FCF /* JavaAcceptanceTests.swift */,
+				24FAA9A21F573B9900752153 /* TestAssignments.jkr */,
 				24C037591F4A0DFD00C88FCF /* TestEmpty.jkr */,
 				24FAA9A31F573BEE00752153 /* TestExpressions.jkr */,
 				24171CC01F4CAF9B002C136B /* TestFunctionCalls.jkr */,
-				24FAA9A21F573B9900752153 /* TestAssignments.jkr */,
 			);
 			path = Java;
 			sourceTree = "<group>";
@@ -375,6 +377,8 @@
 			isa = PBXGroup;
 			children = (
 				24C0375B1F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift */,
+				24FAA9A41F573CC600752153 /* TestAssignments.jkr */,
+				24FAA9A51F573CD300752153 /* TestExpressions.jkr */,
 				24C0375F1F4A0DFD00C88FCF /* TestEmpty.jkr */,
 				24171CC11F4CAFBA002C136B /* TestFunctionCalls.jkr */,
 			);

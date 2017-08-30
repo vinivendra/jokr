@@ -32,8 +32,8 @@ class ObjCAcceptanceTests: XCTestCase {
 		do {
 			let result = try transpileAndRun(file: "TestEmpty.jkr")
 			XCTAssertEqual(result.status, 0)
-			XCTAssertEqual(result.output, "")
 			XCTAssertEqual(result.error, "")
+			XCTAssertEqual(result.output, "")
 		}
 		catch (let error) {
 			XCTFail(errorMessage + "\(error)")
@@ -44,9 +44,33 @@ class ObjCAcceptanceTests: XCTestCase {
 		do {
 			let result = try transpileAndRun(file: "TestFunctionCalls.jkr")
 			XCTAssertEqual(result.status, 0)
-			XCTAssertEqual(result.output, "")
 			XCTAssertEqual(result.error.strippingNSLogData(),
 			               "Hello jokr!\n1\n1 2\n")
+			XCTAssertEqual(result.output, "")
+		}
+		catch (let error) {
+			XCTFail(errorMessage + "\(error)")
+		}
+	}
+
+	func testAssignments() {
+		do {
+			let result = try transpileAndRun(file: "TestAssignments.jkr")
+			XCTAssertEqual(result.status, 0)
+			XCTAssertEqual(result.error.strippingNSLogData(), "4 3\n")
+			XCTAssertEqual(result.output, (""))
+		}
+		catch (let error) {
+			XCTFail(errorMessage + "\(error)")
+		}
+	}
+
+	func testExpressions() {
+		do {
+			let result = try transpileAndRun(file: "TestExpressions.jkr")
+			XCTAssertEqual(result.status, 0)
+			XCTAssertEqual(result.error.strippingNSLogData(), "4\n0\n12\n")
+			XCTAssertEqual(result.output, (""))
 		}
 		catch (let error) {
 			XCTFail(errorMessage + "\(error)")
