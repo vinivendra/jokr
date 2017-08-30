@@ -63,4 +63,16 @@ class JavaAcceptanceTests: XCTestCase {
 			XCTFail(errorMessage + "\(error)")
 		}
 	}
+
+	func testExpressions() {
+		do {
+			let result = try transpileAndRun(file: "TestExpressions.jkr")
+			XCTAssertEqual(result.status, 0)
+			XCTAssertEqual(result.output, "4\n0\n12\n")
+			XCTAssertEqual(result.error, (""))
+		}
+		catch (let error) {
+			XCTFail(errorMessage + "\(error)")
+		}
+	}
 }
