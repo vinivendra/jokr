@@ -2,7 +2,6 @@ import Foundation
 import Antlr4
 
 // Branch - acceptance tests
-// TODO: Add acceptance tests for parameters in function calls
 // TODO: Add acceptance tests for expressions and assignments
 // TODO: Consider adding Strings to allow print formatting with any types
 
