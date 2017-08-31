@@ -374,6 +374,33 @@ class AntlrParserTests: XCTestCase {
 		}
 	}
 
+	func testClassDeclarations() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestClassDeclarations")
+
+			let declarations = tree.filter(type:
+				JokrParser.ClassDeclarationContext.self)
+
+			// TEST: Parser found all expected elements
+			let expectedDeclarations: [TokenTest] =
+				[(1, 0, "classPerson{\n\n}")]
+
+			for (expected, actual) in zip(expectedDeclarations, declarations) {
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(declarations.count, expectedDeclarations.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	// Code snippet to print all found contexts, helps when creating new tests.
 	//
 	//	for context in contexts {

@@ -1247,6 +1247,7 @@ open class JokrParser: Parser {
 		open func CLASS() -> TerminalNode? { return getToken(JokrParser.Tokens.CLASS.rawValue, 0) }
 		open func TYPE() -> TerminalNode? { return getToken(JokrParser.Tokens.TYPE.rawValue, 0) }
 		open func LBRACE() -> TerminalNode? { return getToken(JokrParser.Tokens.LBRACE.rawValue, 0) }
+		open func NEW_LINE() -> TerminalNode? { return getToken(JokrParser.Tokens.NEW_LINE.rawValue, 0) }
 		open func RBRACE() -> TerminalNode? { return getToken(JokrParser.Tokens.RBRACE.rawValue, 0) }
 		open override func getRuleIndex() -> Int { return JokrParser.RULE_classDeclaration }
 		override
@@ -1278,6 +1279,8 @@ open class JokrParser: Parser {
 		 	setState(170)
 		 	try match(JokrParser.Tokens.LBRACE.rawValue)
 		 	setState(171)
+		 	try match(JokrParser.Tokens.NEW_LINE.rawValue)
+		 	setState(172)
 		 	try match(JokrParser.Tokens.RBRACE.rawValue)
 
 		}

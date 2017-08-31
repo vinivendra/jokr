@@ -88,7 +88,7 @@ functionDeclarationParameters:
 	LPAREN parameterDeclarationList RPAREN;
 
 classDeclaration:
-	CLASS TYPE LBRACE RBRACE;
+	CLASS TYPE LBRACE NEW_LINE RBRACE;
 
 ///////////////////////////////////////////////////////
 // Keywords
