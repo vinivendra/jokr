@@ -146,6 +146,7 @@
 		24C037591F4A0DFD00C88FCF /* TestEmpty.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestEmpty.jkr; sourceTree = "<group>"; };
 		24C0375B1F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCAcceptanceTests.swift; sourceTree = "<group>"; };
 		24C0375F1F4A0DFD00C88FCF /* TestEmpty.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestEmpty.jkr; sourceTree = "<group>"; };
+		24C21A691F5C562D0089F9A8 /* TestClassDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestClassDeclarations; path = "Antlr to Jokr Tests/TestClassDeclarations"; sourceTree = "<group>"; };
 		24C65CB41F3B65EE00FCFFF2 /* main.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jkr; path = tests/main.jkr; sourceTree = SOURCE_ROOT; };
 		24C65CC01F3B838600FCFFF2 /* AntlrToJKR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AntlrToJKR.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		24C65CC11F3B838600FCFFF2 /* JKRAntlrParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JKRAntlrParser.swift; sourceTree = "<group>"; };
@@ -435,6 +436,7 @@
 			children = (
 				24E61C3E1F33AC5200A2B8F5 /* AntlrToJokrTests.swift */,
 				24E61C431F33B00C00A2B8F5 /* TestAssignments */,
+				24C21A691F5C562D0089F9A8 /* TestClassDeclarations */,
 				2432956E1F461EAA00478218 /* TestDeclarations */,
 				248F364B1F3659F600BCAF0A /* TestEmpty */,
 				2433CFCB1F33FA310027A15F /* TestExpressions */,

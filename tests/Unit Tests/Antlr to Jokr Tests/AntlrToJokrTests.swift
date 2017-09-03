@@ -133,6 +133,12 @@ class AntlrToJokrTests: XCTestCase {
 								"String", "baz", .operation(5, "+", 6))),
 							JKRTreeStatement.returnStm(0)]
 					)
+				),
+				.classDeclaration(
+					JKRTreeClassDeclaration(type: "Person")
+				),
+				.classDeclaration(
+					JKRTreeClassDeclaration(type: "Animal")
 				)
 			]
 
@@ -363,6 +369,30 @@ class AntlrToJokrTests: XCTestCase {
 					             JKRTreeParameterDeclaration(type: "Float", id: "foo"),
 					             JKRTreeParameterDeclaration(type: "Double", id: "hue")],
 					block: [.returnStm(0)])
+			]
+
+			// TEST: All elements were converted successfully
+			XCTAssertEqual(declarations, expectedDeclarations)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testClassDeclarations() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestClassDeclarations")
+
+			let declarations = tree.filter(type:
+				JokrParser.ClassDeclarationContext.self)
+				.map { $0.toJKRTreeClassDeclaration() }
+
+			let expectedDeclarations: [JKRTreeClassDeclaration] = [
+				JKRTreeClassDeclaration(
+					type: "Person"),
+				JKRTreeClassDeclaration(
+					type: "Animal")
 			]
 
 			// TEST: All elements were converted successfully
