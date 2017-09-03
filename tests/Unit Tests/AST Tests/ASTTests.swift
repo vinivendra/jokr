@@ -167,6 +167,31 @@ class ASTTests: XCTestCase {
 		XCTAssertEqual(parameters.map { $0.id }, expectedData.map { $0.id })
 	}
 
+	func testDeclarations() {
+		let declarations: [JKRTreeDeclaration] = [
+			.functionDeclaration(JKRTreeFunctionDeclaration(
+				type: "Int", id: "func1",
+				parameters: [], block: [])),
+			.functionDeclaration(JKRTreeFunctionDeclaration(
+				type: "Int", id: "func2",
+				parameters: [], block: [])),
+			.classDeclaration(JKRTreeClassDeclaration(
+				type: "Person")),
+			.classDeclaration(JKRTreeClassDeclaration(
+				type: "Animal"))
+		]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(declarations, declarations.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (declaration, differentDeclaration) in
+			zip(declarations, declarations.shifted())
+		{
+			XCTAssertNotEqual(declaration, differentDeclaration)
+		}
+	}
+
 	func testFunctionDeclarations() {
 		let declarations: [JKRTreeFunctionDeclaration] = [
 			JKRTreeFunctionDeclaration(
@@ -219,6 +244,24 @@ class ASTTests: XCTestCase {
 			zip(declarations.map { $0.block }, expectedBlocks)
 		{
 			XCTAssertEqual(block, expectedBlock)
+		}
+	}
+
+	func testClassDeclarations() {
+		// WITH:
+		let classDeclarations: [JKRTreeClassDeclaration] = [
+			JKRTreeClassDeclaration(type: "Person"),
+			JKRTreeClassDeclaration(type: "Animal")
+		]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(classDeclarations, classDeclarations.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (classDeclaration, differentClassDeclaration) in
+			zip(classDeclarations, classDeclarations.shifted())
+		{
+			XCTAssertNotEqual(classDeclaration, differentClassDeclaration)
 		}
 	}
 

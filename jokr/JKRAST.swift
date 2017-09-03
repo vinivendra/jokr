@@ -32,19 +32,18 @@ enum JKRTreeStatement: Equatable {
 
 enum JKRTreeDeclaration: Equatable {
 	case functionDeclaration(JKRTreeFunctionDeclaration)
-
-	var block: [JKRTreeStatement] {
-		switch self {
-		case let .functionDeclaration(functionDeclaration):
-			return functionDeclaration.block
-		}
-	}
+	case classDeclaration(JKRTreeClassDeclaration)
 
 	static func == (lhs: JKRTreeDeclaration, rhs: JKRTreeDeclaration) -> Bool {
 		switch (lhs, rhs) {
 		case let (.functionDeclaration(functionDeclaration1),
 		          .functionDeclaration(functionDeclaration2)):
 			return functionDeclaration1 == functionDeclaration2
+		case let (.classDeclaration(classDeclaration1),
+		          .classDeclaration(classDeclaration2)):
+			return classDeclaration1 == classDeclaration2
+		default:
+			return false
 		}
 	}
 }
@@ -181,6 +180,16 @@ struct JKRTreeFunctionDeclaration: Equatable {
 	                rhs: JKRTreeFunctionDeclaration) -> Bool {
 		return lhs.type == rhs.type && lhs.id == rhs.id &&
 			lhs.parameters == rhs.parameters && lhs.block == rhs.block
+	}
+}
+
+struct JKRTreeClassDeclaration: Equatable {
+	let type: JKRTreeType
+
+	// Equatable
+	static func == (lhs: JKRTreeClassDeclaration,
+	                rhs: JKRTreeClassDeclaration) -> Bool {
+		return lhs.type == rhs.type
 	}
 }
 
