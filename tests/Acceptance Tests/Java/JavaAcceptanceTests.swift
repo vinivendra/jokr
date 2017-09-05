@@ -15,6 +15,9 @@ class JavaAcceptanceTests: XCTestCase {
 	func transpileAndRun(
 		file filename: String) throws -> Shell.CommandResult {
 		do {
+			// TODO: Add trashFiles call to Objc tests too
+			try trashFiles(atFolder: outputDirectory)
+
 			let program = try parser.parse(file: testFilesPath + filename)
 			let writer = JKRFileWriter(outputDirectory: outputDirectory)
 			let translator = JKRJavaTranslator(writingWith: writer)
@@ -28,6 +31,9 @@ class JavaAcceptanceTests: XCTestCase {
 		}
 	}
 
+	// TODO: Figure out what the appropriate behaviour should be for transpiling
+	// an empty file. Create an empty main like before? Return two empty arrays
+	// and then stop? Return two nils and then stop? Throw an exception?
 	func testEmpty() {
 		do {
 			let result = try transpileAndRun(file: "TestEmpty.jkr")
