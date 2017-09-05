@@ -14,7 +14,8 @@ class JKRObjcTranslator: JKRTranslator {
 
 	func translate(program: JKRTreeProgram) throws {
 		do {
-			if let statements = program.statements {
+			if let statements = program.statements,
+				statements.count > 0 {
 				changeFile("main.m")
 
 				indentation = 0
@@ -35,8 +36,39 @@ class JKRObjcTranslator: JKRTranslator {
 				write("return 0;\n}\n")
 			}
 
-//			if let declarations = program.declarations {
-//			}
+			if let declarations = program.declarations,
+				declarations.count > 0 {
+
+				for case let .classDeclaration(classDeclaration)
+					in declarations
+				{
+					let className = classDeclaration.type.text
+
+					//
+					// Interface file
+					changeFile("\(className).h")
+
+					write("#import <Foundation/Foundation.h>\n\n@interface \(className) : NSObject\n\n@end\n")
+					// swiftlint:disable:previous line_length
+					indentation = 0
+
+					//					writeWithStructure(statements)
+					
+					write("}\n")
+
+					//
+					// Implementation file
+					changeFile("\(className).m")
+
+					write("#import \"\(className).h\"\n\n@implementation \(className)\n\n@end\n")
+					// swiftlint:disable:previous line_length
+					indentation = 0
+
+//					writeWithStructure(statements)
+
+					write("}\n")
+				}
+			}
 
 			try writer.finishWriting()
 		}

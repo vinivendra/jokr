@@ -94,6 +94,8 @@
 		240409451F4726FA00FC2AD4 /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestAssignments.jkr; path = "tests/Unit Tests/Java Translator Tests/TestAssignments.jkr"; sourceTree = SOURCE_ROOT; };
 		240409471F47288C00FC2AD4 /* Objc Translator Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Objc Translator Tests.swift"; sourceTree = "<group>"; };
 		240409491F47288C00FC2AD4 /* TestEmpty.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestEmpty.jkr; sourceTree = "<group>"; };
+		240E11151F5DDB7300F67F3E /* TestClassDeclarations.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestClassDeclarations.jkr; path = "Java Translator Tests/TestClassDeclarations.jkr"; sourceTree = "<group>"; };
+		240E112C1F5DDDFA00F67F3E /* TestClassDeclarations.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClassDeclarations.jkr; sourceTree = "<group>"; };
 		241371DE1F58D55A001DE932 /* TestClassDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClassDeclarations; sourceTree = "<group>"; };
 		24171CB91F4CA0FE002C136B /* TestFunctionCalls */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestFunctionCalls; path = "Antlr to Jokr Tests/TestFunctionCalls"; sourceTree = "<group>"; };
 		24171CBA1F4CAA66002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			children = (
 				240409411F47223800FC2AD4 /* Java Translator Tests.swift */,
 				24171CBE1F4CAE6C002C136B /* TestAssignments.jkr */,
+				240E11151F5DDB7300F67F3E /* TestClassDeclarations.jkr */,
 				240409441F47230900FC2AD4 /* TestEmpty.jkr */,
 				24171CBF1F4CAEE0002C136B /* TestFunctionCalls.jkr */,
 			);
@@ -215,6 +218,7 @@
 			children = (
 				240409471F47288C00FC2AD4 /* Objc Translator Tests.swift */,
 				24171CBD1F4CAE62002C136B /* TestAssignments.jkr */,
+				240E112C1F5DDDFA00F67F3E /* TestClassDeclarations.jkr */,
 				240409491F47288C00FC2AD4 /* TestEmpty.jkr */,
 				24171CBA1F4CAA66002C136B /* TestFunctionCalls.jkr */,
 			);

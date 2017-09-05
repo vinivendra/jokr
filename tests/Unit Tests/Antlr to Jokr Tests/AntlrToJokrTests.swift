@@ -357,7 +357,8 @@ class AntlrToJokrTests: XCTestCase {
 					block: [.returnStm(0)]),
 				JKRTreeFunctionDeclaration(
 					type: "Int", id: "func2",
-					parameters: [JKRTreeParameterDeclaration(type: "Float", id: "bla")],
+					parameters: [
+						JKRTreeParameterDeclaration(type: "Float", id: "bla")],
 					block: [
 						.assignment(.declaration(
 							"String", "baz",
@@ -365,9 +366,10 @@ class AntlrToJokrTests: XCTestCase {
 						.returnStm(0)]),
 				JKRTreeFunctionDeclaration(
 					type: "Void", id: "func4",
-					parameters: [JKRTreeParameterDeclaration(type: "Int", id: "bla"),
-					             JKRTreeParameterDeclaration(type: "Float", id: "foo"),
-					             JKRTreeParameterDeclaration(type: "Double", id: "hue")],
+					parameters: [
+						JKRTreeParameterDeclaration(type: "Int", id: "bla"),
+						JKRTreeParameterDeclaration(type: "Float", id: "foo"),
+						JKRTreeParameterDeclaration(type: "Double", id: "hue")],
 					block: [.returnStm(0)])
 			]
 

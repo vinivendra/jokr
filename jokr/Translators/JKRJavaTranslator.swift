@@ -14,26 +14,40 @@ class JKRJavaTranslator: JKRTranslator {
 
 	func translate(program: JKRTreeProgram) throws {
 		do {
-			if let statements = program.statements {
+			if let statements = program.statements,
+				statements.count > 0 {
 				changeFile("Main.java")
 
-				indentation = 0
 				write("public class Main {\n")
-				indentation += 1
+				indentation = 1
 
-				addIntentation()
+				writeIntentation()
 				write("public static void main(String []args) {\n")
 				indentation += 1
 
 				writeWithStructure(statements)
 
 				indentation = 1
-				addIntentation()
+				writeIntentation()
 				write("}\n}\n")
 			}
+			if let declarations = program.declarations,
+				declarations.count > 0 {
 
-//			if let declarations = program.declarations {
-//			}
+				for case let .classDeclaration(classDeclaration)
+					in declarations
+				{
+					let className = classDeclaration.type.text
+					changeFile("\(className).java")
+
+					write("public class \(className) {\n")
+					indentation = 1
+
+//					writeWithStructure(statements)
+
+					write("}\n")
+				}
+			}
 
 			try writer.finishWriting()
 		}
@@ -57,7 +71,7 @@ class JKRJavaTranslator: JKRTranslator {
 	}
 
 	private func writeWithStructure(_ statement: JKRTreeStatement) {
-		addIntentation()
+		writeIntentation()
 		write(translate(statement))
 
 //		if let block = statement.block {
@@ -184,7 +198,7 @@ class JKRJavaTranslator: JKRTranslator {
 		writer.changeFile(string)
 	}
 
-	private func addIntentation() {
+	private func writeIntentation() {
 		for _ in 0..<indentation {
 			write("\t")
 		}
