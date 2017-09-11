@@ -10,6 +10,7 @@ excluded:
 disabled_rules:
   - todo
   - opening_brace
+  - file_length
 
 opt_in_rules:
   - force_unwrapping
