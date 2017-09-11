@@ -25,10 +25,16 @@ class ObjCTranslatorTests: XCTestCase {
 	func translate(
 		file filename: String) throws -> [String: String] {
 		do {
-			let program = try parser.parse(file: testFilesPath + filename)
+			guard let tree = try parser.parse(file: testFilesPath + filename)
+				else
+			{
+				XCTFail("Failed to parse file \(filename)")
+				throw JKRError.parsing
+			}
+
 			let writer = JKRStringWriter()
 			let translator = JKRObjcTranslator(writingWith: writer)
-			try translator.translate(program: program)
+			try translator.translate(tree: tree)
 			return writer.files
 		}
 		catch (let error) {

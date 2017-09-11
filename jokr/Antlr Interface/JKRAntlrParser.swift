@@ -1,7 +1,7 @@
 import Antlr4
 
 class JKRAntlrParser: JKRParser {
-	func parse(file: String) throws -> JKRTreeProgram {
+	func parse(file: String) throws -> JKRTree? {
 		do {
 			let contents = try String(contentsOfFile: file)
 			let char = ANTLRInputStream(contents)
@@ -12,16 +12,13 @@ class JKRAntlrParser: JKRParser {
 			let tree = try parser.program()
 
 			if let statements = tree.toJKRTreeStatements() {
-				return JKRTreeProgram(statements: statements,
-				                      declarations: [])
+				return .statements(statements)
 			}
 			else if let declarations = tree.toJKRTreeDeclarations() {
-				return JKRTreeProgram(statements: [],
-				                      declarations: declarations)
+				return .declarations(declarations)
 			}
 			else {
-				return JKRTreeProgram(statements: [],
-				                      declarations: [])
+				return nil
 			}
 		}
 		catch (let error) {

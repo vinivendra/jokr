@@ -12,10 +12,10 @@ class JKRObjcTranslator: JKRTranslator {
 		return JKRObjcTranslator(writingWith: writer)
 	}
 
-	func translate(program: JKRTreeProgram) throws {
+	func translate(tree: JKRTree) throws {
 		do {
-			if let statements = program.statements,
-				statements.count > 0 {
+			switch tree {
+			case let .statements(statements):
 				changeFile("main.m")
 
 				indentation = 0
@@ -34,11 +34,7 @@ class JKRObjcTranslator: JKRTranslator {
 				write("}\n")
 				addIntentation()
 				write("return 0;\n}\n")
-			}
-
-			if let declarations = program.declarations,
-				declarations.count > 0 {
-
+			case let .declarations(declarations):
 				for case let .classDeclaration(classDeclaration)
 					in declarations
 				{
@@ -48,20 +44,22 @@ class JKRObjcTranslator: JKRTranslator {
 					// Interface file
 					changeFile("\(className).h")
 
-					write("#import <Foundation/Foundation.h>\n\n@interface \(className) : NSObject\n\n@end\n")
-					// swiftlint:disable:previous line_length
+					write("#import <Foundation/Foundation.h>\n\n" +
+						"@interface \(className) : NSObject\n\n" +
+						"@end\n")
 					indentation = 0
 
-					//					writeWithStructure(statements)
-					
+//					writeWithStructure(statements)
+
 					write("}\n")
 
 					//
 					// Implementation file
 					changeFile("\(className).m")
 
-					write("#import \"\(className).h\"\n\n@implementation \(className)\n\n@end\n")
-					// swiftlint:disable:previous line_length
+					write("#import \"\(className).h\"\n\n" +
+						"@implementation \(className)\n\n" +
+						"@end\n")
 					indentation = 0
 
 //					writeWithStructure(statements)

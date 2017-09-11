@@ -12,10 +12,10 @@ class JKRJavaTranslator: JKRTranslator {
 		return JKRJavaTranslator(writingWith: writer)
 	}
 
-	func translate(program: JKRTreeProgram) throws {
+	func translate(tree: JKRTree) throws {
 		do {
-			if let statements = program.statements,
-				statements.count > 0 {
+			switch tree {
+			case let .statements(statements):
 				changeFile("Main.java")
 
 				write("public class Main {\n")
@@ -30,10 +30,7 @@ class JKRJavaTranslator: JKRTranslator {
 				indentation = 1
 				writeIntentation()
 				write("}\n}\n")
-			}
-			if let declarations = program.declarations,
-				declarations.count > 0 {
-
+			case let .declarations(declarations):
 				for case let .classDeclaration(classDeclaration)
 					in declarations
 				{

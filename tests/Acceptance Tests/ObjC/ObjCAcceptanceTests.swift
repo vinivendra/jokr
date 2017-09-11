@@ -15,10 +15,16 @@ class ObjCAcceptanceTests: XCTestCase {
 	func transpileAndRun(
 		file filename: String) throws -> Shell.CommandResult {
 		do {
-			let program = try parser.parse(file: testFilesPath + filename)
+			guard let tree = try parser.parse(file: testFilesPath + filename)
+				else
+			{
+				XCTFail("Failed to parse file \(filename)")
+				throw JKRError.parsing
+			}
+
 			let writer = JKRFileWriter(outputDirectory: outputDirectory)
 			let translator = JKRObjcTranslator(writingWith: writer)
-			try translator.translate(program: program)
+			try translator.translate(tree: tree)
 			let compiler = JKRObjcCompiler()
 			try compiler.compileFiles(atPath: outputDirectory)
 			return compiler.runProgram(atPath: outputDirectory)

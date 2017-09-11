@@ -16,12 +16,19 @@ class JavaAcceptanceTests: XCTestCase {
 		file filename: String) throws -> Shell.CommandResult {
 		do {
 			// TODO: Add trashFiles call to Objc tests too
+
+			guard let tree = try parser.parse(file: testFilesPath + filename)
+				else
+			{
+				XCTFail("Failed to parse file \(filename)")
+				throw JKRError.parsing
+			}
+
 			try trashFiles(atFolder: outputDirectory)
 
-			let program = try parser.parse(file: testFilesPath + filename)
 			let writer = JKRFileWriter(outputDirectory: outputDirectory)
 			let translator = JKRJavaTranslator(writingWith: writer)
-			try translator.translate(program: program)
+			try translator.translate(tree: tree)
 			let compiler = JKRJavaCompiler()
 			try compiler.compileFiles(atPath: outputDirectory)
 			return compiler.runProgram(atPath: outputDirectory)
@@ -31,9 +38,6 @@ class JavaAcceptanceTests: XCTestCase {
 		}
 	}
 
-	// TODO: Figure out what the appropriate behaviour should be for transpiling
-	// an empty file. Create an empty main like before? Return two empty arrays
-	// and then stop? Return two nils and then stop? Throw an exception?
 	func testEmpty() {
 		do {
 			let result = try transpileAndRun(file: "TestEmpty.jkr")

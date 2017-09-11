@@ -2,9 +2,9 @@
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 
-struct JKRTreeProgram {
-	let statements: [JKRTreeStatement]?
-	let declarations: [JKRTreeDeclaration]?
+enum JKRTree {
+	case statements([JKRTreeStatement])
+	case declarations([JKRTreeDeclaration])
 }
 
 enum JKRTreeStatement: Equatable {

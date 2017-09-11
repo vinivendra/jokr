@@ -53,7 +53,7 @@ class JKRDriver {
 	private let parser: JKRParser
 	private let language: JKRTargetLanguage
 
-	private var ast: JKRTreeProgram?
+	private var ast: JKRTree?
 
 	private func parseInputFiles() throws {
 		do {
@@ -78,7 +78,7 @@ class JKRDriver {
 			let writer = JKRFileWriter(outputDirectory: folderPath)
 			let translator = language.translator.create(writingWith: writer)
 
-			try translator.translate(program: ast!)
+			try translator.translate(tree: ast!)
 			// swiftlint:disable:previous force_unwrapping
 
 			writer.prettyPrint()
