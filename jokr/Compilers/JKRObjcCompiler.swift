@@ -27,22 +27,14 @@ struct JKRObjcCompiler: JKRCompiler {
 
 	@discardableResult
 	func runProgram(atPath folderPath: String) -> Shell.CommandResult {
+		log("======== Running program...")
 		let result = Shell.runBinary("\(folderPath)a.out")
 
 		if result.output != "" {
 			log(result.output)
 		}
 
-		return result
-	}
-
-	@discardableResult
-	func runProgramToSTDERR(atPath folderPath: String) -> Shell.CommandResult {
-		let result = Shell.runBinary("\(folderPath)a.out")
-
-		if result.output != "" {
-			log(result.output)
-		}
+		log("======== Program finished with status \(result.status)")
 
 		return result
 	}
