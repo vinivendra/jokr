@@ -23,16 +23,16 @@ class JKRObjcTranslator: JKRTranslator {
 				// swiftlint:disable:previous line_length
 				indentation += 1
 
-				addIntentation()
+				writeIntentation()
 				write("@autoreleasepool {\n")
 				indentation += 1
 
 				writeWithStructure(statements)
 
 				indentation = 1
-				addIntentation()
+				writeIntentation()
 				write("}\n")
-				addIntentation()
+				writeIntentation()
 				write("return 0;\n}\n")
 			case let .declarations(declarations):
 				for case let .classDeclaration(classDeclaration)
@@ -90,7 +90,7 @@ class JKRObjcTranslator: JKRTranslator {
 	}
 
 	private func writeWithStructure(_ statement: JKRTreeStatement) {
-		addIntentation()
+		writeIntentation()
 		write(translate(statement))
 
 //		if let block = statement.block {
@@ -231,7 +231,7 @@ class JKRObjcTranslator: JKRTranslator {
 		writer.changeFile(string)
 	}
 
-	private func addIntentation() {
+	private func writeIntentation() {
 		for _ in 0..<indentation {
 			write("\t")
 		}
