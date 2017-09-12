@@ -44,19 +44,6 @@ class JavaTranslatorTests: XCTestCase {
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: - Tests
 
-	func testEmpty() {
-		do {
-			// WITH:
-			let files = try translate(file: "TestEmpty.jkr")
-
-			// TEST: No other files get created
-			XCTAssertEqual(files.count, 0)
-		}
-		catch (let error) {
-			XCTFail(errorMessage + "\(error)")
-		}
-	}
-
 	func testAssignments() {
 		do {
 			// WITH:
