@@ -15,8 +15,6 @@ class JavaAcceptanceTests: XCTestCase {
 	func transpileAndRun(
 		file filename: String) throws -> Shell.CommandResult {
 		do {
-			// TODO: Add trashFiles call to Objc tests too
-
 			guard let tree = try parser.parse(file: testFilesPath + filename)
 				else
 			{

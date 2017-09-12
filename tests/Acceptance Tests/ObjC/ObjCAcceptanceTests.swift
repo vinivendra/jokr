@@ -22,6 +22,8 @@ class ObjCAcceptanceTests: XCTestCase {
 				throw JKRError.parsing
 			}
 
+			try trashFiles(atFolder: outputDirectory)
+
 			let writer = JKRFileWriter(outputDirectory: outputDirectory)
 			let translator = JKRObjcTranslator(writingWith: writer)
 			try translator.translate(tree: tree)
