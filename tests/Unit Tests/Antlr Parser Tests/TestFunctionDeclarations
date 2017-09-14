@@ -1,14 +1,16 @@
-Int five() {
-	Int x = 4
-	x = 5
-	return 5
-}
+class SomeClass {
+	Int five() {
+		Int x = 4
+		x = 5
+		return 5
+	}
 
-Int number(Int number) {
-	result = number
-	return result
-}
+	Int number(Int number) {
+		result = number
+		return result
+	}
 
-Int sum(Int a, Int b, Int c) {
-	return a + b + c
+	Int sum(Int a, Int b, Int c) {
+		return a + b + c
+	}
 }

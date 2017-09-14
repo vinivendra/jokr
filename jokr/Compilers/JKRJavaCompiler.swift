@@ -29,7 +29,6 @@ struct JKRJavaCompiler: JKRCompiler {
 	func runProgram(atPath folderPath: String) -> Shell.CommandResult {
 		log("======== Running program...")
 		let result = Shell.runCommand("cd \"\(folderPath)\" ;java -cp . Main ;")
-		// swiftlint:disable:previous line_length
 
 		if result.output != "" {
 			log(result.output)

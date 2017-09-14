@@ -116,24 +116,6 @@ class AntlrToJokrTests: XCTestCase {
 			}
 
 			let expectedDeclarations: [JKRTreeDeclaration] = [
-				.functionDeclaration(
-					JKRTreeFunctionDeclaration(
-						type: "Int", id: "func1",
-						parameters: [],
-						block: [.returnStm(0)]
-					)
-				),
-				.functionDeclaration(
-					JKRTreeFunctionDeclaration(
-						type: "Int", id: "func2",
-						parameters: [JKRTreeParameterDeclaration(type: "Float",
-						                              id: "bla")],
-						block: [
-							JKRTreeStatement.assignment(.declaration(
-								"String", "baz", .operation(5, "+", 6))),
-							JKRTreeStatement.returnStm(0)]
-					)
-				),
 				.classDeclaration(
 					JKRTreeClassDeclaration(type: "Person")
 				),

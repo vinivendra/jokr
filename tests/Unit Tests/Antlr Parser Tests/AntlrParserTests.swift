@@ -36,12 +36,12 @@ class AntlrParserTests: XCTestCase {
 	func testStatementLists() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestStatementLists")
+            let tree = try getProgram(inFile: "TestStatementLists")
 
-			let statementLists = tree.filter(type:
+            let statementLists = tree.filter(type:
 				JokrParser.StatementListContext.self)
 
-			let statements = tree.filter(type: JokrParser.StatementContext.self)
+            let statements = tree.filter(type: JokrParser.StatementContext.self)
 
 			let expectedStatementLists: [TokenTest] = [
 				(1, 0, "x=0\nx=1\nf()"),
@@ -82,12 +82,12 @@ class AntlrParserTests: XCTestCase {
 	func testStatementListsWithNewline() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestStatementListsWithNewline")
+            let tree = try getProgram(inFile: "TestStatementListsWithNewline")
 
-			let statementLists = tree.filter(type:
+            let statementLists = tree.filter(type:
 				JokrParser.StatementListContext.self)
 
-			let statements = tree.filter(type: JokrParser.StatementContext.self)
+            let statements = tree.filter(type: JokrParser.StatementContext.self)
 
 			let expectedStatementLists: [TokenTest] = [
 				(1, 0, "x=0\nx=1\nx=2\nf()"), (1, 0, "x=0\nx=1\nx=2"),
@@ -125,9 +125,9 @@ class AntlrParserTests: XCTestCase {
 	func testExpressions() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestExpressions")
+            let tree = try getProgram(inFile: "TestExpressions")
 
-			let expressions = tree.filter(type:
+            let expressions = tree.filter(type:
 				JokrParser.ExpressionContext.self)
 
 			let expectedExpressions: [TokenTest] = [
@@ -158,12 +158,12 @@ class AntlrParserTests: XCTestCase {
 	func testParameters() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestParameters")
+            let tree = try getProgram(inFile: "TestParameters")
 
-			let parameterLists = tree.filter(type:
+            let parameterLists = tree.filter(type:
 				JokrParser.ParameterListContext.self)
 
-			let parameters = tree.filter(type:
+            let parameters = tree.filter(type:
 				JokrParser.ParameterContext.self)
 
 			let expectedParameterLists: [TokenTest] = [
@@ -214,9 +214,9 @@ class AntlrParserTests: XCTestCase {
 	func testAssignments() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestAssignments")
+            let tree = try getProgram(inFile: "TestAssignments")
 
-			let assignments = tree.filter(type:
+            let assignments = tree.filter(type:
 				JokrParser.AssignmentContext.self)
 
 			let expectedAssignments: [TokenTest] = [
@@ -243,9 +243,9 @@ class AntlrParserTests: XCTestCase {
 	func testVariableDeclarations() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestVariableDeclarations")
+            let tree = try getProgram(inFile: "TestVariableDeclarations")
 
-			let declarations = tree.filter(type:
+            let declarations = tree.filter(type:
 				JokrParser.VariableDeclarationContext.self)
 
 			let expectedDeclarations: [TokenTest] = [(1, 0, "Intbla"),
@@ -270,9 +270,9 @@ class AntlrParserTests: XCTestCase {
 	func testFunctionCalls() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestFunctionCalls")
+            let tree = try getProgram(inFile: "TestFunctionCalls")
 
-			let functionCalls = tree.filter(type:
+            let functionCalls = tree.filter(type:
 				JokrParser.FunctionCallContext.self)
 
 			let expectedFunctionCalls: [TokenTest] = [
@@ -302,21 +302,21 @@ class AntlrParserTests: XCTestCase {
 	func testParameterDeclaration() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestFunctionDeclarations")
+            let tree = try getProgram(inFile: "TestFunctionDeclarations")
 
-			let parameterLists = tree.filter(type:
+            let parameterLists = tree.filter(type:
 				JokrParser.ParameterDeclarationListContext.self)
 
-			let parameters = tree.filter(type:
+            let parameters = tree.filter(type:
 				JokrParser.ParameterDeclarationContext.self)
 
 			let expectedParameterLists: [TokenTest] = [
-				(1, 9, ""), (7, 11, "Intnumber"), (12, 8, "Inta,Intb,Intc"),
-				(12, 8, "Inta,Intb"), (12, 8, "Inta")]
+				(2, 10, ""), (8, 12, "Intnumber"), (13, 9, "Inta,Intb,Intc"),
+				(13, 9, "Inta,Intb"), (13, 9, "Inta")]
 
 			let expectedParameters: [TokenTest] = [
-				(7, 11, "Intnumber"), (12, 8, "Inta"), (12, 15, "Intb"),
-				(12, 22, "Intc")]
+				(8, 12, "Intnumber"), (13, 9, "Inta"), (13, 16, "Intb"),
+				(13, 23, "Intc")]
 
 			// TEST: Parser found all expected elements
 			for (expected, actual) in
@@ -347,17 +347,17 @@ class AntlrParserTests: XCTestCase {
 	func testFunctionDeclarations() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestFunctionDeclarations")
+            let tree = try getProgram(inFile: "TestFunctionDeclarations")
 
-			let declarations = tree.filter(type:
+            let declarations = tree.filter(type:
 				JokrParser.FunctionDeclarationContext.self)
 
 			// TEST: Parser found all expected elements
 			let expectedDeclarations: [TokenTest] = [
-				(1, 0, "Intfive(){\nIntx=4\nx=5\nreturn5\n}"),
-				(7, 0,
-				 "Intnumber(Intnumber){\nresult=number\nreturnresult\n}"),
-				(12, 0, "Intsum(Inta,Intb,Intc){\nreturna+b+c\n}")]
+				(2, 1, "Intfive(){\n\t\tIntx=4\n\t\tx=5\n\t\treturn5\n\t}"),
+				(8, 1,
+				 "Intnumber(Intnumber){\n\t\tresult=number\n\t\treturnresult\n\t}"),
+				(13, 1, "Intsum(Inta,Intb,Intc){\n\t\treturna+b+c\n\t}")]
 
 			for (expected, actual) in zip(expectedDeclarations, declarations) {
 				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
@@ -377,9 +377,9 @@ class AntlrParserTests: XCTestCase {
 	func testClassDeclarations() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile: "TestClassDeclarations")
+            let tree = try getProgram(inFile: "TestClassDeclarations")
 
-			let declarations = tree.filter(type:
+            let declarations = tree.filter(type:
 				JokrParser.ClassDeclarationContext.self)
 
 			// TEST: Parser found all expected elements

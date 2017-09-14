@@ -22,16 +22,16 @@ open class JokrParser: Parser {
                    RULE_declarationList = 3, RULE_declaration = 4, RULE_block = 5, 
                    RULE_lvalue = 6, RULE_expression = 7, RULE_parameterList = 8, 
                    RULE_parameter = 9, RULE_assignment = 10, RULE_variableDeclaration = 11, 
-                   RULE_functionCall = 12, RULE_returnStatement = 13, RULE_parameterDeclarationList = 14, 
-                   RULE_parameterDeclaration = 15, RULE_functionDeclaration = 16, 
-                   RULE_functionDeclarationHeader = 17, RULE_functionDeclarationParameters = 18, 
-                   RULE_classDeclaration = 19
+                   RULE_functionCall = 12, RULE_returnStatement = 13, RULE_classDeclaration = 14, 
+                   RULE_classMemberList = 15, RULE_classMember = 16, RULE_functionDeclaration = 17, 
+                   RULE_functionDeclarationHeader = 18, RULE_functionDeclarationParameters = 19, 
+                   RULE_parameterDeclarationList = 20, RULE_parameterDeclaration = 21
 	public static let ruleNames: [String] = [
 		"program", "statementList", "statement", "declarationList", "declaration", 
 		"block", "lvalue", "expression", "parameterList", "parameter", "assignment", 
-		"variableDeclaration", "functionCall", "returnStatement", "parameterDeclarationList", 
-		"parameterDeclaration", "functionDeclaration", "functionDeclarationHeader", 
-		"functionDeclarationParameters", "classDeclaration"
+		"variableDeclaration", "functionCall", "returnStatement", "classDeclaration", 
+		"classMemberList", "classMember", "functionDeclaration", "functionDeclarationHeader", 
+		"functionDeclarationParameters", "parameterDeclarationList", "parameterDeclaration"
 	]
 
 	private static let _LITERAL_NAMES: [String?] = [
@@ -121,7 +121,7 @@ open class JokrParser: Parser {
 	    		try! exitRule()
 	    }
 		do {
-		 	setState(49)
+		 	setState(53)
 		 	try _errHandler.sync(self)
 		 	switch(try getInterpreter().adaptivePredict(_input,0, _ctx)) {
 		 	case 1:
@@ -130,29 +130,29 @@ open class JokrParser: Parser {
 		 		break
 		 	case 2:
 		 		try enterOuterAlt(_localctx, 2)
-		 		setState(41)
+		 		setState(45)
 		 		try statementList(0)
 
 		 		break
 		 	case 3:
 		 		try enterOuterAlt(_localctx, 3)
-		 		setState(42)
+		 		setState(46)
 		 		try statementList(0)
-		 		setState(43)
+		 		setState(47)
 		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
 
 		 		break
 		 	case 4:
 		 		try enterOuterAlt(_localctx, 4)
-		 		setState(45)
+		 		setState(49)
 		 		try declarationList(0)
 
 		 		break
 		 	case 5:
 		 		try enterOuterAlt(_localctx, 5)
-		 		setState(46)
+		 		setState(50)
 		 		try declarationList(0)
-		 		setState(47)
+		 		setState(51)
 		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
 
 		 		break
@@ -208,11 +208,11 @@ open class JokrParser: Parser {
 		do {
 			var _alt: Int
 			try enterOuterAlt(_localctx, 1)
-			setState(52)
+			setState(56)
 			try statement()
 
 			_ctx!.stop = try _input.LT(-1)
-			setState(59)
+			setState(63)
 			try _errHandler.sync(self)
 			_alt = try getInterpreter().adaptivePredict(_input,1,_ctx)
 			while (_alt != 2 && _alt != ATN.INVALID_ALT_NUMBER) {
@@ -223,18 +223,18 @@ open class JokrParser: Parser {
 					_prevctx = _localctx
 					_localctx = StatementListContext(_parentctx, _parentState);
 					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_statementList)
-					setState(54)
+					setState(58)
 					if (!(precpred(_ctx, 1))) {
 					    throw try ANTLRException.recognition(e:FailedPredicateException(self, "precpred(_ctx, 1)"))
 					}
-					setState(55)
+					setState(59)
 					try match(JokrParser.Tokens.NEW_LINE.rawValue)
-					setState(56)
+					setState(60)
 					try statement()
 
 			 
 				}
-				setState(61)
+				setState(65)
 				try _errHandler.sync(self)
 				_alt = try getInterpreter().adaptivePredict(_input,1,_ctx)
 			}
@@ -280,24 +280,24 @@ open class JokrParser: Parser {
 	    		try! exitRule()
 	    }
 		do {
-		 	setState(65)
+		 	setState(69)
 		 	try _errHandler.sync(self)
 		 	switch(try getInterpreter().adaptivePredict(_input,2, _ctx)) {
 		 	case 1:
 		 		try enterOuterAlt(_localctx, 1)
-		 		setState(62)
+		 		setState(66)
 		 		try assignment()
 
 		 		break
 		 	case 2:
 		 		try enterOuterAlt(_localctx, 2)
-		 		setState(63)
+		 		setState(67)
 		 		try functionCall()
 
 		 		break
 		 	case 3:
 		 		try enterOuterAlt(_localctx, 3)
-		 		setState(64)
+		 		setState(68)
 		 		try returnStatement()
 
 		 		break
@@ -353,11 +353,11 @@ open class JokrParser: Parser {
 		do {
 			var _alt: Int
 			try enterOuterAlt(_localctx, 1)
-			setState(68)
+			setState(72)
 			try declaration()
 
 			_ctx!.stop = try _input.LT(-1)
-			setState(75)
+			setState(79)
 			try _errHandler.sync(self)
 			_alt = try getInterpreter().adaptivePredict(_input,3,_ctx)
 			while (_alt != 2 && _alt != ATN.INVALID_ALT_NUMBER) {
@@ -368,18 +368,18 @@ open class JokrParser: Parser {
 					_prevctx = _localctx
 					_localctx = DeclarationListContext(_parentctx, _parentState);
 					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_declarationList)
-					setState(70)
+					setState(74)
 					if (!(precpred(_ctx, 1))) {
 					    throw try ANTLRException.recognition(e:FailedPredicateException(self, "precpred(_ctx, 1)"))
 					}
-					setState(71)
+					setState(75)
 					try match(JokrParser.Tokens.NEW_LINE.rawValue)
-					setState(72)
+					setState(76)
 					try declaration()
 
 			 
 				}
-				setState(77)
+				setState(81)
 				try _errHandler.sync(self)
 				_alt = try getInterpreter().adaptivePredict(_input,3,_ctx)
 			}
@@ -394,9 +394,6 @@ open class JokrParser: Parser {
 		return _localctx;
 	}
 	open class DeclarationContext:ParserRuleContext {
-		open func functionDeclaration() -> FunctionDeclarationContext? {
-			return getRuleContext(FunctionDeclarationContext.self,0)
-		}
 		open func classDeclaration() -> ClassDeclarationContext? {
 			return getRuleContext(ClassDeclarationContext.self,0)
 		}
@@ -422,25 +419,10 @@ open class JokrParser: Parser {
 	    		try! exitRule()
 	    }
 		do {
-		 	setState(80)
-		 	try _errHandler.sync(self)
-		 	switch (JokrParser.Tokens(rawValue: try _input.LA(1))!) {
-		 	case .TYPE:
-		 		try enterOuterAlt(_localctx, 1)
-		 		setState(78)
-		 		try functionDeclaration()
+		 	try enterOuterAlt(_localctx, 1)
+		 	setState(82)
+		 	try classDeclaration()
 
-		 		break
-
-		 	case .CLASS:
-		 		try enterOuterAlt(_localctx, 2)
-		 		setState(79)
-		 		try classDeclaration()
-
-		 		break
-		 	default:
-		 		throw try ANTLRException.recognition(e: NoViableAltException(self))
-		 	}
 		}
 		catch ANTLRException.recognition(let re) {
 			_localctx.exception = re
@@ -456,10 +438,10 @@ open class JokrParser: Parser {
 		open func NEW_LINE(_ i:Int) -> TerminalNode?{
 			return getToken(JokrParser.Tokens.NEW_LINE.rawValue, i)
 		}
+		open func RBRACE() -> TerminalNode? { return getToken(JokrParser.Tokens.RBRACE.rawValue, 0) }
 		open func statementList() -> StatementListContext? {
 			return getRuleContext(StatementListContext.self,0)
 		}
-		open func RBRACE() -> TerminalNode? { return getToken(JokrParser.Tokens.RBRACE.rawValue, 0) }
 		open override func getRuleIndex() -> Int { return JokrParser.RULE_block }
 		override
 		open func enterRule(_ listener: ParseTreeListener) {
@@ -482,18 +464,35 @@ open class JokrParser: Parser {
 	    		try! exitRule()
 	    }
 		do {
-		 	try enterOuterAlt(_localctx, 1)
-		 	setState(82)
-		 	try match(JokrParser.Tokens.LBRACE.rawValue)
-		 	setState(83)
-		 	try match(JokrParser.Tokens.NEW_LINE.rawValue)
-		 	setState(84)
-		 	try statementList(0)
-		 	setState(85)
-		 	try match(JokrParser.Tokens.NEW_LINE.rawValue)
-		 	setState(86)
-		 	try match(JokrParser.Tokens.RBRACE.rawValue)
+		 	setState(93)
+		 	try _errHandler.sync(self)
+		 	switch(try getInterpreter().adaptivePredict(_input,4, _ctx)) {
+		 	case 1:
+		 		try enterOuterAlt(_localctx, 1)
+		 		setState(84)
+		 		try match(JokrParser.Tokens.LBRACE.rawValue)
+		 		setState(85)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+		 		setState(86)
+		 		try match(JokrParser.Tokens.RBRACE.rawValue)
 
+		 		break
+		 	case 2:
+		 		try enterOuterAlt(_localctx, 2)
+		 		setState(87)
+		 		try match(JokrParser.Tokens.LBRACE.rawValue)
+		 		setState(88)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+		 		setState(89)
+		 		try statementList(0)
+		 		setState(90)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+		 		setState(91)
+		 		try match(JokrParser.Tokens.RBRACE.rawValue)
+
+		 		break
+		 	default: break
+		 	}
 		}
 		catch ANTLRException.recognition(let re) {
 			_localctx.exception = re
@@ -528,7 +527,7 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(88)
+		 	setState(95)
 		 	try match(JokrParser.Tokens.ID.rawValue)
 
 		}
@@ -587,27 +586,27 @@ open class JokrParser: Parser {
 		do {
 			var _alt: Int
 			try enterOuterAlt(_localctx, 1)
-			setState(97)
+			setState(104)
 			try _errHandler.sync(self)
 			switch (JokrParser.Tokens(rawValue: try _input.LA(1))!) {
 			case .INT:
-				setState(91)
+				setState(98)
 				try match(JokrParser.Tokens.INT.rawValue)
 
 				break
 
 			case .LPAREN:
-				setState(92)
+				setState(99)
 				try match(JokrParser.Tokens.LPAREN.rawValue)
-				setState(93)
+				setState(100)
 				try expression(0)
-				setState(94)
+				setState(101)
 				try match(JokrParser.Tokens.RPAREN.rawValue)
 
 				break
 
 			case .ID:
-				setState(96)
+				setState(103)
 				try lvalue()
 
 				break
@@ -615,7 +614,7 @@ open class JokrParser: Parser {
 				throw try ANTLRException.recognition(e: NoViableAltException(self))
 			}
 			_ctx!.stop = try _input.LT(-1)
-			setState(104)
+			setState(111)
 			try _errHandler.sync(self)
 			_alt = try getInterpreter().adaptivePredict(_input,6,_ctx)
 			while (_alt != 2 && _alt != ATN.INVALID_ALT_NUMBER) {
@@ -626,18 +625,18 @@ open class JokrParser: Parser {
 					_prevctx = _localctx
 					_localctx = ExpressionContext(_parentctx, _parentState);
 					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_expression)
-					setState(99)
+					setState(106)
 					if (!(precpred(_ctx, 2))) {
 					    throw try ANTLRException.recognition(e:FailedPredicateException(self, "precpred(_ctx, 2)"))
 					}
-					setState(100)
+					setState(107)
 					try match(JokrParser.Tokens.OPERATOR.rawValue)
-					setState(101)
+					setState(108)
 					try expression(3)
 
 			 
 				}
-				setState(106)
+				setState(113)
 				try _errHandler.sync(self)
 				_alt = try getInterpreter().adaptivePredict(_input,6,_ctx)
 			}
@@ -692,20 +691,20 @@ open class JokrParser: Parser {
 		do {
 			var _alt: Int
 			try enterOuterAlt(_localctx, 1)
-			setState(109)
+			setState(116)
 			try _errHandler.sync(self)
 			switch(try getInterpreter().adaptivePredict(_input,7, _ctx)) {
 			case 1:
 				break
 			case 2:
-				setState(108)
+				setState(115)
 				try parameter()
 
 				break
 			default: break
 			}
 			_ctx!.stop = try _input.LT(-1)
-			setState(116)
+			setState(123)
 			try _errHandler.sync(self)
 			_alt = try getInterpreter().adaptivePredict(_input,8,_ctx)
 			while (_alt != 2 && _alt != ATN.INVALID_ALT_NUMBER) {
@@ -716,18 +715,18 @@ open class JokrParser: Parser {
 					_prevctx = _localctx
 					_localctx = ParameterListContext(_parentctx, _parentState);
 					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_parameterList)
-					setState(111)
+					setState(118)
 					if (!(precpred(_ctx, 1))) {
 					    throw try ANTLRException.recognition(e:FailedPredicateException(self, "precpred(_ctx, 1)"))
 					}
-					setState(112)
+					setState(119)
 					try match(JokrParser.Tokens.COMMA.rawValue)
-					setState(113)
+					setState(120)
 					try parameter()
 
 			 
 				}
-				setState(118)
+				setState(125)
 				try _errHandler.sync(self)
 				_alt = try getInterpreter().adaptivePredict(_input,8,_ctx)
 			}
@@ -768,7 +767,7 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(119)
+		 	setState(126)
 		 	try expression(0)
 
 		}
@@ -813,27 +812,27 @@ open class JokrParser: Parser {
 	    		try! exitRule()
 	    }
 		do {
-		 	setState(129)
+		 	setState(136)
 		 	try _errHandler.sync(self)
 		 	switch (JokrParser.Tokens(rawValue: try _input.LA(1))!) {
 		 	case .TYPE:
 		 		try enterOuterAlt(_localctx, 1)
-		 		setState(121)
+		 		setState(128)
 		 		try variableDeclaration()
-		 		setState(122)
+		 		setState(129)
 		 		try match(JokrParser.Tokens.ASSIGN.rawValue)
-		 		setState(123)
+		 		setState(130)
 		 		try expression(0)
 
 		 		break
 
 		 	case .ID:
 		 		try enterOuterAlt(_localctx, 2)
-		 		setState(125)
+		 		setState(132)
 		 		try lvalue()
-		 		setState(126)
+		 		setState(133)
 		 		try match(JokrParser.Tokens.ASSIGN.rawValue)
-		 		setState(127)
+		 		setState(134)
 		 		try expression(0)
 
 		 		break
@@ -875,9 +874,9 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(131)
+		 	setState(138)
 		 	try match(JokrParser.Tokens.TYPE.rawValue)
-		 	setState(132)
+		 	setState(139)
 		 	try match(JokrParser.Tokens.ID.rawValue)
 
 		}
@@ -919,13 +918,13 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(134)
+		 	setState(141)
 		 	try match(JokrParser.Tokens.ID.rawValue)
-		 	setState(135)
+		 	setState(142)
 		 	try match(JokrParser.Tokens.LPAREN.rawValue)
-		 	setState(136)
+		 	setState(143)
 		 	try parameterList(0)
-		 	setState(137)
+		 	setState(144)
 		 	try match(JokrParser.Tokens.RPAREN.rawValue)
 
 		}
@@ -965,10 +964,353 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(139)
+		 	setState(146)
 		 	try match(JokrParser.Tokens.RETURN.rawValue)
-		 	setState(140)
+		 	setState(147)
 		 	try expression(0)
+
+		}
+		catch ANTLRException.recognition(let re) {
+			_localctx.exception = re
+			_errHandler.reportError(self, re)
+			try _errHandler.recover(self, re)
+		}
+
+		return _localctx
+	}
+	open class ClassDeclarationContext:ParserRuleContext {
+		open func CLASS() -> TerminalNode? { return getToken(JokrParser.Tokens.CLASS.rawValue, 0) }
+		open func TYPE() -> TerminalNode? { return getToken(JokrParser.Tokens.TYPE.rawValue, 0) }
+		open func LBRACE() -> TerminalNode? { return getToken(JokrParser.Tokens.LBRACE.rawValue, 0) }
+		open func NEW_LINE() -> Array<TerminalNode> { return getTokens(JokrParser.Tokens.NEW_LINE.rawValue) }
+		open func NEW_LINE(_ i:Int) -> TerminalNode?{
+			return getToken(JokrParser.Tokens.NEW_LINE.rawValue, i)
+		}
+		open func RBRACE() -> TerminalNode? { return getToken(JokrParser.Tokens.RBRACE.rawValue, 0) }
+		open func classMemberList() -> ClassMemberListContext? {
+			return getRuleContext(ClassMemberListContext.self,0)
+		}
+		open override func getRuleIndex() -> Int { return JokrParser.RULE_classDeclaration }
+		override
+		open func enterRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).enterClassDeclaration(self)
+			}
+		}
+		override
+		open func exitRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).exitClassDeclaration(self)
+			}
+		}
+	}
+	@discardableResult
+	open func classDeclaration() throws -> ClassDeclarationContext {
+		var _localctx: ClassDeclarationContext = ClassDeclarationContext(_ctx, getState())
+		try enterRule(_localctx, 28, JokrParser.RULE_classDeclaration)
+		defer {
+	    		try! exitRule()
+	    }
+		do {
+		 	setState(162)
+		 	try _errHandler.sync(self)
+		 	switch(try getInterpreter().adaptivePredict(_input,10, _ctx)) {
+		 	case 1:
+		 		try enterOuterAlt(_localctx, 1)
+		 		setState(149)
+		 		try match(JokrParser.Tokens.CLASS.rawValue)
+		 		setState(150)
+		 		try match(JokrParser.Tokens.TYPE.rawValue)
+		 		setState(151)
+		 		try match(JokrParser.Tokens.LBRACE.rawValue)
+		 		setState(152)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+		 		setState(153)
+		 		try match(JokrParser.Tokens.RBRACE.rawValue)
+
+		 		break
+		 	case 2:
+		 		try enterOuterAlt(_localctx, 2)
+		 		setState(154)
+		 		try match(JokrParser.Tokens.CLASS.rawValue)
+		 		setState(155)
+		 		try match(JokrParser.Tokens.TYPE.rawValue)
+		 		setState(156)
+		 		try match(JokrParser.Tokens.LBRACE.rawValue)
+		 		setState(157)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+		 		setState(158)
+		 		try classMemberList(0)
+		 		setState(159)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+		 		setState(160)
+		 		try match(JokrParser.Tokens.RBRACE.rawValue)
+
+		 		break
+		 	default: break
+		 	}
+		}
+		catch ANTLRException.recognition(let re) {
+			_localctx.exception = re
+			_errHandler.reportError(self, re)
+			try _errHandler.recover(self, re)
+		}
+
+		return _localctx
+	}
+
+	open class ClassMemberListContext:ParserRuleContext {
+		open func classMember() -> ClassMemberContext? {
+			return getRuleContext(ClassMemberContext.self,0)
+		}
+		open func classMemberList() -> ClassMemberListContext? {
+			return getRuleContext(ClassMemberListContext.self,0)
+		}
+		open func NEW_LINE() -> TerminalNode? { return getToken(JokrParser.Tokens.NEW_LINE.rawValue, 0) }
+		open override func getRuleIndex() -> Int { return JokrParser.RULE_classMemberList }
+		override
+		open func enterRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).enterClassMemberList(self)
+			}
+		}
+		override
+		open func exitRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).exitClassMemberList(self)
+			}
+		}
+	}
+
+	public final  func classMemberList( ) throws -> ClassMemberListContext   {
+		return try classMemberList(0)
+	}
+	@discardableResult
+	private func classMemberList(_ _p: Int) throws -> ClassMemberListContext   {
+		let _parentctx: ParserRuleContext? = _ctx
+		var _parentState: Int = getState()
+		var _localctx: ClassMemberListContext = ClassMemberListContext(_ctx, _parentState)
+		var  _prevctx: ClassMemberListContext = _localctx
+		var _startState: Int = 30
+		try enterRecursionRule(_localctx, 30, JokrParser.RULE_classMemberList, _p)
+		defer {
+	    		try! unrollRecursionContexts(_parentctx)
+	    }
+		do {
+			var _alt: Int
+			try enterOuterAlt(_localctx, 1)
+			setState(166)
+			try _errHandler.sync(self)
+			switch(try getInterpreter().adaptivePredict(_input,11, _ctx)) {
+			case 1:
+				break
+			case 2:
+				setState(165)
+				try classMember()
+
+				break
+			default: break
+			}
+			_ctx!.stop = try _input.LT(-1)
+			setState(173)
+			try _errHandler.sync(self)
+			_alt = try getInterpreter().adaptivePredict(_input,12,_ctx)
+			while (_alt != 2 && _alt != ATN.INVALID_ALT_NUMBER) {
+				if ( _alt==1 ) {
+					if _parseListeners != nil {
+					   try triggerExitRuleEvent()
+					}
+					_prevctx = _localctx
+					_localctx = ClassMemberListContext(_parentctx, _parentState);
+					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_classMemberList)
+					setState(168)
+					if (!(precpred(_ctx, 1))) {
+					    throw try ANTLRException.recognition(e:FailedPredicateException(self, "precpred(_ctx, 1)"))
+					}
+					setState(169)
+					try match(JokrParser.Tokens.NEW_LINE.rawValue)
+					setState(170)
+					try classMember()
+
+			 
+				}
+				setState(175)
+				try _errHandler.sync(self)
+				_alt = try getInterpreter().adaptivePredict(_input,12,_ctx)
+			}
+
+		}
+		catch ANTLRException.recognition(let re) {
+			_localctx.exception = re
+			_errHandler.reportError(self, re)
+			try _errHandler.recover(self, re)
+		}
+
+		return _localctx;
+	}
+	open class ClassMemberContext:ParserRuleContext {
+		open func functionDeclaration() -> FunctionDeclarationContext? {
+			return getRuleContext(FunctionDeclarationContext.self,0)
+		}
+		open override func getRuleIndex() -> Int { return JokrParser.RULE_classMember }
+		override
+		open func enterRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).enterClassMember(self)
+			}
+		}
+		override
+		open func exitRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).exitClassMember(self)
+			}
+		}
+	}
+	@discardableResult
+	open func classMember() throws -> ClassMemberContext {
+		var _localctx: ClassMemberContext = ClassMemberContext(_ctx, getState())
+		try enterRule(_localctx, 32, JokrParser.RULE_classMember)
+		defer {
+	    		try! exitRule()
+	    }
+		do {
+		 	try enterOuterAlt(_localctx, 1)
+		 	setState(176)
+		 	try functionDeclaration()
+
+		}
+		catch ANTLRException.recognition(let re) {
+			_localctx.exception = re
+			_errHandler.reportError(self, re)
+			try _errHandler.recover(self, re)
+		}
+
+		return _localctx
+	}
+	open class FunctionDeclarationContext:ParserRuleContext {
+		open func functionDeclarationHeader() -> FunctionDeclarationHeaderContext? {
+			return getRuleContext(FunctionDeclarationHeaderContext.self,0)
+		}
+		open func functionDeclarationParameters() -> FunctionDeclarationParametersContext? {
+			return getRuleContext(FunctionDeclarationParametersContext.self,0)
+		}
+		open func block() -> BlockContext? {
+			return getRuleContext(BlockContext.self,0)
+		}
+		open override func getRuleIndex() -> Int { return JokrParser.RULE_functionDeclaration }
+		override
+		open func enterRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).enterFunctionDeclaration(self)
+			}
+		}
+		override
+		open func exitRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).exitFunctionDeclaration(self)
+			}
+		}
+	}
+	@discardableResult
+	open func functionDeclaration() throws -> FunctionDeclarationContext {
+		var _localctx: FunctionDeclarationContext = FunctionDeclarationContext(_ctx, getState())
+		try enterRule(_localctx, 34, JokrParser.RULE_functionDeclaration)
+		defer {
+	    		try! exitRule()
+	    }
+		do {
+		 	try enterOuterAlt(_localctx, 1)
+		 	setState(178)
+		 	try functionDeclarationHeader()
+		 	setState(179)
+		 	try functionDeclarationParameters()
+		 	setState(180)
+		 	try block()
+
+		}
+		catch ANTLRException.recognition(let re) {
+			_localctx.exception = re
+			_errHandler.reportError(self, re)
+			try _errHandler.recover(self, re)
+		}
+
+		return _localctx
+	}
+	open class FunctionDeclarationHeaderContext:ParserRuleContext {
+		open func TYPE() -> TerminalNode? { return getToken(JokrParser.Tokens.TYPE.rawValue, 0) }
+		open func ID() -> TerminalNode? { return getToken(JokrParser.Tokens.ID.rawValue, 0) }
+		open override func getRuleIndex() -> Int { return JokrParser.RULE_functionDeclarationHeader }
+		override
+		open func enterRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).enterFunctionDeclarationHeader(self)
+			}
+		}
+		override
+		open func exitRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).exitFunctionDeclarationHeader(self)
+			}
+		}
+	}
+	@discardableResult
+	open func functionDeclarationHeader() throws -> FunctionDeclarationHeaderContext {
+		var _localctx: FunctionDeclarationHeaderContext = FunctionDeclarationHeaderContext(_ctx, getState())
+		try enterRule(_localctx, 36, JokrParser.RULE_functionDeclarationHeader)
+		defer {
+	    		try! exitRule()
+	    }
+		do {
+		 	try enterOuterAlt(_localctx, 1)
+		 	setState(182)
+		 	try match(JokrParser.Tokens.TYPE.rawValue)
+		 	setState(183)
+		 	try match(JokrParser.Tokens.ID.rawValue)
+
+		}
+		catch ANTLRException.recognition(let re) {
+			_localctx.exception = re
+			_errHandler.reportError(self, re)
+			try _errHandler.recover(self, re)
+		}
+
+		return _localctx
+	}
+	open class FunctionDeclarationParametersContext:ParserRuleContext {
+		open func LPAREN() -> TerminalNode? { return getToken(JokrParser.Tokens.LPAREN.rawValue, 0) }
+		open func parameterDeclarationList() -> ParameterDeclarationListContext? {
+			return getRuleContext(ParameterDeclarationListContext.self,0)
+		}
+		open func RPAREN() -> TerminalNode? { return getToken(JokrParser.Tokens.RPAREN.rawValue, 0) }
+		open override func getRuleIndex() -> Int { return JokrParser.RULE_functionDeclarationParameters }
+		override
+		open func enterRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).enterFunctionDeclarationParameters(self)
+			}
+		}
+		override
+		open func exitRule(_ listener: ParseTreeListener) {
+			if listener is JokrListener {
+			 	(listener as! JokrListener).exitFunctionDeclarationParameters(self)
+			}
+		}
+	}
+	@discardableResult
+	open func functionDeclarationParameters() throws -> FunctionDeclarationParametersContext {
+		var _localctx: FunctionDeclarationParametersContext = FunctionDeclarationParametersContext(_ctx, getState())
+		try enterRule(_localctx, 38, JokrParser.RULE_functionDeclarationParameters)
+		defer {
+	    		try! exitRule()
+	    }
+		do {
+		 	try enterOuterAlt(_localctx, 1)
+		 	setState(185)
+		 	try match(JokrParser.Tokens.LPAREN.rawValue)
+		 	setState(186)
+		 	try parameterDeclarationList(0)
+		 	setState(187)
+		 	try match(JokrParser.Tokens.RPAREN.rawValue)
 
 		}
 		catch ANTLRException.recognition(let re) {
@@ -1012,30 +1354,30 @@ open class JokrParser: Parser {
 		var _parentState: Int = getState()
 		var _localctx: ParameterDeclarationListContext = ParameterDeclarationListContext(_ctx, _parentState)
 		var  _prevctx: ParameterDeclarationListContext = _localctx
-		var _startState: Int = 28
-		try enterRecursionRule(_localctx, 28, JokrParser.RULE_parameterDeclarationList, _p)
+		var _startState: Int = 40
+		try enterRecursionRule(_localctx, 40, JokrParser.RULE_parameterDeclarationList, _p)
 		defer {
 	    		try! unrollRecursionContexts(_parentctx)
 	    }
 		do {
 			var _alt: Int
 			try enterOuterAlt(_localctx, 1)
-			setState(144)
+			setState(191)
 			try _errHandler.sync(self)
-			switch(try getInterpreter().adaptivePredict(_input,10, _ctx)) {
+			switch(try getInterpreter().adaptivePredict(_input,13, _ctx)) {
 			case 1:
 				break
 			case 2:
-				setState(143)
+				setState(190)
 				try parameterDeclaration()
 
 				break
 			default: break
 			}
 			_ctx!.stop = try _input.LT(-1)
-			setState(151)
+			setState(198)
 			try _errHandler.sync(self)
-			_alt = try getInterpreter().adaptivePredict(_input,11,_ctx)
+			_alt = try getInterpreter().adaptivePredict(_input,14,_ctx)
 			while (_alt != 2 && _alt != ATN.INVALID_ALT_NUMBER) {
 				if ( _alt==1 ) {
 					if _parseListeners != nil {
@@ -1044,20 +1386,20 @@ open class JokrParser: Parser {
 					_prevctx = _localctx
 					_localctx = ParameterDeclarationListContext(_parentctx, _parentState);
 					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_parameterDeclarationList)
-					setState(146)
+					setState(193)
 					if (!(precpred(_ctx, 1))) {
 					    throw try ANTLRException.recognition(e:FailedPredicateException(self, "precpred(_ctx, 1)"))
 					}
-					setState(147)
+					setState(194)
 					try match(JokrParser.Tokens.COMMA.rawValue)
-					setState(148)
+					setState(195)
 					try parameterDeclaration()
 
 			 
 				}
-				setState(153)
+				setState(200)
 				try _errHandler.sync(self)
-				_alt = try getInterpreter().adaptivePredict(_input,11,_ctx)
+				_alt = try getInterpreter().adaptivePredict(_input,14,_ctx)
 			}
 
 		}
@@ -1089,199 +1431,16 @@ open class JokrParser: Parser {
 	@discardableResult
 	open func parameterDeclaration() throws -> ParameterDeclarationContext {
 		var _localctx: ParameterDeclarationContext = ParameterDeclarationContext(_ctx, getState())
-		try enterRule(_localctx, 30, JokrParser.RULE_parameterDeclaration)
+		try enterRule(_localctx, 42, JokrParser.RULE_parameterDeclaration)
 		defer {
 	    		try! exitRule()
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(154)
+		 	setState(201)
 		 	try match(JokrParser.Tokens.TYPE.rawValue)
-		 	setState(155)
+		 	setState(202)
 		 	try match(JokrParser.Tokens.ID.rawValue)
-
-		}
-		catch ANTLRException.recognition(let re) {
-			_localctx.exception = re
-			_errHandler.reportError(self, re)
-			try _errHandler.recover(self, re)
-		}
-
-		return _localctx
-	}
-	open class FunctionDeclarationContext:ParserRuleContext {
-		open func functionDeclarationHeader() -> FunctionDeclarationHeaderContext? {
-			return getRuleContext(FunctionDeclarationHeaderContext.self,0)
-		}
-		open func functionDeclarationParameters() -> FunctionDeclarationParametersContext? {
-			return getRuleContext(FunctionDeclarationParametersContext.self,0)
-		}
-		open func block() -> BlockContext? {
-			return getRuleContext(BlockContext.self,0)
-		}
-		open override func getRuleIndex() -> Int { return JokrParser.RULE_functionDeclaration }
-		override
-		open func enterRule(_ listener: ParseTreeListener) {
-			if listener is JokrListener {
-			 	(listener as! JokrListener).enterFunctionDeclaration(self)
-			}
-		}
-		override
-		open func exitRule(_ listener: ParseTreeListener) {
-			if listener is JokrListener {
-			 	(listener as! JokrListener).exitFunctionDeclaration(self)
-			}
-		}
-	}
-	@discardableResult
-	open func functionDeclaration() throws -> FunctionDeclarationContext {
-		var _localctx: FunctionDeclarationContext = FunctionDeclarationContext(_ctx, getState())
-		try enterRule(_localctx, 32, JokrParser.RULE_functionDeclaration)
-		defer {
-	    		try! exitRule()
-	    }
-		do {
-		 	try enterOuterAlt(_localctx, 1)
-		 	setState(157)
-		 	try functionDeclarationHeader()
-		 	setState(158)
-		 	try functionDeclarationParameters()
-		 	setState(159)
-		 	try block()
-
-		}
-		catch ANTLRException.recognition(let re) {
-			_localctx.exception = re
-			_errHandler.reportError(self, re)
-			try _errHandler.recover(self, re)
-		}
-
-		return _localctx
-	}
-	open class FunctionDeclarationHeaderContext:ParserRuleContext {
-		open func TYPE() -> TerminalNode? { return getToken(JokrParser.Tokens.TYPE.rawValue, 0) }
-		open func ID() -> TerminalNode? { return getToken(JokrParser.Tokens.ID.rawValue, 0) }
-		open override func getRuleIndex() -> Int { return JokrParser.RULE_functionDeclarationHeader }
-		override
-		open func enterRule(_ listener: ParseTreeListener) {
-			if listener is JokrListener {
-			 	(listener as! JokrListener).enterFunctionDeclarationHeader(self)
-			}
-		}
-		override
-		open func exitRule(_ listener: ParseTreeListener) {
-			if listener is JokrListener {
-			 	(listener as! JokrListener).exitFunctionDeclarationHeader(self)
-			}
-		}
-	}
-	@discardableResult
-	open func functionDeclarationHeader() throws -> FunctionDeclarationHeaderContext {
-		var _localctx: FunctionDeclarationHeaderContext = FunctionDeclarationHeaderContext(_ctx, getState())
-		try enterRule(_localctx, 34, JokrParser.RULE_functionDeclarationHeader)
-		defer {
-	    		try! exitRule()
-	    }
-		do {
-		 	try enterOuterAlt(_localctx, 1)
-		 	setState(161)
-		 	try match(JokrParser.Tokens.TYPE.rawValue)
-		 	setState(162)
-		 	try match(JokrParser.Tokens.ID.rawValue)
-
-		}
-		catch ANTLRException.recognition(let re) {
-			_localctx.exception = re
-			_errHandler.reportError(self, re)
-			try _errHandler.recover(self, re)
-		}
-
-		return _localctx
-	}
-	open class FunctionDeclarationParametersContext:ParserRuleContext {
-		open func LPAREN() -> TerminalNode? { return getToken(JokrParser.Tokens.LPAREN.rawValue, 0) }
-		open func parameterDeclarationList() -> ParameterDeclarationListContext? {
-			return getRuleContext(ParameterDeclarationListContext.self,0)
-		}
-		open func RPAREN() -> TerminalNode? { return getToken(JokrParser.Tokens.RPAREN.rawValue, 0) }
-		open override func getRuleIndex() -> Int { return JokrParser.RULE_functionDeclarationParameters }
-		override
-		open func enterRule(_ listener: ParseTreeListener) {
-			if listener is JokrListener {
-			 	(listener as! JokrListener).enterFunctionDeclarationParameters(self)
-			}
-		}
-		override
-		open func exitRule(_ listener: ParseTreeListener) {
-			if listener is JokrListener {
-			 	(listener as! JokrListener).exitFunctionDeclarationParameters(self)
-			}
-		}
-	}
-	@discardableResult
-	open func functionDeclarationParameters() throws -> FunctionDeclarationParametersContext {
-		var _localctx: FunctionDeclarationParametersContext = FunctionDeclarationParametersContext(_ctx, getState())
-		try enterRule(_localctx, 36, JokrParser.RULE_functionDeclarationParameters)
-		defer {
-	    		try! exitRule()
-	    }
-		do {
-		 	try enterOuterAlt(_localctx, 1)
-		 	setState(164)
-		 	try match(JokrParser.Tokens.LPAREN.rawValue)
-		 	setState(165)
-		 	try parameterDeclarationList(0)
-		 	setState(166)
-		 	try match(JokrParser.Tokens.RPAREN.rawValue)
-
-		}
-		catch ANTLRException.recognition(let re) {
-			_localctx.exception = re
-			_errHandler.reportError(self, re)
-			try _errHandler.recover(self, re)
-		}
-
-		return _localctx
-	}
-	open class ClassDeclarationContext:ParserRuleContext {
-		open func CLASS() -> TerminalNode? { return getToken(JokrParser.Tokens.CLASS.rawValue, 0) }
-		open func TYPE() -> TerminalNode? { return getToken(JokrParser.Tokens.TYPE.rawValue, 0) }
-		open func LBRACE() -> TerminalNode? { return getToken(JokrParser.Tokens.LBRACE.rawValue, 0) }
-		open func NEW_LINE() -> TerminalNode? { return getToken(JokrParser.Tokens.NEW_LINE.rawValue, 0) }
-		open func RBRACE() -> TerminalNode? { return getToken(JokrParser.Tokens.RBRACE.rawValue, 0) }
-		open override func getRuleIndex() -> Int { return JokrParser.RULE_classDeclaration }
-		override
-		open func enterRule(_ listener: ParseTreeListener) {
-			if listener is JokrListener {
-			 	(listener as! JokrListener).enterClassDeclaration(self)
-			}
-		}
-		override
-		open func exitRule(_ listener: ParseTreeListener) {
-			if listener is JokrListener {
-			 	(listener as! JokrListener).exitClassDeclaration(self)
-			}
-		}
-	}
-	@discardableResult
-	open func classDeclaration() throws -> ClassDeclarationContext {
-		var _localctx: ClassDeclarationContext = ClassDeclarationContext(_ctx, getState())
-		try enterRule(_localctx, 38, JokrParser.RULE_classDeclaration)
-		defer {
-	    		try! exitRule()
-	    }
-		do {
-		 	try enterOuterAlt(_localctx, 1)
-		 	setState(168)
-		 	try match(JokrParser.Tokens.CLASS.rawValue)
-		 	setState(169)
-		 	try match(JokrParser.Tokens.TYPE.rawValue)
-		 	setState(170)
-		 	try match(JokrParser.Tokens.LBRACE.rawValue)
-		 	setState(171)
-		 	try match(JokrParser.Tokens.NEW_LINE.rawValue)
-		 	setState(172)
-		 	try match(JokrParser.Tokens.RBRACE.rawValue)
 
 		}
 		catch ANTLRException.recognition(let re) {
@@ -1304,7 +1463,9 @@ open class JokrParser: Parser {
 			return try expression_sempred(_localctx?.castdown(ExpressionContext.self), predIndex)
 		case  8:
 			return try parameterList_sempred(_localctx?.castdown(ParameterListContext.self), predIndex)
-		case  14:
+		case  15:
+			return try classMemberList_sempred(_localctx?.castdown(ClassMemberListContext.self), predIndex)
+		case  20:
 			return try parameterDeclarationList_sempred(_localctx?.castdown(ParameterDeclarationListContext.self), predIndex)
 	    default: return true
 		}
@@ -1333,9 +1494,15 @@ open class JokrParser: Parser {
 		    default: return true
 		}
 	}
-	private func parameterDeclarationList_sempred(_ _localctx: ParameterDeclarationListContext!,  _ predIndex: Int) throws -> Bool {
+	private func classMemberList_sempred(_ _localctx: ClassMemberListContext!,  _ predIndex: Int) throws -> Bool {
 		switch (predIndex) {
 		    case 4:return precpred(_ctx, 1)
+		    default: return true
+		}
+	}
+	private func parameterDeclarationList_sempred(_ _localctx: ParameterDeclarationListContext!,  _ predIndex: Int) throws -> Bool {
+		switch (predIndex) {
+		    case 5:return precpred(_ctx, 1)
 		    default: return true
 		}
 	}

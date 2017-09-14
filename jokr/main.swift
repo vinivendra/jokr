@@ -2,7 +2,7 @@ import Foundation
 import Antlr4
 
 // Branch - ClassDeclarations
-// TODO: Refactor function declarations into class declarations (as methods)
+// TODO: Refactor function declarations into class declarations (as methods) 
 // TODO: Add missing tests for declaration files, function declarations and
 // returns
 // TODO: Add method calls
@@ -15,10 +15,12 @@ do {
 	                       parser: JKRAntlrParser(),
 	                       language: .java)
 
+	// TODO: Trash build files
+
 	try driver.transpile()
-	let result = driver.run()
+	driver.run()
 }
 catch (let error) {
 	log("Failed :(")
-	log(String(describing: error))
+	log("\(error)")
 }

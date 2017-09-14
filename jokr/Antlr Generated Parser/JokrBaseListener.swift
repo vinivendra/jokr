@@ -197,26 +197,39 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext) { }
+	open func enterClassDeclaration(_ ctx: JokrParser.ClassDeclarationContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext) { }
+	open func exitClassDeclaration(_ ctx: JokrParser.ClassDeclarationContext) { }
 
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext) { }
+	open func enterClassMemberList(_ ctx: JokrParser.ClassMemberListContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext) { }
+	open func exitClassMemberList(_ ctx: JokrParser.ClassMemberListContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterClassMember(_ ctx: JokrParser.ClassMemberContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitClassMember(_ ctx: JokrParser.ClassMemberContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -262,13 +275,26 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterClassDeclaration(_ ctx: JokrParser.ClassDeclarationContext) { }
+	open func enterParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitClassDeclaration(_ ctx: JokrParser.ClassDeclarationContext) { }
+	open func exitParameterDeclarationList(_ ctx: JokrParser.ParameterDeclarationListContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitParameterDeclaration(_ ctx: JokrParser.ParameterDeclarationContext) { }
 
 	/**
 	 * {@inheritDoc}

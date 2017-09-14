@@ -98,11 +98,7 @@ extension JokrParser.DeclarationListContext {
 
 extension JokrParser.DeclarationContext {
 	func toJKRTreeDeclaration() -> JKRTreeDeclaration {
-		if let functionDeclaration = functionDeclaration() {
-			return .functionDeclaration(
-				functionDeclaration.toJKRTreeFunctionDeclaration())
-		}
-		else if let classDeclaration = classDeclaration() {
+		if let classDeclaration = classDeclaration() {
 			return .classDeclaration(
 				classDeclaration.toJKRTreeClassDeclaration())
 		}

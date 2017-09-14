@@ -25,14 +25,14 @@ declarationList:
 	| declarationList NEW_LINE declaration;
 
 declaration:
-	functionDeclaration
-	| classDeclaration;
+	classDeclaration;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Building blocks
 
 block:
-	LBRACE NEW_LINE statementList NEW_LINE RBRACE;
+	LBRACE NEW_LINE RBRACE
+	| LBRACE NEW_LINE statementList NEW_LINE RBRACE;
 
 lvalue:
 	ID;
@@ -70,14 +70,21 @@ returnStatement:
 ////////////////////////////////////////////////////////////////////////////////
 // Declarations
 
-parameterDeclarationList:
+// Class declarations
+classDeclaration:
+	CLASS TYPE LBRACE NEW_LINE RBRACE // empty class
+	| CLASS TYPE LBRACE NEW_LINE classMemberList NEW_LINE RBRACE;
+
+// Class members
+classMemberList:
 	// empty
-	| parameterDeclaration
-	| parameterDeclarationList COMMA parameterDeclaration;
+	| classMember
+	| classMemberList NEW_LINE classMember;
 
-parameterDeclaration:
-	TYPE ID;
+classMember:
+	functionDeclaration;
 
+// Function declarations
 functionDeclaration:
 	functionDeclarationHeader functionDeclarationParameters block;
 
@@ -87,10 +94,15 @@ functionDeclarationHeader:
 functionDeclarationParameters:
 	LPAREN parameterDeclarationList RPAREN;
 
-classDeclaration:
-	CLASS TYPE LBRACE NEW_LINE RBRACE;
+parameterDeclarationList:
+	// empty
+	| parameterDeclaration
+	| parameterDeclarationList COMMA parameterDeclaration;
 
-///////////////////////////////////////////////////////
+parameterDeclaration:
+	TYPE ID;
+
+////////////////////////////////////////////////////////////////////////////////
 // Keywords
 CLASS: 'class';
 
@@ -110,7 +122,7 @@ TYPE: [_]*[A-Z][a-zA-Z0-9]*;
 ID: [_]*[a-z][a-zA-Z0-9]*;
 SNAKE_CASE: [a-zA-Z0-9_]+;
 ASSIGN: '=';
-NEW_LINE: '\n'+;
+NEW_LINE: '\n'+ | ('\n'[ \t\r]*)+;
 
 //
 WS: [ \t\r]+ -> skip;
