@@ -7,9 +7,11 @@ struct JKRObjcCompiler: JKRCompiler {
 
 	@discardableResult
 	func compileFiles(atPath folderPath: String) throws -> Shell.CommandResult {
-		let result =
-			Shell.runCommand("clang -framework Foundation \"\(folderPath)main.m\" -o \"\(folderPath)a.out\"")
-		// swiftlint:disable:previous line_length
+		let result = Shell.runCommand("""
+			clang -framework Foundation \"\(folderPath)main.m\" \
+			-o \"\(folderPath)a.out\"
+			""")
+
 		if result.output != "" {
 			log(result.output)
 		}

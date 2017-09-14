@@ -4,19 +4,87 @@ private let testFilesPath = CommandLine.arguments[1] +
 	"/tests/Unit Tests/Objc Translator Tests/"
 
 private let errorMessage =
-	"Lexer, Parser or Translator failed during test.\nError: "
+"""
+Lexer, Parser or Translator failed during test.
+Error:
+"""
 
+// TODO: Consider sending these strings to other files, or (probably better)
+// saving expected results in separate files.
 ////////////////////////////////////////////////////////////////////////////////
-// swiftlint:disable line_length
-private let assignmentMainContents = "#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n\t@autoreleasepool {\n\t\tint x = 2;\n\t\tint y = x + x;\n\t\tfloat z = y - x;\n\t\ty = (z + x) - y;\n\t}\n\treturn 0;\n}\n"
+private let assignmentMainContents =
+"""
+#import <Foundation/Foundation.h>
 
-private let functionCallMainContents = "#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n\t@autoreleasepool {\n\t\tNSLog(@\"Hello jokr!\\n\");\n\t\tNSLog(@\"%d\\n\", 1);\n\t\tNSLog(@\"%d %d\\n\", 1, 2);\n\t}\n\treturn 0;\n}\n"
+int main(int argc, const char * argv[]) {
+	@autoreleasepool {
+		int x = 2;
+		int y = x + x;
+		float z = y - x;
+		y = (z + x) - y;
+	}
+	return 0;
+}
 
-private let classDeclarationPersonHContents = "#import <Foundation/Foundation.h>\n\n@interface Person : NSObject\n\n@end\n}\n"
-private let classDeclarationPersonMContents = "#import \"Person.h\"\n\n@implementation Person\n\n@end\n}\n"
-private let classDeclarationAnimalHContents = "#import <Foundation/Foundation.h>\n\n@interface Animal : NSObject\n\n@end\n}\n"
-private let classDeclarationAnimalMContents = "#import \"Animal.h\"\n\n@implementation Animal\n\n@end\n}\n"
-// swiftlint:enable line_length
+"""
+
+private let functionCallMainContents =
+"""
+#import <Foundation/Foundation.h>
+
+int main(int argc, const char * argv[]) {
+	@autoreleasepool {
+		NSLog(@\"Hello jokr!\\n");
+		NSLog(@\"%d\\n", 1);
+		NSLog(@\"%d %d\\n", 1, 2);
+	}
+	return 0;
+}
+
+"""
+
+// TODO: There shouldn't be these extra brackets after @end's in either .m or .h
+// files.
+private let classDeclarationPersonHContents =
+"""
+#import <Foundation/Foundation.h>
+
+@interface Person : NSObject
+
+@end
+}
+
+"""
+private let classDeclarationPersonMContents =
+"""
+#import \"Person.h\"
+
+@implementation Person
+
+@end
+}
+
+"""
+private let classDeclarationAnimalHContents =
+"""
+#import <Foundation/Foundation.h>
+
+@interface Animal : NSObject
+
+@end
+}
+
+"""
+private let classDeclarationAnimalMContents =
+"""
+#import \"Animal.h\"
+
+@implementation Animal
+
+@end
+}
+
+"""
 
 ////////////////////////////////////////////////////////////////////////////////
 class ObjCTranslatorTests: XCTestCase {

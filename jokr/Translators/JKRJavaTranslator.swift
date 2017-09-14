@@ -16,34 +16,9 @@ class JKRJavaTranslator: JKRTranslator {
 		do {
 			switch tree {
 			case let .statements(statements):
-				changeFile("Main.java")
-
-				write("public class Main {\n")
-				indentation = 1
-
-				writeIntentation()
-				write("public static void main(String []args) {\n")
-				indentation += 1
-
-				writeWithStructure(statements)
-
-				indentation = 1
-				writeIntentation()
-				write("}\n}\n")
+				writeStatementsFile(withStatements: statements)
 			case let .declarations(declarations):
-				for case let .classDeclaration(classDeclaration)
-					in declarations
-				{
-					let className = classDeclaration.type.text
-					changeFile("\(className).java")
-
-					write("public class \(className) {\n")
-					indentation = 1
-
-//					writeWithStructure(statements)
-
-					write("}\n")
-				}
+				writeDeclarationsFile(withDeclarations: declarations)
 			}
 
 			try writer.finishWriting()
@@ -60,6 +35,43 @@ class JKRJavaTranslator: JKRTranslator {
 
 	// Transpilation (general structure)
 	private var indentation = 0
+
+	private func writeStatementsFile(
+		withStatements statements: ([JKRTreeStatement])) {
+
+		changeFile("Main.java")
+
+		write("public class Main {\n")
+		indentation = 1
+
+		writeIntentation()
+		write("public static void main(String []args) {\n")
+		indentation += 1
+
+		writeWithStructure(statements)
+
+		indentation = 1
+		writeIntentation()
+		write("}\n}\n")
+	}
+
+	private func writeDeclarationsFile(
+		withDeclarations declarations: ([JKRTreeDeclaration])) {
+
+		for case let .classDeclaration(classDeclaration)
+			in declarations
+		{
+			let className = classDeclaration.type.text
+			changeFile("\(className).java")
+
+			write("public class \(className) {\n")
+			indentation = 1
+
+//			writeWithStructure(statements)
+
+			write("}\n")
+		}
+	}
 
 	private func writeWithStructure(_ statements: [JKRTreeStatement]) {
 		for statement in statements {
