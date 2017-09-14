@@ -16,56 +16,9 @@ class JKRObjcTranslator: JKRTranslator {
 		do {
 			switch tree {
 			case let .statements(statements):
-				changeFile("main.m")
-
-				indentation = 0
-				write("#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n")
-				// swiftlint:disable:previous line_length
-				indentation += 1
-
-				writeIntentation()
-				write("@autoreleasepool {\n")
-				indentation += 1
-
-				writeWithStructure(statements)
-
-				indentation = 1
-				writeIntentation()
-				write("}\n")
-				writeIntentation()
-				write("return 0;\n}\n")
+				writeStatementsFile(withStatements: statements)
 			case let .declarations(declarations):
-				for case let .classDeclaration(classDeclaration)
-					in declarations
-				{
-					let className = classDeclaration.type.text
-
-					//
-					// Interface file
-					changeFile("\(className).h")
-
-					write("#import <Foundation/Foundation.h>\n\n" +
-						"@interface \(className) : NSObject\n\n" +
-						"@end\n")
-					indentation = 0
-
-//					writeWithStructure(statements)
-
-					write("}\n")
-
-					//
-					// Implementation file
-					changeFile("\(className).m")
-
-					write("#import \"\(className).h\"\n\n" +
-						"@implementation \(className)\n\n" +
-						"@end\n")
-					indentation = 0
-
-//					writeWithStructure(statements)
-
-					write("}\n")
-				}
+				writeDeclarationFiles(withDeclarations: declarations)
 			}
 
 			try writer.finishWriting()
@@ -83,6 +36,71 @@ class JKRObjcTranslator: JKRTranslator {
 	// Transpilation (general structure)
 	private var indentation = 0
 
+	private func writeStatementsFile(
+		withStatements statements: [JKRTreeStatement]) {
+
+		changeFile("main.m")
+
+		indentation = 0
+		write("""
+			#import <Foundation/Foundation.h>
+
+			int main(int argc, const char * argv[]) {\n
+			""")
+
+		indentation += 1
+
+		writeIntentation()
+		write("@autoreleasepool {\n")
+		indentation += 1
+
+		writeWithStructure(statements)
+
+		indentation = 1
+		writeIntentation()
+		write("}\n")
+		writeIntentation()
+		write("return 0;\n}\n")
+	}
+
+	private func writeDeclarationFiles(
+		withDeclarations declarations: [JKRTreeDeclaration]) {
+
+		for case let .classDeclaration(classDeclaration)
+			in declarations
+		{
+			let className = classDeclaration.type.text
+
+			// Interface file
+			changeFile("\(className).h")
+
+			write("""
+				#import <Foundation/Foundation.h>
+
+				@interface \(className) : NSObject
+
+				@end\n
+				""")
+			indentation = 0
+//			writeWithStructure(statements)
+			write("}\n")
+
+			// Implementation file
+			changeFile("\(className).m")
+
+			write("""
+				#import \"\(className).h\"
+
+				@implementation \(className)
+
+				@end\n
+				""")
+			indentation = 0
+//			writeWithStructure(statements)
+			write("}\n")
+		}
+	}
+
 	private func writeWithStructure(_ statements: [JKRTreeStatement]) {
 		for statement in statements {
 			writeWithStructure(statement)
@@ -93,14 +111,14 @@ class JKRObjcTranslator: JKRTranslator {
 		writeIntentation()
 		write(translate(statement))
 
-//		if let block = statement.block {
-//			write(" {\n")
-//			indentation += 1
-//			writeWithStructure(block)
-//			indentation -= 1
-//			addIntentation()
-//			write("}\n")
-//		}
+		//		if let block = statement.block {
+		//			write(" {\n")
+		//			indentation += 1
+		//			writeWithStructure(block)
+		//			indentation -= 1
+		//			addIntentation()
+		//			write("}\n")
+		//		}
 	}
 
 	// Translation (pieces of code)
@@ -150,7 +168,7 @@ class JKRObjcTranslator: JKRTranslator {
 	private func translateHeader(
 		_ function: JKRTreeFunctionDeclaration) -> String {
 		var contents =
-			"- (\(string(for: function.type)))\(string(for: function.id))"
+		"- (\(string(for: function.type)))\(string(for: function.id))"
 
 		let parameters = function.parameters.map(strings(for:))
 

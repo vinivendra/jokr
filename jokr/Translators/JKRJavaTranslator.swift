@@ -126,11 +126,13 @@ class JKRJavaTranslator: JKRTranslator {
 
 	private func translateHeader(
 		_ function: JKRTreeFunctionDeclaration) -> String {
+
+		let returnType = string(for: function.type)
+		let functionName = string(for: function.id)
 		let parameters = function.parameters.map(string(for:))
 			.joined(separator: ", ")
 
-		return "\(string(for: function.type)) \(string(for: function.id))(\(parameters))"
-		// swiftlint:disable:previous line_length
+		return "\(returnType) \(functionName)(\(parameters))"
 	}
 
 	private func translate(_ returnStm: JKRTreeReturn) -> String {
