@@ -4,6 +4,9 @@ import Antlr4
 // Swift 4 stuff
 // TODO: Check for places to add one-sided ranges.
 
+// Project settings
+// TODO: Add full Antlr compilation to test target.
+
 // Branch - ClassDeclarations
 // TODO: Refactor function declarations into class declarations (as methods) 
 // TODO: Add missing tests for declaration files, function declarations and
