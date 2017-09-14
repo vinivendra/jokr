@@ -8,6 +8,7 @@ class JKRAntlrParser: JKRParser {
 			let lexer = JokrLexer(char)
 			let tokens = CommonTokenStream(lexer)
 			let parser = try JokrParser(tokens)
+			parser.setTrace(true)
 			parser.setBuildParseTree(true)
 			let tree = try parser.program()
 
