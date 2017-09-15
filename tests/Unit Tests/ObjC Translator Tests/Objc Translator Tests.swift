@@ -9,9 +9,6 @@ Lexer, Parser or Translator failed during test.
 Error:
 """
 
-// TODO: There shouldn't be these extra brackets after @end's in either .m or .h
-// files.
-
 ////////////////////////////////////////////////////////////////////////////////
 class ObjCTranslatorTests: XCTestCase {
 	let parser = JKRAntlrParser()

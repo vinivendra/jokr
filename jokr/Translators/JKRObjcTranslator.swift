@@ -77,13 +77,11 @@ class JKRObjcTranslator: JKRTranslator {
 			write("""
 				#import <Foundation/Foundation.h>
 
-				@interface \(className) : NSObject
-
-				@end\n
+				@interface \(className) : NSObject\n\n
 				""")
 			indentation = 0
 //			writeWithStructure(statements)
-			write("}\n")
+			write("@end\n")
 
 			// Implementation file
 			changeFile("\(className).m")
@@ -91,13 +89,11 @@ class JKRObjcTranslator: JKRTranslator {
 			write("""
 				#import \"\(className).h\"
 
-				@implementation \(className)
-
-				@end\n
+				@implementation \(className)\n\n
 				""")
 			indentation = 0
 //			writeWithStructure(statements)
-			write("}\n")
+			write("@end\n")
 		}
 	}
 
