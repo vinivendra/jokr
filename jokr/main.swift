@@ -1,9 +1,6 @@
 import Foundation
 import Antlr4
 
-// Project settings
-// TODO: Add full Antlr compilation to test target.
-
 // Branch - ClassDeclarations
 // TODO: Refactor function declarations into class declarations (as methods) 
 // TODO: Add missing tests for declaration files, function declarations and

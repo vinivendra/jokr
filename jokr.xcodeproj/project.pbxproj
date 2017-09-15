@@ -541,9 +541,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24A4144B1F0F20CE0075993D /* Build configuration list for PBXNativeTarget "jokr" */;
 			buildPhases = (
+				24349BC81F37343F00B7A62F /* Run Swiftlint */,
 				24AFC3171F1ED15400534712 /* Build Antlr runtime */,
 				24A4147C1F0F2B750075993D /* Run Antlr to build parser */,
-				24349BC81F37343F00B7A62F /* Run Swiftlint */,
 				24A414401F0F20CE0075993D /* Sources */,
 				24A414411F0F20CE0075993D /* Frameworks */,
 				24A414421F0F20CE0075993D /* CopyFiles */,
@@ -561,7 +561,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24B5F5111F17B7E80045FF6A /* Build configuration list for PBXNativeTarget "jokrUnitTests" */;
 			buildPhases = (
-				24D908591F4F364D001E5C22 /* ShellScript */,
+				24D908591F4F364D001E5C22 /* Run Swiftlint */,
+				247032031F6C8CEF00D4804A /* Build Antlr Runtime */,
+				247032041F6C8D2700D4804A /* Run Antlr to build parser */,
 				24B5F5081F17B7E80045FF6A /* Sources */,
 				24B5F5091F17B7E80045FF6A /* Frameworks */,
 				24B5F50A1F17B7E80045FF6A /* Resources */,
@@ -652,6 +654,34 @@
 			shellPath = /bin/sh;
 			shellScript = "cd $SRCROOT\nswiftlint";
 		};
+		247032031F6C8CEF00D4804A /* Build Antlr Runtime */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Antlr Runtime";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT\"/jokr\nbash buildAntlrRuntime.sh";
+		};
+		247032041F6C8D2700D4804A /* Run Antlr to build parser */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Antlr to build parser";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT\"/jokr\nbash runAntlr.sh";
+		};
 		24A4147C1F0F2B750075993D /* Run Antlr to build parser */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -680,13 +710,14 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"$SRCROOT\"/jokr\nbash buildAntlrRuntime.sh";
 		};
-		24D908591F4F364D001E5C22 /* ShellScript */ = {
+		24D908591F4F364D001E5C22 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Swiftlint";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
