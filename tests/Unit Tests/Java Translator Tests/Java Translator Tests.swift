@@ -7,55 +7,16 @@ private let errorMessage =
 	"Lexer, Parser or Translator failed during test.\nError: "
 
 ////////////////////////////////////////////////////////////////////////////////
-private let assignmentMainContents =
-"""
-public class Main {
-	public static void main(String []args) {
-		int x = 2;
-		int y = x + x;
-		float z = y - x;
-		y = (z + x) - y;
-	}
-}
-
-"""
-
-private let functionCallMainContents =
-"""
-public class Main {
-	public static void main(String []args) {
-		System.out.format(\"Hello jokr!\\n\");
-		System.out.format(\"%d\\n\", 1);
-		System.out.format(\"%d %d\\n\", 1, 2);
-	}
-}
-
-"""
-
-private let classDeclarationPersonContents =
-"""
-public class Person {
-}
-
-"""
-private let classDeclarationAnimalContents =
-"""
-public class Animal {
-}
-
-"""
-
-////////////////////////////////////////////////////////////////////////////////
 class JavaTranslatorTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
-	func translate(
-		file filename: String) throws -> [String: String] {
+	func translate(_ testName: String) throws -> [String: String] {
 		do {
-			guard let tree = try parser.parse(file: testFilesPath + filename)
+			guard let tree = try parser.parse(file:
+				"\(testFilesPath)\(testName)/\(testName).jkr")
 				else
 			{
-				XCTFail("Failed to parse file \(filename)")
+				XCTFail("Failed to parse file \(testName)")
 				throw JKRError.parsing
 			}
 
@@ -76,10 +37,16 @@ class JavaTranslatorTests: XCTestCase {
 	func testAssignments() {
 		do {
 			// WITH:
-			let files = try translate(file: "TestAssignments.jkr")
+			let testName = "TestAssignments"
+			let files = try translate(testName)
 
-			// TEST: Main file gets created with correct contents
-			XCTAssertEqual(files["Main.java"], assignmentMainContents)
+			// TEST: Files get created with correct contents
+			for (filename, contents) in files {
+				let expectedContents = try String(
+					contentsOfFile: "\(testFilesPath)\(testName)/\(filename)")
+				XCTAssertEqual(contents, expectedContents,
+				               "Translation failed in file \(filename)")
+			}
 
 			// TEST: No other files get created
 			XCTAssertEqual(files.count, 1)
@@ -92,10 +59,16 @@ class JavaTranslatorTests: XCTestCase {
 	func testFunctionCalls() {
 		do {
 			// WITH:
-			let files = try translate(file: "TestFunctionCalls.jkr")
+			let testName = "TestFunctionCalls"
+			let files = try translate(testName)
 
-			// TEST: Main file gets created with correct contents
-			XCTAssertEqual(files["Main.java"], functionCallMainContents)
+			// TEST: Files get created with correct contents
+			for (filename, contents) in files {
+				let expectedContents = try String(
+					contentsOfFile: "\(testFilesPath)\(testName)/\(filename)")
+				XCTAssertEqual(contents, expectedContents,
+				               "Translation failed in file \(filename)")
+			}
 
 			// TEST: No other files get created
 			XCTAssertEqual(files.count, 1)
@@ -108,15 +81,16 @@ class JavaTranslatorTests: XCTestCase {
 	func testClassDeclarations() {
 		do {
 			// WITH:
-			let files = try translate(file: "TestClassDeclarations.jkr")
+			let testName = "TestClassDeclarations"
+			let files = try translate(testName)
 
-			print(files)
-
-			// TEST: Person file gets created with correct contents
-			XCTAssertEqual(files["Person.java"], classDeclarationPersonContents)
-
-			// TEST: Animal file gets created with correct contents
-			XCTAssertEqual(files["Animal.java"], classDeclarationAnimalContents)
+			// TEST: Files get created with correct contents
+			for (filename, contents) in files {
+				let expectedContents = try String(
+					contentsOfFile: "\(testFilesPath)\(testName)/\(filename)")
+				XCTAssertEqual(contents, expectedContents,
+				               "Translation failed in file \(filename)")
+			}
 
 			// TEST: No other files get created
 			XCTAssertEqual(files.count, 2)
