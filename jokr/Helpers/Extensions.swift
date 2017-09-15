@@ -59,7 +59,6 @@ extension Collection {
 
 // String Strip NSLog data
 extension String {
-	// TODO: Consider using new Swift 4 string-as-sequence APIs.
 	func strippingNSLogData() -> String {
 		let lines = self.components(separatedBy: "\n")
 		let contents = lines.map { (string: String) -> String in
