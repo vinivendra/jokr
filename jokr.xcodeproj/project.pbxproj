@@ -91,10 +91,7 @@
 
 /* Begin PBXFileReference section */
 		240409471F47288C00FC2AD4 /* Objc Translator Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Objc Translator Tests.swift"; sourceTree = "<group>"; };
-		240E112C1F5DDDFA00F67F3E /* TestClassDeclarations.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClassDeclarations.jkr; sourceTree = "<group>"; };
 		241371DE1F58D55A001DE932 /* TestClassDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClassDeclarations; sourceTree = "<group>"; };
-		24171CBA1F4CAA66002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
-		24171CBD1F4CAE62002C136B /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
 		24171CC01F4CAF9B002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
 		24171CC11F4CAFBA002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
 		242A22A51F6FFEFB0099944F /* main.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jkr; sourceTree = "<group>"; };
@@ -343,7 +340,6 @@
 		247031F81F6C869B00D4804A /* TestAssignments */ = {
 			isa = PBXGroup;
 			children = (
-				24171CBD1F4CAE62002C136B /* TestAssignments.jkr */,
 				247031FB1F6C86C000D4804A /* main.m */,
 			);
 			path = TestAssignments;
@@ -352,7 +348,6 @@
 		247031F91F6C86A800D4804A /* TestClassDeclarations */ = {
 			isa = PBXGroup;
 			children = (
-				240E112C1F5DDDFA00F67F3E /* TestClassDeclarations.jkr */,
 				247032021F6C86FE00D4804A /* Animal.h */,
 				247032001F6C86F800D4804A /* Animal.m */,
 				247031FF1F6C86F100D4804A /* Person.h */,
@@ -364,7 +359,6 @@
 		247031FA1F6C86AE00D4804A /* TestFunctionCalls */ = {
 			isa = PBXGroup;
 			children = (
-				24171CBA1F4CAA66002C136B /* TestFunctionCalls.jkr */,
 				247031FC1F6C86D800D4804A /* main.m */,
 			);
 			path = TestFunctionCalls;
