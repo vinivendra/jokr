@@ -8,7 +8,7 @@ import Antlr4
 // TODO: Add method calls
 // TODO: Add properties
 
-private let filePath = CommandLine.arguments[1] + "/tests/"
+private let filePath = CommandLine.arguments[1] + "/example/"
 
 do {
 	let driver = JKRDriver(folderPath: filePath,
