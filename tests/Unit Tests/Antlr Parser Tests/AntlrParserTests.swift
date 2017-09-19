@@ -388,7 +388,14 @@ class AntlrParserTests: XCTestCase {
 
 			// TEST: Parser found all expected elements
 			let expectedDeclarations: [TokenTest] =
-				[(1, 0, "classPerson{\n\n}")]
+				[(1, 0, "classPerson{\n\n}"),
+				 (5, 0, """
+					classAnimal{
+						IntnumberOfLegs(){
+							return5
+						}
+					}
+					""")]
 
 			for (expected, actual) in zip(expectedDeclarations, declarations) {
 				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
