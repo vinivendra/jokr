@@ -250,10 +250,44 @@ extension JokrParser.FunctionDeclarationContext {
 	}
 }
 
+extension JokrParser.ClassMemberListContext {
+	func toJKRTreeFunctionDeclarations() -> [JKRTreeFunctionDeclaration] {
+		guard let functionDeclaration =
+			classMember()?.toJKRTreeFunctionDeclaration() else {
+			fatalError("Failed to transpile declarations")
+		}
+
+		if let classMemberList = classMemberList() {
+			return classMemberList.toJKRTreeFunctionDeclarations() +
+				[functionDeclaration]
+		}
+		else {
+			return [functionDeclaration]
+		}
+	}
+}
+
+extension JokrParser.ClassMemberContext {
+	func toJKRTreeFunctionDeclaration() -> JKRTreeFunctionDeclaration {
+		if let functionDeclaration = functionDeclaration() {
+			return functionDeclaration.toJKRTreeFunctionDeclaration()
+		}
+
+		fatalError("Failed to transpile parameter")
+	}
+}
+
 extension JokrParser.ClassDeclarationContext {
 	func toJKRTreeClassDeclaration() -> JKRTreeClassDeclaration {
 		if let type = TYPE()?.toJKRTreeType() {
-			return JKRTreeClassDeclaration(type: type)
+			if let functionDeclarations =
+				classMemberList()?.toJKRTreeFunctionDeclarations() {
+				return JKRTreeClassDeclaration(type: type,
+				                               methods: functionDeclarations)
+			}
+			else {
+				return JKRTreeClassDeclaration(type: type)
+			}
 		}
 
 		fatalError("Failed to transpile class declaration")

@@ -376,7 +376,12 @@ class AntlrToJokrTests: XCTestCase {
 				JKRTreeClassDeclaration(
 					type: "Person"),
 				JKRTreeClassDeclaration(
-					type: "Animal")
+					type: "Animal",
+					methods: [JKRTreeFunctionDeclaration(
+						type: "Int",
+						id: "numberOfLegs",
+						parameters: [],
+						block: [.returnStm(5)])])
 			]
 
 			// TEST: All elements were converted successfully

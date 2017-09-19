@@ -185,6 +185,12 @@ struct JKRTreeFunctionDeclaration: Equatable {
 
 struct JKRTreeClassDeclaration: Equatable {
 	let type: JKRTreeType
+	let methods: [JKRTreeFunctionDeclaration]
+
+	init(type: JKRTreeType, methods: [JKRTreeFunctionDeclaration] = []) {
+		self.type = type
+		self.methods = methods
+	}
 
 	// Equatable
 	static func == (lhs: JKRTreeClassDeclaration,
