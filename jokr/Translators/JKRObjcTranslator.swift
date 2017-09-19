@@ -50,16 +50,16 @@ class JKRObjcTranslator: JKRTranslator {
 
 		indentation += 1
 
-		writeIntentation()
+		writeIndentation()
 		write("@autoreleasepool {\n")
 		indentation += 1
 
 		writeWithStructure(statements)
 
 		indentation = 1
-		writeIntentation()
+		writeIndentation()
 		write("}\n")
-		writeIntentation()
+		writeIndentation()
 		write("return 0;\n}\n")
 	}
 
@@ -92,7 +92,7 @@ class JKRObjcTranslator: JKRTranslator {
 				@implementation \(className)\n\n
 				""")
 			indentation = 0
-//			writeWithStructure(statements)
+			writeWithStructure(classDeclaration.methods)
 			write("@end\n")
 		}
 	}
@@ -104,7 +104,7 @@ class JKRObjcTranslator: JKRTranslator {
 	}
 
 	private func writeWithStructure(_ statement: JKRTreeStatement) {
-		writeIntentation()
+		writeIndentation()
 
 		switch statement {
 		case let .assignment(assignment):
@@ -114,6 +114,31 @@ class JKRObjcTranslator: JKRTranslator {
 		case let .returnStm(returnStm):
 			write(translate(returnStm))
 		}
+	}
+
+	private func writeWithStructure(_ methods: [JKRTreeFunctionDeclaration]) {
+		for method in methods {
+			writeWithStructure(method)
+			write("\n")
+		}
+	}
+
+	private func writeWithStructure(_ method: JKRTreeFunctionDeclaration) {
+		writeIndentation()
+		write(translateHeader(method))
+		write(" {\n")
+
+		if method.block.count > 0 {
+			indentation += 1
+			writeWithStructure(method.block)
+			indentation -= 1
+		}
+		else {
+			write("\n")
+		}
+
+		writeIndentation()
+		write("}\n")
 	}
 
 	// Translation (pieces of code)
@@ -233,7 +258,7 @@ class JKRObjcTranslator: JKRTranslator {
 		writer.changeFile(string)
 	}
 
-	private func writeIntentation() {
+	private func writeIndentation() {
 		for _ in 0..<indentation {
 			write("\t")
 		}

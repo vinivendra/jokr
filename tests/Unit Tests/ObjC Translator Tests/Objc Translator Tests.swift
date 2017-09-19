@@ -102,7 +102,20 @@ class ObjCTranslatorTests: XCTestCase {
 
 			let tree = JKRTree.declarations([
 				.classDeclaration(JKRTreeClassDeclaration(type: "Person")),
-				.classDeclaration(JKRTreeClassDeclaration(type: "Animal"))
+				.classDeclaration(JKRTreeClassDeclaration(
+					type: "Animal",
+					methods: [JKRTreeFunctionDeclaration(
+						type: "Int", id: "numberOfLegs", parameters: [],
+						block: [.returnStm(5)])])),
+				.classDeclaration(JKRTreeClassDeclaration(
+					type: "SomeClass",
+					methods: [
+						JKRTreeFunctionDeclaration(
+							type: "Int", id: "five", parameters: [],
+							block: [.returnStm(5)]),
+						JKRTreeFunctionDeclaration(
+							type: "Int", id: "two", parameters: [],
+							block: [.returnStm(2)])]))
 				])
 
 			let files = try translate(tree)
@@ -116,7 +129,7 @@ class ObjCTranslatorTests: XCTestCase {
 			}
 
 			// TEST: No other files get created
-			XCTAssertEqual(files.count, 4)
+			XCTAssertEqual(files.count, 6)
 		}
 		catch (let error) {
 			XCTFail(errorMessage + "\(error)")
