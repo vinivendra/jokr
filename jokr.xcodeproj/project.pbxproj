@@ -177,6 +177,8 @@
 		24D61EAF1F6B15F900401646 /* TestTypes */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestTypes; sourceTree = "<group>"; };
 		24D908571F4F33C4001E5C22 /* TestParameters */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestParameters; sourceTree = "<group>"; };
 		24E7D9241F714A83000D584B /* SomeClass.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = SomeClass.java; sourceTree = "<group>"; };
+		24E7D92B1F715A14000D584B /* SomeClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SomeClass.m; sourceTree = "<group>"; };
+		24E7D92C1F715A1F000D584B /* SomeClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SomeClass.h; sourceTree = "<group>"; };
 		24FAA0CF1F369D9A0053A6BC /* FunctionListenerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionListenerTests.swift; sourceTree = "<group>"; };
 		24FAA9A21F573B9900752153 /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
 		24FAA9A31F573BEE00752153 /* TestExpressions.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestExpressions.jkr; sourceTree = "<group>"; };
@@ -354,6 +356,8 @@
 				247032001F6C86F800D4804A /* Animal.m */,
 				247031FF1F6C86F100D4804A /* Person.h */,
 				247031FD1F6C86EB00D4804A /* Person.m */,
+				24E7D92C1F715A1F000D584B /* SomeClass.h */,
+				24E7D92B1F715A14000D584B /* SomeClass.m */,
 			);
 			path = TestClassDeclarations;
 			sourceTree = "<group>";
