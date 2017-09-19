@@ -54,13 +54,13 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterDeclarationList(_ ctx: JokrParser.DeclarationListContext) { }
+	open func enterClassList(_ ctx: JokrParser.ClassListContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitDeclarationList(_ ctx: JokrParser.DeclarationListContext) { }
+	open func exitClassList(_ ctx: JokrParser.ClassListContext) { }
 
 	/**
 	 * {@inheritDoc}

@@ -41,7 +41,7 @@ extension JokrParser.ProgramContext {
 	}
 
 	func toJKRTreeClasses() -> [JKRTreeClassDeclaration]? {
-		if let declarationList = declarationList() {
+		if let declarationList = classList() {
 			return declarationList.toJKRTreeClassDeclarations()
 		}
 		else {
@@ -81,7 +81,7 @@ extension JokrParser.StatementContext {
 	}
 }
 
-extension JokrParser.DeclarationListContext {
+extension JokrParser.ClassListContext {
 	func toJKRTreeClassDeclarations() -> [JKRTreeClassDeclaration] {
 		guard let classDeclaration =
 			classDeclaration()?.toJKRTreeClassDeclaration() else
@@ -89,8 +89,9 @@ extension JokrParser.DeclarationListContext {
 			fatalError("Failed to transpile declarations")
 		}
 
-		if let declarationList = declarationList() {
-			return declarationList.toJKRTreeClassDeclarations() + [classDeclaration]
+		if let declarationList = classList() {
+			return declarationList.toJKRTreeClassDeclarations() +
+				[classDeclaration]
 		}
 		else {
 			return [classDeclaration]
