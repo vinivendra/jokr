@@ -195,7 +195,7 @@ struct JKRTreeClassDeclaration: Equatable {
 	// Equatable
 	static func == (lhs: JKRTreeClassDeclaration,
 	                rhs: JKRTreeClassDeclaration) -> Bool {
-		return lhs.type == rhs.type
+		return lhs.type == rhs.type && lhs.methods == rhs.methods
 	}
 }
 

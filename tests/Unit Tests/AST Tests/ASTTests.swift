@@ -251,7 +251,13 @@ class ASTTests: XCTestCase {
 		// WITH:
 		let classDeclarations: [JKRTreeClassDeclaration] = [
 			JKRTreeClassDeclaration(type: "Person"),
-			JKRTreeClassDeclaration(type: "Animal")
+			JKRTreeClassDeclaration(type: "Animal"),
+			JKRTreeClassDeclaration(type: "Animal",
+			                        methods: [JKRTreeFunctionDeclaration(
+										type: "Int",
+										id: "numberOfLegs",
+										parameters: [],
+										block: [.returnStm(5)])])
 		]
 
 		// TEST: == succeeds on equal instances (reflexive)
