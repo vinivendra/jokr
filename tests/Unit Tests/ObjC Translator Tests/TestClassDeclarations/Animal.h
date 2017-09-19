@@ -2,4 +2,6 @@
 
 @interface Animal : NSObject
 
+- (int)numberOfLegs;
+
 @end

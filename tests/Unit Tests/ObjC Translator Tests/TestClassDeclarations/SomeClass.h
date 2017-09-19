@@ -2,4 +2,7 @@
 
 @interface SomeClass : NSObject
 
+- (int)five;
+- (int)two;
+
 @end

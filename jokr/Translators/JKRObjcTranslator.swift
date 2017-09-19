@@ -80,7 +80,7 @@ class JKRObjcTranslator: JKRTranslator {
 				@interface \(className) : NSObject\n\n
 				""")
 			indentation = 0
-//			writeWithStructure(statements)
+			writeInterfaceWithStructure(classDeclaration.methods)
 			write("@end\n")
 
 			// Implementation file
@@ -139,6 +139,26 @@ class JKRObjcTranslator: JKRTranslator {
 
 		writeIndentation()
 		write("}\n")
+	}
+
+	private func writeInterfaceWithStructure(
+		_ methods: [JKRTreeFunctionDeclaration]) {
+
+		for method in methods {
+			writeInterfaceWithStructure(method)
+		}
+
+		if methods.count > 0 {
+			write("\n")
+		}
+	}
+
+	private func writeInterfaceWithStructure(
+		_ method: JKRTreeFunctionDeclaration) {
+
+		writeIndentation()
+		write(translateHeader(method))
+		write(";\n")
 	}
 
 	// Translation (pieces of code)
