@@ -357,10 +357,24 @@ class AntlrParserTests: XCTestCase {
 
 			// TEST: Parser found all expected elements
 			let expectedDeclarations: [TokenTest] = [
-				(2, 1, "Intfive(){\n\t\tIntx=4\n\t\tx=5\n\t\treturn5\n\t}"),
-				(8, 1,
-				 "Intnumber(Intnumber){\n\t\tresult=number\n\t\treturnresult\n\t}"),
-				(13, 1, "Intsum(Inta,Intb,Intc){\n\t\treturna+b+c\n\t}")]
+				(2, 1, """
+					Intfive(){
+							Intx=4
+							x=5
+							return5
+						}
+					"""),
+				(8, 1, """
+					Intnumber(Intnumber){
+							result=number
+							returnresult
+						}
+					"""),
+				(13, 1, """
+					Intsum(Inta,Intb,Intc){
+							returna+b+c
+						}
+					""")]
 
 			for (expected, actual) in zip(expectedDeclarations, declarations) {
 				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
