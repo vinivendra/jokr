@@ -81,16 +81,15 @@ class JKRJavaTranslator: JKRTranslator {
 
 	private func writeWithStructure(_ statement: JKRTreeStatement) {
 		writeIndentation()
-		write(translate(statement))
 
-//		if let block = statement.block {
-//			write(" {\n")
-//			indentation += 1
-//			writeWithStructure(block)
-//			indentation -= 1
-//			addIntentation()
-//			write("}\n")
-//		}
+		switch statement {
+		case let .assignment(assignment):
+			write(translate(assignment))
+		case let .functionCall(functionCall):
+			write(translate(functionCall))
+		case let .returnStm(returnStm):
+			write(translate(returnStm))
+		}
 	}
 
 	private func writeWithStructure(_ methods: [JKRTreeFunctionDeclaration]) {
@@ -123,16 +122,6 @@ class JKRJavaTranslator: JKRTranslator {
 	}
 
 	// Translation (pieces of code)
-	private func translate(_ statement: JKRTreeStatement) -> String {
-		switch statement {
-		case let .assignment(assignment):
-			return translate(assignment)
-		case let .functionCall(functionCall):
-			return translate(functionCall)
-		case let .returnStm(returnStm):
-			return translate(returnStm)
-		}
-	}
 
 	private func translate(_ assignment: JKRTreeAssignment) -> String {
 		switch assignment {
