@@ -122,7 +122,6 @@ class JKRJavaTranslator: JKRTranslator {
 	}
 
 	// Translation (pieces of code)
-
 	private func translate(_ assignment: JKRTreeAssignment) -> String {
 		switch assignment {
 		case let .declaration(type, id, expression):
