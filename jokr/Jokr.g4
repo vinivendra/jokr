@@ -8,8 +8,8 @@ program:
 	// empty
 	| statementList
 	| statementList NEW_LINE
-	| classList
-	| classList NEW_LINE;
+	| classDeclarationList
+	| classDeclarationList NEW_LINE;
 
 statementList:
 	statement
@@ -20,9 +20,9 @@ statement:
 	| functionCall
 	| returnStatement;
 
-classList:
+classDeclarationList:
 	classDeclaration
-	| classList NEW_LINE classDeclaration;
+	| classDeclarationList NEW_LINE classDeclaration;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Building blocks

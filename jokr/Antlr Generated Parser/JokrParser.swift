@@ -19,7 +19,7 @@ open class JokrParser: Parser {
                  ID = 14, SNAKE_CASE = 15, ASSIGN = 16, NEW_LINE = 17, WS = 18
 	}
 	public static let RULE_program = 0, RULE_statementList = 1, RULE_statement = 2, 
-                   RULE_classList = 3, RULE_block = 4, RULE_lvalue = 5, 
+                   RULE_classDeclarationList = 3, RULE_block = 4, RULE_lvalue = 5, 
                    RULE_expression = 6, RULE_parameterList = 7, RULE_parameter = 8, 
                    RULE_assignment = 9, RULE_variableDeclaration = 10, RULE_functionCall = 11, 
                    RULE_returnStatement = 12, RULE_classDeclaration = 13, 
@@ -27,8 +27,8 @@ open class JokrParser: Parser {
                    RULE_functionDeclarationHeader = 17, RULE_functionDeclarationParameters = 18, 
                    RULE_parameterDeclarationList = 19, RULE_parameterDeclaration = 20
 	public static let ruleNames: [String] = [
-		"program", "statementList", "statement", "classList", "block", "lvalue", 
-		"expression", "parameterList", "parameter", "assignment", "variableDeclaration", 
+		"program", "statementList", "statement", "classDeclarationList", "block", 
+		"lvalue", "expression", "parameterList", "parameter", "assignment", "variableDeclaration", 
 		"functionCall", "returnStatement", "classDeclaration", "classMemberList", 
 		"classMember", "functionDeclaration", "functionDeclarationHeader", "functionDeclarationParameters", 
 		"parameterDeclarationList", "parameterDeclaration"
@@ -96,8 +96,8 @@ open class JokrParser: Parser {
 			return getRuleContext(StatementListContext.self,0)
 		}
 		open func NEW_LINE() -> TerminalNode? { return getToken(JokrParser.Tokens.NEW_LINE.rawValue, 0) }
-		open func classList() -> ClassListContext? {
-			return getRuleContext(ClassListContext.self,0)
+		open func classDeclarationList() -> ClassDeclarationListContext? {
+			return getRuleContext(ClassDeclarationListContext.self,0)
 		}
 		open override func getRuleIndex() -> Int { return JokrParser.RULE_program }
 		override
@@ -145,13 +145,13 @@ open class JokrParser: Parser {
 		 	case 4:
 		 		try enterOuterAlt(_localctx, 4)
 		 		setState(47)
-		 		try classList(0)
+		 		try classDeclarationList(0)
 
 		 		break
 		 	case 5:
 		 		try enterOuterAlt(_localctx, 5)
 		 		setState(48)
-		 		try classList(0)
+		 		try classDeclarationList(0)
 		 		setState(49)
 		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
 
@@ -313,40 +313,40 @@ open class JokrParser: Parser {
 		return _localctx
 	}
 
-	open class ClassListContext:ParserRuleContext {
+	open class ClassDeclarationListContext:ParserRuleContext {
 		open func classDeclaration() -> ClassDeclarationContext? {
 			return getRuleContext(ClassDeclarationContext.self,0)
 		}
-		open func classList() -> ClassListContext? {
-			return getRuleContext(ClassListContext.self,0)
+		open func classDeclarationList() -> ClassDeclarationListContext? {
+			return getRuleContext(ClassDeclarationListContext.self,0)
 		}
 		open func NEW_LINE() -> TerminalNode? { return getToken(JokrParser.Tokens.NEW_LINE.rawValue, 0) }
-		open override func getRuleIndex() -> Int { return JokrParser.RULE_classList }
+		open override func getRuleIndex() -> Int { return JokrParser.RULE_classDeclarationList }
 		override
 		open func enterRule(_ listener: ParseTreeListener) {
 			if listener is JokrListener {
-			 	(listener as! JokrListener).enterClassList(self)
+			 	(listener as! JokrListener).enterClassDeclarationList(self)
 			}
 		}
 		override
 		open func exitRule(_ listener: ParseTreeListener) {
 			if listener is JokrListener {
-			 	(listener as! JokrListener).exitClassList(self)
+			 	(listener as! JokrListener).exitClassDeclarationList(self)
 			}
 		}
 	}
 
-	public final  func classList( ) throws -> ClassListContext   {
-		return try classList(0)
+	public final  func classDeclarationList( ) throws -> ClassDeclarationListContext   {
+		return try classDeclarationList(0)
 	}
 	@discardableResult
-	private func classList(_ _p: Int) throws -> ClassListContext   {
+	private func classDeclarationList(_ _p: Int) throws -> ClassDeclarationListContext   {
 		let _parentctx: ParserRuleContext? = _ctx
 		var _parentState: Int = getState()
-		var _localctx: ClassListContext = ClassListContext(_ctx, _parentState)
-		var  _prevctx: ClassListContext = _localctx
+		var _localctx: ClassDeclarationListContext = ClassDeclarationListContext(_ctx, _parentState)
+		var  _prevctx: ClassDeclarationListContext = _localctx
 		var _startState: Int = 6
-		try enterRecursionRule(_localctx, 6, JokrParser.RULE_classList, _p)
+		try enterRecursionRule(_localctx, 6, JokrParser.RULE_classDeclarationList, _p)
 		defer {
 	    		try! unrollRecursionContexts(_parentctx)
 	    }
@@ -366,8 +366,8 @@ open class JokrParser: Parser {
 					   try triggerExitRuleEvent()
 					}
 					_prevctx = _localctx
-					_localctx = ClassListContext(_parentctx, _parentState);
-					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_classList)
+					_localctx = ClassDeclarationListContext(_parentctx, _parentState);
+					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_classDeclarationList)
 					setState(72)
 					if (!(precpred(_ctx, 1))) {
 					    throw try ANTLRException.recognition(e:FailedPredicateException(self, "precpred(_ctx, 1)"))
@@ -1419,7 +1419,7 @@ open class JokrParser: Parser {
 		case  1:
 			return try statementList_sempred(_localctx?.castdown(StatementListContext.self), predIndex)
 		case  3:
-			return try classList_sempred(_localctx?.castdown(ClassListContext.self), predIndex)
+			return try classDeclarationList_sempred(_localctx?.castdown(ClassDeclarationListContext.self), predIndex)
 		case  6:
 			return try expression_sempred(_localctx?.castdown(ExpressionContext.self), predIndex)
 		case  7:
@@ -1437,7 +1437,7 @@ open class JokrParser: Parser {
 		    default: return true
 		}
 	}
-	private func classList_sempred(_ _localctx: ClassListContext!,  _ predIndex: Int) throws -> Bool {
+	private func classDeclarationList_sempred(_ _localctx: ClassDeclarationListContext!,  _ predIndex: Int) throws -> Bool {
 		switch (predIndex) {
 		    case 1:return precpred(_ctx, 1)
 		    default: return true

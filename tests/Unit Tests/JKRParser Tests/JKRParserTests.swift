@@ -63,7 +63,7 @@ class JKRParserTests: XCTestCase {
 				// TEST: File with top level declarations should return a
 				// .declaration case
 				switch tree {
-				case JKRTree.classes(_): break
+				case JKRTree.classDeclarations(_): break
 				default: XCTFail("Parser \(parser) failed the test.")
 				}
 			}

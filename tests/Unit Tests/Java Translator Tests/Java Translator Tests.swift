@@ -97,7 +97,7 @@ class JavaTranslatorTests: XCTestCase {
 			// WITH:
 			let expectedResultsFolder = "TestClassDeclarations"
 
-			let tree = JKRTree.classes([
+			let tree = JKRTree.classDeclarations([
 				JKRTreeClassDeclaration(type: "Person"),
 				JKRTreeClassDeclaration(
 					type: "Animal",

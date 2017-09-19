@@ -43,17 +43,17 @@ public protocol JokrListener: ParseTreeListener {
 	 */
 	func exitStatement(_ ctx: JokrParser.StatementContext)
 	/**
-	 * Enter a parse tree produced by {@link JokrParser#classList}.
+	 * Enter a parse tree produced by {@link JokrParser#classDeclarationList}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func enterClassList(_ ctx: JokrParser.ClassListContext)
+	func enterClassDeclarationList(_ ctx: JokrParser.ClassDeclarationListContext)
 	/**
-	 * Exit a parse tree produced by {@link JokrParser#classList}.
+	 * Exit a parse tree produced by {@link JokrParser#classDeclarationList}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func exitClassList(_ ctx: JokrParser.ClassListContext)
+	func exitClassDeclarationList(_ ctx: JokrParser.ClassDeclarationListContext)
 	/**
 	 * Enter a parse tree produced by {@link JokrParser#block}.
 	 - Parameters:

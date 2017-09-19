@@ -4,7 +4,7 @@
 
 enum JKRTree {
 	case statements([JKRTreeStatement])
-	case classes([JKRTreeClassDeclaration])
+	case classDeclarations([JKRTreeClassDeclaration])
 }
 
 enum JKRTreeStatement: Equatable {

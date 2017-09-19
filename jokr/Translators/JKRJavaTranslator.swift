@@ -17,7 +17,7 @@ class JKRJavaTranslator: JKRTranslator {
 			switch tree {
 			case let .statements(statements):
 				writeStatementsFile(withStatements: statements)
-			case let .classes(classes):
+			case let .classDeclarations(classes):
 				writeClassFiles(withClasses: classes)
 			}
 
