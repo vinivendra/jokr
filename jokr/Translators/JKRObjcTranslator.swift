@@ -17,8 +17,8 @@ class JKRObjcTranslator: JKRTranslator {
 			switch tree {
 			case let .statements(statements):
 				writeStatementsFile(withStatements: statements)
-			case let .declarations(declarations):
-				writeDeclarationFiles(withDeclarations: declarations)
+			case let .classes(classes):
+				writeClassFiles(withClasses: classes)
 			}
 
 			try writer.finishWriting()
@@ -63,12 +63,10 @@ class JKRObjcTranslator: JKRTranslator {
 		write("return 0;\n}\n")
 	}
 
-	private func writeDeclarationFiles(
-		withDeclarations declarations: [JKRTreeDeclaration]) {
+	private func writeClassFiles(
+		withClasses declarations: [JKRTreeClassDeclaration]) {
 
-		for case let .classDeclaration(classDeclaration)
-			in declarations
-		{
+		for classDeclaration in declarations {
 			let className = classDeclaration.type.text
 
 			// Interface file

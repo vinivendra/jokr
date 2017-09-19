@@ -15,8 +15,8 @@ class JKRAntlrParser: JKRParser {
 			if let statements = tree.toJKRTreeStatements() {
 				return .statements(statements)
 			}
-			else if let declarations = tree.toJKRTreeDeclarations() {
-				return .declarations(declarations)
+			else if let classDeclarations = tree.toJKRTreeClasses() {
+				return .classes(classDeclarations)
 			}
 			else {
 				return nil

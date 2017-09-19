@@ -33,7 +33,7 @@ class AntlrToJokrTests: XCTestCase {
 
 			// TEST: program contains no statements or declarations
 			XCTAssertNil(tree.toJKRTreeStatements())
-			XCTAssertNil(tree.toJKRTreeDeclarations())
+			XCTAssertNil(tree.toJKRTreeClasses())
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
@@ -110,19 +110,14 @@ class AntlrToJokrTests: XCTestCase {
 			// WITH:
 			let tree = try getProgram(inFile:  "TestDeclarations")
 
-			guard let declarations = tree.toJKRTreeDeclarations() else {
+			guard let declarations = tree.toJKRTreeClasses() else {
 				XCTFail("Failed to get declarations from declarations file.")
 				return
 			}
 
-			let expectedDeclarations: [JKRTreeDeclaration] = [
-				.classDeclaration(
-					JKRTreeClassDeclaration(type: "Person")
-				),
-				.classDeclaration(
-					JKRTreeClassDeclaration(type: "Animal")
-				)
-			]
+			let expectedDeclarations: [JKRTreeClassDeclaration] = [
+					JKRTreeClassDeclaration(type: "Person"),
+					JKRTreeClassDeclaration(type: "Animal")]
 
 			// TEST: All elements were converted successfully
 			XCTAssertEqual(declarations, expectedDeclarations)

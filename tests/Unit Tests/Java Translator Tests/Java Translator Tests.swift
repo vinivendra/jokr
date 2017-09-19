@@ -97,14 +97,14 @@ class JavaTranslatorTests: XCTestCase {
 			// WITH:
 			let expectedResultsFolder = "TestClassDeclarations"
 
-			let tree = JKRTree.declarations([
-				.classDeclaration(JKRTreeClassDeclaration(type: "Person")),
-				.classDeclaration(JKRTreeClassDeclaration(
+			let tree = JKRTree.classes([
+				JKRTreeClassDeclaration(type: "Person"),
+				JKRTreeClassDeclaration(
 					type: "Animal",
 					methods: [JKRTreeFunctionDeclaration(
 						type: "Int", id: "numberOfLegs", parameters: [],
-						block: [.returnStm(5)])])),
-				.classDeclaration(JKRTreeClassDeclaration(
+						block: [.returnStm(5)])]),
+				JKRTreeClassDeclaration(
 					type: "SomeClass",
 					methods: [
 						JKRTreeFunctionDeclaration(
@@ -112,8 +112,7 @@ class JavaTranslatorTests: XCTestCase {
 							block: [.returnStm(5)]),
 						JKRTreeFunctionDeclaration(
 							type: "Int", id: "two", parameters: [],
-							block: [.returnStm(2)])]))
-				])
+							block: [.returnStm(2)])])])
 
 			let files = try translate(tree)
 

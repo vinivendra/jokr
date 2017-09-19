@@ -21,11 +21,8 @@ statement:
 	| returnStatement;
 
 declarationList:
-	declaration
-	| declarationList NEW_LINE declaration;
-
-declaration:
-	classDeclaration;
+	classDeclaration
+	| declarationList NEW_LINE classDeclaration;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Building blocks

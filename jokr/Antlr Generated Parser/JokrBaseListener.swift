@@ -67,19 +67,6 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterDeclaration(_ ctx: JokrParser.DeclarationContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitDeclaration(_ ctx: JokrParser.DeclarationContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterBlock(_ ctx: JokrParser.BlockContext) { }
 	/**
 	 * {@inheritDoc}
