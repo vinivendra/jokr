@@ -30,24 +30,6 @@ enum JKRTreeStatement: Equatable {
 	}
 }
 
-enum JKRTreeDeclaration: Equatable {
-	case functionDeclaration(JKRTreeFunctionDeclaration)
-	case classDeclaration(JKRTreeClassDeclaration)
-
-	static func == (lhs: JKRTreeDeclaration, rhs: JKRTreeDeclaration) -> Bool {
-		switch (lhs, rhs) {
-		case let (.functionDeclaration(functionDeclaration1),
-		          .functionDeclaration(functionDeclaration2)):
-			return functionDeclaration1 == functionDeclaration2
-		case let (.classDeclaration(classDeclaration1),
-		          .classDeclaration(classDeclaration2)):
-			return classDeclaration1 == classDeclaration2
-		default:
-			return false
-		}
-	}
-}
-
 indirect enum JKRTreeExpression: Equatable, ExpressibleByIntegerLiteral,
 ExpressibleByStringLiteral {
 	case int(JKRTreeInt)
