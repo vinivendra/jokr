@@ -408,6 +408,10 @@ class AntlrParserTests: XCTestCase {
 						IntnumberOfLegs(){
 							return5
 						}
+
+						IntnumberOfEyes(){
+							return2
+						}
 					}
 					""")]
 
