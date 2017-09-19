@@ -176,6 +176,7 @@
 		24D61EAE1F6B15F900401646 /* TestStatements */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestStatements; sourceTree = "<group>"; };
 		24D61EAF1F6B15F900401646 /* TestTypes */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestTypes; sourceTree = "<group>"; };
 		24D908571F4F33C4001E5C22 /* TestParameters */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestParameters; sourceTree = "<group>"; };
+		24E7D9241F714A83000D584B /* SomeClass.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = SomeClass.java; sourceTree = "<group>"; };
 		24FAA0CF1F369D9A0053A6BC /* FunctionListenerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionListenerTests.swift; sourceTree = "<group>"; };
 		24FAA9A21F573B9900752153 /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
 		24FAA9A31F573BEE00752153 /* TestExpressions.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestExpressions.jkr; sourceTree = "<group>"; };
@@ -325,6 +326,7 @@
 			children = (
 				247031F71F6C83E200D4804A /* Animal.java */,
 				247031F61F6C83D300D4804A /* Person.java */,
+				24E7D9241F714A83000D584B /* SomeClass.java */,
 			);
 			path = TestClassDeclarations;
 			sourceTree = "<group>";

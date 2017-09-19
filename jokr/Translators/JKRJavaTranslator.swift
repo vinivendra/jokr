@@ -44,14 +44,14 @@ class JKRJavaTranslator: JKRTranslator {
 		write("public class Main {\n")
 		indentation = 1
 
-		writeIntentation()
+		writeIndentation()
 		write("public static void main(String []args) {\n")
 		indentation += 1
 
 		writeWithStructure(statements)
 
 		indentation = 1
-		writeIntentation()
+		writeIndentation()
 		write("}\n}\n")
 	}
 
@@ -67,7 +67,7 @@ class JKRJavaTranslator: JKRTranslator {
 			write("public class \(className) {\n")
 			indentation = 1
 
-//			writeWithStructure(statements)
+			writeWithStructure(classDeclaration.methods)
 
 			write("}\n")
 		}
@@ -80,7 +80,7 @@ class JKRJavaTranslator: JKRTranslator {
 	}
 
 	private func writeWithStructure(_ statement: JKRTreeStatement) {
-		writeIntentation()
+		writeIndentation()
 		write(translate(statement))
 
 //		if let block = statement.block {
@@ -91,6 +91,35 @@ class JKRJavaTranslator: JKRTranslator {
 //			addIntentation()
 //			write("}\n")
 //		}
+	}
+
+	private func writeWithStructure(_ methods: [JKRTreeFunctionDeclaration]) {
+		// Write methods with newlines in between them
+		for method in methods.dropLast() {
+			writeWithStructure(method)
+			write("\n")
+		}
+		if let lastMethod = methods.last {
+			writeWithStructure(lastMethod)
+		}
+	}
+
+	private func writeWithStructure(_ method: JKRTreeFunctionDeclaration) {
+		writeIndentation()
+		write(translateHeader(method))
+		write(" {\n")
+
+		if method.block.count > 0 {
+			indentation += 1
+			writeWithStructure(method.block)
+			indentation -= 1
+		}
+		else {
+			write("\n")
+		}
+
+		writeIndentation()
+		write("}\n")
 	}
 
 	// Translation (pieces of code)
@@ -209,7 +238,7 @@ class JKRJavaTranslator: JKRTranslator {
 		writer.changeFile(string)
 	}
 
-	private func writeIntentation() {
+	private func writeIndentation() {
 		for _ in 0..<indentation {
 			write("\t")
 		}
