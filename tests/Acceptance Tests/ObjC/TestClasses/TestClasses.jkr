@@ -1,0 +1,5 @@
+class SomeClass {
+	Int five() {
+		return 5
+	}
+}

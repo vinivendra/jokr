@@ -94,6 +94,8 @@
 		24037BA81F73F98E0062827D /* Main.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Main.java; sourceTree = "<group>"; };
 		24037BA91F73F98E0062827D /* TestClasses.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClasses.jkr; sourceTree = "<group>"; };
 		240409471F47288C00FC2AD4 /* Objc Translator Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Objc Translator Tests.swift"; sourceTree = "<group>"; };
+		24104C5F1F74524E00D7004F /* TestClasses.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClasses.jkr; sourceTree = "<group>"; };
+		24104C611F74528100D7004F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		241371DE1F58D55A001DE932 /* TestClassDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClassDeclarations; sourceTree = "<group>"; };
 		24171CC01F4CAF9B002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
 		24171CC11F4CAFBA002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
@@ -253,6 +255,40 @@
 			);
 			path = "ObjC Translator Tests";
 			sourceTree = "<group>";
+		};
+		24104C591F74511200D7004F /* TestAssignments */ = {
+			isa = PBXGroup;
+			children = (
+				24FAA9A41F573CC600752153 /* TestAssignments.jkr */,
+			);
+			path = TestAssignments;
+			sourceTree = "<group>";
+		};
+		24104C5A1F74511B00D7004F /* TestExpressions */ = {
+			isa = PBXGroup;
+			children = (
+				24FAA9A51F573CD300752153 /* TestExpressions.jkr */,
+			);
+			path = TestExpressions;
+			sourceTree = "<group>";
+		};
+		24104C5B1F74512200D7004F /* TestFunctionCalls */ = {
+			isa = PBXGroup;
+			children = (
+				24171CC11F4CAFBA002C136B /* TestFunctionCalls.jkr */,
+			);
+			path = TestFunctionCalls;
+			sourceTree = "<group>";
+		};
+		24104C601F74524E00D7004F /* TestClasses */ = {
+			isa = PBXGroup;
+			children = (
+				24104C5F1F74524E00D7004F /* TestClasses.jkr */,
+				24104C611F74528100D7004F /* main.m */,
+			);
+			name = TestClasses;
+			path = "/Users/vini/Development/Compilers/jokr/tests/Acceptance Tests/ObjC/TestClasses";
+			sourceTree = "<absolute>";
 		};
 		242A22A11F6FFEFB0099944F /* example */ = {
 			isa = PBXGroup;
@@ -470,9 +506,10 @@
 			isa = PBXGroup;
 			children = (
 				24C0375B1F4A0DFD00C88FCF /* ObjCAcceptanceTests.swift */,
-				24FAA9A41F573CC600752153 /* TestAssignments.jkr */,
-				24FAA9A51F573CD300752153 /* TestExpressions.jkr */,
-				24171CC11F4CAFBA002C136B /* TestFunctionCalls.jkr */,
+				24104C591F74511200D7004F /* TestAssignments */,
+				24104C5A1F74511B00D7004F /* TestExpressions */,
+				24104C5B1F74512200D7004F /* TestFunctionCalls */,
+				24104C601F74524E00D7004F /* TestClasses */,
 			);
 			path = ObjC;
 			sourceTree = "<group>";

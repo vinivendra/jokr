@@ -7,20 +7,27 @@ struct JKRObjcCompiler: JKRCompiler {
 
 	@discardableResult
 	func compileFiles(atPath folderPath: String) throws -> Shell.CommandResult {
+		log("======== Compiling ObjC...")
+
+		let javaFiles = try Files.files(atFolder: folderPath,
+		                                withExtension: "m")
+
+		let filesString = javaFiles.map { "\"\(folderPath)\($0)\"" }
+			.joined(separator: " ")
+
 		let result = Shell.runCommand("""
-			clang -framework Foundation \"\(folderPath)main.m\" \
+			clang -framework Foundation \(filesString) \
 			-o \"\(folderPath)a.out\"
 			""")
 
-		if result.output != "" {
-			log(result.output)
-		}
+		log(result.output)
+		log(result.error)
 
-		if result.status != 0 {
-			log("================")
-			log(result.output)
-			log("================")
-			log(result.error)
+		if result.status == 0 {
+			log("======== Compilation succeeded!")
+		}
+		else {
+			log("======== Compilation failed with status \(result.status)")
 			throw JKRError.compilation(result.status)
 		}
 

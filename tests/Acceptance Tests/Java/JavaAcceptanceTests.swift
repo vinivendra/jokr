@@ -9,10 +9,7 @@ private let errorMessage =
 class JavaAcceptanceTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
-	func transpileAndRun(test testName: String,
-	                     withAuxiliaryFiles auxiliaryFiles: Set<String> = [])
-		throws -> Shell.CommandResult
-	{
+	func transpileAndRun(test testName: String) throws -> Shell.CommandResult {
 		let testFolder = testFilesPath + testName + "/"
 		let testFile = testName + ".jkr"
 
@@ -46,6 +43,8 @@ class JavaAcceptanceTests: XCTestCase {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
+	// MARK: - Tests
+
 	func testFunctionCalls() {
 		let testName = "TestFunctionCalls"
 		trashBuildFilesAtTeardown(forTest: testName)
