@@ -53,3 +53,20 @@ func trashFiles(atFolder folderPath: String) throws {
 		throw error
 	}
 }
+
+func trashFiles(atFolder folderPath: String,
+                skippingFiles filesToSkip: [String]) throws {
+	do {
+		let fileManager = FileManager.default
+
+		for file in try fileManager.contentsOfDirectory(atPath: folderPath)
+			where !filesToSkip.contains(file)
+		{
+			let url = URL(fileURLWithPath: folderPath + file)
+			try fileManager.trashItem(at: url, resultingItemURL: nil)
+		}
+	}
+	catch (let error) {
+		throw error
+	}
+}
