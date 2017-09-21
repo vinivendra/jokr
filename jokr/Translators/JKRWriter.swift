@@ -88,14 +88,9 @@ class JKRFileWriter: JKRWriter {
 	func finishWriting() throws {
 		for (filename, contents) in files {
 			let path = outputDirectory + filename
-			do {
-				try contents.write(toFile: path,
-				                   atomically: false,
-				                   encoding: .utf8)
-			}
-			catch (let error) {
-				throw error
-			}
+			try contents.write(toFile: path,
+							   atomically: false,
+							   encoding: .utf8)
 		}
 	}
 }

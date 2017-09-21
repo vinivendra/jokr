@@ -13,25 +13,15 @@ class JKRDriver {
 	}
 
 	func translate() throws {
-		do {
-			try parseInputFiles()
-			try writeOutputFiles()
-		}
-		catch (let error) {
-			throw error
-		}
+		try parseInputFiles()
+		try writeOutputFiles()
 	}
 
 	@discardableResult
 	func transpile() throws -> Shell.CommandResult {
-		do {
-			try parseInputFiles()
-			try writeOutputFiles()
-			return try compile()
-		}
-		catch (let error) {
-			throw error
-		}
+		try parseInputFiles()
+		try writeOutputFiles()
+		return try compile()
 	}
 
 	@discardableResult

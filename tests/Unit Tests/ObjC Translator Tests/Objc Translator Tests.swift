@@ -14,16 +14,11 @@ class ObjCTranslatorTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
 	func translate(_ tree: JKRTree) throws -> [String: String] {
-		do {
-			let writer = JKRStringWriter()
-			let translator = JKRObjcTranslator(writingWith: writer)
-			try translator.translate(tree: tree)
-			writer.prettyPrint()
-			return writer.files
-		}
-		catch (let error) {
-			throw error
-		}
+		let writer = JKRStringWriter()
+		let translator = JKRObjcTranslator(writingWith: writer)
+		try translator.translate(tree: tree)
+		writer.prettyPrint()
+		return writer.files
 	}
 
 	////////////////////////////////////////////////////////////////////////////

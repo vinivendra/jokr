@@ -19,15 +19,10 @@ extension Array where Element == Token {
 
 class AntlrLexerTests: XCTestCase {
 	func getTokens(inFile filename: String) throws -> [Token] {
-		do {
-			let contents = try! String(contentsOfFile: testFilesPath + filename)
-			let inputStream = ANTLRInputStream(contents)
-			let lexer = JokrLexer(inputStream)
-			return try lexer.getAllTokens()
-		}
-		catch (let error) {
-			throw error
-		}
+		let contents = try! String(contentsOfFile: testFilesPath + filename)
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		return try lexer.getAllTokens()
 	}
 
 	////////////////////////////////////////////////////////////////////////////

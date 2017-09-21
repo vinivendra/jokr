@@ -13,19 +13,14 @@ class JKRJavaTranslator: JKRTranslator {
 	}
 
 	func translate(tree: JKRTree) throws {
-		do {
-			switch tree {
-			case let .statements(statements):
-				writeStatementsFile(withStatements: statements)
-			case let .classDeclarations(classes):
-				writeClassFiles(withClasses: classes)
-			}
+		switch tree {
+		case let .statements(statements):
+			writeStatementsFile(withStatements: statements)
+		case let .classDeclarations(classes):
+			writeClassFiles(withClasses: classes)
+		}
 
-			try writer.finishWriting()
-		}
-		catch (let error) {
-			throw error
-		}
+		try writer.finishWriting()
 	}
 
 	////////////////////////////////////////////////////////////////////////////

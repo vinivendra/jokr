@@ -11,16 +11,11 @@ class JavaTranslatorTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
 	func translate(_ tree: JKRTree) throws -> [String: String] {
-		do {
-			let writer = JKRStringWriter()
-			let translator = JKRJavaTranslator(writingWith: writer)
-			try translator.translate(tree: tree)
-			writer.prettyPrint()
-			return writer.files
-		}
-		catch (let error) {
-			throw error
-		}
+		let writer = JKRStringWriter()
+		let translator = JKRJavaTranslator(writingWith: writer)
+		try translator.translate(tree: tree)
+		writer.prettyPrint()
+		return writer.files
 	}
 
 	////////////////////////////////////////////////////////////////////////////

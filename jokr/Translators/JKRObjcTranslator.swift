@@ -13,7 +13,6 @@ class JKRObjcTranslator: JKRTranslator {
 	}
 
 	func translate(tree: JKRTree) throws {
-		do {
 			switch tree {
 			case let .statements(statements):
 				writeStatementsFile(withStatements: statements)
@@ -22,10 +21,6 @@ class JKRObjcTranslator: JKRTranslator {
 			}
 
 			try writer.finishWriting()
-		}
-		catch (let error) {
-			throw error
-		}
 	}
 
 	////////////////////////////////////////////////////////////////////////////

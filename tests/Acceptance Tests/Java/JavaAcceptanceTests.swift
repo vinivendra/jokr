@@ -6,8 +6,6 @@ private let testFilesPath = CommandLine.arguments[1] +
 private let errorMessage =
 	"Transpiler failed during test.\nError: "
 
-// TODO: Try removing redundant try/catch
-
 class JavaAcceptanceTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
@@ -15,27 +13,22 @@ class JavaAcceptanceTests: XCTestCase {
 	                     withAuxiliaryFiles auxiliaryFiles: Set<String> = [])
 		throws -> Shell.CommandResult
 	{
-		do {
-			let testFolder = testFilesPath + testName + "/"
-			let testFile = testName + ".jkr"
+		let testFolder = testFilesPath + testName + "/"
+		let testFile = testName + ".jkr"
 
-			guard let tree = try parser.parse(
-				file: testFolder + testFile) else
-			{
-				XCTFail("Failed to parse file \(testFile)")
-				throw JKRError.parsing
-			}
+		guard let tree = try parser.parse(
+			file: testFolder + testFile) else
+		{
+			XCTFail("Failed to parse file \(testFile)")
+			throw JKRError.parsing
+		}
 
-			let writer = JKRFileWriter(outputDirectory: testFolder)
-			let translator = JKRJavaTranslator(writingWith: writer)
-			try translator.translate(tree: tree)
-			let compiler = JKRJavaCompiler()
-			try compiler.compileFiles(atPath: testFolder)
-			return compiler.runProgram(atPath: testFolder)
-		}
-		catch (let error) {
-			throw error
-		}
+		let writer = JKRFileWriter(outputDirectory: testFolder)
+		let translator = JKRJavaTranslator(writingWith: writer)
+		try translator.translate(tree: tree)
+		let compiler = JKRJavaCompiler()
+		try compiler.compileFiles(atPath: testFolder)
+		return compiler.runProgram(atPath: testFolder)
 	}
 
 	func trashBuildFilesAtTeardown(forTest testName: String,

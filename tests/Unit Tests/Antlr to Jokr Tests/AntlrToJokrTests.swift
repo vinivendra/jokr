@@ -8,19 +8,13 @@ class AntlrToJokrTests: XCTestCase {
 
 	func getProgram(
 		inFile filename: String) throws -> JokrParser.ProgramContext {
-
-		do {
-			let contents = try! String(contentsOfFile: testFilesPath + filename)
-			let inputStream = ANTLRInputStream(contents)
-			let lexer = JokrLexer(inputStream)
-			let tokens = CommonTokenStream(lexer)
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			return try parser.program()
-		}
-		catch (let error) {
-			throw error
-		}
+		let contents = try! String(contentsOfFile: testFilesPath + filename)
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+		let parser = try JokrParser(tokens)
+		parser.setBuildParseTree(true)
+		return try parser.program()
 	}
 
 	////////////////////////////////////////////////////////////////////////////
