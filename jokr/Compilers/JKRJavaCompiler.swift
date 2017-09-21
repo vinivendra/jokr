@@ -8,11 +8,17 @@ struct JKRJavaCompiler: JKRCompiler {
 	@discardableResult
 	func compileFiles(atPath folderPath: String) throws -> Shell.CommandResult {
 		log("======== Compiling Java...")
-		let result = Shell.runCommand("javac \"\(folderPath)Main.java\"")
 
-		if result.output != "" {
-			log(result.output)
-		}
+		let javaFiles = try Files.files(atFolder: folderPath,
+		                                withExtension: "java")
+
+		let filesString = javaFiles.map { "\"\(folderPath)\($0)\"" }
+			.joined(separator: " ")
+
+		let result = Shell.runCommand("javac " + filesString)
+
+		log(result.output)
+		log(result.error)
 
 		if result.status == 0 {
 			log("======== Compilation succeeded!")

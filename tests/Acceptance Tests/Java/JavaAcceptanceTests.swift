@@ -6,6 +6,8 @@ private let testFilesPath = CommandLine.arguments[1] +
 private let errorMessage =
 	"Transpiler failed during test.\nError: "
 
+// TODO: Try removing redundant try/catch
+
 class JavaAcceptanceTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
@@ -40,8 +42,9 @@ class JavaAcceptanceTests: XCTestCase {
 	                               skipping filesToSkip: [String] = []) {
 		addTeardownBlock {
 			do {
-				try trashFiles(atFolder: testFilesPath + testName + "/",
-				               skippingFiles: filesToSkip + [testName + ".jkr"])
+				try Files.trashFiles(
+					atFolder: testFilesPath + testName + "/",
+					skippingFiles: filesToSkip + [testName + ".jkr"])
 			}
 			catch (let error) {
 				XCTFail("Failed to trash build files. Error: \(error)")
@@ -88,6 +91,21 @@ class JavaAcceptanceTests: XCTestCase {
 			let result = try transpileAndRun(test: testName)
 			XCTAssertEqual(result.status, 0)
 			XCTAssertEqual(result.output, "4\n0\n12\n")
+			XCTAssertEqual(result.error, (""))
+		}
+		catch (let error) {
+			XCTFail(errorMessage + "\(error)")
+		}
+	}
+
+	func testClasses() {
+		let testName = "TestClasses"
+		trashBuildFilesAtTeardown(forTest: testName, skipping: ["Main.java"])
+
+		do {
+			let result = try transpileAndRun(test: testName)
+			XCTAssertEqual(result.status, 0)
+			XCTAssertEqual(result.output, "5\n")
 			XCTAssertEqual(result.error, (""))
 		}
 		catch (let error) {

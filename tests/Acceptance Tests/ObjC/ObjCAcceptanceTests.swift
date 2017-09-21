@@ -22,7 +22,7 @@ class ObjCAcceptanceTests: XCTestCase {
 				throw JKRError.parsing
 			}
 
-			try trashFiles(atFolder: outputDirectory)
+			try Files.trashFiles(atFolder: outputDirectory)
 
 			let writer = JKRFileWriter(outputDirectory: outputDirectory)
 			let translator = JKRObjcTranslator(writingWith: writer)

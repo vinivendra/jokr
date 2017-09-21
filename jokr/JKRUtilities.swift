@@ -37,36 +37,57 @@ func log(_ string: String) {
 
 var jkrDebug: Bool = true
 
-func trashFiles(atFolder folderPath: String) throws {
-	do {
-		let fileManager = FileManager.default
+enum Files {
+	static func trashFiles(atFolder folderPath: String) throws {
+		do {
+			let fileManager = FileManager.default
 
-		// Move all files in folder to trash, except for hidden files.
-		for file in try fileManager.contentsOfDirectory(atPath: folderPath)
-			where !file.hasPrefix(".")
-		{
-			let url = URL(fileURLWithPath: folderPath + file)
-			try fileManager.trashItem(at: url, resultingItemURL: nil)
+			// Move all files in folder to trash, except for hidden files.
+			for file in try fileManager.contentsOfDirectory(atPath: folderPath)
+				where !file.hasPrefix(".")
+			{
+				let url = URL(fileURLWithPath: folderPath + file)
+				try fileManager.trashItem(at: url, resultingItemURL: nil)
+			}
+		}
+		catch (let error) {
+			throw error
 		}
 	}
-	catch (let error) {
-		throw error
-	}
-}
 
-func trashFiles(atFolder folderPath: String,
-                skippingFiles filesToSkip: [String]) throws {
-	do {
-		let fileManager = FileManager.default
+	static func trashFiles(atFolder folderPath: String,
+	                       skippingFiles filesToSkip: [String]) throws {
+		do {
+			let fileManager = FileManager.default
 
-		for file in try fileManager.contentsOfDirectory(atPath: folderPath)
-			where !filesToSkip.contains(file)
-		{
-			let url = URL(fileURLWithPath: folderPath + file)
-			try fileManager.trashItem(at: url, resultingItemURL: nil)
+			for file in try fileManager.contentsOfDirectory(atPath: folderPath)
+				where !filesToSkip.contains(file)
+			{
+				let url = URL(fileURLWithPath: folderPath + file)
+				try fileManager.trashItem(at: url, resultingItemURL: nil)
+			}
+		}
+		catch (let error) {
+			throw error
 		}
 	}
-	catch (let error) {
-		throw error
+
+	static func files(atFolder folderPath: String,
+	                  withExtension ext: String) throws -> [String] {
+		do {
+			let fileManager = FileManager.default
+			var result = [String]()
+
+			for file in try fileManager.contentsOfDirectory(atPath: folderPath)
+				where file.hasSuffix("." + ext)
+			{
+				result.append(file)
+			}
+
+			return result
+		}
+		catch (let error) {
+			throw error
+		}
 	}
 }

@@ -91,6 +91,8 @@
 
 /* Begin PBXFileReference section */
 		24037BA31F73E54A0062827D /* TestAssignments.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
+		24037BA81F73F98E0062827D /* Main.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Main.java; sourceTree = "<group>"; };
+		24037BA91F73F98E0062827D /* TestClasses.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClasses.jkr; sourceTree = "<group>"; };
 		240409471F47288C00FC2AD4 /* Objc Translator Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Objc Translator Tests.swift"; sourceTree = "<group>"; };
 		241371DE1F58D55A001DE932 /* TestClassDeclarations */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClassDeclarations; sourceTree = "<group>"; };
 		24171CC01F4CAF9B002C136B /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
@@ -230,6 +232,15 @@
 				24171CC01F4CAF9B002C136B /* TestFunctionCalls.jkr */,
 			);
 			path = TestFunctionCalls;
+			sourceTree = "<group>";
+		};
+		24037BA71F73F98E0062827D /* TestClasses */ = {
+			isa = PBXGroup;
+			children = (
+				24037BA81F73F98E0062827D /* Main.java */,
+				24037BA91F73F98E0062827D /* TestClasses.jkr */,
+			);
+			path = TestClasses;
 			sourceTree = "<group>";
 		};
 		240409461F47288C00FC2AD4 /* ObjC Translator Tests */ = {
@@ -448,6 +459,7 @@
 			children = (
 				24C037551F4A0DFD00C88FCF /* JavaAcceptanceTests.swift */,
 				24037BA01F73E54A0062827D /* TestAssignments */,
+				24037BA71F73F98E0062827D /* TestClasses */,
 				24037BA51F73EA300062827D /* TestExpressions */,
 				24037BA61F73EA380062827D /* TestFunctionCalls */,
 			);
