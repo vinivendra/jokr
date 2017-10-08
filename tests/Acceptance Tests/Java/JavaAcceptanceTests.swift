@@ -28,8 +28,10 @@ class JavaAcceptanceTests: XCTestCase {
 		return compiler.runProgram(atPath: testFolder)
 	}
 
-	func trashBuildFilesAtTeardown(forTest testName: String,
-	                               skipping filesToSkip: [String] = []) {
+	func trashTranslatedFilesAtTeardown(
+        forTest testName: String,
+        skipping filesToSkip: [String] = [])
+    {
 		addTeardownBlock {
 			do {
 				try Files.trashFiles(
@@ -47,7 +49,7 @@ class JavaAcceptanceTests: XCTestCase {
 
 	func testFunctionCalls() {
 		let testName = "TestFunctionCalls"
-		trashBuildFilesAtTeardown(forTest: testName)
+		trashTranslatedFilesAtTeardown(forTest: testName)
 
 		do {
 			let result = try transpileAndRun(test: testName)
@@ -62,7 +64,7 @@ class JavaAcceptanceTests: XCTestCase {
 
 	func testAssignments() {
 		let testName = "TestAssignments"
-		trashBuildFilesAtTeardown(forTest: testName)
+		trashTranslatedFilesAtTeardown(forTest: testName)
 
 		do {
 			let result = try transpileAndRun(test: testName)
@@ -77,7 +79,7 @@ class JavaAcceptanceTests: XCTestCase {
 
 	func testExpressions() {
 		let testName = "TestExpressions"
-		trashBuildFilesAtTeardown(forTest: testName)
+		trashTranslatedFilesAtTeardown(forTest: testName)
 
 		do {
 			let result = try transpileAndRun(test: testName)
@@ -92,7 +94,8 @@ class JavaAcceptanceTests: XCTestCase {
 
 	func testClasses() {
 		let testName = "TestClasses"
-		trashBuildFilesAtTeardown(forTest: testName, skipping: ["Main.java"])
+		trashTranslatedFilesAtTeardown(forTest: testName,
+                                       skipping: ["Main.java"])
 
 		do {
 			let result = try transpileAndRun(test: testName)
