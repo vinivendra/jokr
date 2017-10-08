@@ -1,8 +1,7 @@
 import Foundation
 import Antlr4
 
-// Branch - ClassDeclarations
-// TODO: Refactor function declarations into class declarations (as methods) 
+// Branch - ClassDeclarations 
 // TODO: Add missing tests for declaration files, function declarations and
 // returns
 // TODO: Add method calls
