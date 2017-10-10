@@ -9,8 +9,9 @@ enum JKRTree {
 
 enum JKRTreeStatement: Equatable {
 	case assignment(JKRTreeAssignment)
-	case functionCall(JKRTreeFunctionCall)
 	case returnStm(JKRTreeReturn)
+	case functionCall(JKRTreeFunctionCall)
+	case methodCall(JKRTreeMethodCall)
 
 	// Equatable
 	static func == (lhs: JKRTreeStatement, rhs: JKRTreeStatement) -> Bool {
@@ -24,6 +25,9 @@ enum JKRTreeStatement: Equatable {
 		case let (.returnStm(returnStm1),
 		          .returnStm(returnStm2)):
 			return returnStm1 == returnStm2
+		case let (.methodCall(methodCall1),
+		          .methodCall(methodCall2)):
+			return methodCall1 == methodCall2
 		default:
 			return false
 		}
@@ -137,6 +141,32 @@ ExpressibleByStringLiteral {
 	// ExpressibleByIntegerLiteral
 	public init(integerLiteral value: Int) {
 		self.expression = JKRTreeExpression(integerLiteral: value)
+	}
+}
+
+struct JKRTreeMethodCall: Equatable {
+	let object: JKRTreeID
+	let method: JKRTreeID
+	let parameters: [JKRTreeExpression]
+
+	init(object: JKRTreeID, method: JKRTreeID, parameters: [JKRTreeExpression])
+	{
+		self.object = object
+		self.method = method
+		self.parameters = parameters
+	}
+
+	init(object: JKRTreeID, method: JKRTreeID) {
+		self.object = object
+		self.method = method
+		self.parameters = []
+	}
+
+	// Equatable
+	static func == (lhs: JKRTreeMethodCall, rhs: JKRTreeMethodCall) -> Bool {
+		return lhs.object == rhs.object &&
+			lhs.method == rhs.method &&
+			rhs.parameters == lhs.parameters
 	}
 }
 

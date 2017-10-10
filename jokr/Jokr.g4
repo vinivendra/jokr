@@ -17,8 +17,9 @@ statementList:
 
 statement:
 	assignment
+	| returnStatement
 	| functionCall
-	| returnStatement;
+	| methodCall;
 
 classDeclarationList:
 	classDeclaration
@@ -58,11 +59,14 @@ assignment:
 variableDeclaration:
 	TYPE ID;
 
+returnStatement:
+	RETURN expression;
+
 functionCall:
 	ID LPAREN parameterList RPAREN;
 
-returnStatement:
-	RETURN expression;
+methodCall:
+	ID PERIOD functionCall;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Declarations
@@ -113,6 +117,7 @@ RPAREN: ')';
 LBRACE: '{';
 RBRACE: '}';
 COMMA: ',';
+PERIOD: '.';
 RETURN: 'return';
 INT: [0-9]+;
 TYPE: [_]*[A-Z][a-zA-Z0-9]*;

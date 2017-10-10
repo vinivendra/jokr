@@ -158,6 +158,19 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	open func enterReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	open func enterFunctionCall(_ ctx: JokrParser.FunctionCallContext) { }
 	/**
 	 * {@inheritDoc}
@@ -171,13 +184,13 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
+	open func enterMethodCall(_ ctx: JokrParser.MethodCallContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext) { }
+	open func exitMethodCall(_ ctx: JokrParser.MethodCallContext) { }
 
 	/**
 	 * {@inheritDoc}

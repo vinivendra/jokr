@@ -139,6 +139,18 @@ public protocol JokrListener: ParseTreeListener {
 	 */
 	func exitVariableDeclaration(_ ctx: JokrParser.VariableDeclarationContext)
 	/**
+	 * Enter a parse tree produced by {@link JokrParser#returnStatement}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#returnStatement}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
+	/**
 	 * Enter a parse tree produced by {@link JokrParser#functionCall}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -151,17 +163,17 @@ public protocol JokrListener: ParseTreeListener {
 	 */
 	func exitFunctionCall(_ ctx: JokrParser.FunctionCallContext)
 	/**
-	 * Enter a parse tree produced by {@link JokrParser#returnStatement}.
+	 * Enter a parse tree produced by {@link JokrParser#methodCall}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func enterReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
+	func enterMethodCall(_ ctx: JokrParser.MethodCallContext)
 	/**
-	 * Exit a parse tree produced by {@link JokrParser#returnStatement}.
+	 * Exit a parse tree produced by {@link JokrParser#methodCall}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
+	func exitMethodCall(_ ctx: JokrParser.MethodCallContext)
 	/**
 	 * Enter a parse tree produced by {@link JokrParser#classDeclaration}.
 	 - Parameters:

@@ -13,14 +13,14 @@ class JKRObjcTranslator: JKRTranslator {
 	}
 
 	func translate(tree: JKRTree) throws {
-			switch tree {
-			case let .statements(statements):
-				writeStatementsFile(withStatements: statements)
-			case let .classDeclarations(classes):
-				writeClassFiles(withClasses: classes)
-			}
+            switch tree {
+            case let .statements(statements):
+                writeStatementsFile(withStatements: statements)
+            case let .classDeclarations(classes):
+                writeClassFiles(withClasses: classes)
+            }
 
-			try writer.finishWriting()
+            try writer.finishWriting()
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -106,6 +106,9 @@ class JKRObjcTranslator: JKRTranslator {
 			write(translate(functionCall))
 		case let .returnStm(returnStm):
 			write(translate(returnStm))
+		case let .methodCall(methodCall):
+			// TODO:
+			break
 		}
 	}
 
