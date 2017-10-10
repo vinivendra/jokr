@@ -206,7 +206,7 @@ class JKRJavaTranslator: JKRTranslator {
 	func string(for id: JKRTreeID) -> String {
 		return id.text
 	}
-	
+
 	func string(for int: JKRTreeInt) -> String {
 		return String(int.value)
 	}
