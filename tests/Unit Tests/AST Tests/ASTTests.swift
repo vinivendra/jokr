@@ -141,6 +141,29 @@ class ASTTests: XCTestCase {
 		}
 	}
 
+	func testMethodCalls() {
+		// WITH:
+		let methodCalls: [JKRTreeMethodCall] = [
+			JKRTreeMethodCall(object: "foo", method: "print"),
+			JKRTreeMethodCall(object: "foo", method: "someMethodName"),
+			JKRTreeMethodCall(object: "baz", method: "someMethodName"),
+			JKRTreeMethodCall(object: "baz", method: "someMethodName",
+			                  parameters: [1]),
+			JKRTreeMethodCall(object: "baz", method: "someMethodName",
+			                  parameters: [1, 2])
+		]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(methodCalls, methodCalls.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (methodCall, differentMethodCall) in
+			zip(methodCalls, methodCalls.shifted())
+		{
+			XCTAssertNotEqual(methodCall, differentMethodCall)
+		}
+	}
+
 	func testParameterDeclarations() {
 		// WITH:
 		let parameters: [JKRTreeParameterDeclaration] = [
