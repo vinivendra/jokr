@@ -77,7 +77,7 @@ class AntlrToJokrTests: XCTestCase {
 	func testStatements() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile:  "TestStatements")
+			let tree = try getProgram(inFile: "TestStatements")
 
 			guard let statements = tree.toJKRTreeStatements() else {
 				XCTFail("Failed to get statements from statements file.")
@@ -234,7 +234,7 @@ class AntlrToJokrTests: XCTestCase {
 	func testReturns() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile:  "TestReturns")
+			let tree = try getProgram(inFile: "TestReturns")
 
 			let returns = tree.filter(type:
 				JokrParser.ReturnStatementContext.self)
