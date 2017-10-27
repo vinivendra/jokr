@@ -83,8 +83,7 @@ class JKRJavaTranslator: JKRTranslator {
 		case let .returnStm(returnStm):
 			write(translate(returnStm))
 		case let .methodCall(methodCall):
-			// TODO:
-			break
+			write(translate(methodCall))
 		}
 	}
 
@@ -147,6 +146,16 @@ class JKRJavaTranslator: JKRTranslator {
 		}
 
 		return "\(string(for: functionCall.id))();\n"
+	}
+
+	private func translate(_ methodCall: JKRTreeMethodCall) -> String {
+		let parameters = methodCall.parameters
+			.map(translate)
+			.joined(separator: ", ")
+
+		return "\(string(for: methodCall.object))" + "." +
+			"\(string(for: methodCall.method))" +
+			"(\(parameters));\n"
 	}
 
 	private func translateHeader(

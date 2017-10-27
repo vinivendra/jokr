@@ -114,6 +114,7 @@
 		2432957C1F46238D00478218 /* TestVariableDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestVariableDeclarations; sourceTree = "<group>"; };
 		246A37B51FA3C77C0054A31D /* TestMethodCalls */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestMethodCalls; sourceTree = "<group>"; };
 		246A37B61FA3D3BB0054A31D /* TestMethodCalls */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestMethodCalls; sourceTree = "<group>"; };
+		246A37BC1FA3DC320054A31D /* Main.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Main.java; sourceTree = "<group>"; };
 		246BCBF51F19567E004BE84C /* Jokr.tokens */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Jokr.tokens; sourceTree = "<group>"; };
 		246BCBF61F19567E004BE84C /* JokrBaseListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrBaseListener.swift; sourceTree = "<group>"; };
 		246BCBF71F19567E004BE84C /* JokrLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrLexer.swift; sourceTree = "<group>"; };
@@ -329,6 +330,14 @@
 				2432957C1F46238D00478218 /* TestVariableDeclarations */,
 			);
 			path = "Antlr Parser Tests";
+			sourceTree = "<group>";
+		};
+		246A37BB1FA3DC320054A31D /* TestMethodCalls */ = {
+			isa = PBXGroup;
+			children = (
+				246A37BC1FA3DC320054A31D /* Main.java */,
+			);
+			path = TestMethodCalls;
 			sourceTree = "<group>";
 		};
 		246BCBF31F19567E004BE84C /* jokr */ = {
@@ -576,6 +585,7 @@
 				247031F11F6C811200D4804A /* TestAssignments */,
 				247031F31F6C837400D4804A /* TestClassDeclarations */,
 				247031F41F6C838C00D4804A /* TestFunctionCalls */,
+				246A37BB1FA3DC320054A31D /* TestMethodCalls */,
 			);
 			path = "Java Translator Tests";
 			sourceTree = "<group>";

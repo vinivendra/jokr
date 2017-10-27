@@ -10,7 +10,7 @@ import Antlr4
 	// ✅ Test Parser
 	// ✅ Test AntlrToJokr
 	// ✅ Test AST
-	// Add and test Java Translator
+	// ✅ Add and test Java Translator
 	// Add and test ObjC Translator
 	// Test Java (Acceptance)
 	// Test ObjC (Appectance)
