@@ -9,7 +9,7 @@ import Antlr4
 	// ✅ Add AntlrToJokr methods
 	// ✅ Test Parser
 	// ✅ Test AntlrToJokr
-	// Test AST
+	// ✅ Test AST
 	// Add and test Java Translator
 	// Add and test ObjC Translator
 	// Test Java (Acceptance)
