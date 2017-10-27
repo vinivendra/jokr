@@ -296,6 +296,42 @@ class AntlrParserTests: XCTestCase {
 		}
 	}
 
+	func testMethodCalls() {
+		do {
+			// WITH:
+			let program = try getProgram(inFile: "TestMethodCalls")
+
+			let methodCalls = program.filter(type:
+				JokrParser.MethodCallContext.self)
+
+			let expectedMethodCalls: [TokenTest] = [
+				(1, 0, "object.someMethod()"),
+				(2, 0, "object.someMethod()"),
+				(3, 0, "object.someMethod()"),
+				(4, 0, "object.someMethod()"),
+				(6, 0, "object.\nsomeMethod()"),
+				(9, 0, "object\n.someMethod()"),
+				(12, 0, "object.\n\tsomeMethod()"),
+				(15, 0, "object\n\t.someMethod()")
+			]
+
+			// TEST: Parser found all expected elements
+			for (expected, actual) in zip(expectedMethodCalls, methodCalls)
+			{
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+				               expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(methodCalls.count, expectedMethodCalls.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	func testParameterDeclaration() {
 		do {
 			// WITH:

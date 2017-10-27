@@ -66,7 +66,7 @@ functionCall:
 	ID LPAREN parameterList RPAREN;
 
 methodCall:
-	ID PERIOD functionCall;
+	ID NEW_LINE? PERIOD NEW_LINE? functionCall;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Declarations

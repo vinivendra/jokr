@@ -955,6 +955,10 @@ open class JokrParser: Parser {
 		open func functionCall() -> FunctionCallContext? {
 			return getRuleContext(FunctionCallContext.self,0)
 		}
+		open func NEW_LINE() -> Array<TerminalNode> { return getTokens(JokrParser.Tokens.NEW_LINE.rawValue) }
+		open func NEW_LINE(_ i:Int) -> TerminalNode?{
+			return getToken(JokrParser.Tokens.NEW_LINE.rawValue, i)
+		}
 		open override func getRuleIndex() -> Int { return JokrParser.RULE_methodCall }
 		override
 		open func enterRule(_ listener: ParseTreeListener) {
@@ -973,6 +977,7 @@ open class JokrParser: Parser {
 	open func methodCall() throws -> MethodCallContext {
 		var _localctx: MethodCallContext = MethodCallContext(_ctx, getState())
 		try enterRule(_localctx, 26, JokrParser.RULE_methodCall)
+		var _la: Int = 0
 		defer {
 	    		try! exitRule()
 	    }
@@ -980,9 +985,35 @@ open class JokrParser: Parser {
 		 	try enterOuterAlt(_localctx, 1)
 		 	setState(148)
 		 	try match(JokrParser.Tokens.ID.rawValue)
-		 	setState(149)
-		 	try match(JokrParser.Tokens.PERIOD.rawValue)
 		 	setState(150)
+		 	try _errHandler.sync(self)
+		 	_la = try _input.LA(1)
+		 	if (//closure
+		 	 { () -> Bool in
+		 	      let testSet: Bool = _la == JokrParser.Tokens.NEW_LINE.rawValue
+		 	      return testSet
+		 	 }()) {
+		 		setState(149)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+
+		 	}
+
+		 	setState(152)
+		 	try match(JokrParser.Tokens.PERIOD.rawValue)
+		 	setState(154)
+		 	try _errHandler.sync(self)
+		 	_la = try _input.LA(1)
+		 	if (//closure
+		 	 { () -> Bool in
+		 	      let testSet: Bool = _la == JokrParser.Tokens.NEW_LINE.rawValue
+		 	      return testSet
+		 	 }()) {
+		 		setState(153)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+
+		 	}
+
+		 	setState(156)
 		 	try functionCall()
 
 		}
@@ -1028,38 +1059,38 @@ open class JokrParser: Parser {
 	    		try! exitRule()
 	    }
 		do {
-		 	setState(165)
+		 	setState(171)
 		 	try _errHandler.sync(self)
-		 	switch(try getInterpreter().adaptivePredict(_input,10, _ctx)) {
+		 	switch(try getInterpreter().adaptivePredict(_input,12, _ctx)) {
 		 	case 1:
 		 		try enterOuterAlt(_localctx, 1)
-		 		setState(152)
+		 		setState(158)
 		 		try match(JokrParser.Tokens.CLASS.rawValue)
-		 		setState(153)
+		 		setState(159)
 		 		try match(JokrParser.Tokens.TYPE.rawValue)
-		 		setState(154)
+		 		setState(160)
 		 		try match(JokrParser.Tokens.LBRACE.rawValue)
-		 		setState(155)
+		 		setState(161)
 		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
-		 		setState(156)
+		 		setState(162)
 		 		try match(JokrParser.Tokens.RBRACE.rawValue)
 
 		 		break
 		 	case 2:
 		 		try enterOuterAlt(_localctx, 2)
-		 		setState(157)
-		 		try match(JokrParser.Tokens.CLASS.rawValue)
-		 		setState(158)
-		 		try match(JokrParser.Tokens.TYPE.rawValue)
-		 		setState(159)
-		 		try match(JokrParser.Tokens.LBRACE.rawValue)
-		 		setState(160)
-		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
-		 		setState(161)
-		 		try classMemberList(0)
-		 		setState(162)
-		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
 		 		setState(163)
+		 		try match(JokrParser.Tokens.CLASS.rawValue)
+		 		setState(164)
+		 		try match(JokrParser.Tokens.TYPE.rawValue)
+		 		setState(165)
+		 		try match(JokrParser.Tokens.LBRACE.rawValue)
+		 		setState(166)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+		 		setState(167)
+		 		try classMemberList(0)
+		 		setState(168)
+		 		try match(JokrParser.Tokens.NEW_LINE.rawValue)
+		 		setState(169)
 		 		try match(JokrParser.Tokens.RBRACE.rawValue)
 
 		 		break
@@ -1115,22 +1146,22 @@ open class JokrParser: Parser {
 		do {
 			var _alt: Int
 			try enterOuterAlt(_localctx, 1)
-			setState(169)
+			setState(175)
 			try _errHandler.sync(self)
-			switch(try getInterpreter().adaptivePredict(_input,11, _ctx)) {
+			switch(try getInterpreter().adaptivePredict(_input,13, _ctx)) {
 			case 1:
 				break
 			case 2:
-				setState(168)
+				setState(174)
 				try classMember()
 
 				break
 			default: break
 			}
 			_ctx!.stop = try _input.LT(-1)
-			setState(176)
+			setState(182)
 			try _errHandler.sync(self)
-			_alt = try getInterpreter().adaptivePredict(_input,12,_ctx)
+			_alt = try getInterpreter().adaptivePredict(_input,14,_ctx)
 			while (_alt != 2 && _alt != ATN.INVALID_ALT_NUMBER) {
 				if ( _alt==1 ) {
 					if _parseListeners != nil {
@@ -1139,20 +1170,20 @@ open class JokrParser: Parser {
 					_prevctx = _localctx
 					_localctx = ClassMemberListContext(_parentctx, _parentState);
 					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_classMemberList)
-					setState(171)
+					setState(177)
 					if (!(precpred(_ctx, 1))) {
 					    throw try ANTLRException.recognition(e:FailedPredicateException(self, "precpred(_ctx, 1)"))
 					}
-					setState(172)
+					setState(178)
 					try match(JokrParser.Tokens.NEW_LINE.rawValue)
-					setState(173)
+					setState(179)
 					try classMember()
 
 			 
 				}
-				setState(178)
+				setState(184)
 				try _errHandler.sync(self)
-				_alt = try getInterpreter().adaptivePredict(_input,12,_ctx)
+				_alt = try getInterpreter().adaptivePredict(_input,14,_ctx)
 			}
 
 		}
@@ -1191,7 +1222,7 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(179)
+		 	setState(185)
 		 	try functionDeclaration()
 
 		}
@@ -1236,11 +1267,11 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(181)
+		 	setState(187)
 		 	try functionDeclarationHeader()
-		 	setState(182)
+		 	setState(188)
 		 	try functionDeclarationParameters()
-		 	setState(183)
+		 	setState(189)
 		 	try block()
 
 		}
@@ -1278,9 +1309,9 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(185)
+		 	setState(191)
 		 	try match(JokrParser.Tokens.TYPE.rawValue)
-		 	setState(186)
+		 	setState(192)
 		 	try match(JokrParser.Tokens.ID.rawValue)
 
 		}
@@ -1321,11 +1352,11 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(188)
+		 	setState(194)
 		 	try match(JokrParser.Tokens.LPAREN.rawValue)
-		 	setState(189)
+		 	setState(195)
 		 	try parameterDeclarationList(0)
-		 	setState(190)
+		 	setState(196)
 		 	try match(JokrParser.Tokens.RPAREN.rawValue)
 
 		}
@@ -1378,22 +1409,22 @@ open class JokrParser: Parser {
 		do {
 			var _alt: Int
 			try enterOuterAlt(_localctx, 1)
-			setState(194)
+			setState(200)
 			try _errHandler.sync(self)
-			switch(try getInterpreter().adaptivePredict(_input,13, _ctx)) {
+			switch(try getInterpreter().adaptivePredict(_input,15, _ctx)) {
 			case 1:
 				break
 			case 2:
-				setState(193)
+				setState(199)
 				try parameterDeclaration()
 
 				break
 			default: break
 			}
 			_ctx!.stop = try _input.LT(-1)
-			setState(201)
+			setState(207)
 			try _errHandler.sync(self)
-			_alt = try getInterpreter().adaptivePredict(_input,14,_ctx)
+			_alt = try getInterpreter().adaptivePredict(_input,16,_ctx)
 			while (_alt != 2 && _alt != ATN.INVALID_ALT_NUMBER) {
 				if ( _alt==1 ) {
 					if _parseListeners != nil {
@@ -1402,20 +1433,20 @@ open class JokrParser: Parser {
 					_prevctx = _localctx
 					_localctx = ParameterDeclarationListContext(_parentctx, _parentState);
 					try pushNewRecursionContext(_localctx, _startState, JokrParser.RULE_parameterDeclarationList)
-					setState(196)
+					setState(202)
 					if (!(precpred(_ctx, 1))) {
 					    throw try ANTLRException.recognition(e:FailedPredicateException(self, "precpred(_ctx, 1)"))
 					}
-					setState(197)
+					setState(203)
 					try match(JokrParser.Tokens.COMMA.rawValue)
-					setState(198)
+					setState(204)
 					try parameterDeclaration()
 
 			 
 				}
-				setState(203)
+				setState(209)
 				try _errHandler.sync(self)
-				_alt = try getInterpreter().adaptivePredict(_input,14,_ctx)
+				_alt = try getInterpreter().adaptivePredict(_input,16,_ctx)
 			}
 
 		}
@@ -1453,9 +1484,9 @@ open class JokrParser: Parser {
 	    }
 		do {
 		 	try enterOuterAlt(_localctx, 1)
-		 	setState(204)
+		 	setState(210)
 		 	try match(JokrParser.Tokens.TYPE.rawValue)
-		 	setState(205)
+		 	setState(211)
 		 	try match(JokrParser.Tokens.ID.rawValue)
 
 		}
