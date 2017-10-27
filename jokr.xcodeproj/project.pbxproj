@@ -113,6 +113,7 @@
 		2432957B1F46238D00478218 /* TestStatementListsWithNewline */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestStatementListsWithNewline; sourceTree = "<group>"; };
 		2432957C1F46238D00478218 /* TestVariableDeclarations */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestVariableDeclarations; sourceTree = "<group>"; };
 		246A37B51FA3C77C0054A31D /* TestMethodCalls */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestMethodCalls; sourceTree = "<group>"; };
+		246A37B61FA3D3BB0054A31D /* TestMethodCalls */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestMethodCalls; sourceTree = "<group>"; };
 		246BCBF51F19567E004BE84C /* Jokr.tokens */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Jokr.tokens; sourceTree = "<group>"; };
 		246BCBF61F19567E004BE84C /* JokrBaseListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrBaseListener.swift; sourceTree = "<group>"; };
 		246BCBF71F19567E004BE84C /* JokrLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokrLexer.swift; sourceTree = "<group>"; };
@@ -597,6 +598,7 @@
 				24D61EA51F6B15F900401646 /* TestEmpty */,
 				24D61EA61F6B15F900401646 /* TestExpressions */,
 				24D61EA71F6B15F900401646 /* TestFunctionCalls */,
+				246A37B61FA3D3BB0054A31D /* TestMethodCalls */,
 				24D61EA81F6B15F900401646 /* TestFunctionDeclarations */,
 				24D61EA91F6B15F900401646 /* TestIDs */,
 				24D61EAA1F6B15F900401646 /* TestOperators */,

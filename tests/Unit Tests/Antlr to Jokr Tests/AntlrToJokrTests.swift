@@ -231,6 +231,32 @@ class AntlrToJokrTests: XCTestCase {
 		}
 	}
 
+	func testMethodCall() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestMethodCalls")
+
+			let functionCalls = tree.filter(type:
+				JokrParser.MethodCallContext.self)
+				.map { $0.toJKRTreeMethodCall() }
+
+			let expectedFunctionCalls: [JKRTreeMethodCall] = [
+				JKRTreeMethodCall(object: "foo", method: "print"),
+				JKRTreeMethodCall(object: "bar", method: "someFunctionName"),
+				JKRTreeMethodCall(object: "baz", method: "f"),
+				JKRTreeMethodCall(object: "bla", method: "f", parameters: [1]),
+				JKRTreeMethodCall(object: "blah", method: "f",
+				                  parameters: [1, 2])
+			]
+
+			// TEST: All elements were converted successfully
+			XCTAssertEqual(functionCalls, expectedFunctionCalls)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	func testReturns() {
 		do {
 			// WITH:

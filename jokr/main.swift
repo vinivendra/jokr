@@ -8,7 +8,7 @@ import Antlr4
 	// ✅ Add method calls to the AST
 	// ✅ Add AntlrToJokr methods
 	// ✅ Test Parser
-	// Test AntlrToJokr
+	// ✅ Test AntlrToJokr
 	// Test AST
 	// Add and test Java Translator
 	// Add and test ObjC Translator
