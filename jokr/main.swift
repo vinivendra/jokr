@@ -7,7 +7,7 @@ import Antlr4
 	// ✅ Add method calls to the grammar
 	// ✅ Add method calls to the AST
 	// ✅ Add AntlrToJokr methods
-	// Test Parser
+	// ✅ Test Parser
 	// Test AntlrToJokr
 	// Test AST
 	// Add and test Java Translator
