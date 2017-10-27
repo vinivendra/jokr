@@ -242,7 +242,7 @@ class AntlrToJokrTests: XCTestCase {
 
 			let expectedFunctionCalls: [JKRTreeMethodCall] = [
 				JKRTreeMethodCall(object: "foo", method: "print"),
-				JKRTreeMethodCall(object: "bar", method: "someFunctionName"),
+				JKRTreeMethodCall(object: "bar", method: "someMethodName"),
 				JKRTreeMethodCall(object: "baz", method: "f"),
 				JKRTreeMethodCall(object: "bla", method: "f", parameters: [1]),
 				JKRTreeMethodCall(object: "blah", method: "f",
