@@ -9,10 +9,10 @@ struct JKRObjcCompiler: JKRCompiler {
 	func compileFiles(atPath folderPath: String) throws -> Shell.CommandResult {
 		log("======== Compiling ObjC...")
 
-		let javaFiles = try Files.files(atFolder: folderPath,
+		let objcFiles = try Files.files(atFolder: folderPath,
 		                                withExtension: "m")
 
-		let filesString = javaFiles.map { "\"\(folderPath)\($0)\"" }
+		let filesString = objcFiles.map { "\"\(folderPath)\($0)\"" }
 			.joined(separator: " ")
 
 		let result = Shell.runCommand("""
