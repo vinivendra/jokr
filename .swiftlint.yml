@@ -6,6 +6,11 @@ excluded:
   - antlr4-master
   - .git
   - jokr/Antlr Generated Parser
+  - example
+
+  - tests/Unit Tests/Swift Translator Tests/TestAssignments
+  - tests/Unit Tests/Swift Translator Tests/TestFunctionCalls
+  - tests/Unit Tests/Swift Translator Tests/TestClassDeclarations
 
 disabled_rules:
   - todo

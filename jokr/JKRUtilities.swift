@@ -3,6 +3,7 @@ import Foundation
 enum JKRTargetLanguage {
 	case java
 	case objectiveC
+	case swift
 
 	var translator: JKRTranslator.Type {
 		switch self {
@@ -10,6 +11,8 @@ enum JKRTargetLanguage {
 			return JKRJavaTranslator.self
 		case .objectiveC:
 			return JKRObjcTranslator.self
+		case .swift:
+			return JKRSwiftTranslator.self
 		}
 	}
 
@@ -19,6 +22,8 @@ enum JKRTargetLanguage {
 			return JKRJavaCompiler.self
 		case .objectiveC:
 			return JKRObjcCompiler.self
+		case .swift:
+			return JKRSwiftCompiler.self
 		}
 	}
 }

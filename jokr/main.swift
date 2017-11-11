@@ -26,9 +26,7 @@ private let filePath = CommandLine.arguments[1] + "/example/"
 do {
 	let driver = JKRDriver(folderPath: filePath,
 	                       parser: JKRAntlrParser(),
-	                       language: .java)
-
-	// TODO: Trash build files
+	                       language: .swift)
 
 	try driver.transpile()
 	driver.run()
