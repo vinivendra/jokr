@@ -1,0 +1,13 @@
+class Person {
+
+}
+
+class Animal {
+	Int numberOfLegs() {
+		return 5
+	}
+
+	Int numberOfEyes() {
+		return 2
+	}
+}

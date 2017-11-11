@@ -1,31 +1,24 @@
 import Antlr4
 
 class JKRAntlrParser: JKRParser {
-	func parse(file: String) throws -> JKRTreeProgram {
-		do {
-			let contents = try String(contentsOfFile: file)
-			let char = ANTLRInputStream(contents)
-			let lexer = JokrLexer(char)
-			let tokens = CommonTokenStream(lexer)
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			let tree = try parser.program()
+	func parse(file: String) throws -> JKRTree? {
+		let contents = try String(contentsOfFile: file)
+		let char = ANTLRInputStream(contents)
+		let lexer = JokrLexer(char)
+		let tokens = CommonTokenStream(lexer)
+		let parser = try JokrParser(tokens)
+		// parser.setTrace(true)
+		parser.setBuildParseTree(true)
+		let tree = try parser.program()
 
-			if let statements = tree.toJKRTreeStatements() {
-				return JKRTreeProgram(statements: statements,
-				                      declarations: [])
-			}
-			else if let declarations = tree.toJKRTreeDeclarations() {
-				return JKRTreeProgram(statements: [],
-				                      declarations: declarations)
-			}
-			else {
-				return JKRTreeProgram(statements: [],
-				                      declarations: [])
-			}
+		if let statements = tree.toJKRTreeStatements() {
+			return .statements(statements)
 		}
-		catch (let error) {
-			throw error
+		else if let classDeclarations = tree.toJKRTreeClasses() {
+			return .classDeclarations(classDeclarations)
+		}
+		else {
+			return nil
 		}
 	}
 }

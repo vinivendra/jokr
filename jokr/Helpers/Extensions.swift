@@ -26,10 +26,7 @@ extension Array {
 }
 
 // Array Shift
-protocol MutableRandomAccessCollection:
-MutableCollection, RandomAccessCollection { }
-
-extension MutableRandomAccessCollection {
+extension MutableCollection where Self: RandomAccessCollection {
 	mutating func shift() {
 		guard let first = self.first,
 			count > 1 else { return }
@@ -52,8 +49,6 @@ extension MutableRandomAccessCollection {
 		return copy
 	}
 }
-
-extension Array: MutableRandomAccessCollection { }
 
 // Array Copy
 extension Collection {

@@ -3,9 +3,6 @@ import XCTest
 private let testFilesPath = CommandLine.arguments[1] +
 	"/tests/Acceptance Tests/ObjC/"
 
-private let outputDirectory = CommandLine.arguments[1] +
-	"/tests/Acceptance Tests/ObjC/Output/"
-
 private let errorMessage =
 	"Transpiler failed during test.\nError: "
 
@@ -13,36 +10,50 @@ class ObjCAcceptanceTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
 	func transpileAndRun(
-		file filename: String) throws -> Shell.CommandResult {
-		do {
-			let program = try parser.parse(file: testFilesPath + filename)
-			let writer = JKRFileWriter(outputDirectory: outputDirectory)
-			let translator = JKRObjcTranslator(writingWith: writer)
-			try translator.translate(program: program)
-			let compiler = JKRObjcCompiler()
-			try compiler.compileFiles(atPath: outputDirectory)
-			return compiler.runProgram(atPath: outputDirectory)
+		test testName: String) throws -> Shell.CommandResult {
+		let testFolder = testFilesPath + testName + "/"
+		let testFile = testName + ".jkr"
+
+		guard let tree = try parser.parse(
+			file: testFolder + testFile) else
+		{
+			XCTFail("Failed to parse file \(testFile)")
+			throw JKRError.parsing
 		}
-		catch (let error) {
-			throw error
+
+		let writer = JKRFileWriter(outputDirectory: testFolder)
+		let translator = JKRObjcTranslator(writingWith: writer)
+		try translator.translate(tree: tree)
+		let compiler = JKRObjcCompiler()
+		try compiler.compileFiles(atPath: testFolder)
+		return compiler.runProgram(atPath: testFolder)
+	}
+
+	func trashTranslatedFilesAtTeardown(
+        forTest testName: String,
+        skipping filesToSkip: [String] = [])
+    {
+		addTeardownBlock {
+			do {
+				try Files.trashFiles(
+					atFolder: testFilesPath + testName + "/",
+					skippingFiles: filesToSkip + [testName + ".jkr"])
+			}
+			catch (let error) {
+				XCTFail("Failed to trash build files. Error: \(error)")
+			}
 		}
 	}
 
-	func testEmpty() {
-		do {
-			let result = try transpileAndRun(file: "TestEmpty.jkr")
-			XCTAssertEqual(result.status, 0)
-			XCTAssertEqual(result.error, "")
-			XCTAssertEqual(result.output, "")
-		}
-		catch (let error) {
-			XCTFail(errorMessage + "\(error)")
-		}
-	}
+	////////////////////////////////////////////////////////////////////////////
+	// MARK: - Tests
 
 	func testFunctionCalls() {
+		let testName = "TestFunctionCalls"
+		trashTranslatedFilesAtTeardown(forTest: testName)
+
 		do {
-			let result = try transpileAndRun(file: "TestFunctionCalls.jkr")
+			let result = try transpileAndRun(test: testName)
 			XCTAssertEqual(result.status, 0)
 			XCTAssertEqual(result.error.strippingNSLogData(),
 			               "Hello jokr!\n1\n1 2\n")
@@ -54,8 +65,11 @@ class ObjCAcceptanceTests: XCTestCase {
 	}
 
 	func testAssignments() {
+		let testName = "TestAssignments"
+		trashTranslatedFilesAtTeardown(forTest: testName)
+
 		do {
-			let result = try transpileAndRun(file: "TestAssignments.jkr")
+			let result = try transpileAndRun(test: testName)
 			XCTAssertEqual(result.status, 0)
 			XCTAssertEqual(result.error.strippingNSLogData(), "4 3\n")
 			XCTAssertEqual(result.output, (""))
@@ -66,11 +80,29 @@ class ObjCAcceptanceTests: XCTestCase {
 	}
 
 	func testExpressions() {
+		let testName = "TestExpressions"
+		trashTranslatedFilesAtTeardown(forTest: testName)
+
 		do {
-			let result = try transpileAndRun(file: "TestExpressions.jkr")
+			let result = try transpileAndRun(test: testName)
 			XCTAssertEqual(result.status, 0)
 			XCTAssertEqual(result.error.strippingNSLogData(), "4\n0\n12\n")
 			XCTAssertEqual(result.output, (""))
+		}
+		catch (let error) {
+			XCTFail(errorMessage + "\(error)")
+		}
+	}
+
+	func testClasses() {
+		let testName = "TestClasses"
+		trashTranslatedFilesAtTeardown(forTest: testName, skipping: ["main.m"])
+
+		do {
+			let result = try transpileAndRun(test: testName)
+			XCTAssertEqual(result.status, 0)
+			XCTAssertEqual(result.error.strippingNSLogData(), "5\n")
+			XCTAssertEqual(result.output, "")
 		}
 		catch (let error) {
 			XCTFail(errorMessage + "\(error)")

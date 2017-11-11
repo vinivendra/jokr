@@ -40,9 +40,9 @@ extension JokrParser.ProgramContext {
 		}
 	}
 
-	func toJKRTreeDeclarations() -> [JKRTreeDeclaration]? {
-		if let declarationList = declarationList() {
-			return declarationList.toJKRTreeDeclarations()
+	func toJKRTreeClasses() -> [JKRTreeClassDeclaration]? {
+		if let declarationList = classDeclarationList() {
+			return declarationList.toJKRTreeClassDeclarations()
 		}
 		else {
 			return nil
@@ -76,34 +76,29 @@ extension JokrParser.StatementContext {
 		else if let returnStatement = returnStatement() {
 			return .returnStm(returnStatement.toJKRTreeReturn())
 		}
+		else if let methodCall = methodCall() {
+			return .methodCall(methodCall.toJKRTreeMethodCall())
+		}
 
 		fatalError("Failed to transpile parameter")
 	}
 }
 
-extension JokrParser.DeclarationListContext {
-	func toJKRTreeDeclarations() -> [JKRTreeDeclaration] {
-		guard let declaration = declaration()?.toJKRTreeDeclaration() else {
+extension JokrParser.ClassDeclarationListContext {
+	func toJKRTreeClassDeclarations() -> [JKRTreeClassDeclaration] {
+		guard let classDeclaration =
+			classDeclaration()?.toJKRTreeClassDeclaration() else
+		{
 			fatalError("Failed to transpile declarations")
 		}
 
-		if let declarationList = declarationList() {
-			return declarationList.toJKRTreeDeclarations() + [declaration]
+		if let classList = classDeclarationList() {
+			return classList.toJKRTreeClassDeclarations() +
+				[classDeclaration]
 		}
 		else {
-			return [declaration]
+			return [classDeclaration]
 		}
-	}
-}
-
-extension JokrParser.DeclarationContext {
-	func toJKRTreeDeclaration() -> JKRTreeDeclaration {
-		if let functionDeclaration = functionDeclaration() {
-			return .functionDeclaration(
-				functionDeclaration.toJKRTreeFunctionDeclaration())
-		}
-
-		fatalError("Failed to transpile parameter")
 	}
 }
 
@@ -202,6 +197,20 @@ extension JokrParser.ReturnStatementContext {
 	}
 }
 
+extension JokrParser.MethodCallContext {
+	func toJKRTreeMethodCall() -> JKRTreeMethodCall {
+		if let object = self.ID()?.toJKRTreeID(),
+			let functionCall = self.functionCall()?.toJKRTreeFunctionCall()
+		{
+			return JKRTreeMethodCall(object: object,
+			                         method: functionCall.id,
+			                         parameters: functionCall.parameters)
+		}
+
+		fatalError("Failed to transpile function call")
+	}
+}
+
 extension JokrParser.ParameterDeclarationListContext {
 	func toJKRTreeParameterDeclarations() -> [JKRTreeParameterDeclaration] {
 		if let parameter = parameterDeclaration() {
@@ -213,7 +222,7 @@ extension JokrParser.ParameterDeclarationListContext {
 			}
 
 			let parameter = JKRTreeParameterDeclaration(type: type,
-			                                 id: id)
+			                                            id: id)
 
 			if let parameterList = parameterDeclarationList() {
 				return parameterList.toJKRTreeParameterDeclarations() + [parameter]
@@ -247,5 +256,49 @@ extension JokrParser.FunctionDeclarationContext {
 		}
 
 		fatalError("Failed to transpile function declaration")
+	}
+}
+
+extension JokrParser.ClassMemberListContext {
+	func toJKRTreeFunctionDeclarations() -> [JKRTreeFunctionDeclaration] {
+		guard let functionDeclaration =
+			classMember()?.toJKRTreeFunctionDeclaration() else {
+				fatalError("Failed to transpile declarations")
+		}
+
+		if let classMemberList = classMemberList() {
+			return classMemberList.toJKRTreeFunctionDeclarations() +
+				[functionDeclaration]
+		}
+		else {
+			return [functionDeclaration]
+		}
+	}
+}
+
+extension JokrParser.ClassMemberContext {
+	func toJKRTreeFunctionDeclaration() -> JKRTreeFunctionDeclaration {
+		if let functionDeclaration = functionDeclaration() {
+			return functionDeclaration.toJKRTreeFunctionDeclaration()
+		}
+
+		fatalError("Failed to transpile parameter")
+	}
+}
+
+extension JokrParser.ClassDeclarationContext {
+	func toJKRTreeClassDeclaration() -> JKRTreeClassDeclaration {
+		if let type = TYPE()?.toJKRTreeType() {
+			if let functionDeclarations =
+				classMemberList()?.toJKRTreeFunctionDeclarations() {
+				return JKRTreeClassDeclaration(type: type,
+				                               methods: functionDeclarations)
+			}
+			else {
+				return JKRTreeClassDeclaration(type: type)
+			}
+		}
+
+		fatalError("Failed to transpile class declaration")
 	}
 }

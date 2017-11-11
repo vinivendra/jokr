@@ -1,3 +1,3 @@
 protocol JKRParser {
-	func parse(file: String) throws -> JKRTreeProgram
+	func parse(file: String) throws -> JKRTree?
 }

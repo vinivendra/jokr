@@ -8,19 +8,13 @@ class AntlrToJokrTests: XCTestCase {
 
 	func getProgram(
 		inFile filename: String) throws -> JokrParser.ProgramContext {
-
-		do {
-			let contents = try! String(contentsOfFile: testFilesPath + filename)
-			let inputStream = ANTLRInputStream(contents)
-			let lexer = JokrLexer(inputStream)
-			let tokens = CommonTokenStream(lexer)
-			let parser = try JokrParser(tokens)
-			parser.setBuildParseTree(true)
-			return try parser.program()
-		}
-		catch (let error) {
-			throw error
-		}
+		let contents = try! String(contentsOfFile: testFilesPath + filename)
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		let tokens = CommonTokenStream(lexer)
+		let parser = try JokrParser(tokens)
+		parser.setBuildParseTree(true)
+		return try parser.program()
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -33,7 +27,7 @@ class AntlrToJokrTests: XCTestCase {
 
 			// TEST: program contains no statements or declarations
 			XCTAssertNil(tree.toJKRTreeStatements())
-			XCTAssertNil(tree.toJKRTreeDeclarations())
+			XCTAssertNil(tree.toJKRTreeClasses())
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
@@ -83,7 +77,7 @@ class AntlrToJokrTests: XCTestCase {
 	func testStatements() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile:  "TestStatements")
+			let tree = try getProgram(inFile: "TestStatements")
 
 			guard let statements = tree.toJKRTreeStatements() else {
 				XCTFail("Failed to get statements from statements file.")
@@ -99,45 +93,6 @@ class AntlrToJokrTests: XCTestCase {
 
 			// TEST: All elements were converted successfully
 			XCTAssertEqual(statements, expectedStatements)
-		}
-		catch (let error) {
-			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
-		}
-	}
-
-	func testDeclarations() {
-		do {
-			// WITH:
-			let tree = try getProgram(inFile:  "TestDeclarations")
-
-			guard let declarations = tree.toJKRTreeDeclarations() else {
-				XCTFail("Failed to get declarations from declarations file.")
-				return
-			}
-
-			let expectedDeclarations: [JKRTreeDeclaration] = [
-				.functionDeclaration(
-					JKRTreeFunctionDeclaration(
-						type: "Int", id: "func1",
-						parameters: [],
-						block: [.returnStm(0)]
-					)
-				),
-				.functionDeclaration(
-					JKRTreeFunctionDeclaration(
-						type: "Int", id: "func2",
-						parameters: [JKRTreeParameterDeclaration(type: "Float",
-						                              id: "bla")],
-						block: [
-							JKRTreeStatement.assignment(.declaration(
-								"String", "baz", .operation(5, "+", 6))),
-							JKRTreeStatement.returnStm(0)]
-					)
-				)
-			]
-
-			// TEST: All elements were converted successfully
-			XCTAssertEqual(declarations, expectedDeclarations)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
@@ -276,10 +231,36 @@ class AntlrToJokrTests: XCTestCase {
 		}
 	}
 
+	func testMethodCall() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestMethodCalls")
+
+			let functionCalls = tree.filter(type:
+				JokrParser.MethodCallContext.self)
+				.map { $0.toJKRTreeMethodCall() }
+
+			let expectedFunctionCalls: [JKRTreeMethodCall] = [
+				JKRTreeMethodCall(object: "foo", method: "print"),
+				JKRTreeMethodCall(object: "bar", method: "someMethodName"),
+				JKRTreeMethodCall(object: "baz", method: "f"),
+				JKRTreeMethodCall(object: "bla", method: "f", parameters: [1]),
+				JKRTreeMethodCall(object: "blah", method: "f",
+				                  parameters: [1, 2])
+			]
+
+			// TEST: All elements were converted successfully
+			XCTAssertEqual(functionCalls, expectedFunctionCalls)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
 	func testReturns() {
 		do {
 			// WITH:
-			let tree = try getProgram(inFile:  "TestReturns")
+			let tree = try getProgram(inFile: "TestReturns")
 
 			let returns = tree.filter(type:
 				JokrParser.ReturnStatementContext.self)
@@ -351,7 +332,8 @@ class AntlrToJokrTests: XCTestCase {
 					block: [.returnStm(0)]),
 				JKRTreeFunctionDeclaration(
 					type: "Int", id: "func2",
-					parameters: [JKRTreeParameterDeclaration(type: "Float", id: "bla")],
+					parameters: [
+						JKRTreeParameterDeclaration(type: "Float", id: "bla")],
 					block: [
 						.assignment(.declaration(
 							"String", "baz",
@@ -359,10 +341,46 @@ class AntlrToJokrTests: XCTestCase {
 						.returnStm(0)]),
 				JKRTreeFunctionDeclaration(
 					type: "Void", id: "func4",
-					parameters: [JKRTreeParameterDeclaration(type: "Int", id: "bla"),
-					             JKRTreeParameterDeclaration(type: "Float", id: "foo"),
-					             JKRTreeParameterDeclaration(type: "Double", id: "hue")],
+					parameters: [
+						JKRTreeParameterDeclaration(type: "Int", id: "bla"),
+						JKRTreeParameterDeclaration(type: "Float", id: "foo"),
+						JKRTreeParameterDeclaration(type: "Double", id: "hue")],
 					block: [.returnStm(0)])
+			]
+
+			// TEST: All elements were converted successfully
+			XCTAssertEqual(declarations, expectedDeclarations)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testClassDeclarations() {
+		do {
+			// WITH:
+			let tree = try getProgram(inFile: "TestClassDeclarations")
+
+			let declarations = tree.filter(type:
+				JokrParser.ClassDeclarationContext.self)
+				.map { $0.toJKRTreeClassDeclaration() }
+
+			let expectedDeclarations: [JKRTreeClassDeclaration] = [
+				JKRTreeClassDeclaration(
+					type: "Person"),
+				JKRTreeClassDeclaration(
+					type: "Animal",
+					methods: [
+						JKRTreeFunctionDeclaration(
+							type: "Int",
+							id: "numberOfLegs",
+							parameters: [],
+							block: [.returnStm(5)]),
+						JKRTreeFunctionDeclaration(
+							type: "Int",
+							id: "numberOfEyes",
+							parameters: [],
+							block: [.returnStm(2)])])
 			]
 
 			// TEST: All elements were converted successfully

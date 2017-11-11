@@ -141,6 +141,29 @@ class ASTTests: XCTestCase {
 		}
 	}
 
+	func testMethodCalls() {
+		// WITH:
+		let methodCalls: [JKRTreeMethodCall] = [
+			JKRTreeMethodCall(object: "foo", method: "print"),
+			JKRTreeMethodCall(object: "foo", method: "someMethodName"),
+			JKRTreeMethodCall(object: "baz", method: "someMethodName"),
+			JKRTreeMethodCall(object: "baz", method: "someMethodName",
+			                  parameters: [1]),
+			JKRTreeMethodCall(object: "baz", method: "someMethodName",
+			                  parameters: [1, 2])
+		]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(methodCalls, methodCalls.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (methodCall, differentMethodCall) in
+			zip(methodCalls, methodCalls.shifted())
+		{
+			XCTAssertNotEqual(methodCall, differentMethodCall)
+		}
+	}
+
 	func testParameterDeclarations() {
 		// WITH:
 		let parameters: [JKRTreeParameterDeclaration] = [
@@ -219,6 +242,30 @@ class ASTTests: XCTestCase {
 			zip(declarations.map { $0.block }, expectedBlocks)
 		{
 			XCTAssertEqual(block, expectedBlock)
+		}
+	}
+
+	func testClassDeclarations() {
+		// WITH:
+		let classDeclarations: [JKRTreeClassDeclaration] = [
+			JKRTreeClassDeclaration(type: "Person"),
+			JKRTreeClassDeclaration(type: "Animal"),
+			JKRTreeClassDeclaration(type: "Animal",
+			                        methods: [JKRTreeFunctionDeclaration(
+										type: "Int",
+										id: "numberOfLegs",
+										parameters: [],
+										block: [.returnStm(5)])])
+		]
+
+		// TEST: == succeeds on equal instances (reflexive)
+		XCTAssertEqual(classDeclarations, classDeclarations.arrayCopy())
+
+		// TEST: == fails on different instances
+		for (classDeclaration, differentClassDeclaration) in
+			zip(classDeclarations, classDeclarations.shifted())
+		{
+			XCTAssertNotEqual(classDeclaration, differentClassDeclaration)
 		}
 	}
 

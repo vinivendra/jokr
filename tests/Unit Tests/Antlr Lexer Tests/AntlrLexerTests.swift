@@ -19,15 +19,10 @@ extension Array where Element == Token {
 
 class AntlrLexerTests: XCTestCase {
 	func getTokens(inFile filename: String) throws -> [Token] {
-		do {
-			let contents = try! String(contentsOfFile: testFilesPath + filename)
-			let inputStream = ANTLRInputStream(contents)
-			let lexer = JokrLexer(inputStream)
-			return try lexer.getAllTokens()
-		}
-		catch (let error) {
-			throw error
-		}
+		let contents = try! String(contentsOfFile: testFilesPath + filename)
+		let inputStream = ANTLRInputStream(contents)
+		let lexer = JokrLexer(inputStream)
+		return try lexer.getAllTokens()
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -86,6 +81,33 @@ class AntlrLexerTests: XCTestCase {
 
 			// TEST: Lexer didn't find any other tokens of this type
 			XCTAssertEqual(tokens.countTokens(ofType: JokrLexer.TYPE),
+			               expectedTokens.count)
+		}
+		catch (let error) {
+			XCTFail("JokrLexer failed to get tokens.\nError: \(error)")
+		}
+	}
+
+	func testClass() {
+		do {
+			// WITH:
+			let tokens = try getTokens(inFile: "TestClass")
+
+			let expectedTokens: [(line: Int, charInLine: Int, text: String)] =
+				[(1, 0, "class")]
+
+			// TEST: Lexer found all expected tokens (in order)
+			for expected in expectedTokens {
+				XCTAssert(tokens.contains { token in
+					return token.getType() == JokrLexer.CLASS
+						&& token.getLine() == expected.line
+						&& token.getCharPositionInLine() == expected.charInLine
+						&& token.getText() == expected.text
+				}, "Token not found: \(expected)")
+			}
+
+			// TEST: Lexer didn't find any other tokens of this type
+			XCTAssertEqual(tokens.countTokens(ofType: JokrLexer.CLASS),
 			               expectedTokens.count)
 		}
 		catch (let error) {

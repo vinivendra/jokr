@@ -8,8 +8,8 @@ program:
 	// empty
 	| statementList
 	| statementList NEW_LINE
-	| declarationList
-	| declarationList NEW_LINE;
+	| classDeclarationList
+	| classDeclarationList NEW_LINE;
 
 statementList:
 	statement
@@ -17,21 +17,20 @@ statementList:
 
 statement:
 	assignment
+	| returnStatement
 	| functionCall
-	| returnStatement;
+	| methodCall;
 
-declarationList:
-	declaration
-	| declarationList NEW_LINE declaration;
-
-declaration:
-	functionDeclaration;
+classDeclarationList:
+	classDeclaration
+	| classDeclarationList NEW_LINE classDeclaration;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Building blocks
 
 block:
-	LBRACE NEW_LINE statementList NEW_LINE RBRACE;
+	LBRACE NEW_LINE RBRACE
+	| LBRACE NEW_LINE statementList NEW_LINE RBRACE;
 
 lvalue:
 	ID;
@@ -60,23 +59,33 @@ assignment:
 variableDeclaration:
 	TYPE ID;
 
+returnStatement:
+	RETURN expression;
+
 functionCall:
 	ID LPAREN parameterList RPAREN;
 
-returnStatement:
-	RETURN expression;
+methodCall:
+	ID NEW_LINE? PERIOD NEW_LINE? functionCall;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Declarations
 
-parameterDeclarationList:
+// Class declarations
+classDeclaration:
+	CLASS TYPE LBRACE NEW_LINE RBRACE // empty class
+	| CLASS TYPE LBRACE NEW_LINE classMemberList NEW_LINE RBRACE;
+
+// Class members
+classMemberList:
 	// empty
-	| parameterDeclaration
-	| parameterDeclarationList COMMA parameterDeclaration;
+	| classMember
+	| classMemberList NEW_LINE classMember;
 
-parameterDeclaration:
-	TYPE ID;
+classMember:
+	functionDeclaration;
 
+// Function declarations
 functionDeclaration:
 	functionDeclarationHeader functionDeclarationParameters block;
 
@@ -86,7 +95,19 @@ functionDeclarationHeader:
 functionDeclarationParameters:
 	LPAREN parameterDeclarationList RPAREN;
 
-///////////////////////////////////////////////////////
+parameterDeclarationList:
+	// empty
+	| parameterDeclaration
+	| parameterDeclarationList COMMA parameterDeclaration;
+
+parameterDeclaration:
+	TYPE ID;
+
+////////////////////////////////////////////////////////////////////////////////
+// Keywords
+CLASS: 'class';
+
+// Tokens
 BLOCK_COMMENT : '/*' (BLOCK_COMMENT|.)*? '*/' -> channel(HIDDEN);
 LINE_COMMENT : '//' ~('\n')* -> channel(HIDDEN);
 OPERATOR: OPERATOR_CHAR+;
@@ -96,13 +117,14 @@ RPAREN: ')';
 LBRACE: '{';
 RBRACE: '}';
 COMMA: ',';
+PERIOD: '.';
 RETURN: 'return';
 INT: [0-9]+;
 TYPE: [_]*[A-Z][a-zA-Z0-9]*;
 ID: [_]*[a-z][a-zA-Z0-9]*;
 SNAKE_CASE: [a-zA-Z0-9_]+;
 ASSIGN: '=';
-NEW_LINE: '\n'+;
+NEW_LINE: '\n'+ | ('\n'[ \t\r]*)+;
 
 //
 WS: [ \t\r]+ -> skip;

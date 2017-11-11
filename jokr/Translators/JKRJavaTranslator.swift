@@ -12,34 +12,15 @@ class JKRJavaTranslator: JKRTranslator {
 		return JKRJavaTranslator(writingWith: writer)
 	}
 
-	func translate(program: JKRTreeProgram) throws {
-		do {
-			if let statements = program.statements {
-				changeFile("Main.java")
-
-				indentation = 0
-				write("public class Main {\n")
-				indentation += 1
-
-				addIntentation()
-				write("public static void main(String []args) {\n")
-				indentation += 1
-
-				writeWithStructure(statements)
-
-				indentation = 1
-				addIntentation()
-				write("}\n}\n")
-			}
-
-//			if let declarations = program.declarations {
-//			}
-
-			try writer.finishWriting()
+	func translate(tree: JKRTree) throws {
+		switch tree {
+		case let .statements(statements):
+			writeStatementsFile(withStatements: statements)
+		case let .classDeclarations(classes):
+			writeClassFiles(withClasses: classes)
 		}
-		catch (let error) {
-			throw error
-		}
+
+		try writer.finishWriting()
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -50,6 +31,41 @@ class JKRJavaTranslator: JKRTranslator {
 	// Transpilation (general structure)
 	private var indentation = 0
 
+	private func writeStatementsFile(
+		withStatements statements: ([JKRTreeStatement])) {
+
+		changeFile("Main.java")
+
+		write("public class Main {\n")
+		indentation = 1
+
+		writeIndentation()
+		write("public static void main(String []args) {\n")
+		indentation += 1
+
+		writeWithStructure(statements)
+
+		indentation = 1
+		writeIndentation()
+		write("}\n}\n")
+	}
+
+	private func writeClassFiles(
+		withClasses declarations: ([JKRTreeClassDeclaration])) {
+
+		for classDeclaration in declarations {
+			let className = classDeclaration.type.text
+			changeFile("\(className).java")
+
+			write("public class \(className) {\n")
+			indentation = 1
+
+			writeWithStructure(classDeclaration.methods)
+
+			write("}\n")
+		}
+	}
+
 	private func writeWithStructure(_ statements: [JKRTreeStatement]) {
 		for statement in statements {
 			writeWithStructure(statement)
@@ -57,31 +73,50 @@ class JKRJavaTranslator: JKRTranslator {
 	}
 
 	private func writeWithStructure(_ statement: JKRTreeStatement) {
-		addIntentation()
-		write(translate(statement))
+		writeIndentation()
 
-//		if let block = statement.block {
-//			write(" {\n")
-//			indentation += 1
-//			writeWithStructure(block)
-//			indentation -= 1
-//			addIntentation()
-//			write("}\n")
-//		}
-	}
-
-	// Translation (pieces of code)
-	private func translate(_ statement: JKRTreeStatement) -> String {
 		switch statement {
 		case let .assignment(assignment):
-			return translate(assignment)
+			write(translate(assignment))
 		case let .functionCall(functionCall):
-			return translate(functionCall)
+			write(translate(functionCall))
 		case let .returnStm(returnStm):
-			return translate(returnStm)
+			write(translate(returnStm))
+		case let .methodCall(methodCall):
+			write(translate(methodCall))
 		}
 	}
 
+	private func writeWithStructure(_ methods: [JKRTreeFunctionDeclaration]) {
+		// Write methods with newlines in between them
+		for method in methods.dropLast() {
+			writeWithStructure(method)
+			write("\n")
+		}
+		if let lastMethod = methods.last {
+			writeWithStructure(lastMethod)
+		}
+	}
+
+	private func writeWithStructure(_ method: JKRTreeFunctionDeclaration) {
+		writeIndentation()
+		write(translateHeader(method))
+		write(" {\n")
+
+		if method.block.count > 0 {
+			indentation += 1
+			writeWithStructure(method.block)
+			indentation -= 1
+		}
+		else {
+			write("\n")
+		}
+
+		writeIndentation()
+		write("}\n")
+	}
+
+	// Translation (pieces of code)
 	private func translate(_ assignment: JKRTreeAssignment) -> String {
 		switch assignment {
 		case let .declaration(type, id, expression):
@@ -113,13 +148,25 @@ class JKRJavaTranslator: JKRTranslator {
 		return "\(string(for: functionCall.id))();\n"
 	}
 
+	private func translate(_ methodCall: JKRTreeMethodCall) -> String {
+		let parameters = methodCall.parameters
+			.map(translate)
+			.joined(separator: ", ")
+
+		return "\(string(for: methodCall.object))" + "." +
+			"\(string(for: methodCall.method))" +
+			"(\(parameters));\n"
+	}
+
 	private func translateHeader(
 		_ function: JKRTreeFunctionDeclaration) -> String {
+
+		let returnType = string(for: function.type)
+		let functionName = string(for: function.id)
 		let parameters = function.parameters.map(string(for:))
 			.joined(separator: ", ")
 
-		return "\(string(for: function.type)) \(string(for: function.id))(\(parameters))"
-		// swiftlint:disable:previous line_length
+		return "\(returnType) \(functionName)(\(parameters))"
 	}
 
 	private func translate(_ returnStm: JKRTreeReturn) -> String {
@@ -184,7 +231,7 @@ class JKRJavaTranslator: JKRTranslator {
 		writer.changeFile(string)
 	}
 
-	private func addIntentation() {
+	private func writeIndentation() {
 		for _ in 0..<indentation {
 			write("\t")
 		}

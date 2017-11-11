@@ -1,0 +1,16 @@
+object.someMethod()
+object . someMethod()
+object. someMethod()
+object .someMethod()
+
+object.
+someMethod()
+
+object
+.someMethod()
+
+object.
+	someMethod()
+
+object
+	.someMethod()

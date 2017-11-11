@@ -4,59 +4,52 @@ private let testFilesPath = CommandLine.arguments[1] +
 	"/tests/Unit Tests/Objc Translator Tests/"
 
 private let errorMessage =
-	"Lexer, Parser or Translator failed during test.\nError: "
-
-////////////////////////////////////////////////////////////////////////////////
-// swiftlint:disable line_length
-private let emptyMainContents = "#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n\t@autoreleasepool {\n\t}\n\treturn 0;\n}\n"
-private let assignmentMainContents = "#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n\t@autoreleasepool {\n\t\tint x = 2;\n\t\tint y = x + x;\n\t\tfloat z = y - x;\n\t\ty = (z + x) - y;\n\t}\n\treturn 0;\n}\n"
-private let functionCallMainContents = "#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n\t@autoreleasepool {\n\t\tNSLog(@\"Hello jokr!\\n\");\n\t\tNSLog(@\"%d\\n\", 1);\n\t\tNSLog(@\"%d %d\\n\", 1, 2);\n\t}\n\treturn 0;\n}\n"
-// swiftlint:enable line_length
+"""
+Lexer, Parser or Translator failed during test.
+Error:
+"""
 
 ////////////////////////////////////////////////////////////////////////////////
 class ObjCTranslatorTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
-	func translate(
-		file filename: String) throws -> [String: String] {
-		do {
-			let program = try parser.parse(file: testFilesPath + filename)
-			let writer = JKRStringWriter()
-			let translator = JKRObjcTranslator(writingWith: writer)
-			try translator.translate(program: program)
-			return writer.files
-		}
-		catch (let error) {
-			throw error
-		}
+	func translate(_ tree: JKRTree) throws -> [String: String] {
+		let writer = JKRStringWriter()
+		let translator = JKRObjcTranslator(writingWith: writer)
+		try translator.translate(tree: tree)
+		writer.prettyPrint()
+		return writer.files
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 	// MARK: - Tests
 
-	func testEmpty() {
-		do {
-			// WITH:
-			let files = try translate(file: "TestEmpty.jkr")
-
-			// TEST: Empty main file gets created
-			XCTAssertEqual(files["main.m"], emptyMainContents)
-
-			// TEST: No other files get created
-			XCTAssertEqual(files.count, 1)
-		}
-		catch (let error) {
-			XCTFail(errorMessage + "\(error)")
-		}
-	}
-
 	func testAssignments() {
 		do {
 			// WITH:
-			let files = try translate(file: "TestAssignments.jkr")
+			let testName = "TestAssignments"
 
-			// TEST: Main file gets created with correct contents
-			XCTAssertEqual(files["main.m"], assignmentMainContents)
+			let tree = JKRTree.statements([
+				.assignment(.declaration("Int", "x", 2)),
+				.assignment(.declaration("Int", "y",
+				                         .operation("x", "+", "x"))),
+				.assignment(.declaration("Float", "z",
+				                         .operation("y", "-", "x"))),
+				.assignment(.assignment(
+					"y",
+					.operation(.parenthesized(
+						.operation("z", "+", "x")), "-", "y")))
+				])
+
+			let files = try translate(tree)
+
+			// TEST: Files get created with correct contents
+			for (filename, contents) in files {
+				let expectedContents = try String(
+					contentsOfFile: "\(testFilesPath)\(testName)/\(filename)")
+				XCTAssertEqual(contents, expectedContents,
+				               "Translation failed in file \(filename)")
+			}
 
 			// TEST: No other files get created
 			XCTAssertEqual(files.count, 1)
@@ -69,13 +62,69 @@ class ObjCTranslatorTests: XCTestCase {
 	func testFunctionCall() {
 		do {
 			// WITH:
-			let files = try translate(file: "TestFunctionCalls.jkr")
+			let testName = "TestFunctionCalls"
 
-			// TEST: Main file gets created with correct contents
-			XCTAssertEqual(files["main.m"], functionCallMainContents)
+			let tree = JKRTree.statements([
+				.functionCall(JKRTreeFunctionCall(id: "print")),
+				.functionCall(JKRTreeFunctionCall(id: "print",
+				                                  parameters: [1])),
+				.functionCall(JKRTreeFunctionCall(id: "print",
+				                                  parameters: [1, 2]))
+				])
+
+			let files = try translate(tree)
+
+			// TEST: Files get created with correct contents
+			for (filename, contents) in files {
+				let expectedContents = try String(
+					contentsOfFile: "\(testFilesPath)\(testName)/\(filename)")
+				XCTAssertEqual(contents, expectedContents,
+				               "Translation failed in file \(filename)")
+			}
 
 			// TEST: No other files get created
 			XCTAssertEqual(files.count, 1)
+		}
+		catch (let error) {
+			XCTFail(errorMessage + "\(error)")
+		}
+	}
+
+	func testClassDeclarations() {
+		do {
+			// WITH:
+			let testName = "TestClassDeclarations"
+
+			let tree = JKRTree.classDeclarations([
+				JKRTreeClassDeclaration(type: "Person"),
+				JKRTreeClassDeclaration(
+					type: "Animal",
+					methods: [JKRTreeFunctionDeclaration(
+						type: "Int", id: "numberOfLegs", parameters: [],
+						block: [.returnStm(5)])]),
+				JKRTreeClassDeclaration(
+					type: "SomeClass",
+					methods: [
+						JKRTreeFunctionDeclaration(
+							type: "Int", id: "five", parameters: [],
+							block: [.returnStm(5)]),
+						JKRTreeFunctionDeclaration(
+							type: "Int", id: "two", parameters: [],
+							block: [.returnStm(2)])])
+				])
+
+			let files = try translate(tree)
+
+			// TEST: Files get created with correct contents
+			for (filename, contents) in files {
+				let expectedContents = try String(
+					contentsOfFile: "\(testFilesPath)\(testName)/\(filename)")
+				XCTAssertEqual(contents, expectedContents,
+				               "Translation failed in file \(filename)")
+			}
+
+			// TEST: No other files get created
+			XCTAssertEqual(files.count, 6)
 		}
 		catch (let error) {
 			XCTFail(errorMessage + "\(error)")

@@ -13,25 +13,15 @@ class JKRDriver {
 	}
 
 	func translate() throws {
-		do {
-			try parseInputFiles()
-			try writeOutputFiles()
-		}
-		catch (let error) {
-			throw error
-		}
+		try parseInputFiles()
+		try writeOutputFiles()
 	}
 
 	@discardableResult
 	func transpile() throws -> Shell.CommandResult {
-		do {
-			try parseInputFiles()
-			try writeOutputFiles()
-			return try compile()
-		}
-		catch (let error) {
-			throw error
-		}
+		try parseInputFiles()
+		try writeOutputFiles()
+		return try compile()
 	}
 
 	@discardableResult
@@ -53,7 +43,7 @@ class JKRDriver {
 	private let parser: JKRParser
 	private let language: JKRTargetLanguage
 
-	private var ast: JKRTreeProgram?
+	private var ast: JKRTree?
 
 	private func parseInputFiles() throws {
 		do {
@@ -78,7 +68,7 @@ class JKRDriver {
 			let writer = JKRFileWriter(outputDirectory: folderPath)
 			let translator = language.translator.create(writingWith: writer)
 
-			try translator.translate(program: ast!)
+			try translator.translate(tree: ast!)
 			// swiftlint:disable:previous force_unwrapping
 
 			writer.prettyPrint()

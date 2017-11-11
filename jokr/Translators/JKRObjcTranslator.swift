@@ -12,37 +12,15 @@ class JKRObjcTranslator: JKRTranslator {
 		return JKRObjcTranslator(writingWith: writer)
 	}
 
-	func translate(program: JKRTreeProgram) throws {
-		do {
-			if let statements = program.statements {
-				changeFile("main.m")
-
-				indentation = 0
-				write("#import <Foundation/Foundation.h>\n\nint main(int argc, const char * argv[]) {\n")
-				// swiftlint:disable:previous line_length
-				indentation += 1
-
-				addIntentation()
-				write("@autoreleasepool {\n")
-				indentation += 1
-
-				writeWithStructure(statements)
-
-				indentation = 1
-				addIntentation()
-				write("}\n")
-				addIntentation()
-				write("return 0;\n}\n")
-			}
-
-//			if let declarations = program.declarations {
-//			}
-
-			try writer.finishWriting()
+	func translate(tree: JKRTree) throws {
+		switch tree {
+		case let .statements(statements):
+			writeStatementsFile(withStatements: statements)
+		case let .classDeclarations(classes):
+			writeClassFiles(withClasses: classes)
 		}
-		catch (let error) {
-			throw error
-		}
+
+		try writer.finishWriting()
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -53,6 +31,65 @@ class JKRObjcTranslator: JKRTranslator {
 	// Transpilation (general structure)
 	private var indentation = 0
 
+	private func writeStatementsFile(
+		withStatements statements: [JKRTreeStatement]) {
+
+		changeFile("main.m")
+
+		indentation = 0
+		write("""
+			#import <Foundation/Foundation.h>
+
+			int main(int argc, const char * argv[]) {\n
+			""")
+
+		indentation += 1
+
+		writeIndentation()
+		write("@autoreleasepool {\n")
+		indentation += 1
+
+		writeWithStructure(statements)
+
+		indentation = 1
+		writeIndentation()
+		write("}\n")
+		writeIndentation()
+		write("return 0;\n}\n")
+	}
+
+	private func writeClassFiles(
+		withClasses declarations: [JKRTreeClassDeclaration]) {
+
+		for classDeclaration in declarations {
+			let className = classDeclaration.type.text
+
+			// Interface file
+			changeFile("\(className).h")
+
+			write("""
+				#import <Foundation/Foundation.h>
+
+				@interface \(className) : NSObject\n\n
+				""")
+			indentation = 0
+			writeInterfaceWithStructure(classDeclaration.methods)
+			write("@end\n")
+
+			// Implementation file
+			changeFile("\(className).m")
+
+			write("""
+				#import \"\(className).h\"
+
+				@implementation \(className)\n\n
+				""")
+			indentation = 0
+			writeWithStructure(classDeclaration.methods)
+			write("@end\n")
+		}
+	}
+
 	private func writeWithStructure(_ statements: [JKRTreeStatement]) {
 		for statement in statements {
 			writeWithStructure(statement)
@@ -60,31 +97,67 @@ class JKRObjcTranslator: JKRTranslator {
 	}
 
 	private func writeWithStructure(_ statement: JKRTreeStatement) {
-		addIntentation()
-		write(translate(statement))
+		writeIndentation()
 
-//		if let block = statement.block {
-//			write(" {\n")
-//			indentation += 1
-//			writeWithStructure(block)
-//			indentation -= 1
-//			addIntentation()
-//			write("}\n")
-//		}
-	}
-
-	// Translation (pieces of code)
-	private func translate(_ statement: JKRTreeStatement) -> String {
 		switch statement {
 		case let .assignment(assignment):
-			return translate(assignment)
+			write(translate(assignment))
 		case let .functionCall(functionCall):
-			return translate(functionCall)
+			write(translate(functionCall))
 		case let .returnStm(returnStm):
-			return translate(returnStm)
+			write(translate(returnStm))
+		case let .methodCall(methodCall):
+			// TODO:
+			break
 		}
 	}
 
+	private func writeWithStructure(_ methods: [JKRTreeFunctionDeclaration]) {
+		for method in methods {
+			writeWithStructure(method)
+			write("\n")
+		}
+	}
+
+	private func writeWithStructure(_ method: JKRTreeFunctionDeclaration) {
+		writeIndentation()
+		write(translateHeader(method))
+		write(" {\n")
+
+		if method.block.count > 0 {
+			indentation += 1
+			writeWithStructure(method.block)
+			indentation -= 1
+		}
+		else {
+			write("\n")
+		}
+
+		writeIndentation()
+		write("}\n")
+	}
+
+	private func writeInterfaceWithStructure(
+		_ methods: [JKRTreeFunctionDeclaration]) {
+
+		for method in methods {
+			writeInterfaceWithStructure(method)
+		}
+
+		if methods.count > 0 {
+			write("\n")
+		}
+	}
+
+	private func writeInterfaceWithStructure(
+		_ method: JKRTreeFunctionDeclaration) {
+
+		writeIndentation()
+		write(translateHeader(method))
+		write(";\n")
+	}
+
+	// Translation (pieces of code)
 	private func translate(
 		_ assignment: JKRTreeAssignment) -> String {
 		switch assignment {
@@ -120,7 +193,7 @@ class JKRObjcTranslator: JKRTranslator {
 	private func translateHeader(
 		_ function: JKRTreeFunctionDeclaration) -> String {
 		var contents =
-			"- (\(string(for: function.type)))\(string(for: function.id))"
+		"- (\(string(for: function.type)))\(string(for: function.id))"
 
 		let parameters = function.parameters.map(strings(for:))
 
@@ -201,7 +274,7 @@ class JKRObjcTranslator: JKRTranslator {
 		writer.changeFile(string)
 	}
 
-	private func addIntentation() {
+	private func writeIndentation() {
 		for _ in 0..<indentation {
 			write("\t")
 		}

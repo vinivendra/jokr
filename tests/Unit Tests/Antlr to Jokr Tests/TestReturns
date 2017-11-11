@@ -1,16 +1,17 @@
-Int func1() {
-	return 0
-}
+class SomeClass {
+	Int func1() {
+		return 0
+	}
 
-Int func2(Float bla) {
-	return 5 + 6
-}
+	Int func2(Float bla) {
+		return 5 + 6
+	}
 
-Void func4(Int bla, Float foo, Double hue) {
-	return (9)
-}
+	Void func4(Int bla, Float foo, Double hue) {
+		return (9)
+	}
 
-Int func4(Int bla, Float foo, Double hue) {
-	return bla
+	Int func4(Int bla, Float foo, Double hue) {
+		return bla
+	}
 }
-

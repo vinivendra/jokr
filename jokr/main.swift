@@ -1,23 +1,39 @@
 import Foundation
 import Antlr4
 
-// Branch - declarations
-// TODO: Add class declarations
-// TODO: Integrate class declarations to output file structure
-// TODO: Add missing tests for declaration files, function declarations and
-// returns
+// Branch - ClassDeclarations
 
-private let filePath = CommandLine.arguments[1] + "/tests/"
+// TODO: Add method calls
+	// ✅ Add method calls to the grammar
+	// ✅ Add method calls to the AST
+	// ✅ Add AntlrToJokr methods
+	// ✅ Test Parser
+	// ✅ Test AntlrToJokr
+	// ✅ Test AST
+	// ✅ Add and test Java Translator
+	// Add and test ObjC Translator
+	// Test Java (Acceptance)
+	// Test ObjC (Appectance)
+	// Look into using method calls to test other things (soundness, semantic
+		// properties, etc)
+	// Make the order of possible statements constant (i.e. assignment,
+		// returnStm, functionCall, methodCall)
+
+// TODO: Add properties
+
+private let filePath = CommandLine.arguments[1] + "/example/"
 
 do {
 	let driver = JKRDriver(folderPath: filePath,
 	                       parser: JKRAntlrParser(),
 	                       language: .java)
 
+	// TODO: Trash build files
+
 	try driver.transpile()
-	let result = driver.run()
+	driver.run()
 }
 catch (let error) {
 	log("Failed :(")
-	log(String(describing: error))
+	log("\(error)")
 }

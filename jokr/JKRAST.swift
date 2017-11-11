@@ -2,15 +2,16 @@
 /// transpiler code to be independent from antlr, and makes it easier to reason
 /// about given the type safety and the enum coverage.
 
-struct JKRTreeProgram {
-	let statements: [JKRTreeStatement]?
-	let declarations: [JKRTreeDeclaration]?
+enum JKRTree {
+	case statements([JKRTreeStatement])
+	case classDeclarations([JKRTreeClassDeclaration])
 }
 
 enum JKRTreeStatement: Equatable {
 	case assignment(JKRTreeAssignment)
-	case functionCall(JKRTreeFunctionCall)
 	case returnStm(JKRTreeReturn)
+	case functionCall(JKRTreeFunctionCall)
+	case methodCall(JKRTreeMethodCall)
 
 	// Equatable
 	static func == (lhs: JKRTreeStatement, rhs: JKRTreeStatement) -> Bool {
@@ -24,27 +25,11 @@ enum JKRTreeStatement: Equatable {
 		case let (.returnStm(returnStm1),
 		          .returnStm(returnStm2)):
 			return returnStm1 == returnStm2
+		case let (.methodCall(methodCall1),
+		          .methodCall(methodCall2)):
+			return methodCall1 == methodCall2
 		default:
 			return false
-		}
-	}
-}
-
-enum JKRTreeDeclaration: Equatable {
-	case functionDeclaration(JKRTreeFunctionDeclaration)
-
-	var block: [JKRTreeStatement] {
-		switch self {
-		case let .functionDeclaration(functionDeclaration):
-			return functionDeclaration.block
-		}
-	}
-
-	static func == (lhs: JKRTreeDeclaration, rhs: JKRTreeDeclaration) -> Bool {
-		switch (lhs, rhs) {
-		case let (.functionDeclaration(functionDeclaration1),
-		          .functionDeclaration(functionDeclaration2)):
-			return functionDeclaration1 == functionDeclaration2
 		}
 	}
 }
@@ -159,6 +144,32 @@ ExpressibleByStringLiteral {
 	}
 }
 
+struct JKRTreeMethodCall: Equatable {
+	let object: JKRTreeID
+	let method: JKRTreeID
+	let parameters: [JKRTreeExpression]
+
+	init(object: JKRTreeID, method: JKRTreeID, parameters: [JKRTreeExpression])
+	{
+		self.object = object
+		self.method = method
+		self.parameters = parameters
+	}
+
+	init(object: JKRTreeID, method: JKRTreeID) {
+		self.object = object
+		self.method = method
+		self.parameters = []
+	}
+
+	// Equatable
+	static func == (lhs: JKRTreeMethodCall, rhs: JKRTreeMethodCall) -> Bool {
+		return lhs.object == rhs.object &&
+			lhs.method == rhs.method &&
+			rhs.parameters == lhs.parameters
+	}
+}
+
 struct JKRTreeParameterDeclaration: Equatable {
 	let type: JKRTreeType
 	let id: JKRTreeID
@@ -181,6 +192,22 @@ struct JKRTreeFunctionDeclaration: Equatable {
 	                rhs: JKRTreeFunctionDeclaration) -> Bool {
 		return lhs.type == rhs.type && lhs.id == rhs.id &&
 			lhs.parameters == rhs.parameters && lhs.block == rhs.block
+	}
+}
+
+struct JKRTreeClassDeclaration: Equatable {
+	let type: JKRTreeType
+	let methods: [JKRTreeFunctionDeclaration]
+
+	init(type: JKRTreeType, methods: [JKRTreeFunctionDeclaration] = []) {
+		self.type = type
+		self.methods = methods
+	}
+
+	// Equatable
+	static func == (lhs: JKRTreeClassDeclaration,
+	                rhs: JKRTreeClassDeclaration) -> Bool {
+		return lhs.type == rhs.type && lhs.methods == rhs.methods
 	}
 }
 
