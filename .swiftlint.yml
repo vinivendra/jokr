@@ -1,5 +1,5 @@
 ################################################################################
-# WARNING: any updates made here should also be made to tests/.swiftlint
+# WARNING: any updates made here should also be made to 'tests/.swiftlint'
 ################################################################################
 
 excluded:
