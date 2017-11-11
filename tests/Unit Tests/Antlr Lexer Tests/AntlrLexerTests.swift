@@ -138,7 +138,7 @@ class AntlrLexerTests: XCTestCase {
 					return token.getType() == expected.type
 						&& token.getLine() == expected.line
 						&& token.getCharPositionInLine() == expected.charInLine
-						&& token.getText()!.characters.count == expected.length
+						&& token.getText()!.count == expected.length
 				}, "Token not found: \(expected)")
 			}
 
