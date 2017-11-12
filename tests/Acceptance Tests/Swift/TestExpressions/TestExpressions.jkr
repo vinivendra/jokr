@@ -15,10 +15,18 @@ print(y)
 y = ((2 + 4) * 2) + y
 print(y)
 
-Float a = 4 + 5
+Float a = 4.0 + 5.0
 print(a)
 
-Int8 b = 4
+Int b = 4
 b = b + 1
 b = 0 + b
 print(b)
+
+SomeClass k = SomeClass()
+Int f = k.someMethod()
+Int g = someFunction()
+Int h = someFunctionWithParameters(3)
+print(f)
+print(g)
+print(h)

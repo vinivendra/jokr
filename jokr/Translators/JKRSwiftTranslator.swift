@@ -138,7 +138,9 @@ class JKRSwiftTranslator: JKRTranslator {
 			}
 		}
 
-		return "\(string(for: functionCall.id))()"
+		let parameters = functionCall.parameters.map(translate)
+			.joined(separator: ", ")
+		return "\(string(for: functionCall.id))(\(parameters))"
 	}
 
 	private func translate(_ methodCall: JKRTreeMethodCall) -> String {

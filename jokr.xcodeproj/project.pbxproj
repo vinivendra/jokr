@@ -178,6 +178,8 @@
 		248C9EF21FB88FB700C44FAD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		248C9EF31FB8911D00C44FAD /* main.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jkr; sourceTree = "<group>"; };
 		248C9EF41FB8BDCB00C44FAD /* main.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jkr; sourceTree = "<group>"; };
+		248C9EF61FB8DCA600C44FAD /* testExpressions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testExpressions.swift; sourceTree = "<group>"; };
+		248C9EF81FB8DE0200C44FAD /* testExpressions.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testExpressions.kt; sourceTree = "<group>"; };
 		248F364F1F36610200BCAF0A /* ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		24A414441F0F20CE0075993D /* jokr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jokr; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A414651F0F29270075993D /* antlr4-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "antlr4-master"; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 		248C9ED81FB8809B00C44FAD /* TestExpressions */ = {
 			isa = PBXGroup;
 			children = (
+				248C9EF61FB8DCA600C44FAD /* testExpressions.swift */,
 				248C9ED91FB8809B00C44FAD /* TestExpressions.jkr */,
 			);
 			path = TestExpressions;
@@ -649,6 +652,7 @@
 		248C9EE91FB8834E00C44FAD /* TestExpressions */ = {
 			isa = PBXGroup;
 			children = (
+				248C9EF81FB8DE0200C44FAD /* testExpressions.kt */,
 				248C9EEA1FB8834E00C44FAD /* TestExpressions.jkr */,
 			);
 			path = TestExpressions;
