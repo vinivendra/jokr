@@ -11,6 +11,7 @@ excluded:
   - tests/Unit Tests/Swift Translator Tests/TestAssignments
   - tests/Unit Tests/Swift Translator Tests/TestFunctionCalls
   - tests/Unit Tests/Swift Translator Tests/TestClassDeclarations
+  - tests/Unit Tests/Swift Translator Tests/TestMethodCalls
 
   - tests/Acceptance Tests/Swift/TestAssignments
   - tests/Acceptance Tests/Swift/TestClasses

@@ -90,6 +90,40 @@ class SwiftTranslatorTests: XCTestCase {
 		}
 	}
 
+	func testMethodCalls() {
+		do {
+			// WITH:
+			let expectedResultsFolder = "TestMethodCalls"
+
+			let tree = JKRTree.statements([
+				.methodCall(JKRTreeMethodCall(object: "anObject",
+											  method: "aMethod")),
+				.methodCall(JKRTreeMethodCall(object: "anotherObject",
+											  method: "anotherMethod",
+											  parameters: [0])),
+				.methodCall(JKRTreeMethodCall(object: "someObject",
+											  method: "someMethod",
+											  parameters: [1, 2]))
+				])
+
+			let files = try translate(tree)
+
+			// TEST: Files get created with correct contents
+			for (filename, contents) in files {
+				let expectedContents = try String(contentsOfFile:
+					"\(testFilesPath)\(expectedResultsFolder)/\(filename)")
+				XCTAssertEqual(contents, expectedContents,
+							   "Translation failed in file \(filename)")
+			}
+
+			// TEST: No other files get created
+			XCTAssertEqual(files.count, 1)
+		}
+		catch (let error) {
+			XCTFail(errorMessage + "\(error)")
+		}
+	}
+
 	func testClassDeclarations() {
 		do {
 			// WITH:

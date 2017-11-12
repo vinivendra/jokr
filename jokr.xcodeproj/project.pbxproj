@@ -176,6 +176,8 @@
 		248C9EEA1FB8834E00C44FAD /* TestExpressions.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestExpressions.jkr; sourceTree = "<group>"; };
 		248C9EEC1FB8834E00C44FAD /* TestClasses.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClasses.jkr; sourceTree = "<group>"; };
 		248C9EED1FB8834E00C44FAD /* main.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.kt; sourceTree = "<group>"; };
+		248C9EF01FB88F1800C44FAD /* main.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.kt; sourceTree = "<group>"; };
+		248C9EF21FB88FB700C44FAD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		248F364F1F36610200BCAF0A /* ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		24A414441F0F20CE0075993D /* jokr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jokr; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A414651F0F29270075993D /* antlr4-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "antlr4-master"; sourceTree = "<group>"; };
@@ -434,8 +436,8 @@
 				24D61E9E1F6B15F900401646 /* AST Tests */,
 				24D61E991F6B15F900401646 /* Java Translator Tests */,
 				240409461F47288C00FC2AD4 /* ObjC Translator Tests */,
-				248C9EC21FB8682C00C44FAD /* Kotlin Translator Tests */,
 				248C9EB11FB7681100C44FAD /* Swift Translator Tests */,
+				248C9EC21FB8682C00C44FAD /* Kotlin Translator Tests */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -502,6 +504,7 @@
 				248C9EB21FB7681100C44FAD /* TestFunctionCalls */,
 				248C9EB41FB7681100C44FAD /* TestAssignments */,
 				248C9EB61FB7681100C44FAD /* TestClassDeclarations */,
+				248C9EF11FB88FB700C44FAD /* TestMethodCalls */,
 			);
 			path = "Swift Translator Tests";
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				248C9EC31FB8682C00C44FAD /* TestFunctionCalls */,
 				248C9EC51FB8682C00C44FAD /* TestAssignments */,
 				248C9EC81FB8682C00C44FAD /* TestClassDeclarations */,
+				248C9EEF1FB88F1800C44FAD /* TestMethodCalls */,
 			);
 			path = "Kotlin Translator Tests";
 			sourceTree = "<group>";
@@ -659,6 +663,22 @@
 			path = TestClasses;
 			sourceTree = "<group>";
 		};
+		248C9EEF1FB88F1800C44FAD /* TestMethodCalls */ = {
+			isa = PBXGroup;
+			children = (
+				248C9EF01FB88F1800C44FAD /* main.kt */,
+			);
+			path = TestMethodCalls;
+			sourceTree = "<group>";
+		};
+		248C9EF11FB88FB700C44FAD /* TestMethodCalls */ = {
+			isa = PBXGroup;
+			children = (
+				248C9EF21FB88FB700C44FAD /* main.swift */,
+			);
+			path = TestMethodCalls;
+			sourceTree = "<group>";
+		};
 		24A4143B1F0F20CE0075993D = {
 			isa = PBXGroup;
 			children = (
@@ -704,8 +724,8 @@
 			children = (
 				24C037541F4A0DFD00C88FCF /* Java */,
 				24C0375A1F4A0DFD00C88FCF /* ObjC */,
-				248C9EE31FB8834E00C44FAD /* Kotlin */,
 				248C9ED21FB8809B00C44FAD /* Swift */,
+				248C9EE31FB8834E00C44FAD /* Kotlin */,
 			);
 			path = "Acceptance Tests";
 			sourceTree = "<group>";
@@ -749,8 +769,8 @@
 				24C65CC31F3B838600FCFFF2 /* JKRCompiler.swift */,
 				24C65CC41F3B838600FCFFF2 /* JKRJavaCompiler.swift */,
 				24C65CC51F3B838600FCFFF2 /* JKRObjcCompiler.swift */,
-				248C9EBF1FB76F2100C44FAD /* JKRKotlinCompiler.swift */,
 				248C9EA11FB7651F00C44FAD /* JKRSwiftCompiler.swift */,
+				248C9EBF1FB76F2100C44FAD /* JKRKotlinCompiler.swift */,
 			);
 			path = Compilers;
 			sourceTree = "<group>";
@@ -772,8 +792,8 @@
 				24C65CED1F3B84B400FCFFF2 /* JKRTranslator.swift */,
 				24C65CCE1F3B838600FCFFF2 /* JKRJavaTranslator.swift */,
 				24C65CCF1F3B838600FCFFF2 /* JKRObjcTranslator.swift */,
-				248C9EBC1FB76E9700C44FAD /* JKRKotlinTranslator.swift */,
 				248C9E9E1FB7600A00C44FAD /* JKRSwiftTranslator.swift */,
+				248C9EBC1FB76E9700C44FAD /* JKRKotlinTranslator.swift */,
 				24C65CD01F3B838600FCFFF2 /* JKRWriter.swift */,
 			);
 			path = Translators;
