@@ -40,6 +40,9 @@ ExpressibleByStringLiteral {
 	case parenthesized(JKRTreeExpression)
 	case operation(JKRTreeExpression, JKRTreeOperator, JKRTreeExpression)
 	case lvalue(JKRTreeID)
+	case constructorCall(JKRTreeConstructorCall)
+	case functionCall(JKRTreeFunctionCall)
+	case methodCall(JKRTreeMethodCall)
 
 	// Equatable
 	static func == (lhs: JKRTreeExpression, rhs: JKRTreeExpression) -> Bool {
@@ -56,6 +59,12 @@ ExpressibleByStringLiteral {
 		case let (.lvalue(id1),
 		          .lvalue(id2)):
 			return id1 == id2
+		case let (.methodCall(methodCall1),
+				  .methodCall(methodCall2)):
+			return methodCall1 == methodCall2
+		case let (.functionCall(functionCall1),
+				  .functionCall(functionCall2)):
+			return functionCall1 == functionCall2
 		default:
 			return false
 		}
@@ -113,6 +122,28 @@ struct JKRTreeFunctionCall: Equatable {
 	static func == (lhs: JKRTreeFunctionCall,
 	                rhs: JKRTreeFunctionCall) -> Bool {
 		return lhs.id == rhs.id && rhs.parameters == lhs.parameters
+	}
+}
+
+struct JKRTreeConstructorCall: Equatable {
+	let type: JKRTreeType
+	let parameters: [JKRTreeExpression]
+
+	init(type: JKRTreeType, parameters: [JKRTreeExpression]) {
+		self.type = type
+		self.parameters = parameters
+	}
+
+	init(type: JKRTreeType) {
+		self.type = type
+		self.parameters = []
+	}
+
+	// Equatable
+	static func == (lhs: JKRTreeConstructorCall, rhs: JKRTreeConstructorCall)
+		-> Bool
+	{
+		return lhs.type == rhs.type && rhs.parameters == lhs.parameters
 	}
 }
 

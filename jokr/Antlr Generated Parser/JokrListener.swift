@@ -151,6 +151,18 @@ public protocol JokrListener: ParseTreeListener {
 	 */
 	func exitReturnStatement(_ ctx: JokrParser.ReturnStatementContext)
 	/**
+	 * Enter a parse tree produced by {@link JokrParser#constructorCall}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterConstructorCall(_ ctx: JokrParser.ConstructorCallContext)
+	/**
+	 * Exit a parse tree produced by {@link JokrParser#constructorCall}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitConstructorCall(_ ctx: JokrParser.ConstructorCallContext)
+	/**
 	 * Enter a parse tree produced by {@link JokrParser#functionCall}.
 	 - Parameters:
 	   - ctx: the parse tree

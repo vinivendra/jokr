@@ -171,6 +171,19 @@ open class JokrBaseListener: JokrListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	open func enterConstructorCall(_ ctx: JokrParser.ConstructorCallContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitConstructorCall(_ ctx: JokrParser.ConstructorCallContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	open func enterFunctionCall(_ ctx: JokrParser.FunctionCallContext) { }
 	/**
 	 * {@inheritDoc}

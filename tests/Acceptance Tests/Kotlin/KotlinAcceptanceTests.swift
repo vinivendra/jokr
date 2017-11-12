@@ -9,20 +9,27 @@ private let errorMessage =
 class KotlinAcceptanceTests: XCTestCase {
 	let parser = JKRAntlrParser()
 
-	func transpileAndRun(test testName: String) throws -> Shell.CommandResult {
+	func transpileAndRun(test testName: String, testFiles: [String]? = nil)
+		throws -> Shell.CommandResult
+	{
 		let testFolder = testFilesPath + testName + "/"
-		let testFile = testName + ".jkr"
+		let testFiles = testFiles ?? [testName]
 
-		guard let tree = try parser.parse(
-			file: testFolder + testFile) else
-		{
-			XCTFail("Failed to parse file \(testFile)")
-			throw JKRError.parsing
+		for file in testFiles {
+			let testFile = file + ".jkr"
+
+			guard let tree = try parser.parse(
+				file: testFolder + testFile) else
+			{
+				XCTFail("Failed to parse file \(testFile)")
+				throw JKRError.parsing
+			}
+
+			let writer = JKRFileWriter(outputDirectory: testFolder)
+			let translator = JKRKotlinTranslator(writingWith: writer)
+			try translator.translate(tree: tree)
 		}
 
-		let writer = JKRFileWriter(outputDirectory: testFolder)
-		let translator = JKRKotlinTranslator(writingWith: writer)
-		try translator.translate(tree: tree)
 		let compiler = JKRKotlinCompiler()
 		try compiler.compileFiles(atPath: testFolder)
 		return compiler.runProgram(atPath: testFolder)
@@ -95,10 +102,11 @@ class KotlinAcceptanceTests: XCTestCase {
 	func testClasses() {
 		let testName = "TestClasses"
 		trashTranslatedFilesAtTeardown(forTest: testName,
-                                       skipping: ["main.kt"])
+                                       skipping: ["main.jkr"])
 
 		do {
-			let result = try transpileAndRun(test: testName)
+			let result = try transpileAndRun(test: testName,
+											 testFiles: ["main", "TestClasses"])
 			XCTAssertEqual(result.status, 0)
 			XCTAssertEqual(result.output, "5\n")
 			XCTAssertEqual(result.error, (""))

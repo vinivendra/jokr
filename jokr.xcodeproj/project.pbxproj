@@ -169,15 +169,15 @@
 		248C9ED71FB8809B00C44FAD /* SwiftAcceptanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftAcceptanceTests.swift; sourceTree = "<group>"; };
 		248C9ED91FB8809B00C44FAD /* TestExpressions.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestExpressions.jkr; sourceTree = "<group>"; };
 		248C9EDB1FB8809B00C44FAD /* TestClasses.jkr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestClasses.jkr; sourceTree = "<group>"; };
-		248C9EDC1FB8809B00C44FAD /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		248C9EE51FB8834E00C44FAD /* TestFunctionCalls.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestFunctionCalls.jkr; sourceTree = "<group>"; };
 		248C9EE71FB8834E00C44FAD /* TestAssignments.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestAssignments.jkr; sourceTree = "<group>"; };
 		248C9EE81FB8834E00C44FAD /* KotlinAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinAcceptanceTests.swift; sourceTree = "<group>"; };
 		248C9EEA1FB8834E00C44FAD /* TestExpressions.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestExpressions.jkr; sourceTree = "<group>"; };
 		248C9EEC1FB8834E00C44FAD /* TestClasses.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestClasses.jkr; sourceTree = "<group>"; };
-		248C9EED1FB8834E00C44FAD /* main.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.kt; sourceTree = "<group>"; };
 		248C9EF01FB88F1800C44FAD /* main.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.kt; sourceTree = "<group>"; };
 		248C9EF21FB88FB700C44FAD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		248C9EF31FB8911D00C44FAD /* main.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jkr; sourceTree = "<group>"; };
+		248C9EF41FB8BDCB00C44FAD /* main.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jkr; sourceTree = "<group>"; };
 		248F364F1F36610200BCAF0A /* ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		24A414441F0F20CE0075993D /* jokr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jokr; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A414651F0F29270075993D /* antlr4-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "antlr4-master"; sourceTree = "<group>"; };
@@ -613,7 +613,7 @@
 			isa = PBXGroup;
 			children = (
 				248C9EDB1FB8809B00C44FAD /* TestClasses.jkr */,
-				248C9EDC1FB8809B00C44FAD /* main.swift */,
+				248C9EF31FB8911D00C44FAD /* main.jkr */,
 			);
 			path = TestClasses;
 			sourceTree = "<group>";
@@ -658,7 +658,7 @@
 			isa = PBXGroup;
 			children = (
 				248C9EEC1FB8834E00C44FAD /* TestClasses.jkr */,
-				248C9EED1FB8834E00C44FAD /* main.kt */,
+				248C9EF41FB8BDCB00C44FAD /* main.jkr */,
 			);
 			path = TestClasses;
 			sourceTree = "<group>";

@@ -39,7 +39,10 @@ expression:
 	INT
 	| LPAREN expression RPAREN
 	| expression OPERATOR expression
-	| lvalue;
+	| lvalue
+	| constructorCall
+	| functionCall
+	| methodCall;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Statements
@@ -61,6 +64,9 @@ variableDeclaration:
 
 returnStatement:
 	RETURN expression;
+
+constructorCall:
+	TYPE LPAREN parameterList RPAREN;
 
 functionCall:
 	ID LPAREN parameterList RPAREN;

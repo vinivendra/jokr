@@ -103,7 +103,7 @@ class JKRObjcTranslator: JKRTranslator {
 		case let .assignment(assignment):
 			write(translate(assignment))
 		case let .functionCall(functionCall):
-			write(translate(functionCall))
+			write(translate(functionCall) + ";\n")
 		case let .returnStm(returnStm):
 			write(translate(returnStm))
 		case let .methodCall(methodCall):
@@ -176,18 +176,18 @@ class JKRObjcTranslator: JKRTranslator {
 	private func translate(_ functionCall: JKRTreeFunctionCall) -> String {
 		if functionCall.id == "print" {
 			if functionCall.parameters.count == 0 {
-				return "NSLog(@\"Hello jokr!\\n\");\n"
+				return "NSLog(@\"Hello jokr!\\n\")"
 			}
 			else {
 				let format = functionCall.parameters.map {_ in "%d" }
 					.joined(separator: " ")
 				let parameters = functionCall.parameters.map(translate)
 					.joined(separator: ", ")
-				return "NSLog(@\"\(format)\\n\", \(parameters));\n"
+				return "NSLog(@\"\(format)\\n\", \(parameters))"
 			}
 		}
 
-		return "\(string(for: functionCall.id))();\n"
+		return "\(string(for: functionCall.id))()"
 	}
 
 	private func translateHeader(
@@ -227,6 +227,14 @@ class JKRObjcTranslator: JKRTranslator {
 			return "\(leftText) \(op.text) \(rightText)"
 		case let .lvalue(id):
 			return string(for: id)
+		case let .constructorCall(constructorCall):
+			// TODO:
+			return ""
+		case let .functionCall(functionCall):
+			return translate(functionCall)
+		case let .methodCall(methodCall):
+			// TODO:
+			return ""
 		}
 	}
 

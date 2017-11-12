@@ -125,6 +125,15 @@ extension JokrParser.ExpressionContext {
 		{
 			return .lvalue(id)
 		}
+		else if let constructorCall = self.constructorCall() {
+			return .constructorCall(constructorCall.toJKRTreeConstructorCall())
+		}
+		else if let functionCall = self.functionCall() {
+			return .functionCall(functionCall.toJKRTreeFunctionCall())
+		}
+		else if let methodCall = self.methodCall() {
+			return .methodCall(methodCall.toJKRTreeMethodCall())
+		}
 
 		fatalError("Failed to transpile expression")
 	}
@@ -172,6 +181,18 @@ extension JokrParser.AssignmentContext {
 		}
 
 		fatalError("Failed to transpile assignment")
+	}
+}
+
+extension JokrParser.ConstructorCallContext {
+	func toJKRTreeConstructorCall() -> JKRTreeConstructorCall {
+		if let type = self.TYPE()?.toJKRTreeType(),
+			let parameters = self.parameterList()?.toJKRTreeExpressions()
+		{
+			return JKRTreeConstructorCall(type: type, parameters: parameters)
+		}
+
+		fatalError("Failed to transpile constructor call")
 	}
 }
 

@@ -11,13 +11,13 @@ import Antlr4
 	// ✅ Test AntlrToJokr
 	// ✅ Test AST
 	// ✅ Add and test Java Translator
-	// Add and test ObjC Translator
-	// Test Java (Acceptance)
-	// Test ObjC (Appectance)
+	// ✅ Test Swift (Acceptance)
+	// ✅ Test Kotlin (Acceptance)
 	// Look into using method calls to test other things (soundness, semantic
 		// properties, etc)
-	// Make the order of possible statements constant (i.e. assignment,
-		// returnStm, functionCall, methodCall)
+	// Improve order of things in grammar (statements, expressions)
+	// Add tests for other expressions
+	// Add lexer->AST tests for constructors
 
 // TODO: Add properties
 

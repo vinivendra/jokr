@@ -64,11 +64,11 @@ class JKRSwiftTranslator: JKRTranslator {
 		case let .assignment(assignment):
 			write(translate(assignment))
 		case let .functionCall(functionCall):
-			write(translate(functionCall))
+			write(translate(functionCall) + "\n")
 		case let .returnStm(returnStm):
 			write(translate(returnStm))
 		case let .methodCall(methodCall):
-			write(translate(methodCall))
+			write(translate(methodCall) + "\n")
 		}
 	}
 
@@ -116,20 +116,29 @@ class JKRSwiftTranslator: JKRTranslator {
 		}
 	}
 
+	private func translate(_ constructorCall: JKRTreeConstructorCall) -> String
+	{
+		let parameters = constructorCall.parameters
+			.map(translate)
+			.joined(separator: ", ")
+
+		return "\(string(for: constructorCall.type))" + "(\(parameters))"
+	}
+
 	private func translate(_ functionCall: JKRTreeFunctionCall) -> String {
 		if functionCall.id == "print" {
 			if functionCall.parameters.count == 0 {
-				return "print(\"Hello jokr!\")\n"
+				return "print(\"Hello jokr!\")"
 			}
 			else {
 				let parameters = functionCall.parameters.map(translate)
 					.map { "\\(" + $0 + ")" }
 					.joined(separator: " ")
-				return "print(\"\(parameters)\")\n"
+				return "print(\"\(parameters)\")"
 			}
 		}
 
-		return "\(string(for: functionCall.id))()\n"
+		return "\(string(for: functionCall.id))()"
 	}
 
 	private func translate(_ methodCall: JKRTreeMethodCall) -> String {
@@ -139,7 +148,7 @@ class JKRSwiftTranslator: JKRTranslator {
 
 		return "\(string(for: methodCall.object))" + "." +
 			"\(string(for: methodCall.method))" +
-		"(\(parameters))\n"
+		"(\(parameters))"
 	}
 
 	private func translateHeader(
@@ -172,6 +181,12 @@ class JKRSwiftTranslator: JKRTranslator {
 			return "\(leftText) \(op.text) \(rightText)"
 		case let .lvalue(id):
 			return string(for: id)
+		case let .constructorCall(constructorCall):
+			return translate(constructorCall)
+		case let .functionCall(functionCall):
+			return translate(functionCall)
+		case let .methodCall(methodCall):
+			return translate(methodCall)
 		}
 	}
 
