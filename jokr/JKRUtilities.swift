@@ -4,6 +4,7 @@ enum JKRTargetLanguage {
 	case java
 	case objectiveC
 	case swift
+	case kotlin
 
 	var translator: JKRTranslator.Type {
 		switch self {
@@ -13,6 +14,8 @@ enum JKRTargetLanguage {
 			return JKRObjcTranslator.self
 		case .swift:
 			return JKRSwiftTranslator.self
+		case .kotlin:
+			return JKRKotlinTranslator.self
 		}
 	}
 
@@ -24,6 +27,8 @@ enum JKRTargetLanguage {
 			return JKRObjcCompiler.self
 		case .swift:
 			return JKRSwiftCompiler.self
+		case .kotlin:
+			return JKRKotlinCompiler.self
 		}
 	}
 }
