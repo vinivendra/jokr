@@ -180,6 +180,7 @@
 		248C9EF41FB8BDCB00C44FAD /* main.jkr */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jkr; sourceTree = "<group>"; };
 		248C9EF61FB8DCA600C44FAD /* testExpressions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testExpressions.swift; sourceTree = "<group>"; };
 		248C9EF81FB8DE0200C44FAD /* testExpressions.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testExpressions.kt; sourceTree = "<group>"; };
+		248C9EFA1FB8EB2000C44FAD /* TestNumbers */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestNumbers; sourceTree = "<group>"; };
 		248F364F1F36610200BCAF0A /* ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		24A414441F0F20CE0075993D /* jokr */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jokr; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A414651F0F29270075993D /* antlr4-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "antlr4-master"; sourceTree = "<group>"; };
@@ -349,10 +350,11 @@
 			isa = PBXGroup;
 			children = (
 				243295701F46238D00478218 /* AntlrLexerTests.swift */,
-				243295711F46238D00478218 /* TestComments */,
 				24FAA9A71F5740AA00752153 /* TestClass */,
+				243295711F46238D00478218 /* TestComments */,
 				243295721F46238D00478218 /* TestIDs */,
 				243295731F46238D00478218 /* TestNewlines */,
+				248C9EFA1FB8EB2000C44FAD /* TestNumbers */,
 				243295741F46238D00478218 /* TestTypes */,
 			);
 			path = "Antlr Lexer Tests";

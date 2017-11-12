@@ -183,4 +183,48 @@ class AntlrLexerTests: XCTestCase {
 			XCTFail("JokrLexer failed to get tokens.\nError: \(error)")
 		}
 	}
+
+	func testNumbers() {
+		do {
+			// WITH:
+			let tokens = try getTokens(inFile: "TestNumbers")
+
+			let expectedTokens:
+				[(type: Int, line: Int, charInLine: Int, text: String)] =
+				[((JokrLexer.INT, 1, 0, "0")),
+				 ((JokrLexer.INT, 2, 0, "1")),
+				 ((JokrLexer.INT, 3, 0, "1000")),
+				 ((JokrLexer.INT, 4, 0, "002")),
+				 ((JokrLexer.DECIMAL, 5, 0, "1.0")),
+				 ((JokrLexer.DECIMAL, 6, 0, "2.00")),
+				 ((JokrLexer.DECIMAL, 7, 0, "14.0")),
+				 ((JokrLexer.DECIMAL, 8, 0, "14.2")),
+				 ((JokrLexer.DECIMAL, 9, 0, "1234.0")),
+				 ((JokrLexer.DECIMAL, 10, 0, "1234.01234")),
+				 ((JokrLexer.DECIMAL, 11, 0, "1234.1234")),
+				 ((JokrLexer.DECIMAL, 12, 0, ".4")),
+				 ((JokrLexer.DECIMAL, 13, 0, ".432")),
+				 ((JokrLexer.DECIMAL, 14, 0, ".01")),
+				 ((JokrLexer.DECIMAL, 15, 0, ".01234"))]
+
+			// TEST: Lexer found all expected tokens (in order)
+			for expected in expectedTokens {
+				XCTAssert(tokens.contains { token in
+					return token.getType() == expected.type
+						&& token.getLine() == expected.line
+						&& token.getCharPositionInLine() == expected.charInLine
+						&& token.getText() == expected.text
+				}, "Token not found: \(expected)")
+			}
+
+			// TEST: Lexer didn't find any other tokens of this type
+			XCTAssertEqual(
+				tokens.countTokens(ofType: JokrLexer.INT) +
+					tokens.countTokens(ofType: JokrLexer.DECIMAL),
+				expectedTokens.count)
+		}
+		catch (let error) {
+			XCTFail("JokrLexer failed to get tokens.\nError: \(error)")
+		}
+	}
 }
