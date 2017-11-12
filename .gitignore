@@ -2,6 +2,7 @@
 # Executable files
 a.out
 *.class
+*.jar
 
 #######################
 # Macos
@@ -31,3 +32,4 @@ DerivedData/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+
