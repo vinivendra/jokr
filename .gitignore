@@ -5,6 +5,14 @@ a.out
 *.jar
 
 #######################
+# Auto-generated example files
+example/*.java
+example/*.m
+example/*.h
+example/*.swift
+example/*.kt
+
+#######################
 # Macos
 .DS_Store
 
