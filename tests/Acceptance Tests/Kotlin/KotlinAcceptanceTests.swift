@@ -91,7 +91,7 @@ class KotlinAcceptanceTests: XCTestCase {
 		do {
 			let result = try transpileAndRun(test: testName)
 			XCTAssertEqual(result.status, 0)
-			XCTAssertEqual(result.output, "4\n0\n12\n")
+			XCTAssertEqual(result.output, "4\n4\n4\n11\n7\n19\n9.0\n5\n")
 			XCTAssertEqual(result.error, (""))
 		}
 		catch (let error) {

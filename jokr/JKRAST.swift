@@ -35,8 +35,9 @@ enum JKRTreeStatement: Equatable {
 }
 
 indirect enum JKRTreeExpression: Equatable, ExpressibleByIntegerLiteral,
-ExpressibleByStringLiteral {
+ExpressibleByFloatLiteral, ExpressibleByStringLiteral {
 	case int(JKRTreeInt)
+	case decimal(JKRTreeDecimal)
 	case parenthesized(JKRTreeExpression)
 	case operation(JKRTreeExpression, JKRTreeOperator, JKRTreeExpression)
 	case lvalue(JKRTreeID)
@@ -50,6 +51,9 @@ ExpressibleByStringLiteral {
 		case let (.int(int1),
 		          .int(int2)):
 			return int1 == int2
+		case let (.decimal(decimal1),
+				  .decimal(decimal2)):
+			return decimal1 == decimal2
 		case let (.parenthesized(exp1),
 		          .parenthesized(exp2)):
 			return exp1 == exp2
@@ -82,6 +86,11 @@ ExpressibleByStringLiteral {
 	// ExpressibleByIntegerLiteral
 	public init(integerLiteral value: Int) {
 		self = .int(JKRTreeInt(value))
+	}
+
+	// ExpressibleByFloatLiteral
+	public init(floatLiteral value: Float) {
+		self = .decimal(JKRTreeDecimal(value))
 	}
 }
 
@@ -303,11 +312,24 @@ struct JKRTreeInt: Equatable, ExpressibleByIntegerLiteral {
 	let value: Int
 	init(_ value: Int) { self.value = value }
 
-	// ExpressibleByStringLiteral
+	// ExpressibleByIntLiteral
 	public init(integerLiteral value: Int) { self.value = value }
 
 	// Equatable
 	static func == (lhs: JKRTreeInt, rhs: JKRTreeInt) -> Bool {
+		return lhs.value == rhs.value
+	}
+}
+
+struct JKRTreeDecimal: Equatable, ExpressibleByFloatLiteral {
+	let value: Float
+	init(_ value: Float) { self.value = value }
+
+	// ExpressibleByFloatLiteral
+	public init(floatLiteral value: Float) { self.value = value }
+
+	// Equatable
+	static func == (lhs: JKRTreeDecimal, rhs: JKRTreeDecimal) -> Bool {
 		return lhs.value == rhs.value
 	}
 }

@@ -28,6 +28,15 @@ extension TerminalNode {
 
 		return JKRTreeInt(int)
 	}
+
+	func toJKRTreeDecimal() -> JKRTreeDecimal {
+		guard let decimal = Float(getText()) else {
+			fatalError(
+				"Trying to create decimal from invalid string: \(getText())")
+		}
+
+		return JKRTreeDecimal(decimal)
+	}
 }
 
 extension JokrParser.ProgramContext {
@@ -106,6 +115,9 @@ extension JokrParser.ExpressionContext {
 	func toJKRTreeExpression() -> JKRTreeExpression {
 		if let int = self.INT()?.toJKRTreeInt() {
 			return .int(int)
+		}
+		else if let decimal = self.DECIMAL()?.toJKRTreeDecimal() {
+			return .decimal(decimal)
 		}
 		else if self.LPAREN() != nil,
 			let expression = self.expression(0)

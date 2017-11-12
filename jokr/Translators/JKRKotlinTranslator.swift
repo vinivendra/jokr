@@ -178,6 +178,8 @@ class JKRKotlinTranslator: JKRTranslator {
 		switch expression {
 		case let .int(int):
 			return string(for: int)
+		case let .decimal(decimal):
+			return string(for: decimal)
 		case let .parenthesized(innerExpression):
 			let innerExpressionText = translate(innerExpression)
 			return "(\(innerExpressionText))"
@@ -210,6 +212,10 @@ class JKRKotlinTranslator: JKRTranslator {
 
 	func string(for int: JKRTreeInt) -> String {
 		return String(int.value)
+	}
+
+	func string(for decimal: JKRTreeDecimal) -> String {
+		return String(decimal.value) + "f"
 	}
 
 	// Writing

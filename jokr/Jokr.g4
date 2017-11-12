@@ -37,6 +37,7 @@ lvalue:
 
 expression:
 	INT
+	| DECIMAL
 	| LPAREN expression RPAREN
 	| expression OPERATOR expression
 	| lvalue
@@ -126,6 +127,7 @@ COMMA: ',';
 PERIOD: '.';
 RETURN: 'return';
 INT: [0-9]+;
+DECIMAL: INT PERIOD INT | PERIOD INT;
 TYPE: [_]*[A-Z][a-zA-Z0-9]*;
 ID: [_]*[a-z][a-zA-Z0-9]*;
 SNAKE_CASE: [a-zA-Z0-9_]+;

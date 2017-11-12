@@ -1,6 +1,24 @@
 Int y = 4
 print(y)
+
+Int x = 4
+Int z = 4+y*(4+x)/97
+print(x)
+print(z)
+
+y = 4+7
+print(y)
+
 y = y - 4
 print(y)
+
 y = ((2 + 4) * 2) + y
 print(y)
+
+Float a = 4 + 5
+print(a)
+
+Int8 b = 4
+b = b + 1
+b = 0 + b
+print(b)
