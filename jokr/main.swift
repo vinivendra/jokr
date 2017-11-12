@@ -16,7 +16,7 @@ import Antlr4
 	// Look into using method calls to test other things (soundness, semantic
 		// properties, etc)
 	// Improve order of things in grammar (statements, expressions)
-	// Add tests for other expressions
+	// ✅ Add tests for other expressions
 	// Add lexer->AST tests for constructors
 
 // TODO: Add properties
