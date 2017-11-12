@@ -124,7 +124,7 @@ class JKRSwiftTranslator: JKRTranslator {
 			else {
 				let parameters = functionCall.parameters.map(translate)
 					.map { "\\(" + $0 + ")" }
-					.joined(separator: ", ")
+					.joined(separator: " ")
 				return "print(\"\(parameters)\")\n"
 			}
 		}

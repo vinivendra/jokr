@@ -12,6 +12,11 @@ excluded:
   - tests/Unit Tests/Swift Translator Tests/TestFunctionCalls
   - tests/Unit Tests/Swift Translator Tests/TestClassDeclarations
 
+  - tests/Acceptance Tests/Swift/TestAssignments
+  - tests/Acceptance Tests/Swift/TestClasses
+  - tests/Acceptance Tests/Swift/TestExpressions
+  - tests/Acceptance Tests/Swift/TestFunctionCalls
+
 disabled_rules:
   - todo
   - opening_brace

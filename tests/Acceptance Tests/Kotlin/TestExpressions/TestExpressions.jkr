@@ -1,0 +1,6 @@
+Int y = 4
+print(y)
+y = y - 4
+print(y)
+y = ((2 + 4) * 2) + y
+print(y)

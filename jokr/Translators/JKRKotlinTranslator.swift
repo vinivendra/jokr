@@ -131,7 +131,7 @@ class JKRKotlinTranslator: JKRTranslator {
 			else {
 				let parameters = functionCall.parameters.map(translate)
 					.map { "${" + $0 + "}" }
-					.joined(separator: ", ")
+					.joined(separator: " ")
 				return "println(\"\(parameters)\")\n"
 			}
 		}
