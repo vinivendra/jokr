@@ -13,7 +13,7 @@ import Antlr4
 	// ✅ Add and test Java Translator
 	// ✅ Test Swift (Acceptance)
 	// ✅ Test Kotlin (Acceptance)
-	// Look into using method calls to test other things (soundness, semantic
+	// ✅ Look into using method calls to test other things (soundness, semantic
 		// properties, etc)
 	// Improve order of things in grammar (statements, expressions)
 	// ✅ Add tests for other expressions
