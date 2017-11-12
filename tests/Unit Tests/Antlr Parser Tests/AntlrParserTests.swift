@@ -134,7 +134,13 @@ class AntlrParserTests: XCTestCase {
 				(4, 10, "foo"),
 				(5, 10, "4+((5)+foo)"), (5, 10, "4"), (5, 14, "((5)+foo)"),
 				(5, 15, "(5)+foo"), (5, 15, "(5)"), (5, 16, "5"),
-				(5, 21, "foo")]
+				(5, 21, "foo"),
+				(6, 10, "function()"),
+				(7, 10, "functionWithParameters(1)"),
+				(7, 33, "1"),
+				(8, 10, "object.method()"),
+				(9, 10, "Constructor()")
+			]
 
 			// TEST: Parser found all expected elements
 			for (expected, actual) in zip(expectedExpressions, expressions) {

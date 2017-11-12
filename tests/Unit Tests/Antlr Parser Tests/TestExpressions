@@ -3,3 +3,7 @@ Int bla = (1)
 Int bla = 2 + 3
 Int bla = foo
 Int bla = 4 + ((5) + foo)
+Int bla = function()
+Int bla = functionWithParameters(1)
+Int bla = object.method()
+Int bla = Constructor()
