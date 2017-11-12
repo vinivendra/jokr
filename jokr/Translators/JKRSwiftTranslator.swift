@@ -129,7 +129,7 @@ class JKRSwiftTranslator: JKRTranslator {
 			}
 		}
 
-		return "\(string(for: functionCall.id))();\n"
+		return "\(string(for: functionCall.id))()\n"
 	}
 
 	private func translate(_ methodCall: JKRTreeMethodCall) -> String {
@@ -139,7 +139,7 @@ class JKRSwiftTranslator: JKRTranslator {
 
 		return "\(string(for: methodCall.object))" + "." +
 			"\(string(for: methodCall.method))" +
-		"(\(parameters));\n"
+		"(\(parameters))\n"
 	}
 
 	private func translateHeader(
