@@ -312,7 +312,9 @@ class AntlrParserTests: XCTestCase {
 				(6, 0, "object.\nsomeMethod()"),
 				(9, 0, "object\n.someMethod()"),
 				(12, 0, "object.\n\tsomeMethod()"),
-				(15, 0, "object\n\t.someMethod()")
+				(15, 0, "object\n\t.someMethod()"),
+				(18, 0, "object.methodWithAFloat(1.2)"),
+				(19, 0, "object.methodWithAFloat(.3)")
 			]
 
 			// TEST: Parser found all expected elements
@@ -326,6 +328,43 @@ class AntlrParserTests: XCTestCase {
 
 			// TEST: Parser didn't find any unexpected elements of this type
 			XCTAssertEqual(methodCalls.count, expectedMethodCalls.count)
+		}
+		catch (let error) {
+			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
+		}
+	}
+
+	func testConstructorCalls() {
+		do {
+			// WITH:
+			let program = try getProgram(inFile: "TestConstructorCalls")
+
+			let constructorCalls = program.filter(type:
+				JokrParser.ConstructorCallContext.self)
+
+			let expectedConstructorCalls: [TokenTest] = [
+				(1, 13, "Foo()"),
+				(2, 15, "B0lah()"),
+				(3, 15, "Blah0()"),
+				(4, 14, "_Lah()"),
+				(5, 15, "__Lah()"),
+				(6, 15, "_Lah0()"),
+				(7, 16, "_La0h0()")
+			]
+
+			// TEST: Parser found all expected elements
+			for (expected, actual)
+				in zip(expectedConstructorCalls, constructorCalls)
+			{
+				XCTAssertEqual(actual.getStart()!.getLine(), expected.startLine)
+				XCTAssertEqual(actual.getStart()!.getCharPositionInLine(),
+							   expected.startChar)
+				XCTAssertEqual(actual.getText(), expected.text)
+			}
+
+			// TEST: Parser didn't find any unexpected elements of this type
+			XCTAssertEqual(constructorCalls.count,
+						   expectedConstructorCalls.count)
 		}
 		catch (let error) {
 			XCTFail("Lexer or Parser failed during test.\nError: \(error)")
